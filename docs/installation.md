@@ -1,8 +1,3 @@
----
-title: installation
-layout: docs
----
-
 # What do you need
 
  * [node.js] [1]

@@ -1,8 +1,3 @@
----
-title: readme
-layout: docs
----
-
 # DOCS
 
 the documentation is in the folder [docs] [1]
