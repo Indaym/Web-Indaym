@@ -3,8 +3,19 @@
 
 ### Project
 
+## build file
+.awcache
+
 ## folder
 
+test/
+backup/
 dist/
 node_modules/
 typings
+
+## file
+
+src/**/*.js*
+!*.json
+*.log
