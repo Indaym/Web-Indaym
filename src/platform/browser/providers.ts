@@ -21,9 +21,9 @@ import {
 }                              from '@angular/http';
 
 // Angular 2 Router
-import {
-		ROUTER_PROVIDERS
-}                             from '@angular/router-deprecated';
+//import {
+//		ROUTER_PROVIDERS
+//}                             from '@angular/router';
 
 // ng2-translate
 import {
@@ -54,7 +54,7 @@ export const NG_TRANSLATE_PROVIDER = [
 export const APPLICATION_PROVIDERS = [
 	...FORM_PROVIDERS,
 	...HTTP_PROVIDERS,
-	...ROUTER_PROVIDERS,
+	//...ROUTER_PROVIDERS,
 	...NG_TRANSLATE_PROVIDER,
 	{provide: LocationStrategy, useClass: HashLocationStrategy}
 ];
