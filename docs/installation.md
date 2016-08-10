@@ -9,11 +9,6 @@ layout: docs
  * [npm] [2]
  * [typings] [3]
  
- 
- [1]: https://nodejs.org/en/                    "node.js"
- [2]: https://www.npmjs.com/                    "npm"
- [3]: https://www.npmjs.com/package/typings     "typings"
-
 
     npm come with node, so don't worry
 
@@ -53,3 +48,11 @@ The `:hmr` tag is for the hot reloading
 
     The hot reloading work when a typescript file (*.ts) change
     This action re-run the build of the project
+
+
+
+
+
+ [1]: https://nodejs.org/en/                    "node.js"
+ [2]: https://www.npmjs.com/                    "npm"
+ [3]: https://www.npmjs.com/package/typings     "typings"

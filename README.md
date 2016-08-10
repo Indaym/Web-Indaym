@@ -5,7 +5,7 @@ layout: docs
 
 # DOCS
 
-You can find the documentation here [docs] [1]
+the documentation is in the folder [docs] [1]
 
 The instructions for the installation are in the file [installation.md] [2]
 
