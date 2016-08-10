@@ -21,7 +21,7 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
  * Webpack Constants
  */
 const METADATA = {
-  title: 'roadn\'joy',
+  title: 'indaym',
   baseUrl: '/'
 };
 
