@@ -1,0 +1,5 @@
+/*
+ *
+ */
+
+export { AppComponent }  from './AppComponent';

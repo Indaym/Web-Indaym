@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- base url -->
+    <base href="<%= webpackConfig.metadata.baseUrl %>">
+    <title><%= webpackConfig.metadata.title %></title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/font/font-awesome-4.6.3/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+
+  </head>
+
+  <body>
+	  <my-app>Loading...</my-app>
+	  <% if (webpackConfig.metadata.ENV === 'development') { %>
+      <!-- Webpack Dev Server reload -->
+      <script src="/webpack-dev-server.js"></script>
+    <% } %>
+    <!--<script src="http://localhost:1337/vorlon.js"></script>-->
+  </body>
+</html>
