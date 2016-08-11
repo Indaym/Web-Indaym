@@ -1,7 +1,7 @@
 # What do you need
 
  * [node.js] [1]
- * [npm] [2]
+ * [npm] [2] ([video tutorial (fr)] [4])
  * [typings] [3]
  
 
@@ -48,6 +48,7 @@ The `:hmr` tag is for the hot reloading
 
 
 
- [1]: https://nodejs.org/en/                    "node.js"
- [2]: https://www.npmjs.com/                    "npm"
- [3]: https://www.npmjs.com/package/typings     "typings"
+ [1]: https://nodejs.org/en/                        "node.js"
+ [2]: https://www.npmjs.com/                        "npm"
+ [3]: https://www.npmjs.com/package/typings         "typings"
+ [4]: https://www.youtube.com/watch?v=53U0TBKFwUw   "video tutorial"
