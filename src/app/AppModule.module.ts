@@ -3,17 +3,7 @@
  */
 
 import { NgModule }         from '@angular/core';
-import { BrowserModule }    from '@angular/platform-browser';
 
-import {
-		APP_DIRECTIVE,
-		AppComponent
-}    from './index';
-
-/*
- * Platform and Environment
- * our providers/directives/pipes
- */
 import {
 		PROVIDERS,
 		PIPES,
@@ -23,17 +13,25 @@ import {
 		ENV_PROVIDERS
 }                           from '../platform/environment';
 
+import {
+		ANGULAR_2_MODULES,
+		APP_DIRECTIVE,
+		AppComponent
+}                           from './index';
+
 @NgModule({
 	bootstrap   : [AppComponent],
-	imports     : [BrowserModule],
+	imports     : [
+		ANGULAR_2_MODULES
+	],
 	declarations: [
 		APP_DIRECTIVE,
 		DIRECTIVES,
 		PIPES
 	],
 	providers   : [
-		...PROVIDERS,
-		...ENV_PROVIDERS
+		PROVIDERS,
+		ENV_PROVIDERS
 	]
 })
 export class AppModule {
