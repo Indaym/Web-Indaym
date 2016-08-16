@@ -1,29 +1,8 @@
-/*
- *
+/**
+ * Created by djavrell on 16/08/16.
  */
 
-import { BrowserModule }          from '@angular/platform-browser';
-import { NgModule }               from '@angular/core';
-import { HttpModule }             from '@angular/http';
-import { RouterModule }           from '@angular/router';
-import { FormsModule }            from '@angular/forms';
-
-import { AppComponent }           from './AppComponent';
-import { FORUM_DIRECTIVES }       from './forum';
-
-export { AppComponent }           from './AppComponent';
-export { AppModule }              from './AppModule.module';
-
-export const APP_DIRECTIVE = [
-	AppComponent,
-	FORUM_DIRECTIVES
-];
-
-export const ANGULAR_2_MODULES = [
-		BrowserModule,
-		HttpModule,
-		FormsModule,
-		RouterModule.forRoot([], {
-			useHash: true
-		})
-];
+/**
+ * expport module
+ */
+export { AppModule } from './app.module';

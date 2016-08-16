@@ -16,8 +16,7 @@ import {
 
 // Angular 2 Http
 import {
-		HTTP_PROVIDERS,
-		Http
+	Http
 }                              from '@angular/http';
 
 // Angular 2 Router
@@ -25,41 +24,22 @@ import {
 //		ROUTER_PROVIDERS
 //}                             from '@angular/router';
 
-// ng2-translate
-import {
-		TranslateService,
-		TranslateLoader,
-		TranslateStaticLoader
-}                              from 'ng2-translate/ng2-translate';
-
 // Other
 import { Md5 } from 'ts-md5/dist/md5';
 
 const OTHER = [
-	Md5
+	//Md5
 ];
 
-export const NG_TRANSLATE_PROVIDER = [
-	TranslateService,
-	provide(TranslateLoader, {
-		useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
-		deps      : [Http]
-	})
-];
 
 /*
  * Application Providers/Directives/Pipes
  * providers/directives/pipes that only live in our browser environment
  */
-export const APPLICATION_PROVIDERS = [
-	...FORM_PROVIDERS,
-	...HTTP_PROVIDERS,
-	//...ROUTER_PROVIDERS,
-	...NG_TRANSLATE_PROVIDER,
-	{provide: LocationStrategy, useClass: HashLocationStrategy}
+const APPLICATION_PROVIDERS = [
 ];
 
 export const PROVIDERS = [
 	...APPLICATION_PROVIDERS,
-	...OTHER
+	OTHER
 ];

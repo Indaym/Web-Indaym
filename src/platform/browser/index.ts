@@ -1,13 +1,4 @@
-export {
-		DIRECTIVES,
-		APPLICATION_DIRECTIVES
-}                         from './directives';
-export {
-		PIPES,
-		APPLICATION_PIPES
-}                         from './pipes';
-export {
-		APPLICATION_PROVIDERS,
-		NG_TRANSLATE_PROVIDER,
-		PROVIDERS
-}                         from './providers';
+export { DIRECTIVES }                   from './directives';
+export { PIPES }                        from './pipes';
+export { PROVIDERS }                    from './providers';
+export { MODULES }                      from './modules';
