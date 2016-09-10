@@ -10,7 +10,6 @@ import { Component }    from '@angular/core';
 <div>Indaym</div>
 `,
   styles    : [],
-  directives: [],
   providers : []
 })
 export class AppComponent {
