@@ -3,7 +3,6 @@
  */
 
 // Angular 2 core
-import { PLATFORM_PIPES } from '@angular/core';
 
 // application_pipes: pipes that are global through out the application
 const APPLICATION_PIPES = [

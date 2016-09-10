@@ -4,14 +4,10 @@
 
 // Angular 2 core
 import {
-		provide
 }                             from '@angular/core';
 
 // Angular 2 common
 import {
-		FORM_PROVIDERS,
-		HashLocationStrategy,
-		LocationStrategy
 }                              from '@angular/common';
 
 // Angular 2 Http
