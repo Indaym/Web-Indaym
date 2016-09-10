@@ -17,6 +17,9 @@ You have one things to do:
     
       npm i
 
+If you've got some error about typing,, do:
+  > typings install
+
 # Build the project
 
 #### prod
