@@ -17,9 +17,6 @@ You have one things to do:
     
       npm i
 
-If you've got some error about typing,, do:
-  > typings install
-
 # Build the project
 
 #### prod
@@ -47,6 +44,11 @@ The `:hmr` tag is for the hot reloading
     The hot reloading work when a typescript file (*.ts) change
     This action re-run the build of the project
 
+
+# Errors
+If you've got some error like this (`error TS2304: Cannot find name '...'`), do:
+
+  > typings install
 
 
 

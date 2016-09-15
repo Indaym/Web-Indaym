@@ -3,13 +3,10 @@
  */
 
 // Angular 2 Core
-import {
-  PLATFORM_DIRECTIVES
-}                           from '@angular/core';
+//import {
+//  PLATFORM_DIRECTIVES
+//}                           from '@angular/core';
 // Angular 2 Router
-import {
-	ROUTER_DIRECTIVES
-}                           from '@angular/router';
 
 // application_directives: directives that are global through out the application
 const APPLICATION_DIRECTIVES = [
