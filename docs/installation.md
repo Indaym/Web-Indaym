@@ -45,6 +45,11 @@ The `:hmr` tag is for the hot reloading
     This action re-run the build of the project
 
 
+# Errors
+If you've got some error like this (`error TS2304: Cannot find name '...'`), do:
+
+  > typings install
+
 
 
 
