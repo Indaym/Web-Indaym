@@ -4,15 +4,15 @@
 
 import {
   RouterModule
-} from '@angular/router';
+}              from '@angular/router';
 
 import {
   HttpModule
-} from '@angular/http';
+}              from '@angular/http';
 
 import { TranslateModule } from 'ng2-translate/ng2-translate';
 
-const ANGULAR_MODULES= [
+const ANGULAR_MODULES = [
   RouterModule,
   HttpModule
 ];
@@ -23,5 +23,5 @@ const TRANSLATE_MODULE = [
 
 
 export const MODULES = [
-  TRANSLATE_MODULE,
+  ANGULAR_MODULES
 ];
