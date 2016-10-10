@@ -18,7 +18,6 @@ const ANGULAR_MODULES = [
 ];
 
 const TRANSLATE_MODULE = [
-  TranslateModule.forRoot()
 ];
 
 
