@@ -8,6 +8,7 @@ import { Component }    from '@angular/core';
   selector  : 'ia-app',
   template  : `
 <div>Indaym</div>
+<editor></editor>
 `,
   styles    : [],
   providers : []
