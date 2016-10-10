@@ -15,8 +15,13 @@ import {
 
 import { AppComponent }     from './app.component';
 
+import { ViewerEditorComponent }    from './viewer-editor/index';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+      AppComponent,
+      ViewerEditorComponent
+  ],
   bootstrap   : [AppComponent],
   imports     : [
       // modules
