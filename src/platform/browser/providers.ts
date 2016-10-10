@@ -21,10 +21,8 @@ import {
 //}                             from '@angular/router';
 
 // Other
-import { Md5 } from 'ts-md5/dist/md5';
 
 const OTHER = [
-	//Md5
 ];
 
 
