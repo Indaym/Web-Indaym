@@ -11,9 +11,6 @@
 
 You have one things to do:
 
-    Checkout to your git branch
-    > git Checkout [Branch_name]
-
     Delete node_module and typings folders
 
    > npm install
