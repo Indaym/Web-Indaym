@@ -3,7 +3,7 @@
  * [node.js] [1]
  * [npm] [2] ([video tutorial (fr)] [4])
  * [typings] [3]
- 
+
 
     npm come with node, so don't worry
 
@@ -11,17 +11,22 @@
 
 You have one things to do:
 
+    Checkout to your git branch
+    > git Checkout [Branch_name]
+
+    Delete node_module and typings folders
+
    > npm install
-   
+
     if this command is too long to write in the terminal, this is the equivalent:
-    
+
       npm i
 
 # Build the project
 
 #### prod
    > npm run build:prod
-    
+
 #### development
    > npm run build:dev
 
@@ -31,14 +36,14 @@ You have one things to do:
 Choose one of the following command
 
    > npm run server
-   
+
    > npm run server:prod
 
 #### development
 The `:hmr` tag is for the hot reloading
 
    > npm run server:dev
-   
+
    > npm run server:dev:hmr
 
     The hot reloading work when a typescript file (*.ts) change
