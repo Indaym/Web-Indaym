@@ -1,0 +1,24 @@
+h1:nth-child(1) {
+  background-color: #ccc;
+  color: white;
+}
+
+.navbar {
+  text-align: center;
+  background-color: #ccc;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height:100px;
+  background:#ccc;
+  text-align: center;
+}
+
+body {
+  position:relative;
+  min-height: 100%;
+}
