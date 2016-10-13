@@ -10,7 +10,8 @@ import { HomeComponent }  from './components/home-component';
 import { EditorComponent }  from './components/editor-component';
 import { PlayComponent }    from './components/play-component';
 import { StoreComponent }   from './components/store-component';
-import { ForumComponent }   from './components/forum-component';
+import { ForumComponent }   from './components/forum/forum.component';
+import { FORUM_COMPONENT}   from './components/forum'
 import { ContactComponent } from './components/contact-component';
 import { LegalMentionsComponent } from './components/legalMentions-component';
 
@@ -30,7 +31,7 @@ import { AppComponent }     from './components/app.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, EditorComponent,
-      PlayComponent, StoreComponent, ForumComponent, ContactComponent,
+      PlayComponent, StoreComponent, ForumComponent, FORUM_COMPONENT, ContactComponent,
       LegalMentionsComponent, NewsComponent, DesignerComponent,
       BlueprintsComponent],
   bootstrap   : [AppComponent],
