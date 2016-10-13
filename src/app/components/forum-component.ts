@@ -1,9 +1,9 @@
 import { Component }    from '@angular/core';
-import { SearchComponent }     from '../views/forum/search/search.component';
+import { SearchComponent }     from './forum/search/search.component';
 
 @Component({
   selector  : 'forum-component',
-  template  : require('app/views/forum/forum.html'),
+  template  : require('./forum/forum.html'),
   styleUrls    : ['app/styles/forum.css'],
   providers : []
 })

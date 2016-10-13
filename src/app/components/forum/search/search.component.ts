@@ -3,7 +3,7 @@ import { Component }    from '@angular/core';
 @Component({
   selector: 'forum-search',
   template: `
-  <form action="/formum/" method="GET" class="discussion-filter">
+  <!--<form action="/formum/" method="GET" class="discussion-filter">!-->
     <select name="game" class="discussion-game-filter center">
       <option value selected>Tous les jeux</option>
       <option value="Tic-Tac-Toe">Tic-Tac-Toe</option>
@@ -23,7 +23,6 @@ import { Component }    from '@angular/core';
       <option value="less-like">Les moins aimées</option>
     </select>
     <input type="submit" class="discussion-submit center" value="filtrer">
-  </form>
   `
 })
 
