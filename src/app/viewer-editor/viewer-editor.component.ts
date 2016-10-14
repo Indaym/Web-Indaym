@@ -3,7 +3,12 @@
  */
 
 import { Component, OnInit }    from '@angular/core';
-import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three';
+
+import {
+    Vector3
+} from 'three';
+
+import { SceneViewer, BoardModelViewer, TexturePoolViewer }          from "./threed-viewer/index";
 
 @Component({
     selector  : 'editor',
@@ -14,21 +19,51 @@ import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial
     providers : []
 })
 export class ViewerEditorComponent implements OnInit {
-    ngOnInit():void {
-        var scene = new Scene();
-        var camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        var geometry = new BoxGeometry( 1, 1, 1 );
-        var material = new MeshBasicMaterial( { color: 0x999999} );
-        var cube = new Mesh( geometry, material );
-        scene.add( cube );
+    private scene:SceneViewer;
 
-        camera.position.z = 5;
-        camera.position.x = 5;
-        camera.position.y = 5;
-        camera.lookAt(new Vector3(0, 0, 0));
-        var renderer = new WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.getElementById('editorContainer').appendChild( renderer.domElement );
-        renderer.render(scene, camera);
+    ngOnInit():void {
+        this.scene = new SceneViewer({
+            width:1000,
+            height:500
+        });
+        this.scene.setContainer('editorContainer');
+        this.scene.setCameraPosition(new Vector3(0, 500, 0));
+        this.scene.setCameraTarget(new Vector3(0, 0, 0));
+        this.initBoards();
+        this.scene.render();
+        this.scene.animate();
+    }
+
+    private initBoards() {
+        var boardMid = new BoardModelViewer({
+            dimensions: [326, 20, 326]
+
+        });
+        boardMid.init((mesh) => {
+            this.scene.addInScene(mesh);
+            this.scene.render();
+        });
+
+
+        var boardWhite = new BoardModelViewer({
+            dimensions: [778, 20, 122],
+            position: [0, 0, 350]
+        });
+        boardWhite.texturesPaths[2] = 'pion_table.png';
+        boardWhite.init((mesh) => {
+            this.scene.addInScene(mesh);
+            this.scene.render();
+        });
+
+        var boardBlack = new BoardModelViewer({
+            dimensions: [778, 20, 122],
+            position: [0, 0, -350]
+        });
+        boardBlack.texturesPaths[2] = 'pion_table.png';
+        boardBlack.init((mesh) => {
+            this.scene.addInScene(mesh);
+            this.scene.render();
+        });
+
     }
 }
