@@ -18,6 +18,8 @@ import { NewsComponent } from './components/news-component';
 import { DesignerComponent } from './components/designer-component';
 import { BlueprintsComponent } from './components/blueprints-component';
 
+import { Tab, Tabs } from './components/tab-component';
+
 import {
   ENV_PROVIDERS,
   DIRECTIVES,
@@ -32,7 +34,7 @@ import { AppComponent }     from './components/app.component';
   declarations: [AppComponent, HomeComponent, EditorComponent,
       PlayComponent, StoreComponent, ForumComponent, ContactComponent,
       LegalMentionsComponent, NewsComponent, DesignerComponent,
-      BlueprintsComponent],
+      BlueprintsComponent, Tab, Tabs],
   bootstrap   : [AppComponent],
   imports     : [
       // modules

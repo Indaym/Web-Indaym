@@ -9,14 +9,55 @@
 
 <div class="content">
   <div class="content-left">
-    <nav>
-      <a>Objects</a>
-      <a>Templates</a>
-    </nav>
+
+    <tabs>
+      <tab tabTitle="Objects">
+        <form>
+          Search:
+          <input type="search" name="Search an object">
+        </form>
+        <button ng-click="boardFunction()">Boards</button><br/>
+        <button ng-click="pawnFunction()">Pawns</button><br/>
+        Here's some content.
+      </tab>
+      <tab tabTitle="Templates">
+        <form>
+          Search:
+          <input type="search" name="Search a template">
+        </form>
+        Boards:<br/>
+        <button>Simple board</button><br/>
+        <button>Bicolor board</button><br/>
+        <br/>
+        Pawns:<br/>
+        <button>Standard pawn</button><br/>
+        <button>Round pawn</button><br/>
+        <button>Squared pawn</button><br/>
+        And here's more in another tab.
+      </tab>
+    </tabs>
   </div>
   <div class="content-right">
-    <nav>
-      <a>Properties</a>
-    </nav>
+    <tabs>
+      <tab tabTitle="Properties">
+        <form>
+          Search:
+          <input type="search" name="Search a property">
+        </form>
+
+        <form onsubmit="submitFunction();">
+          Position:<br/>
+          <input type="number" name="X" value="0"/><br/>
+          <input type="number" name="Y" value="0"/><br/>
+          Design:<br/>
+          <input type= "color" name="Color"/><br/>
+          <input type="text" name="Texture"/><br/>
+          <input type="text" name="Shape"/><br/>
+          <input type="number" name="Size" min="1" max="5"/><br/>
+          Here's some content.
+        </form>
+
+      </tab>
+    </tabs>
   </div>
 </div>
