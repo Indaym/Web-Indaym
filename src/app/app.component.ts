@@ -5,13 +5,12 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'ia-app',
-  template  : `
-<div>Indaym</div>
-<editor></editor>
-`,
-  styles    : [],
-  providers : []
+    selector  : 'ia-app',
+    template  : `
+    <editor></editor>
+    `,
+    styles    : [],
+    providers : []
 })
 export class AppComponent {
 }

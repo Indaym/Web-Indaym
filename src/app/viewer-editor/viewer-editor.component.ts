@@ -13,6 +13,8 @@ import { SceneViewer, BoardModelViewer, TexturePoolViewer }          from "./thr
 @Component({
     selector  : 'editor',
     template  : `
+    <div>
+    </div>
     <div id="editorContainer"></div>
     `,
     styles    : [],
@@ -27,8 +29,9 @@ export class ViewerEditorComponent implements OnInit {
             height:500
         });
         this.scene.setContainer('editorContainer');
-        this.scene.setCameraPosition(new Vector3(0, 500, 0));
+        this.scene.setCameraPosition(new Vector3(0, 50.0, 0));
         this.scene.setCameraTarget(new Vector3(0, 0, 0));
+        document.getElementById(this.scene.getContainer().toString()).addEventListener('mousedown', (event) => { this.scene.onMouseDown(event) }, false);
         this.initBoards();
         this.scene.render();
         this.scene.animate();
@@ -36,7 +39,7 @@ export class ViewerEditorComponent implements OnInit {
 
     private initBoards() {
         var boardMid = new BoardModelViewer({
-            dimensions: [326, 20, 326]
+            dimensions: [32.6, 2.0, 32.6]
 
         });
         boardMid.init((mesh) => {
@@ -46,8 +49,8 @@ export class ViewerEditorComponent implements OnInit {
 
 
         var boardWhite = new BoardModelViewer({
-            dimensions: [778, 20, 122],
-            position: [0, 0, 350]
+            dimensions: [77.8, 2.0, 12.2],
+            position: [0, 0, 35.0]
         });
         boardWhite.texturesPaths[2] = 'pion_table.png';
         boardWhite.init((mesh) => {
@@ -56,8 +59,8 @@ export class ViewerEditorComponent implements OnInit {
         });
 
         var boardBlack = new BoardModelViewer({
-            dimensions: [778, 20, 122],
-            position: [0, 0, -350]
+            dimensions: [77.8, 2.0, 12.2],
+            position: [0, 0, -35.0]
         });
         boardBlack.texturesPaths[2] = 'pion_table.png';
         boardBlack.init((mesh) => {

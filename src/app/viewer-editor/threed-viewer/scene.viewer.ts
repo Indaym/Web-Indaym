@@ -11,11 +11,16 @@ import {
     BoxGeometry,
     MeshBasicMaterial,
     Mesh,
+    Vector2,
     Vector3,
-    Object3D
+    Object3D,
+    Raycaster,
+    GridHelper,
+    AxisHelper
 } from 'three';
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
+var TransformControls = require('three-transformcontrols');
 
 import {ModelViewer} from "./model.viewer";
 
@@ -28,6 +33,9 @@ export class SceneViewer {
     private renderer: WebGLRenderer;
     private container: String;
     private controls: any;
+    private controler: any;
+    private raycaster: Raycaster;
+    private mouse: Vector2 = new Vector2(0, 0);
 
     /*
     parameter : conf > type: json object
@@ -49,6 +57,11 @@ export class SceneViewer {
         this.controls = new OrbitControls( this.camera);
         this.controls.constraint.enableDamping = true;
         this.controls.constraint.dampingFactor = 1;
+        this.scene.add(new GridHelper( 1000, 1000 ));
+        this.scene.add(new AxisHelper(1000));
+        this.controler = new TransformControls(this.camera, this.renderer.domElement);
+        console.dir(this.scene);
+        this.raycaster = new Raycaster();
     }
 
     setCameraPosition(pos:Vector3) {
@@ -93,6 +106,19 @@ export class SceneViewer {
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
         requestAnimationFrame(() => { this.animate() });
+    }
+
+    onMouseDown(event) {
+        console.log(this.mouse);
+        this.mouse.x = ( event.offsetX / this.width ) * 2 - 1;
+        this.mouse.y = - ( event.offsetY / this.height ) * 2 + 1;
+        this.raycaster.setFromCamera( this.mouse, this.camera );
+
+        var intersected = this.raycaster.intersectObjects( this.scene.children.filter((elem) => { return elem instanceof Mesh; }) );
+        if (intersected.length > 0){
+            this.controler.attach(intersected[0].object);
+            this.scene.add(this.controler);
+        }
     }
 
     defaultGenerate() {
