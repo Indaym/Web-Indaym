@@ -4,6 +4,7 @@
 
 import { NgModule }         from '@angular/core';
 import { BrowserModule }    from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import {
   ENV_PROVIDERS,
@@ -28,7 +29,7 @@ import { ViewerEditorComponent }    from './viewer-editor/index';
       BrowserModule,
       MODULES,
       // Router
-      // Forms
+      FormsModule,
       // Application
 
       DIRECTIVES,
