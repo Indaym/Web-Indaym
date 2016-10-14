@@ -92,8 +92,26 @@ export class SceneViewer {
         return this.container;
     }
 
+    setModeControler(mode:string) {
+        this.controler.setMode( mode );
+    }
+
     addInScene(obj:Object3D) {
         this.scene.add(obj);
+    }
+
+    deleteFromScene(obj:Object3D) {
+        this.scene.remove(obj);
+    }
+
+    deleteSelected() {
+        if (this.controler.object !== undefined) {
+            var obj = this.controler.object;
+            this.controler.detach(obj);
+            this.deleteFromScene(obj);
+
+        }
+
     }
 
     render() {
@@ -109,13 +127,13 @@ export class SceneViewer {
     }
 
     onMouseDown(event) {
-        console.log(this.mouse);
         this.mouse.x = ( event.offsetX / this.width ) * 2 - 1;
         this.mouse.y = - ( event.offsetY / this.height ) * 2 + 1;
         this.raycaster.setFromCamera( this.mouse, this.camera );
 
         var intersected = this.raycaster.intersectObjects( this.scene.children.filter((elem) => { return elem instanceof Mesh; }) );
         if (intersected.length > 0){
+            console.log('add controler');
             this.controler.attach(intersected[0].object);
             this.scene.add(this.controler);
         }
