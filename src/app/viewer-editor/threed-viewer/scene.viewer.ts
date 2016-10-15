@@ -32,11 +32,17 @@ export class SceneViewer {
     private _width: number = 300;
     private _height: number = 300;
     private _renderer: WebGLRenderer;
-    private _container: String;
+    private _domElement: HTMLElement;
     private _controls: any;
     private _controller: any;
     private _raycaster: Raycaster;
     private _mouse: Vector2 = new Vector2(0, 0);
+    private _controllerTypes = [
+        'translate',
+        'rotate',
+        'scale'
+    ];
+
 
     /*
     parameter : conf > type: json object
@@ -63,12 +69,13 @@ export class SceneViewer {
         this._controls.constraint.enableDamping = true;
         this._controls.constraint.dampingFactor = 1;
 
-        this._scene.add(new GridHelper( 1000, 1000 ));
-        this._scene.add(new AxisHelper(1000));
-
         this._controller = new TransformControls(this._camera, this._renderer.domElement);
 
         this._raycaster = new Raycaster();
+
+        this._scene.add(new GridHelper( 1000, 1000 ));
+        this._scene.add(new AxisHelper(1000));
+
     }
 
     get cameraPosition():Vector3 {
@@ -108,19 +115,28 @@ export class SceneViewer {
     }
 
     get container():String {
-        return this._container;
+        return this._domElement.id;
     }
 
     set container(value:String) {
-        this._container = value;
+        this._domElement = document.getElementById(value.toString());
+    }
+
+    get domElement(): HTMLElement {
+        return this._domElement;
     }
 
     set modeController(mode:string) {
+        console.log(this._controller._gizmo);
         this._controller.setMode( mode );
     }
 
     get modeController():string {
         return this._controller.getMode();
+    }
+
+    get controllerTypes():string[] {
+        return this._controllerTypes;
     }
 
     addInScene(obj:Object3D) {
@@ -133,7 +149,7 @@ export class SceneViewer {
 
     deleteSelected() {
         if (this._controller.object !== undefined) {
-            var obj = this._controller.object;
+            const obj = this._controller.object;
             this._controller.detach(obj);
             this.deleteFromScene(obj);
 
@@ -142,8 +158,10 @@ export class SceneViewer {
     }
 
     render() {
+        if (this._domElement == undefined)
+            return null;
         this._renderer.setSize( this._width, this._height );
-        document.getElementById(this._container.toString()).appendChild( this._renderer.domElement );
+        this._domElement.appendChild( this._renderer.domElement );
         this._renderer.render(this._scene, this._camera);
     }
 
@@ -160,14 +178,14 @@ export class SceneViewer {
 
         var intersected = this._raycaster.intersectObjects( this._scene.children.filter((elem) => { return elem instanceof Mesh; }) );
         if (intersected.length > 0){
-            console.log('add _controller');
             this._controller.attach(intersected[0].object);
             this._scene.add(this._controller);
         }
     }
 
+    // TO DELETE : Temporaire
     defaultGenerate() {
-        var mod = new ModelViewer({
+        const mod = new ModelViewer({
             position: [0, -2, -4],
             dimensions: [2, 5, 3]
         });

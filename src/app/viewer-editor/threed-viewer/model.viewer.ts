@@ -93,6 +93,7 @@ export class ModelViewer {
         return this._mesh;
     }
 
+    // TO DELETE : Temporaire
     defaultGenerate() {
         this._geometry = new BoxGeometry(this._dimension.x, this._dimension.y, this._dimension.z);
         this._material = new MeshFaceMaterial([

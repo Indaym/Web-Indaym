@@ -38,7 +38,7 @@ export class PionModelViewer extends ModelViewer {
 
         this._textureLoader.load(this._texturesPaths, (textures) => {
             this.material = new MeshBasicMaterial({map:textures[0]});
-            var mesh = this.generateMesh();
+            const mesh = this.generateMesh();
             onLoad(mesh);
 
         }, (texture, index) => {});

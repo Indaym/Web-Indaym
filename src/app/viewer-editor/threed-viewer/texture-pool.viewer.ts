@@ -32,9 +32,9 @@ export class TexturePoolViewer {
     }
 
     private loadImage(img, onLoad, onProgress?) {
-        var textureLoader = new TextureLoader();
+        const textureLoader = new TextureLoader();
         textureLoader.load((this.path != undefined) ? this.path + img : img, (texture) => {
-            var index = this.queue.indexOf(img, 0);
+            const index = this.queue.indexOf(img, 0);
             if (index > -1) {
                 this.queue[index] = null;
                 this.dones[index] = texture;

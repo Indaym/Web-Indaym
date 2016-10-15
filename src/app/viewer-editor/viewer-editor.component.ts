@@ -23,11 +23,11 @@ import { SceneViewer, BoardModelViewer, TexturePoolViewer, PionModelViewer }    
         <button (click)="addLongBoard()">Add 1*9 Board</button>
         <button (click)="addWhitePion()">Add White Pion</button>
         <button (click)="addBlackPion()">Add Black Pion</button>
-        <label *ngFor="let val of modeTypes" >
-        <input type="radio"  [value]="val" name="kind" [(ngModel)]="mode" (ngModelChange)="onModeSelected()">
+        <label *ngFor="let val of scene.controllerTypes" >
+        <input type="radio"  [value]="val" name="kind" [(ngModel)]="scene.modeController">
         {{val}}
         </label>
-        <button (click)="deleteObject()">Delete Object</button>
+        <button (click)="scene.deleteSelected()">Delete Object</button>
     </div>
     <div id="editorContainer"></div>
     `,
@@ -38,17 +38,10 @@ import { SceneViewer, BoardModelViewer, TexturePoolViewer, PionModelViewer }    
         .buttons label {
             margin-right : 10px
         }
-    `],
-    providers : []
+    `]
 })
 export class ViewerEditorComponent implements OnInit {
     private scene:SceneViewer;
-    private modeTypes = [
-        'translate',
-        'rotate',
-        'scale'
-    ];
-    private mode = 'translate';
 
     ngOnInit():void {
         this.scene = new SceneViewer({
@@ -58,13 +51,13 @@ export class ViewerEditorComponent implements OnInit {
         this.scene.container = 'editorContainer';
         this.scene.cameraPosition = new Vector3(0, 50.0, 0);
         this.scene.cameraTarget = new Vector3(0, 0, 0);
-        document.getElementById(this.scene.container.toString()).addEventListener('mousedown', (event) => { this.scene.onMouseDown(event) }, false);
         this.scene.render();
         this.scene.animate();
+        this.scene.domElement.addEventListener('mousedown', (event) => { this.scene.onMouseDown(event) }, false);
     }
 
     addSquareBoard() {
-        var board = new BoardModelViewer({
+        const board = new BoardModelViewer({
             dimension: [32.6, 2.0, 32.6]
 
         });
@@ -76,7 +69,7 @@ export class ViewerEditorComponent implements OnInit {
     }
 
     addLongBoard() {
-        var board = new BoardModelViewer({
+        const board = new BoardModelViewer({
             dimension: [77.8, 2.0, 12.2],
         });
         board.texturesPaths[2] = 'pion_table.png';
@@ -88,7 +81,7 @@ export class ViewerEditorComponent implements OnInit {
     }
 
     addBlackPion() {
-        var pion = new PionModelViewer({
+        const pion = new PionModelViewer({
             dimension: [3.5, 3.5, 1.5]
         });
         pion.texturesPaths[0] = 'black.png';
@@ -99,7 +92,7 @@ export class ViewerEditorComponent implements OnInit {
     }
 
     addWhitePion() {
-        var pion = new PionModelViewer({
+        const pion = new PionModelViewer({
             dimension: [3.5, 3.5, 1.5]
         });
         pion.init((mesh) => {
@@ -108,15 +101,6 @@ export class ViewerEditorComponent implements OnInit {
         });
 
     }
-
-    deleteObject() {
-        this.scene.deleteSelected();
-    }
-
-    onModeSelected() {
-        this.scene.modeController = this.mode;
-    }
-
 
 
 }

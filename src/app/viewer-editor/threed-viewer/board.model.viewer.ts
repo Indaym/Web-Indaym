@@ -39,11 +39,11 @@ export class BoardModelViewer extends ModelViewer {
         this._textureLoader = new TexturePoolViewer('../../../assets/three-images/');
         this.geometry = new CubeGeometry( this.dimension.x, this.dimension.y, this.dimension.z, 1, 1, 1);
 
-        var materials = new Array(6);
+        const materials = new Array(6);
 
         this._textureLoader.load(this._texturesPaths, (textures) => {
             this.material = new MeshFaceMaterial(materials);
-            var mesh = this.generateMesh();
+            const mesh = this.generateMesh();
             onLoad(mesh);
 
         }, (texture, index) => {
