@@ -52,8 +52,8 @@ export class ViewerEditorComponent implements OnInit {
 
     ngOnInit():void {
         this.scene = new SceneViewer({
-            width:1000,
-            height:500
+            width:1500,
+            height:900
         });
         this.scene.container = 'editorContainer';
         this.scene.cameraPosition = new Vector3(0, 50.0, 0);
