@@ -26,16 +26,17 @@ import {ModelViewer} from "./model.viewer";
 
 
 export class SceneViewer {
-    private scene: Scene;
-    private camera: Camera;
-    private width: number = 300;
-    private height: number = 300;
-    private renderer: WebGLRenderer;
-    private container: String;
-    private controls: any;
-    private controler: any;
-    private raycaster: Raycaster;
-    private mouse: Vector2 = new Vector2(0, 0);
+
+    private _scene: Scene;
+    private _camera: Camera;
+    private _width: number = 300;
+    private _height: number = 300;
+    private _renderer: WebGLRenderer;
+    private _container: String;
+    private _controls: any;
+    private _controller: any;
+    private _raycaster: Raycaster;
+    private _mouse: Vector2 = new Vector2(0, 0);
 
     /*
     parameter : conf > type: json object
@@ -46,68 +47,94 @@ export class SceneViewer {
      */
     constructor(conf:any = {}) {
         if (typeof(conf.width) == 'number')
-            this.width = conf.width;
+            this._width = conf.width;
         if (typeof(conf.height) == 'number')
-            this.height = conf.height;
-        this.scene = new Scene();
-        this.camera = new PerspectiveCamera( 75, this.width / this.height, 0.1, 10000 );
-        this.renderer = new WebGLRenderer();
-        this.renderer.setSize( this.width, this.height );
-        this.renderer.setClearColor( 0xdddddd );
-        this.controls = new OrbitControls( this.camera);
-        this.controls.constraint.enableDamping = true;
-        this.controls.constraint.dampingFactor = 1;
-        this.scene.add(new GridHelper( 1000, 1000 ));
-        this.scene.add(new AxisHelper(1000));
-        this.controler = new TransformControls(this.camera, this.renderer.domElement);
-        console.dir(this.scene);
-        this.raycaster = new Raycaster();
+            this._height = conf.height;
+
+        this._scene = new Scene();
+
+        this._camera = new PerspectiveCamera( 75, this._width / this._height, 0.1, 10000 );
+
+        this._renderer = new WebGLRenderer();
+        this._renderer.setSize( this._width, this._height );
+        this._renderer.setClearColor( 0xdddddd );
+
+        this._controls = new OrbitControls( this._camera);
+        this._controls.constraint.enableDamping = true;
+        this._controls.constraint.dampingFactor = 1;
+
+        this._scene.add(new GridHelper( 1000, 1000 ));
+        this._scene.add(new AxisHelper(1000));
+
+        this._controller = new TransformControls(this._camera, this._renderer.domElement);
+
+        this._raycaster = new Raycaster();
     }
 
-    setCameraPosition(pos:Vector3) {
-        this.camera.position.copy(pos);
+    get cameraPosition():Vector3 {
+        return this._camera.position;
     }
 
-    setCameraTarget(target:Vector3) {
-        this.camera.lookAt(target);
+    set cameraPosition(value:Vector3) {
+        this._camera.position.copy(value);
     }
 
-    setSize(width:number, height:number) {
-        this.width = width;
-        this.height = height;
+    get camera():Camera {
+        return this._camera;
     }
 
-    getSize() {
-        return {
-            width:this.width,
-            height:this.height
-        };
+    set camera(value:Camera) {
+        this._camera = value;
     }
 
-    setContainer(container: String) {
-        this.container = container;
+    set cameraTarget(target:Vector3) {
+        this._camera.lookAt(target);
     }
 
-    getContainer() {
-        return this.container;
+    get width():number {
+        return this._width;
     }
 
-    setModeControler(mode:string) {
-        this.controler.setMode( mode );
+    set width(value:number) {
+        this._width = value;
+    }
+
+    get height():number {
+        return this._height;
+    }
+
+    set height(value:number) {
+        this._height = value;
+    }
+
+    get container():String {
+        return this._container;
+    }
+
+    set container(value:String) {
+        this._container = value;
+    }
+
+    set modeController(mode:string) {
+        this._controller.setMode( mode );
+    }
+
+    get modeController():string {
+        return this._controller.getMode();
     }
 
     addInScene(obj:Object3D) {
-        this.scene.add(obj);
+        this._scene.add(obj);
     }
 
     deleteFromScene(obj:Object3D) {
-        this.scene.remove(obj);
+        this._scene.remove(obj);
     }
 
     deleteSelected() {
-        if (this.controler.object !== undefined) {
-            var obj = this.controler.object;
-            this.controler.detach(obj);
+        if (this._controller.object !== undefined) {
+            var obj = this._controller.object;
+            this._controller.detach(obj);
             this.deleteFromScene(obj);
 
         }
@@ -115,27 +142,27 @@ export class SceneViewer {
     }
 
     render() {
-        this.renderer.setSize( this.width, this.height );
-        document.getElementById(this.container.toString()).appendChild( this.renderer.domElement );
-        this.renderer.render(this.scene, this.camera);
+        this._renderer.setSize( this._width, this._height );
+        document.getElementById(this._container.toString()).appendChild( this._renderer.domElement );
+        this._renderer.render(this._scene, this._camera);
     }
 
     animate() {
-        this.controls.update();
-        this.renderer.render(this.scene, this.camera);
+        this._controls.update();
+        this._renderer.render(this._scene, this._camera);
         requestAnimationFrame(() => { this.animate() });
     }
 
     onMouseDown(event) {
-        this.mouse.x = ( event.offsetX / this.width ) * 2 - 1;
-        this.mouse.y = - ( event.offsetY / this.height ) * 2 + 1;
-        this.raycaster.setFromCamera( this.mouse, this.camera );
+        this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
+        this._mouse.y = - ( event.offsetY / this._height ) * 2 + 1;
+        this._raycaster.setFromCamera( this._mouse, this._camera );
 
-        var intersected = this.raycaster.intersectObjects( this.scene.children.filter((elem) => { return elem instanceof Mesh; }) );
+        var intersected = this._raycaster.intersectObjects( this._scene.children.filter((elem) => { return elem instanceof Mesh; }) );
         if (intersected.length > 0){
-            console.log('add controler');
-            this.controler.attach(intersected[0].object);
-            this.scene.add(this.controler);
+            console.log('add _controller');
+            this._controller.attach(intersected[0].object);
+            this._scene.add(this._controller);
         }
     }
 
@@ -145,8 +172,8 @@ export class SceneViewer {
             dimensions: [2, 5, 3]
         });
         mod.defaultGenerate();
-        this.addInScene(mod.getMesh());
-        this.setCameraPosition(new Vector3(5,5,5));
-        this.setCameraTarget(new Vector3(0, 0, 0));
+        this.addInScene(mod.mesh);
+        this.cameraPosition = new Vector3(5, 5, 5);
+        this.cameraTarget = new Vector3(0, 0, 0);
     }
 }

@@ -16,7 +16,7 @@ import { ModelViewer } from './model.viewer';
 import { TexturePoolViewer } from './texture-pool.viewer';
 
 export class BoardModelViewer extends ModelViewer {
-    private textureLoader: TexturePoolViewer;
+    private _textureLoader: TexturePoolViewer;
     private _texturesPaths = [
         'side.png', 'side.png',
         'board.png', 'side.png',
@@ -36,13 +36,12 @@ export class BoardModelViewer extends ModelViewer {
     }
 
     init(onLoad) {
-        this.textureLoader = new TexturePoolViewer('../../../assets/three-images/');
-        var dim = this.getDimensions();
-        this.geometry = new CubeGeometry( dim.x, dim.y, dim.z, 1, 1, 1);
+        this._textureLoader = new TexturePoolViewer('../../../assets/three-images/');
+        this.geometry = new CubeGeometry( this.dimension.x, this.dimension.y, this.dimension.z, 1, 1, 1);
 
         var materials = new Array(6);
 
-        this.textureLoader.load(this._texturesPaths, (textures) => {
+        this._textureLoader.load(this._texturesPaths, (textures) => {
             this.material = new MeshFaceMaterial(materials);
             var mesh = this.generateMesh();
             onLoad(mesh);

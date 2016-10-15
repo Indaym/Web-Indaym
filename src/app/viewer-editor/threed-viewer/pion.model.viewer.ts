@@ -15,7 +15,7 @@ import { ModelViewer } from './model.viewer';
 import { TexturePoolViewer } from './texture-pool.viewer';
 
 export class PionModelViewer extends ModelViewer {
-    private textureLoader: TexturePoolViewer;
+    private _textureLoader: TexturePoolViewer;
     private _texturesPaths = [
         'white.png'
     ];
@@ -33,11 +33,10 @@ export class PionModelViewer extends ModelViewer {
     }
 
     init(onLoad) {
-        this.textureLoader = new TexturePoolViewer('../../../assets/three-images/');
-        var dim = this.getDimensions();
-        this.geometry = new CylinderGeometry( dim.x, dim.y, dim.z, 40);
+        this._textureLoader = new TexturePoolViewer('../../../assets/three-images/');
+        this.geometry = new CylinderGeometry( this.dimension.x, this.dimension.y, this.dimension.z, 40);
 
-        this.textureLoader.load(this._texturesPaths, (textures) => {
+        this._textureLoader.load(this._texturesPaths, (textures) => {
             this.material = new MeshBasicMaterial({map:textures[0]});
             var mesh = this.generateMesh();
             onLoad(mesh);

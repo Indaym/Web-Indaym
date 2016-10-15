@@ -55,17 +55,17 @@ export class ViewerEditorComponent implements OnInit {
             width:1000,
             height:500
         });
-        this.scene.setContainer('editorContainer');
-        this.scene.setCameraPosition(new Vector3(0, 50.0, 0));
-        this.scene.setCameraTarget(new Vector3(0, 0, 0));
-        document.getElementById(this.scene.getContainer().toString()).addEventListener('mousedown', (event) => { this.scene.onMouseDown(event) }, false);
+        this.scene.container = 'editorContainer';
+        this.scene.cameraPosition = new Vector3(0, 50.0, 0);
+        this.scene.cameraTarget = new Vector3(0, 0, 0);
+        document.getElementById(this.scene.container.toString()).addEventListener('mousedown', (event) => { this.scene.onMouseDown(event) }, false);
         this.scene.render();
         this.scene.animate();
     }
 
     addSquareBoard() {
         var board = new BoardModelViewer({
-            dimensions: [32.6, 2.0, 32.6]
+            dimension: [32.6, 2.0, 32.6]
 
         });
         board.init((mesh) => {
@@ -77,7 +77,7 @@ export class ViewerEditorComponent implements OnInit {
 
     addLongBoard() {
         var board = new BoardModelViewer({
-            dimensions: [77.8, 2.0, 12.2],
+            dimension: [77.8, 2.0, 12.2],
         });
         board.texturesPaths[2] = 'pion_table.png';
         board.init((mesh) => {
@@ -89,7 +89,7 @@ export class ViewerEditorComponent implements OnInit {
 
     addBlackPion() {
         var pion = new PionModelViewer({
-            dimensions: [3.5, 3.5, 1.5]
+            dimension: [3.5, 3.5, 1.5]
         });
         pion.texturesPaths[0] = 'black.png';
         pion.init((mesh) => {
@@ -100,7 +100,7 @@ export class ViewerEditorComponent implements OnInit {
 
     addWhitePion() {
         var pion = new PionModelViewer({
-            dimensions: [3.5, 3.5, 1.5]
+            dimension: [3.5, 3.5, 1.5]
         });
         pion.init((mesh) => {
             this.scene.addInScene(mesh);
@@ -114,7 +114,7 @@ export class ViewerEditorComponent implements OnInit {
     }
 
     onModeSelected() {
-        this.scene.setModeControler(this.mode);
+        this.scene.modeController = this.mode;
     }
 
 

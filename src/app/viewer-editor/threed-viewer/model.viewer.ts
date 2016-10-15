@@ -17,11 +17,11 @@ import {
 
 export class ModelViewer {
 
-    private dimensions: Vector3 = new Vector3(1, 1, 1);
-    private position: Vector3 = new Vector3(0, 0, 0);
-    private mesh: Mesh;
-    protected geometry: Geometry;
-    protected material: Material;
+    private _dimension: Vector3 = new Vector3(1, 1, 1);
+    private _position: Vector3 = new Vector3(0, 0, 0);
+    private _mesh: Mesh;
+    private _geometry: Geometry;
+    private _material: Material;
 
     /*
     parameter : conf => type: json object
@@ -34,52 +34,68 @@ export class ModelViewer {
      */
     constructor(conf:any = {}) {
         if (conf.position instanceof Array)
-            this.position.copy(new Vector3().fromArray(conf.position));
-        if (conf.dimensions instanceof Array)
-            this.dimensions.copy(new Vector3().fromArray(conf.dimensions));
+            this._position.copy(new Vector3().fromArray(conf.position));
+        if (conf.dimension instanceof Array)
+            this._dimension.copy(new Vector3().fromArray(conf.dimension));
         if (conf.geometry instanceof Geometry)
-            this.geometry = conf.geometry;
+            this._geometry = conf.geometry;
         if (conf.material instanceof Material)
-            this.material = conf.material;
+            this._material = conf.material;
     }
 
-    setPosition(pos: Vector3) {
-        this.position.copy(pos);
-        if (this.mesh != null)
-            this.mesh.position.copy(this.position);
+    get position():Vector3 {
+        return this._position;
     }
 
-    getPosition() {
-        return this.position;
+    set position(value:Vector3) {
+        this._position.copy(value);
+        if (this._mesh != null)
+            this._mesh.position.copy(this._position);
     }
 
-    setDimensions(pos: Vector3) {
-        this.position.copy(pos);
+    get dimension():Vector3 {
+        return this._dimension;
     }
 
-    getDimensions() {
-        return this.dimensions;
+    set dimension(value:Vector3) {
+        this._dimension.copy(value);
+    }
+
+    get geometry():Geometry {
+        return this._geometry;
+    }
+
+    set geometry(value:Geometry) {
+        this._geometry = value;
+    }
+
+    get material():Material {
+        return this._material;
+    }
+
+    set material(value:Material) {
+        this._material = value;
+    }
+
+    get mesh():Mesh {
+        return this._mesh;
+    }
+
+    set mesh(value:Mesh) {
+        this._mesh = value;
     }
 
     generateMesh() {
-        if (this.geometry == null || this.material == null)
+        if (this._geometry == null || this._material == null)
             return null;
-        this.mesh = new Mesh(this.geometry, this.material);
-        this.mesh.position.copy(this.position);
-        return this.mesh;
-    }
-
-    setMesh(mesh:Mesh) {
-        this.mesh = mesh;
-    }
-
-    getMesh() {
-        return this.mesh;
+        this._mesh = new Mesh(this._geometry, this._material);
+        this._mesh.position.copy(this._position);
+        return this._mesh;
     }
 
     defaultGenerate() {
-        this.geometry = new BoxGeometry(this.dimensions.x, this.dimensions.y, this.dimensions.z);
-        this.material = new MeshFaceMaterial([
+        this._geometry = new BoxGeometry(this._dimension.x, this._dimension.y, this._dimension.z);
+        this._material = new MeshFaceMaterial([
             new MeshBasicMaterial({color: 0xff0000}),
             new MeshBasicMaterial({color: 0xff0000}),
             new MeshBasicMaterial({color: 0x00ff00}),
