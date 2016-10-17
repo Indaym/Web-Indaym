@@ -5,6 +5,7 @@
 import { NgModule }         from '@angular/core';
 import { BrowserModule }    from '@angular/platform-browser';
 import { RouterModule }     from '@angular/router';
+import { MaterialModule} from '@angular/material';
 
 import { HomeComponent }  from './components/home-component';
 import { EditorComponent }  from './components/editor-component';
@@ -29,6 +30,7 @@ import {
 }                           from '../platform';
 
 import { AppComponent }     from './components/app.component';
+import {SideNavComponent} from "./components/sidenav.component";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, EditorComponent,
@@ -38,6 +40,7 @@ import { AppComponent }     from './components/app.component';
   bootstrap   : [AppComponent],
   imports     : [
       // modules
+      MaterialModule.forRoot(),
       BrowserModule,
       RouterModule.forRoot([
         {
