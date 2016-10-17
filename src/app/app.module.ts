@@ -36,7 +36,7 @@ import {SideNavComponent} from "./components/sidenav.component";
   declarations: [AppComponent, HomeComponent, EditorComponent,
       PlayComponent, StoreComponent, ForumComponent, ContactComponent,
       LegalMentionsComponent, NewsComponent, DesignerComponent,
-      BlueprintsComponent, Tab, Tabs],
+      BlueprintsComponent, Tab, Tabs, SideNavComponent],
   bootstrap   : [AppComponent],
   imports     : [
       // modules
