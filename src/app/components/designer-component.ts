@@ -1,4 +1,5 @@
 import { Component }    from '@angular/core';
+import { Tab }          from './tab-component';
 
 @Component({
   selector  : 'designer-component',
