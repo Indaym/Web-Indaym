@@ -1,9 +1,10 @@
 import { Component }    from '@angular/core';
 
+
 @Component({
   selector  : 'forum-component',
-  template  : require('app/views/forum.html'),
-  styleUrls    : ['app/styles/forum.css'],
+  template  : require('./forum.html'),
+  styleUrls    : ['app/components/forum/forum.css'],
   providers : []
 })
 export class ForumComponent {
