@@ -63,7 +63,7 @@ export class SceneViewer {
     this._renderer.setSize(this._width, this._height);
     this._renderer.setClearColor(0xdddddd);
 
-    this._controls = new OrbitControls(this._camera);
+    this._controls = new OrbitControls(this._camera, this._renderer.domElement);
     this._controls.constraint.enableDamping = true;
     this._controls.constraint.dampingFactor = 1;
 
