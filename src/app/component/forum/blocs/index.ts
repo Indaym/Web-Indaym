@@ -1,11 +1,13 @@
-import { BlocAvisComponent }    from './bloc-avis.component.ts';
-import { BlocDiscComponent }    from './bloc-disc.component.ts';
-import { BlocLfgComponent }     from './bloc-lfg.component.ts';
-import { BlocIdeaComponent }    from './bloc-idea.component.ts';
+import { BlocAvisComponent }    from './bloc-avis';
+import { BlocDiscComponent }    from './bloc-disc';
+import { BlocHelpComponent }    from './bloc-help';
+import { BlocIdeaComponent }    from './bloc-idea';
+import { BlocLfgComponent }     from './bloc-lfg';
 
-export const BLOC_COMPONENT = [
+export const BLOC_COMPONENTS = [
   BlocAvisComponent,
   BlocDiscComponent,
-  BlocLfgComponent,
-  BlocIdeaComponent
+  BlocHelpComponent,
+  BlocIdeaComponent,
+  BlocLfgComponent
 ];
