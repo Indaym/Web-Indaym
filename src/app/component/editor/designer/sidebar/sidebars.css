@@ -1,0 +1,9 @@
+.close-button {
+  font-family: 'Glyphicons Halflings';
+  min-width:0;
+  position: absolute;
+  right:0;
+  top:0;
+  color:white;
+}
+

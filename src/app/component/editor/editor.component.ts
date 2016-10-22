@@ -1,7 +1,7 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'editor',
+  selector  : 'ia-editor',
   template  : require('./editor.component.html'),
   styles    : [
     require('./editor.component.css')

@@ -2,19 +2,16 @@ h2 {
   text-align: center;
 }
 
-.content {
-  overflow: hidden;
+md-sidenav-layout {
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  min-height:500px;
+  height:500px;
   width: 100%;
 }
 
-.content-left {
-  float: left;
-  width: 30%;
-  background-color: blue;
-}
-
-.content-right {
-  float: right;
-  width: 30%;
-  background-color: blue;
+md-sidenav {
+  background: rgba(85,85,85, 0.95);
+  width:300px;
 }

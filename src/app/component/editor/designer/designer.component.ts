@@ -1,8 +1,8 @@
 import { Component }    from '@angular/core';
-import { Tab }          from './side-bar/tab.component.ts';
+import { Tab }          from './sidebar/tab.component.ts';
 
 @Component({
-  selector  : 'designer-component',
+  selector  : 'ia-designer',
   template  : require('./designer.component.html'),
   styles    : [
     require('./designer.component.css')

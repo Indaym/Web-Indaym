@@ -1,10 +1,10 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'store',
+  selector  : 'ia-store',
   template  : require('./store.component.html'),
   styles    : [
-      require('./store.component.css')
+    require('./store.component.css')
   ],
   providers : []
 })

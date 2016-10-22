@@ -1,63 +1,23 @@
-<h2>Editor</h2>
-
-<nav class='navbar navbar-default'>
+<nav class='navbar navbar-default navbar-static-left'>
   <ul class='nav navbar-nav'>
-    <li><a [routerLink]="['/designer']">Designer</a></li>
-    <li><a [routerLink]="['/blueprints']">Blueprints</a></li>
+    <li><a [routerLink]="['/editor/designer']">Designer</a></li>
+    <li><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
+    <li class="divider"></li>
+    <li><a md-button (click)="start.toggle()" >Toggle Start Side Drawer</a></li>
+    <li><a md-button (click)="end.toggle()" >Toggle End Side Drawer</a></li>
   </ul>
 </nav>
 
-<div class="content">
-  <div class="content-left">
+<md-sidenav-layout>
+  <md-sidenav #start mode="side">
+    <ia-left-sidebar [start]="start"></ia-left-sidebar>
+  </md-sidenav>
+  <md-sidenav #end mode="side" align="end">
+    <ia-right-sidebar [end]="end"></ia-right-sidebar>
+  </md-sidenav>
 
-    <tabs>
-      <tab tabTitle="Objects">
-        <form>
-          Search:
-          <input type="search" name="Search an object">
-        </form>
-        <button ng-click="boardFunction()">Boards</button><br/>
-        <button ng-click="pawnFunction()">Pawns</button><br/>
-        Here's some content.
-      </tab>
-      <tab tabTitle="Templates">
-        <form>
-          Search:
-          <input type="search" name="Search a template">
-        </form>
-        Boards:<br/>
-        <button>Simple board</button><br/>
-        <button>Bicolor board</button><br/>
-        <br/>
-        Pawns:<br/>
-        <button>Standard pawn</button><br/>
-        <button>Round pawn</button><br/>
-        <button>Squared pawn</button><br/>
-        And here's more in another tab.
-      </tab>
-    </tabs>
+  <div class="content">
+    <h1>My Content</h1>
   </div>
-  <div class="content-right">
-    <tabs>
-      <tab tabTitle="Properties">
-        <form>
-          Search:
-          <input type="search" name="Search a property">
-        </form>
+</md-sidenav-layout>
 
-        <form onsubmit="submitFunction();">
-          Position:<br/>
-          <input type="number" name="X" value="0"/><br/>
-          <input type="number" name="Y" value="0"/><br/>
-          Design:<br/>
-          <input type= "color" name="Color"/><br/>
-          <input type="text" name="Texture"/><br/>
-          <input type="text" name="Shape"/><br/>
-          <input type="number" name="Size" min="1" max="5"/><br/>
-          Here's some content.
-        </form>
-
-      </tab>
-    </tabs>
-  </div>
-</div>

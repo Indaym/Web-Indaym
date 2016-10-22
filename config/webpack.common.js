@@ -74,10 +74,12 @@ module.exports = {
       name: ['polyfills', 'vendor'].reverse()
     }),
     new CopyWebpackPlugin([
-	    { from:'**/*.html',                                           to: 'app/component', context: 'src/app/component' },
-	    { from:'**/*.css',                                            to: 'app/component', context: 'src/app/component' },
-	    { from: 'src/assets',                                         to: 'assets' },
-	    { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css',  to: 'assets/css/bootstrap.min.css' }
+	    { from:'**/*.html',                                                 to: 'app/component', context: 'src/app/component' },
+	    { from:'**/*.css',                                                  to: 'app/component', context: 'src/app/component' },
+	    { from: 'src/assets',                                               to: 'assets' },
+	    { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css',        to: 'assets/css/bootstrap.min.css' },
+        { from: 'node_modules/bootstrap/dist/fonts',                        to: 'assets/fonts' },
+        { from: 'node_modules/@angular2-material/core/style/core.css',      to: 'assets/css/core.css' }
     ]),
     new HtmlWebpackPlugin({
       template: 'src/index.html',

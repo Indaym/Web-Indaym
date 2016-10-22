@@ -1,0 +1,26 @@
+<span md-button (click)="end.close()" class="close-button glyphicon glyphicon-remove"></span>
+
+<button md-button (click)="toggleMode()">Toggle</button>
+<span>Mode : {{end.mode}}</span>
+
+<tabs>
+  <tab tabTitle="Properties">
+    <form>
+      Search:
+      <input type="search" name="Search a property">
+    </form>
+
+    <form onsubmit="submitFunction();">
+      Position:<br/>
+      <input type="number" name="X" value="0"/><br/>
+      <input type="number" name="Y" value="0"/><br/>
+      Design:<br/>
+      <input type= "color" name="Color"/><br/>
+      <input type="text" name="Texture"/><br/>
+      <input type="text" name="Shape"/><br/>
+      <input type="number" name="Size" min="1" max="5"/><br/>
+      Here's some content.
+    </form>
+
+  </tab>
+</tabs>

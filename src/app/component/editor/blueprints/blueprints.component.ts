@@ -1,7 +1,7 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'blueprints-component',
+  selector  : 'ia-blueprints',
   template  : require('./blueprints.component.html'),
   styles    : [
     require('./blueprints.component.css')

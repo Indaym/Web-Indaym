@@ -7,7 +7,6 @@ import { Component }    from '@angular/core';
     require('./discussion.component.css'),
     require('../forum.component.css')
   ]
-
 })
 
 export class DiscussionComponent {

@@ -3,16 +3,10 @@
  */
 
 import { DesignerComponent }    from './designer.component';
-import { SideNavComponent }     from './side-bar/sidenav.component';
-import {
-    Tab,
-    Tabs
-}                               from './side-bar/tab.component';
+import { SIDEBAR_COMPONENTS }     from './sidebar';
 
-export { DesignerComponent }    from './designer.component';
+export {DesignerComponent}    from './designer.component';
 export const DESIGNER_COMPONENTS = [
-    DesignerComponent,
-    SideNavComponent,
-    Tabs,
-    Tab
+  DesignerComponent,
+  SIDEBAR_COMPONENTS
 ];

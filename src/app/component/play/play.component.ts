@@ -1,7 +1,7 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'play',
+  selector  : 'ia-play',
   template : require('./play.component.html'),
   styles : [
     require('./play.component.css')

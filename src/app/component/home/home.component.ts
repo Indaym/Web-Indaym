@@ -1,7 +1,7 @@
 import { Component }    from '@angular/core';
 
 @Component({
-  selector  : 'home',
+  selector  : 'ia-home',
   template  : require('./home.component.html'),
   styles    : [
     require('./home.component.css')
