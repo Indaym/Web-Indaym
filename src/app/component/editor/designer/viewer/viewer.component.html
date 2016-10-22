@@ -1,0 +1,12 @@
+<div class="buttons">
+  <button (click)="addSquareBoard()">Add 3*3 Board</button>
+  <button (click)="addLongBoard()">Add 1*9 Board</button>
+  <button (click)="addWhitePion()">Add White Pion</button>
+  <button (click)="addBlackPion()">Add Black Pion</button>
+  <label *ngFor="let val of scene.controllerTypes" >
+    <input type="radio"  [value]="val" name="kind" [(ngModel)]="scene.modeController">
+    {{val}}
+  </label>
+  <button (click)="scene.deleteSelected()">Delete Object</button>
+</div>
+<div id="editorContainer"></div>

@@ -21,7 +21,7 @@ import {
   APP_COMPONENTS
 }                         from './component';
 
-import { ViewerEditorComponent }    from './viewer-editor/index';
+import { ViewerComponent }    from './component/editor/designer/viewer/index';
 
 @NgModule({
   declarations: [
