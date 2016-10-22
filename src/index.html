@@ -16,17 +16,17 @@
   </head>
 
   <body>
-  <ia-app>
-    <div class="spinner">
-      <span>Loading</span>
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
-  </ia-app>
-  <% if (webpackConfig.metadata.ENV === 'development') { %>
-    <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-  <% } %>
+    <ia-app>
+      <div class="spinner">
+        <span>Loading</span>
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </ia-app>
+    <% if (webpackConfig.metadata.ENV === 'development') { %>
+      <!-- Webpack Dev Server reload -->
+      <script src="/webpack-dev-server.js"></script>
+    <% } %>
   </body>
 </html>

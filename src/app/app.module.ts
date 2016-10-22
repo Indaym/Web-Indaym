@@ -2,9 +2,9 @@
  * Created by djavrell on 16/08/16.
  */
 
-import { NgModule }                 from '@angular/core';
-import { BrowserModule }            from '@angular/platform-browser';
-import { MaterialModule}            from '@angular/material';
+import { NgModule }       from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
+import { MaterialModule } from '@angular/material';
 
 import {
   ENV_PROVIDERS,
@@ -12,19 +12,19 @@ import {
   PIPES,
   PROVIDERS,
   MODULES
-}                                   from '../platform';
-import { routing }                  from './app.route';
+}                         from '../platform';
+import { routing }        from './app.route';
 
 import {
   AppComponent,
   APP_COMPONENTS
-}                                   from './component';
+}                         from './component';
 
 @NgModule({
   declarations: [
     APP_COMPONENTS
   ],
-  bootstrap   : [AppComponent],
+  bootstrap   : [ AppComponent ],
   imports     : [
     // modules
     MaterialModule.forRoot(),

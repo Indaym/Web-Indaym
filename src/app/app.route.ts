@@ -3,22 +3,24 @@
  */
 
 
-import {ModuleWithProviders}      from '@angular/core';
-import {Routes, RouterModule}     from '@angular/router';
+import { ModuleWithProviders }    from '@angular/core';
+import {
+  Routes,
+  RouterModule
+}                                 from '@angular/router';
 
-import {HomeComponent}            from './component/home';
-import {EditorComponent}          from './component/editor';
-import {PlayComponent}            from './component/play';
-import {StoreComponent}           from './component/store';
-import {ForumComponent}           from './component/forum';
-import {ContactComponent}         from './component/contact';
-import {LegalMentionsComponent}   from './component/legal-mentions';
-import {DesignerComponent}        from './component/editor/designer';
-import {BlueprintsComponent}      from './component/editor/blueprints';
+import { HomeComponent }          from './component/home';
+import { EditorComponent }        from './component/editor';
+import { PlayComponent }          from './component/play';
+import { StoreComponent }         from './component/store';
+import { ForumComponent }         from './component/forum';
+import { ContactComponent }       from './component/contact';
+import { LegalMentionsComponent } from './component/legal-mentions';
+import { DesignerComponent }      from './component/editor/designer';
+import { BlueprintsComponent }    from './component/editor/blueprints';
 
 
 export const routes: Routes = [
-  //{ path: '', component: <a component> },
   {
     path: 'home',
     component: HomeComponent
