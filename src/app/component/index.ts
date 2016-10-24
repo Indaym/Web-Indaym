@@ -4,7 +4,7 @@
 
 import { AppComponent }           from './app.component';
 import { ContactComponent }       from './contact';
-import { EDITOR_COMPONENTS }      from "./editor";
+import { EDITOR_COMPONENTS }      from './editor';
 import { FORUM_COMPONENTS }       from './forum';
 import { HOME_COMPONENTS }        from './home';
 import { LegalMentionsComponent } from './legal-mentions';

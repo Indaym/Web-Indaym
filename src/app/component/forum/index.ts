@@ -4,6 +4,7 @@ import { DISCUSSION_COMPONENTS }  from './discussion';
 import { BLOC_COMPONENTS }        from './blocs'
 
 export { ForumComponent }         from './forum.component';
+
 export const FORUM_COMPONENTS = [
   ForumComponent,
   SEARCH_COMPONENTS,

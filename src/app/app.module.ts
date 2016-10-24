@@ -5,7 +5,7 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule }    from '@angular/forms';
 
 import {
   ENV_PROVIDERS,

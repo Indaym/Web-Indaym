@@ -21,52 +21,21 @@ import { BlueprintsComponent }    from './component/editor/blueprints';
 
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'editor',
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  { path: 'home',           component: HomeComponent },
+  { path: 'editor',
     children: [
-      {
-        path: '',
-        component: EditorComponent
-      },
-      {
-        path: 'designer',
-        component: DesignerComponent
-      },
-      {
-        path: 'blueprints',
-        component: BlueprintsComponent
-      }
+      { path: '',           component: EditorComponent },
+      { path: 'designer',   component: DesignerComponent },
+      { path: 'blueprints', component: BlueprintsComponent }
     ]
   },
-  {
-    path: 'play',
-    component: PlayComponent
-  },
-  {
-    path: 'store',
-    component: StoreComponent
-  },
-  {
-    path: 'forum',
-    component: ForumComponent
-  },
-  {
-    path: 'contact',
-    component: ContactComponent
-  },
-  {
-    path: 'legalMentions',
-    component: LegalMentionsComponent
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  }
+  { path: 'play',            component: PlayComponent },
+  { path: 'store',           component: StoreComponent },
+  { path: 'forum',           component: ForumComponent },
+  { path: 'contact',         component: ContactComponent },
+  { path: 'legalMentions',   component: LegalMentionsComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

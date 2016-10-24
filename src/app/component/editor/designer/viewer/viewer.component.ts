@@ -13,7 +13,7 @@ import {
   BoardModelViewer,
   TexturePoolViewer,
   PionModelViewer
-}                   from "app/threed-viewer/index";
+}                   from '../../../../threed-viewer';
 
 //<select #kk="ngModel" [(ngModel)]="kind" (ngModelChange)="onKindSelected()">
 //<option *ngFor="#p of kinds" [value]="p">{{p}}</option>

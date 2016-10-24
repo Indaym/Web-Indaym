@@ -2,7 +2,10 @@
  * Created by nicolas on 22/10/16.
  */
 
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input
+}               from '@angular/core';
 
 @Component({
   selector: 'ia-left-sidebar',
