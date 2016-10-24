@@ -22,7 +22,7 @@ import {
 var OrbitControls = require('three-orbit-controls')(require('three'));
 var TransformControls = require('three-transformcontrols');
 
-import {ModelViewer} from "./model.viewer";
+import { ModelViewer } from "./model.viewer";
 
 
 export class SceneViewer {

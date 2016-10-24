@@ -10,10 +10,10 @@ import {
   CubeTexture,
   Texture,
   Material
-} from 'three'
+}                             from 'three'
 
-import {ModelViewer} from './model.viewer';
-import {TexturePoolViewer} from './texture-pool.viewer';
+import { ModelViewer }        from './model.viewer';
+import { TexturePoolViewer }  from './texture-pool.viewer';
 
 export class BoardModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
@@ -36,7 +36,7 @@ export class BoardModelViewer extends ModelViewer {
   }
 
   init(onLoad) {
-    this._textureLoader = new TexturePoolViewer('../../../assets/three-images/');
+    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(this.dimension.x, this.dimension.y, this.dimension.z, 1, 1, 1);
 
     const materials = new Array(6);
@@ -50,7 +50,7 @@ export class BoardModelViewer extends ModelViewer {
       //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
       if (index > -1)
-        materials[index] = new MeshBasicMaterial({map: texture});
+        materials[index] = new MeshBasicMaterial({ map: texture });
     });
   }
 

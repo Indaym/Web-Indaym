@@ -32,7 +32,7 @@ export class PionModelViewer extends ModelViewer {
   }
 
   init(onLoad) {
-    this._textureLoader = new TexturePoolViewer('../../../assets/three-images/');
+    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(this.dimension.x, this.dimension.y, this.dimension.z, 40);
 
     this._textureLoader.load(this._texturesPaths, (textures) => {

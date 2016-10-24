@@ -5,12 +5,12 @@
 import {
   Component,
   Input
-}               from '@angular/core';
+} from '@angular/core';
 
 @Component({
-  selector: 'ia-left-sidebar',
-  template: require('./left-sidebar.component.html'),
-  styles: [
+  selector  : 'ia-left-sidebar',
+  template  : require('./left-sidebar.component.html'),
+  styles    : [
     require('./left-sidebar.component.css'),
     require('../sidebars.css')
   ]
@@ -23,7 +23,6 @@ export class LeftSidebarComponent {
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
-
     // this.start.mode = (this.start.mode == 'push' ? 'over' : (this.start.mode == 'over' ? 'side' : 'push'));
   }
 }

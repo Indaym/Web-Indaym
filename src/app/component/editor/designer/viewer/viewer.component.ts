@@ -6,12 +6,11 @@ import {
   Component,
   OnInit
 }                   from '@angular/core';
-import {Vector3}  from 'three';
+import { Vector3 }  from 'three';
 
 import {
   SceneViewer,
   BoardModelViewer,
-  TexturePoolViewer,
   PionModelViewer
 }                   from '../../../../threed-viewer';
 
@@ -21,9 +20,9 @@ import {
 //{{ kk.valid }}
 
 @Component({
-  selector  : 'ia-viewer',
-  template  : require('./viewer.component.html'),
-  styles    : [`
+  selector: 'ia-viewer',
+  template: require('./viewer.component.html'),
+  styles: [`
     .buttons {
       padding:5px;
     }

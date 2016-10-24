@@ -1,5 +1,4 @@
 import { Component }    from '@angular/core';
-import { Tab }          from './sidebar/tab.component.ts';
 
 @Component({
   selector  : 'ia-designer',

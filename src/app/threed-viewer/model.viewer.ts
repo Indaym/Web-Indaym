@@ -94,12 +94,12 @@ export class ModelViewer {
   defaultGenerate() {
     this._geometry = new BoxGeometry(this._dimension.x, this._dimension.y, this._dimension.z);
     this._material = new MeshFaceMaterial([
-        new MeshBasicMaterial({color: 0xff0000}),
-        new MeshBasicMaterial({color: 0xff0000}),
-        new MeshBasicMaterial({color: 0x00ff00}),
-        new MeshBasicMaterial({color: 0x00ff00}),
-        new MeshBasicMaterial({color: 0x0000ff}),
-        new MeshBasicMaterial({color: 0x0000ff})
+        new MeshBasicMaterial({ color: 0xff0000 }),
+        new MeshBasicMaterial({ color: 0xff0000 }),
+        new MeshBasicMaterial({ color: 0x00ff00 }),
+        new MeshBasicMaterial({ color: 0x00ff00 }),
+        new MeshBasicMaterial({ color: 0x0000ff }),
+        new MeshBasicMaterial({ color: 0x0000ff })
       ]
     );
     this.generateMesh();

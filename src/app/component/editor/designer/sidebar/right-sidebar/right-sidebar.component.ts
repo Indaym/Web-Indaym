@@ -5,15 +5,14 @@
 import {
   Component,
   Input
-}                     from '@angular/core';
+} from '@angular/core';
 
 @Component({
-  selector: 'ia-right-sidebar',
-  template: require('./right-sidebar.component.html'),
-  styles: [
+  selector  : 'ia-right-sidebar',
+  template  : require('./right-sidebar.component.html'),
+  styles    : [
     require('./right-sidebar.component.css'),
     require('../sidebars.css')
-
   ]
 })
 export class RightSidebarComponent {

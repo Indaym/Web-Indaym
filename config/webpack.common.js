@@ -60,11 +60,11 @@ module.exports = {
       }
     ],
     loaders: [
-      {test: /\.js$/, loader: 'babel', exclude: /node_modules/, query: {preset: ['es2015']}},
-      {test: /\.ts$/, loader: 'ts-loader', exclude: [/\.(spec|e2e)\.ts$/]},
-      {test: /\.json$/, loader: 'json-loader'},
-      {test: /\.css$/, loader: 'raw-loader'},
-      {test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]}
+      { test: /\.js$/,    loader: 'babel',      exclude: /node_modules/, query: { preset: ['es2015'] } },
+      { test: /\.ts$/,    loader: 'ts-loader',  exclude: [/\.(spec|e2e)\.ts$/] },
+      { test: /\.json$/,  loader: 'json-loader' },
+      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.html$/,  loader: 'raw-loader', exclude: [helpers.root('src/index.html')] }
     ]
   },
   plugins: [
@@ -74,12 +74,12 @@ module.exports = {
       name: ['polyfills', 'vendor'].reverse()
     }),
     new CopyWebpackPlugin([
-      {from: '**/*.html',                                           to: 'app/component', context: 'src/app/component'},
-      {from: '**/*.css',                                            to: 'app/component', context: 'src/app/component'},
-      {from: 'src/assets',                                          to: 'assets'},
-      {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css',   to: 'assets/css/bootstrap.min.css'},
-      {from: 'node_modules/bootstrap/dist/fonts',                   to: 'assets/fonts'},
-      {from: 'node_modules/@angular2-material/core/style/core.css', to: 'assets/css/core.css'}
+      { from: '**/*.html',                                            to: 'app/component', context: 'src/app/component' },
+      { from: '**/*.css',                                             to: 'app/component', context: 'src/app/component' },
+      { from: 'src/assets',                                           to: 'assets' },
+      { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css',    to: 'assets/css/bootstrap.min.css' },
+      { from: 'node_modules/bootstrap/dist/fonts',                    to: 'assets/fonts' },
+      { from: 'node_modules/@angular2-material/core/style/core.css',  to: 'assets/css/core.css' }
     ]),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
