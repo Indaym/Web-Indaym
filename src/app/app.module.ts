@@ -2,21 +2,10 @@
  * Created by djavrell on 16/08/16.
  */
 
-import { NgModule }         from '@angular/core';
-import { BrowserModule }    from '@angular/platform-browser';
-import { RouterModule }     from '@angular/router';
-
-import { HomeComponent }  from './components/home-component';
-import { EditorComponent }  from './components/editor-component';
-import { PlayComponent }    from './components/play-component';
-import { StoreComponent }   from './components/store-component';
-import { ForumComponent }   from './components/forum-component';
-import { ContactComponent } from './components/contact-component';
-import { LegalMentionsComponent } from './components/legalMentions-component';
-
-import { NewsComponent } from './components/news-component';
-import { DesignerComponent } from './components/designer-component';
-import { BlueprintsComponent } from './components/blueprints-component';
+import { NgModule }       from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
+import { MaterialModule } from '@angular/material';
+import { FormsModule }    from '@angular/forms';
 
 import {
   ENV_PROVIDERS,
@@ -24,71 +13,33 @@ import {
   PIPES,
   PROVIDERS,
   MODULES
-}                           from '../platform';
+}                         from '../platform';
+import { routing }        from './app.route';
 
-import { AppComponent }     from './components/app.component';
+import {
+  AppComponent,
+  APP_COMPONENTS
+}                         from './components';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, EditorComponent,
-      PlayComponent, StoreComponent, ForumComponent, ContactComponent,
-      LegalMentionsComponent, NewsComponent, DesignerComponent,
-      BlueprintsComponent],
-  bootstrap   : [AppComponent],
+  declarations: [
+    APP_COMPONENTS
+  ],
+  bootstrap   : [ AppComponent ],
   imports     : [
-      // modules
-      BrowserModule,
-      RouterModule.forRoot([
-        {
-            path: 'home',
-            component: HomeComponent
-        },
-        {
-            path: 'editor',
-            component: EditorComponent
-        },
-        {
-            path: 'play',
-            component: PlayComponent
-        },
-        {
-            path: 'store',
-            component: StoreComponent
-        },
-        {
-            path: 'forum',
-            component: ForumComponent
-        },
-        {
-            path: 'contact',
-            component: ContactComponent
-        },
-        {
-            path: 'legalMentions',
-            component: LegalMentionsComponent
-        },
-        {
-            path: 'designer',
-            component: DesignerComponent
-        },
-        {
-            path: 'blueprints',
-            component: BlueprintsComponent
-        },
-        {
-            path: '',
-            redirectTo: '/home',
-            pathMatch: 'full',
-        },
-      ]),
-      MODULES,
-      // Router
-      // Forms
-      // Application
+    // modules
+    MaterialModule.forRoot(),
+    BrowserModule,
+    MODULES,
+    routing,
+    FormsModule,
+    // Forms
+    // Application
 
-      DIRECTIVES,
-      ENV_PROVIDERS,
-      PROVIDERS,
-      PIPES,
+    DIRECTIVES,
+    ENV_PROVIDERS,
+    PROVIDERS,
+    PIPES,
   ]
 })
 export class AppModule {

@@ -1,0 +1,24 @@
+<nav class='navbar navbar-default navbar-static-left'>
+  <ul class='nav navbar-nav'>
+    <li><a [routerLink]="['/editor/designer']">Designer</a></li>
+    <li><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
+    <li class="divider"></li>
+    <li><a md-button (click)="start.toggle()" >Toggle Start Side Drawer</a></li>
+    <li><a md-button (click)="end.toggle()" >Toggle End Side Drawer</a></li>
+  </ul>
+</nav>
+
+<md-sidenav-layout>
+  <md-sidenav #start mode="side">
+    <ia-left-sidebar [start]="start"></ia-left-sidebar>
+  </md-sidenav>
+  <md-sidenav #end mode="side" align="end">
+    <ia-right-sidebar [end]="end"></ia-right-sidebar>
+  </md-sidenav>
+
+  <div class="content">
+    <h1>My Content</h1>
+    <ia-viewer></ia-viewer>
+  </div>
+</md-sidenav-layout>
+
