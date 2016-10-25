@@ -9,15 +9,15 @@ import {
   RouterModule
 }                                 from '@angular/router';
 
-import { HomeComponent }          from './component/home';
-import { EditorComponent }        from './component/editor';
-import { PlayComponent }          from './component/play';
-import { StoreComponent }         from './component/store';
-import { ForumComponent }         from './component/forum';
-import { ContactComponent }       from './component/contact';
-import { LegalMentionsComponent } from './component/legal-mentions';
-import { DesignerComponent }      from './component/editor/designer';
-import { BlueprintsComponent }    from './component/editor/blueprints';
+import { HomeComponent }          from './components/home';
+import { EditorComponent }        from './components/editor';
+import { PlayComponent }          from './components/play';
+import { StoreComponent }         from './components/store';
+import { ForumComponent }         from './components/forum';
+import { ContactComponent }       from './components/contact';
+import { LegalMentionsComponent } from './components/legal-mentions';
+import { DesignerComponent }      from './components/editor/designer';
+import { BlueprintsComponent }    from './components/editor/blueprints';
 
 
 export const routes: Routes = [

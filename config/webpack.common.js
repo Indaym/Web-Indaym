@@ -74,8 +74,8 @@ module.exports = {
       name: ['polyfills', 'vendor'].reverse()
     }),
     new CopyWebpackPlugin([
-      { from: '**/*.html',                                            to: 'app/component', context: 'src/app/component' },
-      { from: '**/*.css',                                             to: 'app/component', context: 'src/app/component' },
+      { from: '**/*.html',                                            to: 'app/components', context: 'src/app/components' },
+      { from: '**/*.css',                                             to: 'app/components', context: 'src/app/components' },
       { from: 'src/assets',                                           to: 'assets' },
       { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css',    to: 'assets/css/bootstrap.min.css' },
       { from: 'node_modules/bootstrap/dist/fonts',                    to: 'assets/fonts' },

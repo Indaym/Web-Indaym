@@ -19,7 +19,7 @@ import { routing }        from './app.route';
 import {
   AppComponent,
   APP_COMPONENTS
-}                         from './component';
+}                         from './components';
 
 @NgModule({
   declarations: [
