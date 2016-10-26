@@ -95,7 +95,6 @@
     "mocha": "^3.1.2",
     "protractor": "^4.0.9",
     "remap-istanbul": "^0.6.3",
-
     "angular2-hmr": "^0.8.1",
     "rimraf": "^2.5.3",
     "parse5": "^2.1.5",
