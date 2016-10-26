@@ -3,24 +3,29 @@
  * [node.js] [1]
  * [npm] [2] ([video tutorial (fr)] [4])
  * [typings] [3]
+ * [Yarn][5]
 
 
     npm come with node, so don't worry
+    
+# Install Yarn
+
+    sudo npm install --global yarn
 
 # How to install the project
 
-You have one things to do:
 
-     Checkout to your git branch
+  * Checkout to your git branch
+    
     > git checkout [Branch_name]
 
-    Delete node_module and typings folders
-
-   > npm install
-
-    if this command is too long to write in the terminal, this is the equivalent:
-
-      npm i
+  * If it is the first installation
+    * `yarn install`
+    * `typings i`
+  * if it's a re installation
+    * `rm -rf node_modules typings`
+    * `yarn install`
+    * `typings i`
 
 # Build the project
 
@@ -62,3 +67,4 @@ If you've got some error like this (`error TS2304: Cannot find name '...'`), do:
  [2]: https://www.npmjs.com/                        "npm"
  [3]: https://www.npmjs.com/package/typings         "typings"
  [4]: https://www.youtube.com/watch?v=53U0TBKFwUw   "video tutorial"
+ [5]: https://yarnpkg.com/                          "yarn"
