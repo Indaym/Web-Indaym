@@ -62,6 +62,7 @@
     "@angular/platform-server": "2.0.2",
     "@angular/router": "3.0.2",
     "@angular/upgrade": "2.0.2",
+
     "@angular2-material/button": "^2.0.0-alpha.8-2",
     "@angular2-material/card": "^2.0.0-alpha.8-2",
     "@angular2-material/checkbox": "^2.0.0-alpha.8-2",
@@ -75,6 +76,7 @@
     "@angular2-material/sidenav": "^2.0.0-alpha.8-2",
     "@angular2-material/tabs": "^2.0.0-alpha.8-2",
     "@angular2-material/toolbar": "^2.0.0-alpha.8-2",
+
     "angular2-in-memory-web-api": "0.0.21",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.1",
@@ -90,6 +92,8 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
+    "mocha": "^3.1.2",
+    "protractor": "^4.0.9",
     "angular2-hmr": "^0.8.1",
     "awesome-typescript-loader": "^2.1.1",
     "babel-core": "^6.13.2",
