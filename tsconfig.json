@@ -16,6 +16,9 @@
   "filesGlob": [
     "./src/app/**/*.ts",
     "./src/platform/**/*.ts",
+    "./src/services/**/*.ts",
+    "./src/models/**/*.ts",
+    "./src/**/*.ts",
     "./src/custom-typings.d.ts",
     "./typings/index.d.ts"
   ],
