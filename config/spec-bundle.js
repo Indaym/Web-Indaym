@@ -1,7 +1,3 @@
-/**
- * @author: @AngularClass
- */
-
 /*
  * When testing with webpack and ES6, we have to do some extra
  * things to get testing to work right. Because we are gonna write tests
@@ -31,6 +27,8 @@ require('rxjs/Rx');
 var testing = require('@angular/core/testing');
 var browser = require('@angular/platform-browser-dynamic/testing');
 
+var helpers = require('./helpers');
+
 testing.setBaseTestProviders(
   browser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
@@ -47,7 +45,7 @@ Object.assign(global, testing);
  * any file that ends with spec.js and get its path. By passing in true
  * we say do this recursively
  */
-var testContext = require.context('../src', true, /\.spec\.ts/);
+var testContext = require.context(helpers.root('src'), true, /\.spec\.ts/);
 
 /*
  * get all the files, for each file, call the context function
