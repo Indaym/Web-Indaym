@@ -28,26 +28,16 @@
     "one-variable-per-declaration": [true, "ignore-for-loop"],
     "new-parens": true,
     "comment-format": [ true, "check-space" ],
-    "triple-equals": [ true, "allow-null-check", "allow-undefined-check" ],
-    "switch-default": true,
     "no-var-keyword": true,
     "no-duplicate-variable": true,
     "no-shadowed-variable": true,
-    "no-conditional-assignment": true,
-    "no-invalid-this": true,
-    "no-unsafe-finally": true,
-    "no-use-before-declare": true,
-    "member-access": [ true, "check-accesssor" ],
 
     "directive-selector-name": [ true, "camelCase" ],
     "component-selector-name": [ true, "kebab-case" ],
-    "directive-class-suffix": true,
-    "component-class-suffix": true,
     "directive-selector-type": [ true, "attribute" ],
     "component-selector-type": [ true, "element" ],
     "directive-selector-prefix": [ true, "ia" ],
     "component-selector-prefix": [ true, "ia" ],
-    "pipe-naming": [ true, "camelCase", "ia" ],
     "use-input-property-decorator": true,
     "no-input-rename": true,
     "use-output-property-decorator": true,
@@ -55,7 +45,8 @@
     "use-host-property-decorator": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "no-attribute-parameter-decorator": true,
-    "no-forward-ref" :true
+    "pipe-naming": [ true, "camelCase", "ia" ],
+    "component-class-suffix": true,
+    "directive-class-suffix": true
   }
 }
