@@ -10,6 +10,7 @@ import { HOME_COMPONENTS }        from './home';
 import { LegalMentionsComponent } from './legal-mentions';
 import { PlayComponent }          from './play';
 import { StoreComponent }         from './store';
+import { ToDeleteComponent }      from './to-delete.component';
 
 export { AppComponent }           from './app.component';
 
@@ -21,5 +22,6 @@ export const APP_COMPONENTS = [
   HOME_COMPONENTS,
   LegalMentionsComponent,
   PlayComponent,
-  StoreComponent
+  StoreComponent,
+  ToDeleteComponent,
 ];
