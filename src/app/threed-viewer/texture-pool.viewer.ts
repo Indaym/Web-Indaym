@@ -3,9 +3,8 @@
  */
 import {
   Texture,
-  TextureLoader
+  TextureLoader,
 } from 'three';
-
 
 export class TexturePoolViewer {
   private processing: boolean = false;
@@ -19,8 +18,8 @@ export class TexturePoolViewer {
     this.path = path;
   }
 
-  load(textures, onLoad, onProgress?) {
-    if (this.processing == true)
+  public load(textures, onLoad, onProgress?) {
+    if (this.processing === true)
       return false;
     this.processing = true;
     this.poolLength = textures.length;
@@ -42,13 +41,13 @@ export class TexturePoolViewer {
       }
       if (onProgress)
         onProgress(texture, index);
-      if (this.pushed == this.poolLength)
+      if (this.pushed === this.poolLength)
         this.finished(onLoad);
     });
   }
 
   private finished(onLoad) {
-    if (this.processing == false)
+    if (this.processing === false)
       return false;
     this.processing = false;
     this.queue = null;

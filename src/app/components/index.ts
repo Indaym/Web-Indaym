@@ -21,5 +21,5 @@ export const APP_COMPONENTS = [
   HOME_COMPONENTS,
   LegalMentionsComponent,
   PlayComponent,
-  StoreComponent
+  StoreComponent,
 ];

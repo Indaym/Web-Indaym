@@ -1,12 +1,12 @@
 import { Component }  from '@angular/core';
 
 @Component({
+  providers : [],
   selector  : 'ia-app',
-  template  : require('./app.component.html'),
   styles    : [
-    require('./app.component.css')
+    require('./app.component.css'),
   ],
-  providers : []
+  template  : require('./app.component.html'),
 })
 export class AppComponent {
 }
