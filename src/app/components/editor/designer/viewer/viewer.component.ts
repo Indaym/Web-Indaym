@@ -14,6 +14,8 @@ import {
   PionModelViewer
 }                   from '../../../../threed-viewer';
 
+export var SCENE = null;
+
 //<select #kk="ngModel" [(ngModel)]="kind" (ngModelChange)="onKindSelected()">
 //<option *ngFor="#p of kinds" [value]="p">{{p}}</option>
 //</select>
@@ -32,7 +34,7 @@ import {
   `]
 })
 export class ViewerComponent implements OnInit {
-  private scene: SceneViewer;
+  public scene: SceneViewer;
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
@@ -47,49 +49,8 @@ export class ViewerComponent implements OnInit {
     this.scene.domElement.addEventListener('mousedown', (event) => {
       this.scene.onMouseDown(event)
     }, false);
+
+    SCENE = this.scene;
   }
 
-  addSquareBoard() {
-    const board = new BoardModelViewer({
-      dimension: [32.6, 2.0, 32.6]
-    });
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-  }
-
-  addLongBoard() {
-    const board = new BoardModelViewer({
-      dimension: [77.8, 2.0, 12.2],
-    });
-    board.texturesPaths[2] = 'pion_table.png';
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-
-  }
-
-  addBlackPion() {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5]
-    });
-    pion.texturesPaths[0] = 'black.png';
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-  }
-
-  addWhitePion() {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5]
-    });
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-
-  }
 }
