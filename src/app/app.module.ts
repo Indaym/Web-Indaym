@@ -6,6 +6,7 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import { FormsModule }    from '@angular/forms';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 import {
   ENV_PROVIDERS,
@@ -40,6 +41,7 @@ import {
     ENV_PROVIDERS,
     PROVIDERS,
     PIPES,
+    DragulaModule,
   ]
 })
 export class AppModule {
