@@ -4,19 +4,6 @@
     "node_modules/codelyzer"
   ],
   "rules": {
-    "indent": [ true, "space" ],
-    "no-trailing-whitespace": true,
-    "arrow-parens": true,
-    "semicolon": [
-      true,
-      "always",
-      "ignore-interfaces"
-    ],
-    "quotemark": [
-      true,
-      "single",
-      "avoid-escape"
-    ],
     "whitespace": [
       true,
       "check-branch",
@@ -25,10 +12,24 @@
       "check-module",
       "check-type"
     ],
-    "one-variable-per-declaration": [true, "ignore-for-loop"],
-    "new-parens": true,
+    "semicolon": [
+      true,
+      "always",
+      "ignore-interfaces"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check",
+      "allow-undefined-check"
+    ],
+    "indent": [ true, "space" ],
+    "quotemark": [ true, "single", "avoid-escape" ],
+    "one-variable-per-declaration": [ true, "ignore-for-loop" ],
     "comment-format": [ true, "check-space" ],
-    "triple-equals": [ true, "allow-null-check", "allow-undefined-check" ],
+    "member-access": [ true, "check-accesssor" ],
+    "no-trailing-whitespace": true,
+    "arrow-parens": true,
+    "new-parens": true,
     "switch-default": true,
     "no-var-keyword": true,
     "no-duplicate-variable": true,
@@ -37,7 +38,9 @@
     "no-invalid-this": true,
     "no-unsafe-finally": true,
     "no-use-before-declare": true,
-    "member-access": [ true, "check-accesssor" ],
+    "curly": false,
+    "use-isnan": true,
+    "no-require-imports": false,
 
     "directive-selector-name": [ true, "camelCase" ],
     "component-selector-name": [ true, "kebab-case" ],
