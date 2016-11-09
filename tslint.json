@@ -40,7 +40,7 @@
     "no-use-before-declare": true,
     "curly": false,
     "use-isnan": true,
-    "no-require-imports": false,
+    "no-var-requires": false,
 
     "directive-selector-name": [ true, "camelCase" ],
     "component-selector-name": [ true, "kebab-case" ],
