@@ -5,17 +5,11 @@ module.exports = function (config) {
 
   config.set ({
     basePath: helper.root('src'),
-    frameworks: [
-      'jasmine',
-      'es6-shim'
-    ],
+    frameworks: [ 'jasmine' ],
     plugin: [
-      'karma-phantomjs-launcher',
-      'karma-es6-shim',
       'karma-babel-preprocessor',
       'karma-jasmine',
       'karma-chrome-launcher',
-      'karma-firefox-launcher',
       'coverage',
       'webpack',
       'sourcemap'
@@ -23,11 +17,11 @@ module.exports = function (config) {
     exclude: [],
     files: [
       { pattern: './config/spec-bundle.js', watched: false },
-      { pattern: '**/*.spec.ts'}
+      { pattern: '**/*.spec.ts' }
     ],
     preprocessors: {
       './config/spec-bundle.js': [ 'coverage', 'webpack', 'sourcemap' ],
-      'src/**/*.ts': [ 'typescript' ]
+      'src/**/!(*spec).ts': [ 'typescript' ]
     },
     typescriptPreprocessor: {
       option: { target: 'ES5' },
@@ -39,7 +33,13 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: [ 'Chrome' ],
+    browsers: [ 'ChromeCustom' ],
+    customLaunchers: {
+      ChromeCustom: {
+        base: 'Chrome',
+        flags: ['--ne-sandbox', '--single-process']
+      }
+    },
     singleRun: true,
     webpack: testWebpackConfig,
     coverageReporter: {
