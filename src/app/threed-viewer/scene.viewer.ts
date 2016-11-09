@@ -3,193 +3,186 @@
  */
 
 import {
-  Scene,
-  Camera,
+  Scene as ThreeScene,
+  Camera as ThreeCamera,
   PerspectiveCamera,
-  Renderer,
   WebGLRenderer,
-  BoxGeometry,
-  MeshBasicMaterial,
   Mesh,
   Vector2,
   Vector3,
   Object3D,
-  Raycaster,
+  Raycaster as ThreeRaycaster,
   GridHelper,
-  AxisHelper
+  AxisHelper,
 } from 'three';
 
-var OrbitControls = require('three-orbit-controls')(require('three'));
-var TransformControls = require('three-transformcontrols');
+const OrbitControls = require('three-orbit-controls')(require('three'));
+const TransformControls = require('three-transformcontrols');
 
-import { ModelViewer } from "./model.viewer";
-
+import { ModelViewer }  from './model.viewer';
 
 export class SceneViewer {
-  private _scene: Scene;
-  private _camera: Camera;
-  private _width: number = 300;
-  private _height: number = 300;
-  private _renderer: WebGLRenderer;
-  private _domElement: HTMLElement;
-  private _controls: any;
-  private _controller: any;
-  private _raycaster: Raycaster;
-  private _mouse: Vector2 = new Vector2(0, 0);
-  private _controllerTypes = [
+  private Scene: ThreeScene;
+  private Camera: ThreeCamera;
+  private Width: number = 300;
+  private Height: number = 300;
+  private Renderer: WebGLRenderer;
+  private DomElement: HTMLElement;
+  private Controls: any;
+  private Controller: any;
+  private Raycaster: ThreeRaycaster;
+  private Mouse: Vector2 = new Vector2(0, 0);
+  private ControllerTypes = [
     'translate',
     'rotate',
-    'scale'
+    'scale',
   ];
 
   /*
    parameter : conf > type: json object
    {
-   width: number
+   Width: number
    height: number
    }
    */
   constructor(conf: any = {}) {
-    if (typeof(conf.width) == 'number')
-      this._width = conf.width;
-    if (typeof(conf.height) == 'number')
-      this._height = conf.height;
+    if (typeof(conf.width) === 'number')
+      this.Width = conf.width;
+    if (typeof(conf.height) === 'number')
+      this.Height = conf.height;
 
-    this._scene = new Scene();
+    this.Scene = new ThreeScene();
 
-    this._camera = new PerspectiveCamera(75, this._width / this._height, 0.1, 10000);
+    this.Camera = new PerspectiveCamera(75, this.Width / this.Height, 0.1, 10000);
 
-    this._renderer = new WebGLRenderer();
-    this._renderer.setSize(this._width, this._height);
-    this._renderer.setClearColor(0xdddddd);
+    this.Renderer = new WebGLRenderer();
+    this.Renderer.setSize(this.Width, this.Height);
+    this.Renderer.setClearColor(0xdddddd);
 
-    this._controls = new OrbitControls(this._camera, this._renderer.domElement);
-    this._controls.constraint.enableDamping = true;
-    this._controls.constraint.dampingFactor = 1;
+    this.Controls = new OrbitControls(this.Camera, this.Renderer.domElement);
+    this.Controls.constraint.enableDamping = true;
+    this.Controls.constraint.dampingFactor = 1;
 
-    this._controller = new TransformControls(this._camera, this._renderer.domElement);
+    this.Controller = new TransformControls(this.Camera, this.Renderer.domElement);
 
-    this._raycaster = new Raycaster();
+    this.Raycaster = new ThreeRaycaster();
 
-    this._scene.add(new GridHelper(1000, 1000));
-    this._scene.add(new AxisHelper(1000));
+    this.Scene.add(new GridHelper(1000, 1000));
+    this.Scene.add(new AxisHelper(1000));
 
   }
 
   get cameraPosition(): Vector3 {
-    return this._camera.position;
+    return this.Camera.position;
   }
 
   set cameraPosition(value: Vector3) {
-    this._camera.position.copy(value);
+    this.Camera.position.copy(value);
   }
 
-  get camera(): Camera {
-    return this._camera;
+  get camera(): ThreeCamera {
+    return this.Camera;
   }
 
-  set camera(value: Camera) {
-    this._camera = value;
+  set camera(value: ThreeCamera) {
+    this.Camera = value;
   }
 
   set cameraTarget(target: Vector3) {
-    this._camera.lookAt(target);
+    this.Camera.lookAt(target);
   }
 
   get width(): number {
-    return this._width;
+    return this.Width;
   }
 
   set width(value: number) {
-    this._width = value;
+    this.Width = value;
   }
 
   get height(): number {
-    return this._height;
+    return this.Height;
   }
 
   set height(value: number) {
-    this._height = value;
+    this.Height = value;
   }
 
   get container(): String {
-    return this._domElement.id;
+    return this.DomElement.id;
   }
 
   set container(value: String) {
-    this._domElement = document.getElementById(value.toString());
+    this.DomElement = document.getElementById(value.toString());
   }
 
   get domElement(): HTMLElement {
-    return this._domElement;
+    return this.DomElement;
   }
 
   set modeController(mode: string) {
-    console.log(this._controller._gizmo);
-    this._controller.setMode(mode);
+    this.Controller.setMode(mode);
   }
 
   get modeController(): string {
-    return this._controller.getMode();
+    return this.Controller.getMode();
   }
 
   get controllerTypes(): string[] {
-    return this._controllerTypes;
+    return this.ControllerTypes;
   }
 
-  addInScene(obj: Object3D) {
-    this._scene.add(obj);
+  public addInScene(obj: Object3D) {
+    this.Scene.add(obj);
   }
 
-  deleteFromScene(obj: Object3D) {
-    this._scene.remove(obj);
+  public deleteFromScene(obj: Object3D) {
+    this.Scene.remove(obj);
   }
 
-  deleteSelected() {
-    if (this._controller.object !== undefined) {
-      const obj = this._controller.object;
-      this._controller.detach(obj);
+  public deleteSelected() {
+    if (this.Controller.object !== undefined) {
+      const obj = this.Controller.object;
+      this.Controller.detach(obj);
       this.deleteFromScene(obj);
-
     }
-
   }
 
-  render() {
-    if (this._domElement == undefined)
+  public render() {
+    if (this.DomElement == undefined)
       return null;
-    this._renderer.setSize(this._width, this._height);
-    this._domElement.appendChild(this._renderer.domElement);
-    this._renderer.render(this._scene, this._camera);
+    this.Renderer.setSize(this.Width, this.Height);
+    this.DomElement.appendChild(this.Renderer.domElement);
+    this.Renderer.render(this.Scene, this.Camera);
   }
 
-  animate() {
-    this._controls.update();
-    this._renderer.render(this._scene, this._camera);
+  public animate() {
+    this.Controls.update();
+    this.Renderer.render(this.Scene, this.Camera);
     requestAnimationFrame(() => {
-      this.animate()
+      this.animate();
     });
   }
 
-  onMouseDown(event) {
-    this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
-    this._raycaster.setFromCamera(this._mouse, this._camera);
+  public onMouseDown(event) {
+    this.Mouse.x = ( event.offsetX / this.Width ) * 2 - 1;
+    this.Mouse.y = -( event.offsetY / this.Height ) * 2 + 1;
+    this.Raycaster.setFromCamera(this.Mouse, this.Camera);
 
-    var intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
+    let intersected = this.Raycaster.intersectObjects(this.Scene.children.filter((elem) => {
       return elem instanceof Mesh;
     }));
     if (intersected.length > 0) {
-      this._controller.attach(intersected[0].object);
-      this._scene.add(this._controller);
+      this.Controller.attach(intersected[0].object);
+      this.Scene.add(this.Controller);
     }
   }
 
   // TO DELETE : Temporaire
-  defaultGenerate() {
+  public defaultGenerate() {
     const mod = new ModelViewer({
+      dimensions: [2, 5, 3],
       position: [0, -2, -4],
-      dimensions: [2, 5, 3]
     });
     mod.defaultGenerate();
     this.addInScene(mod.mesh);

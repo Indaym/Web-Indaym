@@ -6,11 +6,7 @@ import {
   CubeGeometry,
   MeshBasicMaterial,
   MeshFaceMaterial,
-  CubeTextureLoader,
-  CubeTexture,
-  Texture,
-  Material
-}                             from 'three'
+}                             from 'three';
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
@@ -35,7 +31,7 @@ export class BoardModelViewer extends ModelViewer {
     this._texturesPaths = value;
   }
 
-  init(onLoad) {
+  public init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(this.dimension.x, this.dimension.y, this.dimension.z, 1, 1, 1);
 
@@ -53,6 +49,4 @@ export class BoardModelViewer extends ModelViewer {
         materials[index] = new MeshBasicMaterial({ map: texture });
     });
   }
-
-
 }

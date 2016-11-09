@@ -4,14 +4,11 @@
 
 import {
   CylinderGeometry,
-  CubeGeometry,
   MeshBasicMaterial,
-  Texture,
-  Material
-}                           from 'three';
+}                             from 'three';
 
-import {ModelViewer}        from './model.viewer';
-import {TexturePoolViewer}  from './texture-pool.viewer';
+import { ModelViewer }        from './model.viewer';
+import { TexturePoolViewer }  from './texture-pool.viewer';
 
 export class PionModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
@@ -31,7 +28,7 @@ export class PionModelViewer extends ModelViewer {
     this._texturesPaths = value;
   }
 
-  init(onLoad) {
+  public init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(this.dimension.x, this.dimension.y, this.dimension.z, 40);
 
@@ -43,6 +40,4 @@ export class PionModelViewer extends ModelViewer {
     }, (texture, index) => {
     });
   }
-
-
 }

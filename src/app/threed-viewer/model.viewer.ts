@@ -12,7 +12,6 @@ import {
   MeshFaceMaterial
 } from 'three';
 
-
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
   private _position: Vector3 = new Vector3(0, 0, 0);
@@ -82,7 +81,7 @@ export class ModelViewer {
     this._mesh = value;
   }
 
-  generateMesh() {
+  public generateMesh() {
     if (this._geometry == null || this._material == null)
       return null;
     this._mesh = new Mesh(this._geometry, this._material);
@@ -91,7 +90,7 @@ export class ModelViewer {
   }
 
   // TO DELETE : Temporaire
-  defaultGenerate() {
+  public defaultGenerate() {
     this._geometry = new BoxGeometry(this._dimension.x, this._dimension.y, this._dimension.z);
     this._material = new MeshFaceMaterial([
         new MeshBasicMaterial({ color: 0xff0000 }),
