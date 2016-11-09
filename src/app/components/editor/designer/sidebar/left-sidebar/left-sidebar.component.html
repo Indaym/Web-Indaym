@@ -20,13 +20,11 @@
       <input type="search" name="Search a template">
     </form>
     Boards:<br/>
-    <button>Simple board</button><br/>
-    <button>Bicolor board</button><br/>
+    <button (click)="addSquareBoard()">Add 3*3 Board</button><br/>
+    <button (click)="addLongBoard()">Add 1*9 Board</button><br/>
     <br/>
     Pawns:<br/>
-    <button>Standard pawn</button><br/>
-    <button>Round pawn</button><br/>
-    <button>Squared pawn</button><br/>
-    And here's more in another tab.
+    <button (click)="addWhitePion()">Add White Pion</button><br/>
+    <button (click)="addBlackPion()">Add Black Pion</button><br/>
   </tab>
 </tabs>

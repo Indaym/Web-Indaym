@@ -18,12 +18,12 @@ import { routing }        from './app.route';
 
 import {
   AppComponent,
-  APP_COMPONENTS
+  APP_COMPONENTS,
 }                         from './components';
 
 @NgModule({
   declarations: [
-    APP_COMPONENTS
+    APP_COMPONENTS,
   ],
   bootstrap   : [ AppComponent ],
   imports     : [
