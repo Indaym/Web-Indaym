@@ -24,7 +24,7 @@ import { SCENE }      from './viewer/viewer.component';
 })
 export class DesignerComponent {
   @ViewChild(LeftSidebarComponent)
-  private var0 : LeftSidebarComponent;
+  private childLeftSidebar : LeftSidebarComponent;
 
   constructor(private dragulaService: DragulaService) {
     dragulaService.setOptions('first-bag', {
@@ -54,12 +54,12 @@ export class DesignerComponent {
     el.removeChild(e);
     //appeler la bonne fonction
     if (e.id == "board3x3")
-      this.var0.addSquareBoard();
+      this.childLeftSidebar.addSquareBoard();
     else if (e.id == "board1x9")
-      this.var0.addLongBoard();
+      this.childLeftSidebar.addLongBoard();
     else if (e.id == "pawnWhite")
-      this.var0.addWhitePion();
+      this.childLeftSidebar.addWhitePion();
     else if (e.id == "pawnBlack")
-      this.var0.addBlackPion();
+      this.childLeftSidebar.addBlackPion();
   }
 }
