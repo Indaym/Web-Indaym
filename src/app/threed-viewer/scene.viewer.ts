@@ -20,7 +20,7 @@ import {
 } from 'three';
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
-var TransformControls = require('three-transformcontrols');
+var TransformControls = require('threejs-transformcontrols');
 
 import { ModelViewer } from "./model.viewer";
 
