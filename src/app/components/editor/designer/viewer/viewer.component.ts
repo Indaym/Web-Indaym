@@ -52,5 +52,4 @@ export class ViewerComponent implements OnInit {
 
     SCENE = this.scene;
   }
-
 }

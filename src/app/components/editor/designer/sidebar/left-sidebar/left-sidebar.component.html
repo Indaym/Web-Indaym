@@ -19,12 +19,20 @@
       Search:
       <input type="search" name="Search a template">
     </form>
-    Boards:<br/>
-    <button (click)="addSquareBoard()">Add 3*3 Board</button><br/>
-    <button (click)="addLongBoard()">Add 1*9 Board</button><br/>
     <br/>
-    Pawns:<br/>
-    <button (click)="addWhitePion()">Add White Pion</button><br/>
-    <button (click)="addBlackPion()">Add Black Pion</button><br/>
+    Pour placer un objet dans l'éditeur:<br/>
+    -Cliquer le place en pos 0 0<br/>
+    -Le drag and drop à la position voulue<br/>
+    <br/>
+    Boards and pawns:<br/><br/>
+    <div [dragula]='"first-bag"' id="first-bag" class='container2'>
+      <!-- Boards (don't change the ids) -->
+      <button id="board3x3" (click)="addSquareBoard()">Add 3*3 Board</button><br/>
+      <button id="board1x9" (click)="addLongBoard()">Add 1*9 Board</button><br/>
+      <br/>
+      <!-- Pawns (don't change the ids) -->
+      <button id="pawnWhite" (click)="addWhitePion()">Add White Pion</button><br/>
+      <button id="pawnBlack" (click)="addBlackPion()">Add Black Pion</button><br/>
+    </div>
   </tab>
 </tabs>

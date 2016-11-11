@@ -5,4 +5,7 @@
   </label>
   <button (click)="scene.deleteSelected()">Delete Object</button>
 </div>
-<div id="editorContainer"></div>
+
+<div [dragula]='"first-bag"' id="second-bag" class='container2'>
+  <div id="editorContainer"></div>
+</div>
