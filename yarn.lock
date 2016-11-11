@@ -4366,19 +4366,19 @@ three-orbit-controls@^72.0.0:
   version "72.0.0"
   resolved "https://registry.yarnpkg.com/three-orbit-controls/-/three-orbit-controls-72.0.0.tgz#13a4cbf3780cc6e5446aed0032fe1c5135e72755"
 
-three-transformcontrols@^0.78.1:
-  version "0.78.1"
-  resolved "https://registry.yarnpkg.com/three-transformcontrols/-/three-transformcontrols-0.78.1.tgz#bcff06f4fd3239743d93cfc3c1f0d49ece70b5f4"
-  dependencies:
-    three ">=0.78.0"
-
 three@^0.81.2:
   version "0.81.2"
   resolved "https://registry.yarnpkg.com/three/-/three-0.81.2.tgz#100c078dcfbb0a235e3d433066b1b26b145c69c3"
 
-three@>=0.78.0:
-  version "0.82.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.82.0.tgz#03670b7c7f1b73910a8d2cf059c3dd12e7d96dff"
+three@0.82.1:
+  version "0.82.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.82.1.tgz#f63c3730971520c54479e3627d370d764a4a8383"
+
+threejs-transformcontrols@^0.82.3:
+  version "0.82.3"
+  resolved "https://registry.yarnpkg.com/threejs-transformcontrols/-/threejs-transformcontrols-0.82.3.tgz#58fa9adc3694ffb74e0aa57f17d4233f3fa71afd"
+  dependencies:
+    three "0.82.1"
 
 throat@^3.0.0:
   version "3.0.0"
