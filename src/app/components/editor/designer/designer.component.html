@@ -1,12 +1,13 @@
-<nav class='navbar navbar-default navbar-static-left'>
+<nav class='navbar navbar-default'>
   <ul class='nav navbar-nav'>
-    <li><a [routerLink]="['/editor/designer']">Designer</a></li>
-    <li><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
-    <li class="divider"></li>
-    <li><a md-button (click)="start.toggle()" >Toggle Start Side Drawer</a></li>
-    <li><a md-button (click)="end.toggle()" >Toggle End Side Drawer</a></li>
+   <li><a md-button (click)="start.toggle()" >Toggle Start Side Drawer</a></li>
+   <li><a [routerLink]="['/editor/designer']">Designer</a></li>
+   <li><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
+   <li><a md-button (click)="end.toggle()" >Toggle End Side Drawer</a></li>
   </ul>
 </nav>
+
+
 
 <md-sidenav-layout>
   <md-sidenav #start mode="side">

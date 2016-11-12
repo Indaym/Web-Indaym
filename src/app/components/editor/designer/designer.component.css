@@ -1,6 +1,44 @@
+h1 {
+  text-align: center;
+  font: italic bold 21px Georgia, serif;
+}
+
 h2 {
   text-align: center;
 }
+
+/* navbar style */
+
+ul {
+	width: 100%;
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00cccc;
+
+}
+
+li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #00cccc;
+}
+
+.active {
+background-color:#00cccc;
+}
+
+
+nav ul li:nth-child(4) {
+	float: right;
+}
+
 
 md-sidenav-layout {
   /*position: absolute;*/
@@ -12,6 +50,9 @@ md-sidenav-layout {
 }
 
 md-sidenav {
-  background: rgba(85,85,85, 0.95);
+  background: rgba(55,55,55,0.95);
+  padding: 10px;
   width:300px;
+  border-radius: 5px;
+  color:white;
 }

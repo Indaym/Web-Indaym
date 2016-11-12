@@ -22,14 +22,9 @@ import {
 @Component({
   selector: 'ia-viewer',
   template: require('./viewer.component.html'),
-  styles: [`
-    .buttons {
-      padding:5px;
-    }
-    .buttons label {
-      margin-right : 10px
-    }
-  `]
+  styles: [
+    require('./viewer.component.css'),
+  ]
 })
 export class ViewerComponent implements OnInit {
   private scene: SceneViewer;
