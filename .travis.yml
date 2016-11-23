@@ -1,0 +1,29 @@
+language: node_js
+
+node_js:
+  - '6'
+
+notifications:
+  slack:
+    secure: JEPr3S6+P9b7i3z6Mr+Qv2uSotyvQR2thv/uebUHPSZ/nhPK67eA1WN7clk74r20sQelE5qIWO2wP+Qjlkyv+f9/hyHPAS/qprzlgHMHVR/HL8hAG+6SY3+W/BAnQ7nMutDSW7MrLX7dgtH1/a19ILD9GdD5ux3ouDx9oY/gP0oIdVLgYLFYEj4xHyzKcJWGI930UYY3b1dPs20WKuO+YzQBVB2W9C4afg8P6+T/q/EtAJtgHyWeJlYdxpqXjnHrAXj6c1l14WZX8CZhi3yy+1Rhw0wZPtKtRv2nZ4TaHs79bSV3Yn3V/hUo5xwe/VLGbe0CLBZPioSj1hYg/mfKnldD+5QE23Rqbj3uxFqmUYxFNWukD7dC2V7qYLlJHXiVlu4P55d05Vx6kvJmxC2IlqvWpb1Yt8E/RX/6fHcdRG9l9lIL9sHgP1xr/Xqy9OOlH7ZQb/TH6HONcvVcQZps2D6NBZL166/WLqw1KSR4BMHEze48cZDcBOcuH6rrv5CiwPQ0naJoGWvXAdEOqDCkvSsAH6YyVMnDw4PDFTK3rl0BnUVVkNY8yGQUwws8hgJDFg8Y7e9JykeZrY0sFOTAtFHecH1mIIX+rvgpDCCYrPa/99MHeb2bhRRWZnr0/VcvLWyadwdqUsRyOL7WSl1a+NSx9sn77bqdqFRJtOFe6u4=
+
+branches:
+  only:
+    - master
+    - develop
+    - /^feature\/.*$/i
+    - /^hotfix\/.*$/i
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+before_install:
+    - npm install yarn
+
+install:
+  - yarn install
+
+after_success:
+  - yarn clean
