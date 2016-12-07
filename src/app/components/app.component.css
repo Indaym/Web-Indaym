@@ -1,11 +1,13 @@
 h1:nth-child(1) {
-  background-color: #ccc;
+  background-color: #444;
   color: white;
-  font: italic bold 42px Georgia, serif;
+  font: bold;
+  font-family: "Segoe UI",Arial,sans-serif;
+  text-transform: uppercase;
 }
 
 .navbar {
-  background-color: #ccc;
+  background-color: #444;
 }
 
 .footer {
@@ -64,6 +66,7 @@ background-color:#00cccc;
   z-index:-2;
   opacity: 0.4;
   filter: alpha(opacity=40);
+  background-position: center;
 }
 
 .background-image:after {

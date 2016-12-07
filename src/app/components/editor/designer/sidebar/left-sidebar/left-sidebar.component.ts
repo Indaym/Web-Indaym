@@ -40,9 +40,11 @@ export class LeftSidebarComponent {
     // this.start.mode = (this.start.mode == 'push' ? 'over' : (this.start.mode == 'over' ? 'side' : 'push'));
   }
 
-    addSquareBoard() {
+    addSquareBoard(sceneParam) {
       if (this.scene == null && SCENE != null)
          this.scene = SCENE;
+      if (sceneParam != null)
+        this.scene = sceneParam;
       const board = new BoardModelViewer({
         dimension: [32.6, 2.0, 32.6]
       });
@@ -52,9 +54,11 @@ export class LeftSidebarComponent {
       });
     }
 
-    addLongBoard() {
+    addLongBoard(sceneParam) {
       if (this.scene == null && SCENE != null)
          this.scene = SCENE;
+      if (sceneParam != null)
+        this.scene = sceneParam;
       const board = new BoardModelViewer({
         dimension: [77.8, 2.0, 12.2],
       });
@@ -66,9 +70,11 @@ export class LeftSidebarComponent {
 
     }
 
-    addBlackPion() {
+    addBlackPion(sceneParam) {
       if (this.scene == null && SCENE != null)
          this.scene = SCENE;
+      if (sceneParam != null)
+        this.scene = sceneParam;
       const pion = new PionModelViewer({
         dimension: [3.5, 3.5, 1.5]
       });
@@ -79,9 +85,11 @@ export class LeftSidebarComponent {
       });
     }
 
-    addWhitePion() {
+    addWhitePion(sceneParam) {
       if (this.scene == null && SCENE != null)
          this.scene = SCENE;
+      if (sceneParam != null)
+        this.scene = sceneParam;
       const pion = new PionModelViewer({
         dimension: [3.5, 3.5, 1.5]
       });

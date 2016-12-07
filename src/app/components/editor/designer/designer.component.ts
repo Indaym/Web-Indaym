@@ -27,39 +27,43 @@ export class DesignerComponent {
   private childLeftSidebar : LeftSidebarComponent;
 
   constructor(private dragulaService: DragulaService) {
-    dragulaService.setOptions('first-bag', {
-      copy: true,
-      accepts: function (el, target) {
-        return target !== document.getElementById('first-bag')
-      },
-    });
-    dragulaService.drag.subscribe((value) => {
-     console.log(`drag: ${value[0]}`);
-     this.onDrag(value.slice(1));
-    });
-    dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
-      this.onDrop(value.slice(1));
-    });
+    if (dragulaService.find("first-bag") == null)
+    {
+      dragulaService.setOptions('first-bag', {
+        copy: true,
+        accepts: function (el, target) {
+          return target !== document.getElementById('first-bag')
+        },
+      });
+      dragulaService.drag.subscribe((value) => {
+       console.log(`drag: ${value[0]}`);
+       this.onDrag(value.slice(1));
+      });
+      dragulaService.drop.subscribe((value) => {
+        console.log(`drop: ${value[0]}`);
+        this.onDrop(value.slice(1));
+      });
+    }
   }
 
   private onDrag(args) {
     // rendre le bouton draggé invisible
     let [e, el] = args;
-
    }
   private onDrop(args) {
     // supprimer le boutton droppé
     let [e, el] = args;
+    if (el == null) // ne jamais enlever cette ligne
+      return;
     el.removeChild(e);
     //appeler la bonne fonction
     if (e.id == "board3x3")
-      this.childLeftSidebar.addSquareBoard();
+      this.childLeftSidebar.addSquareBoard(SCENE);
     else if (e.id == "board1x9")
-      this.childLeftSidebar.addLongBoard();
+      this.childLeftSidebar.addLongBoard(SCENE);
     else if (e.id == "pawnWhite")
-      this.childLeftSidebar.addWhitePion();
+      this.childLeftSidebar.addWhitePion(SCENE);
     else if (e.id == "pawnBlack")
-      this.childLeftSidebar.addBlackPion();
+      this.childLeftSidebar.addBlackPion(SCENE);
   }
 }

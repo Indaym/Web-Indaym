@@ -4,19 +4,27 @@
 
 <span>Mode : {{start.mode}}</span>
 
+<!--
 <tabs>
   <tab tabTitle="Objects">
     <form>
       Search:
       <input type="search" name="Search an object">
     </form>
+    <tabs>
+      <tab tabTitle="Boards">
+        b
+      </tab>
+      <tab tabTitle="Pawns">
+        p
+      </tab>
+    </tabs>
     <button ng-click="boardFunction()">Boards</button><br/>
     <button ng-click="pawnFunction()">Pawns</button><br/>
-    Here's some content.
   </tab>
+-->
 
-  
-  <tab tabTitle="Templates">
+  <!-- <tab tabTitle="Templates"> -->
     <form>
       Search:
       <input type="search" name="Search a template">
@@ -26,15 +34,61 @@
     -Cliquer le place en pos 0 0<br/>
     -Le drag and drop à la position voulue<br/>
     <br/>
-    Boards and pawns:<br/><br/>
-    <div [dragula]='"first-bag"' id="first-bag" class='container2'>
-      <!-- Boards (don't change the ids) -->
-      <button id="board3x3" (click)="addSquareBoard()">Add 3*3 Board</button><br/>
-      <button id="board1x9" (click)="addLongBoard()">Add 1*9 Board</button><br/>
-      <br/>
-      <!-- Pawns (don't change the ids) -->
-      <button id="pawnWhite" (click)="addWhitePion()">Add White Pion</button><br/>
-      <button id="pawnBlack" (click)="addBlackPion()">Add Black Pion</button><br/>
-    </div>
-  </tab>
+    <h3>Objects</h3><br/>
+      <tabs>
+        <!-- Boards (don't change the ids) -->
+        <tab tabTitle="Boards">
+          <h3>Board Templates</h3><br/>
+          <form id="customBoard">Custom board:<br/>
+            <input type="text" name="later">
+            <button>Add</button>
+          </form><br/>
+          <div [dragula]='"first-bag"' id="first-bag" class='container2'>
+          <button id="board3x3" (click)="addSquareBoard()">Add 3*3 Board</button><br/>
+          <button id="board1x9" (click)="addLongBoard()">Add 1*9 Board</button><br/>
+          </div>
+        </tab>
+
+        <!-- Pawns (don't change the ids) -->
+        <tab tabTitle="Pawns">
+          <h3>Pawn Templates</h3><br/>
+          <form id="customPawn">Custom pawn:<br/>
+            <input type="text" name="later">
+            <button>Add</button>
+          </form><br/>
+          <div [dragula]='"first-bag"' id="first-bag2" class='container2'>
+          <button id="pawnWhite" (click)="addWhitePion()">Add White Pion</button><br/>
+          <button id="pawnBlack" (click)="addBlackPion()">Add Black Pion</button><br/>
+          </div>
+        </tab>
+
+        <!-- Cards (don't change the ids) -->
+        <tab tabTitle="Cards">
+          <h3>Card Templates</h3><br/>
+          <form id="customCards">Custom card:<br/>
+            <input type="text" name="later">
+            <button>Add</button>
+          </form><br/>
+          <div [dragula]='"first-bag"' id="first-bag3" class='container2'>
+            <div>Not implemented yet</div><br/>
+          </div>
+        </tab>
+
+        <!-- Dices (don't change the ids) -->
+        <tab tabTitle="Dices">
+          <h3>Dice Templates</h3><br/>
+          <form id="customBoard">Custom dice:<br/>
+            <input type="text" name="later">
+            <button>Add</button>
+          </form><br/>
+          <div [dragula]='"first-bag"' id="first-bag4" class='container2'>
+          <div>Not implemented yet</div><br/>
+          </div>
+        </tab>
+
+
+      </tabs>
+<!--
+</tab>
 </tabs>
+-->

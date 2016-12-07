@@ -2,8 +2,6 @@ h2 {
   text-align: center;
 }
 
-/* navbar style */
-
 ul {
 	width: 100%;
     list-style-type: none;
@@ -11,7 +9,6 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #00cccc;
-
 }
 
 li a {
@@ -27,4 +24,13 @@ li a:hover:not(.active) {
 
 .active {
 background-color:#00cccc;
+}
+
+#toCenter {
+  margin-left: 45%;
+  text-transform: uppercase;
+}
+
+#toCapitalize {
+  text-transform: uppercase;
 }
