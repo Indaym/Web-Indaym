@@ -20,10 +20,8 @@ cache:
   directories:
     - node_modules
 
-before_install:
-  - npm install yarn
-
-install: travis_wait 30 yarn install
+script:
+  - yarn run lint
 
 after_success:
   - yarn clean
