@@ -22,6 +22,8 @@ cache:
 
 script:
   - yarn run lint
+  - yarn run test
+  - yarn run e2e
 
-after_success:
+after_script:
   - yarn clean
