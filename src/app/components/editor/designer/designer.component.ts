@@ -1,4 +1,6 @@
-import { Component }    from '@angular/core';
+import { Component, ViewChild }    from '@angular/core';
+import { ViewerComponent } from "./viewer/viewer.component";
+import { EventDispatcher } from 'three';
 
 @Component({
   selector  : 'ia-designer',
@@ -9,4 +11,9 @@ import { Component }    from '@angular/core';
   providers : []
 })
 export class DesignerComponent {
+  private dispatcher: EventDispatcher;
+
+  constructor() {
+    this.dispatcher = new EventDispatcher();
+  }
 }

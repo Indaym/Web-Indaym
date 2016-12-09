@@ -4,9 +4,13 @@
 
 import {
   Component,
-  OnInit
+  OnInit,
+  Input
 }                   from '@angular/core';
-import { Vector3 }  from 'three';
+import {
+  Vector3,
+  EventDispatcher
+}                   from 'three';
 
 import {
   SceneViewer,
@@ -32,7 +36,8 @@ import {
   `]
 })
 export class ViewerComponent implements OnInit {
-  private scene: SceneViewer;
+  public scene: SceneViewer;
+  @Input() eventDispatcher;
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
@@ -47,6 +52,7 @@ export class ViewerComponent implements OnInit {
     this.scene.domElement.addEventListener('mousedown', (event) => {
       this.scene.onMouseDown(event)
     }, false);
+    this.scene.eventDispatcher = this.eventDispatcher;
   }
 
   addSquareBoard() {
@@ -90,6 +96,5 @@ export class ViewerComponent implements OnInit {
       this.scene.addInScene(mesh);
       this.scene.render();
     });
-
   }
 }
