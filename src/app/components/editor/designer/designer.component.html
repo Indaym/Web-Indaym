@@ -18,10 +18,10 @@
     <ia-left-sidebar [start]="start"></ia-left-sidebar>
   </md-sidenav>
   <md-sidenav #end mode="side" align="end">
-    <ia-right-sidebar [end]="end"></ia-right-sidebar>
+    <ia-right-sidebar [end]="end" [eventDispatcher]="dispatcher"></ia-right-sidebar>
   </md-sidenav>
 
   <div class="content">
-    <ia-viewer></ia-viewer>
+    <ia-viewer [eventDispatcher]="dispatcher" ></ia-viewer>
   </div>
 </md-sidenav-layout>

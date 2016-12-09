@@ -16,7 +16,8 @@ import {
   Object3D,
   Raycaster,
   GridHelper,
-  AxisHelper
+  AxisHelper,
+  EventDispatcher
 } from 'three';
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
@@ -34,6 +35,7 @@ export class SceneViewer {
   private _domElement: HTMLElement;
   private _controls: any;
   private _controller: any;
+  private _eventDispatcher: EventDispatcher;
   private _raycaster: Raycaster;
   private _mouse: Vector2 = new Vector2(0, 0);
   private _controllerTypes = [
@@ -41,7 +43,7 @@ export class SceneViewer {
     'rotate',
     'scale'
   ];
-
+  private _selected: Object3D;
   /*
    parameter : conf > type: json object
    {
@@ -74,6 +76,35 @@ export class SceneViewer {
     this._scene.add(new GridHelper(1000, 1000));
     this._scene.add(new AxisHelper(1000));
 
+    this._selected = undefined;
+  }
+
+  initDispatcherEvents() {
+    if (this._eventDispatcher !== undefined) {
+      this._eventDispatcher.addEventListener("updateObjectView", (e:any) => {
+        if (this.selected !== undefined) {
+          if (e.position !== undefined)
+            this.selected.position.copy(e.position);
+          if (e.rotation !== undefined)
+            this.selected.rotation.copy(e.rotation);
+          if (e.dimension !== undefined)
+            this.selected.scale.copy(e.dimension);
+          this.updateController();
+        }
+      });
+
+    }
+  }
+
+  get eventDispatcher(): EventDispatcher {
+    return this._eventDispatcher;
+  }
+
+  set eventDispatcher(value: EventDispatcher) {
+    if (value !== undefined) {
+      this._eventDispatcher = value;
+      this.initDispatcherEvents();
+    }
   }
 
   get cameraPosition(): Vector3 {
@@ -137,6 +168,10 @@ export class SceneViewer {
     return this._controllerTypes;
   }
 
+  get selected(): Object3D {
+    return this._selected;
+  }
+
   addInScene(obj: Object3D) {
     this._scene.add(obj);
   }
@@ -145,14 +180,43 @@ export class SceneViewer {
     this._scene.remove(obj);
   }
 
-  deleteSelected() {
-    if (this._controller.object !== undefined) {
-      const obj = this._controller.object;
-      this._controller.detach(obj);
-      this.deleteFromScene(obj);
+  updateController() {
+    this._controller.update();
+  }
 
+  selectObject(obj: Object3D) {
+    if (obj !== undefined) {
+      this._selected = obj;
+      this._controller.attach(obj);
+      this._scene.add(this._controller);
+      this._eventDispatcher.dispatchEvent({
+        type:"updateObjectInputs",
+        position:this._selected.position,
+        dimension:this._selected.scale,
+        rotation:this._selected.rotation
+      });
     }
+  }
 
+  unselectObject(obj:Object3D) {
+    const objSel = [obj, this._controller.object, this._selected].find((elem) => { return elem !== undefined });
+    this._controller.detach(objSel);
+    this._scene.remove(this._controller);
+    this._selected = undefined;
+  }
+
+  deleteSelected() {
+    const objSel = [this._selected, this._controller.object].find((elem) => { return elem !== undefined });
+    if (objSel !== undefined) {
+      this.unselectObject(objSel);
+      this._scene.remove(objSel);
+      this._eventDispatcher.dispatchEvent({
+        type:"updateObjectInputs",
+        position: new Vector3(),
+        dimension: new Vector3(),
+        rotation: new Vector3()
+      });
+    }
   }
 
   render() {
@@ -179,10 +243,8 @@ export class SceneViewer {
     var intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
       return elem instanceof Mesh;
     }));
-    if (intersected.length > 0) {
-      this._controller.attach(intersected[0].object);
-      this._scene.add(this._controller);
-    }
+    if (intersected.length > 0)
+      this.selectObject(intersected[0].object);
   }
 
   // TO DELETE : Temporaire

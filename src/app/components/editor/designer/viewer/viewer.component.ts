@@ -4,9 +4,13 @@
 
 import {
   Component,
-  OnInit
+  OnInit,
+  Input
 }                   from '@angular/core';
-import { Vector3 }  from 'three';
+import {
+  Vector3,
+  EventDispatcher
+}                   from 'three';
 
 import {
   SceneViewer,
@@ -30,6 +34,7 @@ export var SCENE = null;
 })
 export class ViewerComponent implements OnInit {
   public scene: SceneViewer;
+  @Input() eventDispatcher;
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
@@ -46,5 +51,49 @@ export class ViewerComponent implements OnInit {
     }, false);
 
     SCENE = this.scene;
+    this.scene.eventDispatcher = this.eventDispatcher;
+  }
+
+  addSquareBoard() {
+    const board = new BoardModelViewer({
+      dimension: [32.6, 2.0, 32.6]
+    });
+    board.init((mesh) => {
+      this.scene.addInScene(mesh);
+      this.scene.render();
+    });
+  }
+
+  addLongBoard() {
+    const board = new BoardModelViewer({
+      dimension: [77.8, 2.0, 12.2],
+    });
+    board.texturesPaths[2] = 'pion_table.png';
+    board.init((mesh) => {
+      this.scene.addInScene(mesh);
+      this.scene.render();
+    });
+
+  }
+
+  addBlackPion() {
+    const pion = new PionModelViewer({
+      dimension: [3.5, 3.5, 1.5]
+    });
+    pion.texturesPaths[0] = 'black.png';
+    pion.init((mesh) => {
+      this.scene.addInScene(mesh);
+      this.scene.render();
+    });
+  }
+
+  addWhitePion() {
+    const pion = new PionModelViewer({
+      dimension: [3.5, 3.5, 1.5]
+    });
+    pion.init((mesh) => {
+      this.scene.addInScene(mesh);
+      this.scene.render();
+    });
   }
 }

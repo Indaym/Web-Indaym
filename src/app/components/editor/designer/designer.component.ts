@@ -13,6 +13,9 @@ import { LeftSidebarComponent } from './sidebar/left-sidebar/left-sidebar.compon
 import { AfterViewInit, ViewChild } from '@angular/core';
 
 import { SCENE }      from './viewer/viewer.component';
+import { Component, ViewChild }    from '@angular/core';
+import { ViewerComponent } from "./viewer/viewer.component";
+import { EventDispatcher } from 'three';
 
 @Component({
   selector  : 'ia-designer',
@@ -25,8 +28,11 @@ import { SCENE }      from './viewer/viewer.component';
 export class DesignerComponent {
   @ViewChild(LeftSidebarComponent)
   private childLeftSidebar : LeftSidebarComponent;
+  private dispatcher: EventDispatcher;
 
   constructor(private dragulaService: DragulaService) {
+    this.dispatcher = new EventDispatcher();
+
     if (dragulaService.find("first-bag") == null)
     {
       dragulaService.setOptions('first-bag', {
