@@ -1,6 +1,5 @@
-import { Component, ViewChild }    from '@angular/core';
-import { ViewerComponent } from "./viewer/viewer.component";
-import { EventDispatcher } from 'three';
+import { Component }        from '@angular/core';
+import { EventDispatcher }  from 'three';
 
 @Component({
   selector  : 'ia-designer',

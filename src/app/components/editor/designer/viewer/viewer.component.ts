@@ -7,21 +7,13 @@ import {
   OnInit,
   Input
 }                   from '@angular/core';
-import {
-  Vector3,
-  EventDispatcher
-}                   from 'three';
+import { Vector3 }  from 'three';
 
 import {
   SceneViewer,
   BoardModelViewer,
   PionModelViewer
 }                   from '../../../../threed-viewer';
-
-//<select #kk="ngModel" [(ngModel)]="kind" (ngModelChange)="onKindSelected()">
-//<option *ngFor="#p of kinds" [value]="p">{{p}}</option>
-//</select>
-//{{ kk.valid }}
 
 @Component({
   selector: 'ia-viewer',

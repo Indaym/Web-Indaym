@@ -23,6 +23,5 @@ export class LeftSidebarComponent {
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
-    // this.start.mode = (this.start.mode == 'push' ? 'over' : (this.start.mode == 'over' ? 'side' : 'push'));
   }
 }
