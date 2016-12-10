@@ -44,8 +44,8 @@
             <button>Add</button>
           </form><br/>
           <div [dragula]='"first-bag"' id="first-bag" class='container2'>
-          <button id="board3x3" (click)="addSquareBoard()">Add 3*3 Board</button><br/>
-          <button id="board1x9" (click)="addLongBoard()">Add 1*9 Board</button><br/>
+            <button id="board3x3" (click)="addObject('board3x3')">Add 3*3 Board</button><br/>
+            <button id="board1x9" (click)="addObject('board1x9')">Add 1*9 Board</button><br/>
           </div>
         </tab>
 
@@ -57,8 +57,8 @@
             <button>Add</button>
           </form><br/>
           <div [dragula]='"first-bag"' id="first-bag2" class='container2'>
-          <button id="pawnWhite" (click)="addWhitePion()">Add White Pion</button><br/>
-          <button id="pawnBlack" (click)="addBlackPion()">Add Black Pion</button><br/>
+          <button id="pawnWhite" (click)="addObject('pawnWhite')">Add White Pion</button><br/>
+          <button id="pawnBlack" (click)="addObject('pawnBlack')">Add Black Pion</button><br/>
           </div>
         </tab>
 

@@ -15,8 +15,6 @@ import {
   PionModelViewer
 }                   from '../../../../threed-viewer';
 
-export var SCENE = null;
-
 @Component({
   selector: 'ia-viewer',
   template: require('./viewer.component.html'),
@@ -27,6 +25,12 @@ export var SCENE = null;
 export class ViewerComponent implements OnInit {
   public scene: SceneViewer;
   @Input() eventDispatcher;
+  private objects = {
+    "board3x3" : () => this.addSquareBoard(),
+    "board1x9" : () => this.addLongBoard(),
+    "pawnWhite" : () => this.addWhitePion(),
+    "pawnBlack" : () => this.addBlackPion()
+  };
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
@@ -42,11 +46,15 @@ export class ViewerComponent implements OnInit {
       this.scene.onMouseDown(event)
     }, false);
 
-    SCENE = this.scene;
     this.scene.eventDispatcher = this.eventDispatcher;
+    this.eventDispatcher.addEventListener('addObject', (obj:any) => {
+      if(obj.name !== undefined)
+        this.objects[obj.name]()
+    });
   }
 
   addSquareBoard() {
+    console.log("board");
     const board = new BoardModelViewer({
       dimension: [32.6, 2.0, 32.6]
     });

@@ -2,19 +2,9 @@ import { Component }  from '@angular/core';
 
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
-import {
-  SceneViewer,
-  BoardModelViewer,
-  PionModelViewer
-}                     from '../../../threed-viewer';
-
 import { LeftSidebarComponent } from './sidebar/left-sidebar/left-sidebar.component';
 
 import { AfterViewInit, ViewChild } from '@angular/core';
-
-import { SCENE }      from './viewer/viewer.component';
-import { Component, ViewChild }    from '@angular/core';
-import { ViewerComponent } from "./viewer/viewer.component";
 import { EventDispatcher } from 'three';
 
 @Component({
@@ -53,23 +43,20 @@ export class DesignerComponent {
   }
 
   private onDrag(args) {
+    console.log("drag", args);
     // rendre le bouton draggé invisible
     let [e, el] = args;
-   }
+  }
+
   private onDrop(args) {
+    console.log("drop", args);
     // supprimer le boutton droppé
     let [e, el] = args;
     if (el == null) // ne jamais enlever cette ligne
       return;
     el.removeChild(e);
     //appeler la bonne fonction
-    if (e.id == "board3x3")
-      this.childLeftSidebar.addSquareBoard(SCENE);
-    else if (e.id == "board1x9")
-      this.childLeftSidebar.addLongBoard(SCENE);
-    else if (e.id == "pawnWhite")
-      this.childLeftSidebar.addWhitePion(SCENE);
-    else if (e.id == "pawnBlack")
-      this.childLeftSidebar.addBlackPion(SCENE);
+    if (["board3x3", "board1x9", "pawnWhite", "pawnBlack"].indexOf(e.id) !== -1)
+      this.childLeftSidebar.addObject(e.id);
   }
 }
