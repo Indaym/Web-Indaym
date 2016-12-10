@@ -6,12 +6,9 @@ import {
   Component,
   Input,
   OnInit
-} from '@angular/core';
+}                   from '@angular/core';
 
-import {
-  Vector3,
-  Math
-} from 'three';
+import { Vector3 }  from 'three';
 
 @Component({
   selector  : 'ia-right-sidebar',
@@ -46,7 +43,6 @@ export class RightSidebarComponent implements OnInit  {
 
   private toggleMode() {
     this.end.mode = (this.end.mode == 'side') ? 'over' : 'side';
-//    this.end.mode = (this.end.mode == 'push' ? 'over' : (this.end.mode == 'over' ? 'side' : 'push'));
   }
 
   public changePosition() {
