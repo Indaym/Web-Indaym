@@ -12,6 +12,8 @@ branches:
   only:
     - master
     - develop
+    - /^feature\/*/
+    - /^hotfix/\/*/
 
 cache:
   yarn: true
