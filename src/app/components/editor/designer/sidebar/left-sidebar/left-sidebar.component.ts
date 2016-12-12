@@ -12,6 +12,7 @@ import {
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
+    require('../../../../../../assets/css/dragula.min.css'),
     require('../sidebars.css')
   ]
 })

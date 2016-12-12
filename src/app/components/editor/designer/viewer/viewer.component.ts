@@ -20,6 +20,7 @@ import {
   template: require('./viewer.component.html'),
   styles: [
     require('./viewer.component.css'),
+    require('../../../../../assets/css/dragula.min.css')
   ]
 })
 export class ViewerComponent implements OnInit {
@@ -54,7 +55,6 @@ export class ViewerComponent implements OnInit {
   }
 
   addSquareBoard() {
-    console.log("board");
     const board = new BoardModelViewer({
       dimension: [32.6, 2.0, 32.6]
     });
