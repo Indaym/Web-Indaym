@@ -8,8 +8,6 @@ import {
   PerspectiveCamera,
   Renderer,
   WebGLRenderer,
-  BoxGeometry,
-  MeshBasicMaterial,
   Mesh,
   Vector2,
   Vector3,
@@ -22,9 +20,6 @@ import {
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
 var TransformControls = require('threejs-transformcontrols');
-
-import { ModelViewer } from "./model.viewer";
-
 
 export class SceneViewer {
   private _scene: Scene;
@@ -235,6 +230,19 @@ export class SceneViewer {
     });
   }
 
+  getIntersection() {
+    let result = new Vector3(0, 0, 0);
+    const a = this._raycaster.ray.origin;
+    const b = new Vector3(a.x, a.y, a.z);
+
+    b.add(this._raycaster.ray.direction);
+    const t = (result.y - a.y) / (b.y - a.y);
+    result.x = a.x + t * (b.x - a.x);
+    result.z = a.z + t * (b.z - a.z);
+
+    return result;
+  }
+
   onMouseDown(event) {
     this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
     this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
@@ -245,17 +253,5 @@ export class SceneViewer {
     }));
     if (intersected.length > 0)
       this.selectObject(intersected[0].object);
-  }
-
-  // TO DELETE : Temporaire
-  defaultGenerate() {
-    const mod = new ModelViewer({
-      position: [0, -2, -4],
-      dimensions: [2, 5, 3]
-    });
-    mod.defaultGenerate();
-    this.addInScene(mod.mesh);
-    this.cameraPosition = new Vector3(5, 5, 5);
-    this.cameraTarget = new Vector3(0, 0, 0);
   }
 }
