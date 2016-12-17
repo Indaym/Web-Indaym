@@ -3,31 +3,22 @@
 <button md-button (click)="toggleMode()">Toggle</button>
 <span>Mode : {{end.mode}}</span>
 
-<!--
-<tabs>
-  <tab tabTitle="Properties">
-  -->
-    <form>
-      Search:
-      <input type="search" name="Search a property">
-    </form>
+<form>
+  Search:
+  <input type="search" name="Search a property">
+</form>
 
-    <form>
-      Position :<br/>
-      <input type="number" name="PositionX" value="0" [(ngModel)]="objectSelected.position.x" (ngModelChange)="changePosition()"/><br/>
-      <input type="number" name="PositionY" value="0" [(ngModel)]="objectSelected.position.y" (ngModelChange)="changePosition()"/><br/>
-      <input type="number" name="PositionZ" value="0" [(ngModel)]="objectSelected.position.z" (ngModelChange)="changePosition()"/><br/>
-      Rotation :<br/>
-      <input type="number" name="RotationX" value="0" [(ngModel)]="objectSelected.rotation.x" (ngModelChange)="changeRotation()"/><br/>
-      <input type="number" name="RotationY" value="0" [(ngModel)]="objectSelected.rotation.y" (ngModelChange)="changeRotation()"/><br/>
-      <input type="number" name="RotationZ" value="0" [(ngModel)]="objectSelected.rotation.z" (ngModelChange)="changeRotation()"/><br/>
-      Dimension :<br/>
-      <input type="number" name="DimensionX" value="0" [(ngModel)]="objectSelected.dimension.x" (ngModelChange)="changeDimension()"/><br/>
-      <input type="number" name="DimensionY" value="0" [(ngModel)]="objectSelected.dimension.y" (ngModelChange)="changeDimension()"/><br/>
-      <input type="number" name="DimensionZ" value="0" [(ngModel)]="objectSelected.dimension.z" (ngModelChange)="changeDimension()"/><br/>
-    </form>
-
-<!--
-  </tab>
-</tabs>
--->
+<form>
+  Position :<br/>
+  <input type="number" name="PositionX" value="0" [(ngModel)]="objectSelected.position.x" (ngModelChange)="changePosition()"/><br/>
+  <input type="number" name="PositionY" value="0" [(ngModel)]="objectSelected.position.y" (ngModelChange)="changePosition()"/><br/>
+  <input type="number" name="PositionZ" value="0" [(ngModel)]="objectSelected.position.z" (ngModelChange)="changePosition()"/><br/>
+  Rotation :<br/>
+  <input type="number" name="RotationX" value="0" [(ngModel)]="objectSelected.rotation.x" (ngModelChange)="changeRotation()"/><br/>
+  <input type="number" name="RotationY" value="0" [(ngModel)]="objectSelected.rotation.y" (ngModelChange)="changeRotation()"/><br/>
+  <input type="number" name="RotationZ" value="0" [(ngModel)]="objectSelected.rotation.z" (ngModelChange)="changeRotation()"/><br/>
+  Dimension :<br/>
+  <input type="number" name="DimensionX" value="0" [(ngModel)]="objectSelected.dimension.x" (ngModelChange)="changeDimension()"/><br/>
+  <input type="number" name="DimensionY" value="0" [(ngModel)]="objectSelected.dimension.y" (ngModelChange)="changeDimension()"/><br/>
+  <input type="number" name="DimensionZ" value="0" [(ngModel)]="objectSelected.dimension.z" (ngModelChange)="changeDimension()"/><br/>
+</form>

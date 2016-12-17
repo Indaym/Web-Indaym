@@ -230,6 +230,14 @@ export class SceneViewer {
     });
   }
 
+  setIntersection(event) {
+    this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
+    this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
+    this._raycaster.setFromCamera(this._mouse, this._camera);
+
+    return this.getIntersection();
+  }
+
   getIntersection() {
     let result = new Vector3(0, 0, 0);
     const a = this._raycaster.ray.origin;

@@ -6,4 +6,4 @@
   <button (click)="scene.deleteSelected()">Delete Object</button>
 </div>
 
-<div [dragula]='"item-bag"' class='gu-droppable' id="editorContainer"></div>
+<div dnd-droppable [dropZones]="['editor']" (onDropSuccess)="addObject($event)" id="editorContainer"></div>
