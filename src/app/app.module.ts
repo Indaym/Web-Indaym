@@ -21,12 +21,14 @@ import {
   AppComponent,
   APP_COMPONENTS,
 }                         from './components';
+import { HtmlService } from "../services/html.service";
 
 @NgModule({
   declarations: [
     APP_COMPONENTS,
   ],
   bootstrap   : [ AppComponent ],
+  providers : [ HtmlService ],
   imports     : [
     // modules
     MaterialModule.forRoot(),

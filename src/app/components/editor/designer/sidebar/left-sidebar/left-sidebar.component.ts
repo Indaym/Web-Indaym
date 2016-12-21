@@ -6,13 +6,10 @@ import {
   Component,
   Input
 }                       from '@angular/core';
-
-import { HtmlService }  from "../../../../../../services/html.service";
-
+import { HtmlService } from "../../../../../../services/html.service";
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
