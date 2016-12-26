@@ -6,7 +6,7 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import { FormsModule }    from '@angular/forms';
-import { DndModule } from 'ng2-dnd';
+import { DndModule }      from 'ng2-dnd';
 
 import {
   ENV_PROVIDERS,
@@ -21,28 +21,25 @@ import {
   AppComponent,
   APP_COMPONENTS,
 }                         from './components';
-import { HtmlService } from "../services/html.service";
+
+import { HtmlService }    from '../services/html.service';
 
 @NgModule({
   declarations: [
     APP_COMPONENTS,
   ],
-  bootstrap   : [ AppComponent ],
+  bootstrap : [ AppComponent ],
   providers : [ HtmlService ],
-  imports     : [
-    // modules
+  imports   : [
     MaterialModule.forRoot(),
     BrowserModule,
     MODULES,
-    routing,
-    FormsModule,
-    // Forms
-    // Application
-
     DIRECTIVES,
     ENV_PROVIDERS,
     PROVIDERS,
     PIPES,
+    routing,
+    FormsModule,
     DndModule.forRoot(),
   ]
 })

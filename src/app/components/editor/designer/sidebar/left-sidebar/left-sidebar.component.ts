@@ -6,7 +6,7 @@ import {
   Component,
   Input
 }                       from '@angular/core';
-import { HtmlService } from "../../../../../../services/html.service";
+import { HtmlService }  from "../../../../../../services/html.service";
 
 @Component({
   selector  : 'ia-left-sidebar',
@@ -30,16 +30,14 @@ export class LeftSidebarComponent {
     }
   };
 
-  constructor(public html: HtmlService) {}
+  constructor(public html: HtmlService) {
+  }
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
   }
 
-  public addObject(name:string) {
-    this.eventDispatcher.dispatchEvent({type:"addObject", name:name});
+  public addObject(name: string) {
+    this.eventDispatcher.dispatchEvent({ type: "addObject", name: name });
   }
 }
-
-
-

@@ -16,9 +16,9 @@ import {
 }                   from '../../../../threed-viewer';
 
 @Component({
-  selector: 'ia-viewer',
-  template: require('./viewer.component.html'),
-  styles: [
+  selector  : 'ia-viewer',
+  template  : require('./viewer.component.html'),
+  styles    : [
     require('./viewer.component.css'),
   ]
 })
