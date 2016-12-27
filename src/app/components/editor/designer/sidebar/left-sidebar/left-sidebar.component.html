@@ -3,92 +3,62 @@
 <button md-button (click)="toggleMode()">Toggle</button>
 
 <span>Mode : {{start.mode}}</span>
-
-<!--
+<form>
+  Search:
+  <input type="search" name="Search a template">
+</form>
+<br/>
+Pour placer un objet dans l'éditeur:<br/>
+-Cliquer le place en pos 0 0<br/>
+-Le drag and drop à la position voulue<br/>
+<br/>
+<h3>Objects</h3><br/>
 <tabs>
-  <tab tabTitle="Objects">
-    <form>
-      Search:
-      <input type="search" name="Search an object">
-    </form>
-    <tabs>
-      <tab tabTitle="Boards">
-        b
-      </tab>
-      <tab tabTitle="Pawns">
-        p
-      </tab>
-    </tabs>
-    <button ng-click="boardFunction()">Boards</button><br/>
-    <button ng-click="pawnFunction()">Pawns</button><br/>
+  <!-- Boards (don't change the ids) -->
+  <tab tabTitle="Boards">
+    <h3>Board Templates</h3><br/>
+    <form id="customBoard">Custom board:<br/>
+      <input type="text" name="later">
+      <button>Add</button>
+    </form><br/>
+    <div>
+      <button *ngFor="let item of html.keys(items.boards)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.boards[item]}}</button><br/>
+    </div>
   </tab>
--->
 
-  <!-- <tab tabTitle="Templates"> -->
-    <form>
-      Search:
-      <input type="search" name="Search a template">
-    </form>
-    <br/>
-    Pour placer un objet dans l'éditeur:<br/>
-    -Cliquer le place en pos 0 0<br/>
-    -Le drag and drop à la position voulue<br/>
-    <br/>
-    <h3>Objects</h3><br/>
-      <tabs>
-        <!-- Boards (don't change the ids) -->
-        <tab tabTitle="Boards">
-          <h3>Board Templates</h3><br/>
-          <form id="customBoard">Custom board:<br/>
-            <input type="text" name="later">
-            <button>Add</button>
-          </form><br/>
-          <div [dragula]='"item-bag"'>
-            <button id="board3x3" (click)="addObject('board3x3')">Add 3*3 Board</button><br/>
-            <button id="board1x9" (click)="addObject('board1x9')">Add 1*9 Board</button><br/>
-          </div>
-        </tab>
+  <!-- Pawns (don't change the ids) -->
+  <tab tabTitle="Pawns">
+    <h3>Pawn Templates</h3><br/>
+    <form id="customPawn">Custom pawn:<br/>
+      <input type="text" name="later">
+      <button>Add</button>
+    </form><br/>
+    <div>
+      <button *ngFor="let item of html.keys(items.pawns)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.pawns[item]}}</button><br/>
+    </div>
+  </tab>
 
-        <!-- Pawns (don't change the ids) -->
-        <tab tabTitle="Pawns">
-          <h3>Pawn Templates</h3><br/>
-          <form id="customPawn">Custom pawn:<br/>
-            <input type="text" name="later">
-            <button>Add</button>
-          </form><br/>
-          <div [dragula]='"item-bag"'>
-          <button id="pawnWhite" (click)="addObject('pawnWhite')">Add White Pion</button><br/>
-          <button id="pawnBlack" (click)="addObject('pawnBlack')">Add Black Pion</button><br/>
-          </div>
-        </tab>
+  <!-- Cards (don't change the ids) -->
+  <tab tabTitle="Cards">
+    <h3>Card Templates</h3><br/>
+    <form id="customCards">Custom card:<br/>
+      <input type="text" name="later">
+      <button>Add</button>
+    </form><br/>
+    <div>
+      <div>Not implemented yet</div><br/>
+    </div>
+  </tab>
 
-        <!-- Cards (don't change the ids) -->
-        <tab tabTitle="Cards">
-          <h3>Card Templates</h3><br/>
-          <form id="customCards">Custom card:<br/>
-            <input type="text" name="later">
-            <button>Add</button>
-          </form><br/>
-          <div [dragula]='"item-bag"'>
-            <div>Not implemented yet</div><br/>
-          </div>
-        </tab>
-
-        <!-- Dices (don't change the ids) -->
-        <tab tabTitle="Dices">
-          <h3>Dice Templates</h3><br/>
-          <form id="customBoard">Custom dice:<br/>
-            <input type="text" name="later">
-            <button>Add</button>
-          </form><br/>
-          <div [dragula]='"item-bag"'>
-          <div>Not implemented yet</div><br/>
-          </div>
-        </tab>
-
-
-      </tabs>
-<!--
-</tab>
+  <!-- Dices (don't change the ids) -->
+  <tab tabTitle="Dices">
+    <h3>Dice Templates</h3><br/>
+    <form id="customDices">Custom dice:<br/>
+      <input type="text" name="later">
+      <button>Add</button>
+    </form><br/>
+    <div>
+      <div>Not implemented yet</div><br/>
+    </div>
+  </tab>
 </tabs>
--->
