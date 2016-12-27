@@ -65,6 +65,7 @@ export class SceneViewer {
     this._controls.constraint.dampingFactor = 1;
 
     this._controller = new TransformControls(this._camera, this._renderer.domElement);
+    this._controller.minScale = new Vector3(0.001, 0.001, 0.001);
 
     this._raycaster = new Raycaster();
 
