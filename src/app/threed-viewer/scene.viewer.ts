@@ -83,12 +83,14 @@ export class SceneViewer {
             this.selected.position.copy(e.position);
           if (e.rotation !== undefined)
             this.selected.rotation.copy(e.rotation);
-          if (e.dimension !== undefined)
-            this.selected.scale.copy(e.dimension);
+          if (e.dimension !== undefined) {
+            for (var i of ['x', 'y', 'z']) {
+              this.selected.scale[i] = (e.dimension[i] < this._controller.minScale[i]) ? this._controller.minScale[i] : e.dimension[i];
+            }
+          }
           this.updateController();
         }
       });
-
     }
   }
 
@@ -152,7 +154,6 @@ export class SceneViewer {
   }
 
   set modeController(mode: string) {
-    console.log(this._controller._gizmo);
     this._controller.setMode(mode);
   }
 
