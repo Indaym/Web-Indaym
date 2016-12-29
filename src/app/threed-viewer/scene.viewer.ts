@@ -187,10 +187,14 @@ export class SceneViewer {
       this._controller.attach(obj);
       this._scene.add(this._controller);
       this._eventDispatcher.dispatchEvent({
-        type:"updateObjectInputs",
-        position:this._selected.position,
-        dimension:this._selected.scale,
-        rotation:this._selected.rotation
+        type : "updateObjectInputs",
+        position : this._selected.position,
+        dimension : this._selected.scale,
+        rotation : this._selected.rotation
+      });
+      this._eventDispatcher.dispatchEvent({
+        type : "setMinimumScale",
+        minimumScale : this._controller.minScale
       });
     }
   }
