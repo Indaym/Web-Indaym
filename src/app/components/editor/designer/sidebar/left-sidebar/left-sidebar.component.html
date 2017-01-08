@@ -68,8 +68,9 @@
   </tab>
 
   <tab tabTitle="Objects List">
-    -coucou nico<br/>
-    -fais ta liste d'objets ici<br/>
-    -bonnes vacances!!<br/>
+    <div *ngFor="let item of lsObjects">
+      <img src="{{item.icon}}">
+      {{item.name}}
+    </div>
   </tab>
 </tabs>

@@ -8,11 +8,12 @@ import {
 }                       from '@angular/core';
 
 import { HtmlService }  from "../../../../../../services/html.service";
+import {ObjectService} from "../../../../../../services/object.service";
 
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService],
+  providers : [HtmlService, ObjectService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
@@ -33,7 +34,11 @@ export class LeftSidebarComponent {
     }
   };
 
-  constructor(public html: HtmlService) {}
+  lsObjects;
+
+  constructor(public html: HtmlService, private objects: ObjectService) {
+    this.lsObjects = this.objects.getObjects();
+  }
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
