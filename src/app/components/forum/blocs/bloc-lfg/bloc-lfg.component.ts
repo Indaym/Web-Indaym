@@ -4,7 +4,8 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-bloc-lfg',
   template  : require('./bloc-lfg.component.html'),
   styles    : [
-    require('../../forum.component.css')
+    require('../../forum.component.css'),
+    require('../bloc.component.css')
   ]
 })
 export class BlocLfgComponent {

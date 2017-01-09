@@ -4,7 +4,8 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-bloc-help',
   template  : require('./bloc-help.component.html'),
   styles    : [
-    require('../../forum.component.css')
+    require('../../forum.component.css'),
+    require('../bloc.component.css')
   ]
 })
 export class BlocHelpComponent {
