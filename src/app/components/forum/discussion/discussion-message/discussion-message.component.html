@@ -1,0 +1,27 @@
+<div class="discussion-message" *ngFor="let message of currentMessage">
+    <h3 class="discussion-message" style="color:black">{{message.message}}
+    </h3>
+  </div>
+
+  <div class="discussion-do-u-like">
+    <p class="discussion-do-u-like-message">
+      <span class="discussion-do-u-like-message"> Vous aimez cette publication ?</span>
+      <span class="discussion-do-u-like-message-2"><<i class="fa fa-heart-o"></i>
+        <a href="#"title> +1</a></span>
+    </p>
+  </div>
+
+
+  <div class="discussion-let-comment">
+    <h3 class="discussion-legende" style="float:left; margin-top:0px !important; color:black">Laisser un commentaire</h3>
+    <div class="stripe-line"></div>
+    <form action="#" method="post" id="comment-form" class="comment-form">
+      <textarea cols="60" rows="8" aria-required="true" class="discussion-let-comment-field"></textarea>
+      <div class="discussion-title-reponse" style="margin-top:-4px">
+        <a href="#" class="discussion-title-reponse-texte" title>Laisser un commentaire</a>
+      </div>
+    </form>
+  </div>
+  <div class="discussion-reponse">
+    <h3 class="discussion-legende" style="float:left; margin-top:0px !important; color:black">2 commentaires</h3>
+    <div class="stripe-line"></div>

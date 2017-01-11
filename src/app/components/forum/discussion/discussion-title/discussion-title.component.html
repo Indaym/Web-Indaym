@@ -1,0 +1,33 @@
+<div class="discussion-item" *ngFor="let post of currentPost">
+  <div class="discussion-avatar">
+    <img src={{post.currentUser.avatar}}>
+  </div>
+  <div class="discussion-title-reponse">
+    <a href="#" class="discussion-title-reponse-texte" title>Démarer une discussion</a>
+  </div>
+  <div class="discussion-title-all" style="margin-top: -20px">
+    <span class="discussion-title-tag"><i class={{post.categorie.categorieSymbol}}></i></span>
+    <a href="#">
+      <span class="discussion-title">{{post.title}} ({{post.categorie.categorieName}})</span>
+    </a>
+  </div>
+  <p class="discussion-tags">
+    <span class="discussion-time">
+        <span class="discussion-time-logo"><i class="fa fa-clock-o"></i></span>
+        <a href="#" title>Il y a {{post.time}}</a>
+      </span>
+    <span class="discussion-com">
+        <span class="discussion-com-logo"><i class="fa fa-comment-o"></i></span>
+        <a href={{post.comment.commentLink}} title>{{post.comment.commentNb}} commentaires</a>
+      </span>
+    <span class="discussion-like">
+        <span class="discussion-like-logo"><i class="fa fa-heart-o"></i></span>
+        <a href={{post.like.likeLink}} title>{{post.like.likeNb}} likes</a>
+      </span>
+    <span class="discussion-game">
+        <span class="discussion-game-logo"><i class="fa fa-puzzle-piece"></i></span>
+        <a href={{post.game.gameLink}} title>{{post.game.gameName}}</a>
+      </span>
+  </p>
+  <div class="discussion-blue"></div>
+</div>

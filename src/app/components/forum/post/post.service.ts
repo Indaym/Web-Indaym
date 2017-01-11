@@ -1,5 +1,5 @@
 import { User }  from '../user'
-import { Post }  from './post'
+import { Title }  from '../title'
 
 export class PostService {
 /* Remember
@@ -9,7 +9,7 @@ export class PostService {
     Idea : fa fa-lightbulb-o
     Lfg : fa fa-address-card-o
 */
-    getAll(): Post[] {
+    getAll(): Title[] {
         return [
             {
                 title: "Lorem Ipsum",

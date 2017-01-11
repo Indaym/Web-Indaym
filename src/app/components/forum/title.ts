@@ -1,6 +1,6 @@
-import { User }  from '../user'
+import { User }  from './user'
 
-export interface Post{
+export interface Title{
   title: string;
   categorie: {categorieName: string, categorieSymbol: string};
   time: string;

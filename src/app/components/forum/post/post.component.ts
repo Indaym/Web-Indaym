@@ -1,6 +1,6 @@
 import { Component }  from '@angular/core';
 import { User }  from '../user'
-import { Post }  from './post'
+import { Title }  from '../title'
 import { PostService }  from './post.service'
 
 @Component({
@@ -12,8 +12,8 @@ import { PostService }  from './post.service'
     providers: [PostService]
 })
 export class PostComponent {
-  currentPost: Post[] = [];
-  constructor(private _peopleService : PostService){
-    this.currentPost = _peopleService.getAll();
+  currentPost: Title[] = [];
+  constructor(private _postService : PostService){
+    this.currentPost = _postService.getAll();
   }
 }
