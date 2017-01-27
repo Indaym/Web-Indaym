@@ -7,6 +7,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import { FormsModule }    from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
+import { HttpModule } from '@angular/http';
 
 import {
   ENV_PROVIDERS,
@@ -34,6 +35,7 @@ import {
     MODULES,
     routing,
     FormsModule,
+    HttpModule,
     // Forms
     // Application
 
