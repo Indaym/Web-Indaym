@@ -4,7 +4,7 @@
   </div>
   <div class="discussion-title-all">
     <span class="discussion-title-tag"><i class={{post.categorie.categorieSymbol}}></i></span>
-    <a href="#">
+    <a [routerLink]="['/forum/discussion']">
       <span class="discussion-title">{{post.title}} ({{post.categorie.categorieName}})</span>
     </a>
   </div>
