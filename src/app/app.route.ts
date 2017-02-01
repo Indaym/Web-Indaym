@@ -10,6 +10,7 @@ import {
 }                                 from '@angular/router';
 
 import { HomeComponent }          from './components/home';
+import { PreEditorComponent }     from './components/preeditor';
 import { EditorComponent }        from './components/editor';
 import { PlayComponent }          from './components/play';
 import { StoreComponent }         from './components/store';
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
   { path: 'home',           component: HomeComponent },
+  { path: 'preeditor',      component: PreEditorComponent },
   { path: 'editor',
     children: [
       { path: '',           component: EditorComponent },
