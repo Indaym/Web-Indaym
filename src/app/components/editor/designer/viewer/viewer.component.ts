@@ -4,7 +4,8 @@
 
 import {
   Component,
-  OnInit
+  OnInit,
+  Input
 }                   from '@angular/core';
 import { Vector3 }  from 'three';
 
@@ -14,25 +15,22 @@ import {
   PionModelViewer
 }                   from '../../../../threed-viewer';
 
-//<select #kk="ngModel" [(ngModel)]="kind" (ngModelChange)="onKindSelected()">
-//<option *ngFor="#p of kinds" [value]="p">{{p}}</option>
-//</select>
-//{{ kk.valid }}
-
 @Component({
   selector: 'ia-viewer',
   template: require('./viewer.component.html'),
-  styles: [`
-    .buttons {
-      padding:5px;
-    }
-    .buttons label {
-      margin-right : 10px
-    }
-  `]
+  styles: [
+    require('./viewer.component.css'),
+  ]
 })
 export class ViewerComponent implements OnInit {
-  private scene: SceneViewer;
+  public scene: SceneViewer;
+  @Input() eventDispatcher;
+  private objects = {
+    "board3x3" : (args:any) => this.addSquareBoard(args),
+    "board1x9" : (args:any) => this.addLongBoard(args),
+    "pawnWhite" : (args:any) => this.addWhitePion(args),
+    "pawnBlack" : (args:any) => this.addBlackPion(args)
+  };
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
@@ -47,34 +45,51 @@ export class ViewerComponent implements OnInit {
     this.scene.domElement.addEventListener('mousedown', (event) => {
       this.scene.onMouseDown(event)
     }, false);
+
+    this.scene.eventDispatcher = this.eventDispatcher;
+    this.eventDispatcher.addEventListener('addObject', (obj:any) => {
+      if (obj.name != undefined)
+        this.objects[obj.name]();
+    });
   }
 
-  addSquareBoard() {
+  addObject(args:any) {
+    if (args.mouseEvent != undefined) {
+      let coord = this.scene.setIntersection(args.mouseEvent);
+      if (args.dragData != undefined) {
+        this.objects[args.dragData](coord);
+      }
+    }
+  }
+
+  addSquareBoard(position:Vector3 = new Vector3(0,0,0)) {
     const board = new BoardModelViewer({
-      dimension: [32.6, 2.0, 32.6]
+      dimension: [32.6, 2.0, 32.6],
     });
+    board.position.copy(position);
     board.init((mesh) => {
       this.scene.addInScene(mesh);
       this.scene.render();
     });
   }
 
-  addLongBoard() {
+  addLongBoard(position:Vector3 = new Vector3(0,0,0)) {
     const board = new BoardModelViewer({
       dimension: [77.8, 2.0, 12.2],
     });
+    board.position.copy(position);
     board.texturesPaths[2] = 'pion_table.png';
     board.init((mesh) => {
       this.scene.addInScene(mesh);
       this.scene.render();
     });
-
   }
 
-  addBlackPion() {
+  addBlackPion(position:Vector3 = new Vector3(0,0,0)) {
     const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5]
+      dimension: [3.5, 3.5, 1.5],
     });
+    pion.position.copy(position);
     pion.texturesPaths[0] = 'black.png';
     pion.init((mesh) => {
       this.scene.addInScene(mesh);
@@ -82,14 +97,14 @@ export class ViewerComponent implements OnInit {
     });
   }
 
-  addWhitePion() {
+  addWhitePion(position:Vector3 = new Vector3(0,0,0)) {
     const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5]
+      dimension: [3.5, 3.5, 1.5],
     });
+    pion.position.copy(position);
     pion.init((mesh) => {
       this.scene.addInScene(mesh);
       this.scene.render();
     });
-
   }
 }

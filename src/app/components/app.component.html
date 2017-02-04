@@ -1,11 +1,16 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default">
   <h1>Indaym</h1>
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a routerLink="/editor" routerLinkActive="active">Editor</a>
-  <a routerLink="/play" routerLinkActive="active">Play</a>
-  <a routerLink="/store" routerLinkActive="active">Store</a>
-  <a routerLink="/forum" routerLinkActive="active">Forum</a>
+	<ul class='nav navbar-nav'>
+	  <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+	  <li><a routerLink="/gameslist" routerLinkActive="active">Editor</a></li>
+	  <li><a routerLink="/play" routerLinkActive="active">Play</a></li>
+	  <li><a routerLink="/store" routerLinkActive="active">Store</a></li>
+	  <li><a routerLink="/forum" routerLinkActive="active">Forum</a></li>
+	</ul>
 </nav>
+
+<div class="background-image" style="background-image : url(../assets/img/bg/indaymlogo.png)">
+</div>
 
 <router-outlet> </router-outlet>
 <!--<nav class="footer">

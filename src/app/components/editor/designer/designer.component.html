@@ -1,24 +1,27 @@
-<nav class='navbar navbar-default navbar-static-left'>
+<nav class='navbar navbar-default'>
   <ul class='nav navbar-nav'>
-    <li><a [routerLink]="['/editor/designer']">Designer</a></li>
-    <li><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
-    <li class="divider"></li>
-    <li><a md-button (click)="start.toggle()" >Toggle Start Side Drawer</a></li>
-    <li><a md-button (click)="end.toggle()" >Toggle End Side Drawer</a></li>
+   <li id="toCenter"><a [routerLink]="['/editor/designer']">Designer</a></li>
+   <li id="toCapitalize"><a [routerLink]="['/editor/blueprints']">Blueprints</a></li>
   </ul>
 </nav>
 
+<nav class='navbar navbar-default'>
+  <ul id="grey" class='nav navbar-nav'>
+   <li><a md-button (click)="start.toggle()" >Toggle Left Panel</a></li>
+   <li id="goRight"><a md-button (click)="end.toggle()" >Toggle Right Panel</a></li>
+  </ul>
+</nav><br/>
+
+
 <md-sidenav-layout>
   <md-sidenav #start mode="side">
-    <ia-left-sidebar [start]="start"></ia-left-sidebar>
+    <ia-left-sidebar [start]="start" [eventDispatcher]="dispatcher"></ia-left-sidebar>
   </md-sidenav>
   <md-sidenav #end mode="side" align="end">
-    <ia-right-sidebar [end]="end"></ia-right-sidebar>
+    <ia-right-sidebar [end]="end" [eventDispatcher]="dispatcher"></ia-right-sidebar>
   </md-sidenav>
 
   <div class="content">
-    <h1>My Content</h1>
-    <ia-viewer></ia-viewer>
+    <ia-viewer [eventDispatcher]="dispatcher" ></ia-viewer>
   </div>
 </md-sidenav-layout>
-

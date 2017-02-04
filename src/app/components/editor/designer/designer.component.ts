@@ -1,4 +1,7 @@
-import { Component }    from '@angular/core';
+import { Component }  from '@angular/core';
+
+import { EventDispatcher } from 'three';
+import { DND_PROVIDERS } from "ng2-dnd";
 
 @Component({
   selector  : 'ia-designer',
@@ -6,7 +9,12 @@ import { Component }    from '@angular/core';
   styles    : [
     require('./designer.component.css')
   ],
-  providers : []
+  providers: [DND_PROVIDERS],
 })
 export class DesignerComponent {
+  private dispatcher: EventDispatcher;
+
+  constructor() {
+    this.dispatcher = new EventDispatcher();
+  }
 }

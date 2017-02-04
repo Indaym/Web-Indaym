@@ -1,3 +1,36 @@
 h2 {
   text-align: center;
 }
+
+ul {
+	width: 100%;
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00cccc;
+}
+
+li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #00cccc;
+}
+
+.active {
+background-color:#00cccc;
+}
+
+#toCenter {
+  margin-left: 45%;
+  text-transform: uppercase;
+}
+
+#toCapitalize {
+  text-transform: uppercase;
+}
