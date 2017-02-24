@@ -1,9 +1,14 @@
 <div class="buttons">
   <label *ngFor="let val of scene.controllerTypes" >
-    <input type="radio"  [value]="val" name="kind" [(ngModel)]="scene.modeController">
+    <input type="radio" [value]="val" name="kind" [(ngModel)]="scene.modeController">
     {{val}}
   </label>
   <button (click)="scene.deleteSelected()">Delete Object</button>
+</div>
+
+<div class="save">
+  <input type="text" [(ngModel)]="scene.name"/>
+  <button onclick="saveScene()">Save</button>
 </div>
 
 <div dnd-droppable [dropZones]="['editor']" (onDropSuccess)="addObject($event)" id="editorContainer"></div>

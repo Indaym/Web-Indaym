@@ -11,6 +11,7 @@ import {
 
 import { HomeComponent }          from './components/home';
 import { GamesListComponent }     from './components/gameslist';
+import { ScenesListComponent }    from './components/sceneslist';
 import { EditorComponent }        from './components/editor';
 import { PlayComponent }          from './components/play';
 import { StoreComponent }         from './components/store';
@@ -26,6 +27,7 @@ export const routes: Routes = [
 
   { path: 'home',           component: HomeComponent },
   { path: 'gameslist',      component: GamesListComponent },
+  { path: 'sceneslist',     component: ScenesListComponent },
   { path: 'editor',
     children: [
       { path: '',           component: EditorComponent },

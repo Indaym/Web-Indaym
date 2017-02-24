@@ -17,3 +17,7 @@ button {
     font-size: 15px;
     margin: auto;
 }
+
+.save {
+  margin-left: 10px;
+}

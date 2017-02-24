@@ -24,6 +24,8 @@ import {
 })
 export class ViewerComponent implements OnInit {
   public scene: SceneViewer;
+  public scenes: Array<string>;
+
   @Input() eventDispatcher;
   private objects = {
     "board3x3" : (args:any) => this.addSquareBoard(args),
@@ -31,6 +33,11 @@ export class ViewerComponent implements OnInit {
     "pawnWhite" : (args:any) => this.addWhitePion(args),
     "pawnBlack" : (args:any) => this.addBlackPion(args)
   };
+
+  saveScene() {
+  // CARO Ici tu stockes la scene actuelle dans la DB
+  // Faut que tu voies avec Nico comment et sous quelle forme les stocker, perso j'en ai pas la moindre idée
+  }
 
   ngOnInit(): void {
     this.scene = new SceneViewer({
