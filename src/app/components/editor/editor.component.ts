@@ -6,7 +6,7 @@ import { Component }    from '@angular/core';
   styles    : [
     require('./editor.component.css')
   ],
-  providers : []
+  providers : [],
 })
 export class EditorComponent {
 }

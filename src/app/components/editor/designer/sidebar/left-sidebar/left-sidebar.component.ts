@@ -5,10 +5,15 @@
 import {
   Component,
   Input
-} from '@angular/core';
+}                       from '@angular/core';
+
+import { HtmlService }  from "../../../../../../services/html.service";
+import {ObjectService} from "../../../../../../services/object.service";
+
 
 @Component({
   selector  : 'ia-left-sidebar',
+  providers : [HtmlService, ObjectService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
@@ -17,12 +22,32 @@ import {
 })
 export class LeftSidebarComponent {
   @Input() start;
+  @Input() eventDispatcher;
+  items = {
+    boards: {
+      "board3x3": "Add Board 3x3",
+      "board1x9": "Add Board 1x9",
+    },
+    pawns: {
+      "pawnWhite": "Add White Pawn",
+      "pawnBlack": "Add Black Pawn",
+    }
+  };
 
-  constructor() {
+  lsObjects;
+
+  constructor(public html: HtmlService, private objects: ObjectService) {
+    this.lsObjects = this.objects.getObjects();
   }
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
-    // this.start.mode = (this.start.mode == 'push' ? 'over' : (this.start.mode == 'over' ? 'side' : 'push'));
+  }
+
+  public addObject(name:string) {
+    this.eventDispatcher.dispatchEvent({type:"addObject", name:name});
   }
 }
+
+
+

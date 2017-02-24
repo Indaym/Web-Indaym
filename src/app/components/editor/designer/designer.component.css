@@ -10,7 +10,7 @@ h2 {
 /* navbar style */
 
 ul {
-	width: 100%;
+	  width: 100%;
     list-style-type: none;
     margin: auto;
     padding: 0;
@@ -34,11 +34,22 @@ li a:hover:not(.active) {
 background-color:#00cccc;
 }
 
-
-nav ul li:nth-child(4) {
-	float: right;
+#toCenter {
+  margin-left: 45%;
+  text-transform: uppercase;
 }
 
+#toCapitalize {
+  text-transform: uppercase;
+}
+
+#grey {
+  background-color: #555;
+}
+
+#goRight {
+	float: right;
+}
 
 md-sidenav-layout {
   /*position: absolute;*/
@@ -55,4 +66,10 @@ md-sidenav {
   width:300px;
   border-radius: 5px;
   color:white;
+}
+
+.navbar {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  border-bottom: 0px;
 }
