@@ -1,14 +1,34 @@
+import { Injectable } from '@angular/core';
 import { User }  from '../user'
 import { Title }  from '../title'
-
-export class PostService {
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 /* Remember
-    Avis : fa fa-exclamation
-    Discussion : fa fa-comment
-    Help : fa fa-users
-    Idea : fa fa-lightbulb-o
-    Lfg : fa fa-address-card-o
+Avis : fa fa-exclamation
+Discussion : fa fa-comment
+Help : fa fa-users
+Idea : fa fa-lightbulb-o
+Lfg : fa fa-address-card-o
 */
+
+@Injectable()
+export class PostService {
+    private forumUrl = 'http://localhost:3000/forum';
+    private forum = [];
+
+    constructor(private http: Http) { }
+
+/*
+    getForum() {
+      console.log("Loading Forum");
+
+      this.http.get(this.forumUrl)
+          .flatMap((res) => res.json())
+          .subscribe(data => {this.forum.push(data);});
+      return this.forum;
+    }
+*/
+
     getAll(): Title[] {
         return [
             {
@@ -39,5 +59,5 @@ export class PostService {
                 currentUser: { name: { nameName: "Tokiro", nameLink: "#" }, avatar: 'https://s.gravatar.com/avatar/909ecf5782b2ea2ee8888221dd8beba8?s=80' }
             }
         ]
-    }
+    }; 
 }

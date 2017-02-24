@@ -25,7 +25,7 @@ import { DiscussionComponent }    from './components/forum/discussion';
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-<<<<<<< HEAD
+
     { path: 'home', component: HomeComponent },
     {
         path: 'editor',
@@ -45,23 +45,16 @@ export const routes: Routes = [
         ]
     },
     { path: 'contact', component: ContactComponent },
-    { path: 'legalMentions', component: LegalMentionsComponent }
-=======
-  { path: 'home',           component: HomeComponent },
+    { path: 'legalMentions', component: LegalMentionsComponent },
+
   { path: 'gameslist',      component: GamesListComponent },
-  { path: 'editor',
-    children: [
-      { path: '',           component: EditorComponent },
-      { path: 'designer',   component: DesignerComponent },
-      { path: 'blueprints', component: BlueprintsComponent }
-    ]
-  },
+
   { path: 'play',            component: PlayComponent },
   { path: 'store',           component: StoreComponent },
-  { path: 'forum',           component: ForumComponent },
+
   { path: 'contact',         component: ContactComponent },
   { path: 'legalMentions',   component: LegalMentionsComponent }
->>>>>>> 746b178a13f521d556dadc2d678e5c598bb673b6
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
