@@ -1,3 +1,5 @@
+<button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
+<ia-post-create *ngIf="hideElement"></ia-post-create>
 <div class="discussion-item" *ngFor="let post of currentPost">
   <div class="discussion-avatar">
     <img src={{post.currentUser.avatar}}>
