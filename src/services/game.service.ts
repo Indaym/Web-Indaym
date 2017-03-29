@@ -18,10 +18,11 @@ export class GameService {
         this.games = [];
         var urlId = this.gamesUrl + "/" + id;
 
-        this.http.get(urlId)
-            .flatMap((res) => res.json())
+        console.log(urlId);
+        /*this.http.get(urlId)
+            .map((res) => res.json())
             .subscribe(data => {this.games.push(data);});
-        return this.games;
+        return this.games;*/
     }
 
     getGames() {
@@ -34,13 +35,11 @@ export class GameService {
         return this.games;
     }
 
-    postGame(name) {
+    postGame(name, meuh, callback) {
         console.log("posting game : " + name);
 
-        this.games = [];
         this.http.post(this.gamesUrl, {"name": name})
             .map((res) => res.json())
-            .subscribe(data => this.games.push(data));
-        return this.games;
+            .subscribe(data => callback(meuh, data));
     }
 }

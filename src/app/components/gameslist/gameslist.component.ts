@@ -2,6 +2,7 @@ import { Component }    from '@angular/core';
 
 import { HtmlService }  from "../../../services/html.service";
 import {GameService} from "../../../services/game.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector  : 'ia-gameslist',
@@ -11,32 +12,32 @@ import {GameService} from "../../../services/game.service";
   ],
   providers : [HtmlService, GameService],
 })
+
 export class GamesListComponent {
 
-  constructor(public html: HtmlService, private games: GameService) {
-    console.log("alloooooo");
+  constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
 
   lsGames;
 
-  public gameFunction() {
-    document.getElementById('buttonGame');
-    var my_text = prompt('Game Name: ');
-    if (my_text)
-      {
-        var id = this.games.postGame(my_text);
-        console.log(id);
-        // CARO
-        // Ici tu dois stocker le nom du jeu qu'on vient de créer dans la DB
-      }
-    }
+  public goToScenesPage(id) {
+    this.router.navigate(['/sceneslist'], { queryParams: { uuid: id } });
+  }
 
-    public getGamesList() {
-      this.lsGames = this.games.getGames();
-      console.log("hello world");
-      console.log(this.lsGames);
-      // CARO
-      // Ici tu dois recuperer la liste des jeux par utilisateur, la stocker et l'afficher
+  public redirect(meuh, id) {
+    meuh.goToScenesPage(id.uuid);
+  }
+
+  public gameFunction() {
+    var meuh = this;
+    var my_text = prompt('Game Name: ');
+    if (my_text) {
+        this.games.postGame(my_text, meuh, this.redirect);
       }
+  }
+
+  public getGamesList() {
+    this.lsGames = this.games.getGames();
+  }
 }
