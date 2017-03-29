@@ -7,10 +7,9 @@
 <div id="toCenter2">
     <p id="myGames">My Games:</p>
     <div id="toCenter3">
-      <!-- CARO Ici tu dois montrer la liste des jeux existants qui sont en DB -->
-        <button>Jeu Test 1</button><br/><br/>
-        <button>Jeu Test 2</button><br/><br/>
-        <button>Jeu Test 3</button><br/><br/>
+        <div *ngFor="let item of lsGames">
+            <button>{{item.name}}</button>
+        </div>
     </div>
 </div>
 
