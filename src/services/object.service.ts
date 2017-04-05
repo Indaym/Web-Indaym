@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ObjectService {
-    private objectsUrl = 'http://localhost:3000/library';
+    private objectsUrl = 'http://localhost:3000/games';
     private objects = [];
 
     constructor(private http: Http) { }
@@ -19,5 +19,17 @@ export class ObjectService {
             .flatMap((res) => res.json())
             .subscribe(data => {this.objects.push(data);});
         return this.objects;
+    }
+
+    setIds(gameId, sceneId) {
+        this.objectsUrl += "/" + gameId + "/scenes/" + sceneId + "/objects";
+    }
+
+    postSceneObjects(itemThreeJs) {
+        console.log("posting scene objects : ");
+
+        this.http.post(this.objectsUrl, {itemThreeJs: itemThreeJs})
+            .map((res) => res.json())
+            .subscribe(data => console.log(data));
     }
 }
