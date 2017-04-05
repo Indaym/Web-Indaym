@@ -1,6 +1,6 @@
 
 <ul>
-    <li id="toCenter1"><a id="buttonScene" class="active" [routerLink]="['/editor/designer']">Create a New Scene</a></li>
+    <li id="toCenter1"><a id="buttonScene" (click)="addScene()" class="active" [routerLink]="['/editor/designer']">Create a New Scene</a></li>
 </ul>
 
 <br/><br/>
@@ -8,9 +8,9 @@
     <p id="myScenes">My Scenes:</p>
     <div id="toCenter3">
       <!-- CARO Ici tu dois montrer la liste des scenes pour le jeu actuel -->
-        <button>Scene 1</button><br/><br/>
-        <button>Scene 2</button><br/><br/>
-        <button>Scene 3</button><br/><br/>
+        <div *ngFor="let item of lsScenes">
+            <button (click)="goToScenePage(item.uuid)">{{item.name}}</button>
+        </div>
     </div>
 </div>
 

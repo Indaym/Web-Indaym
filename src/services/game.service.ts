@@ -12,19 +12,6 @@ export class GameService {
 
     constructor(private http: Http) { }
 
-    getGame(id) {
-        console.log("loading game");
-
-        this.games = [];
-        var urlId = this.gamesUrl + "/" + id;
-
-        console.log(urlId);
-        /*this.http.get(urlId)
-            .map((res) => res.json())
-            .subscribe(data => {this.games.push(data);});
-        return this.games;*/
-    }
-
     getGames() {
         console.log("loading games");
 

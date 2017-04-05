@@ -22,7 +22,7 @@ export class GamesListComponent {
   lsGames;
 
   public goToScenesPage(id) {
-    this.router.navigate(['/sceneslist'], { queryParams: { uuid: id } });
+    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id } });
   }
 
   public redirect(meuh, id) {
