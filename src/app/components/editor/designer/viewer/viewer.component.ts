@@ -39,7 +39,6 @@ export class ViewerComponent implements OnInit {
     });
     this.scene.container = 'editorContainer';
     this.scene.cameraPosition = new Vector3(0, 50.0, 0);
-    this.scene.cameraTarget = new Vector3(0, 0, 0);
     this.scene.render();
     this.scene.animate();
     this.scene.domElement.addEventListener('mousedown', (event) => {

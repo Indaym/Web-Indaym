@@ -39,39 +39,50 @@ export class SceneViewer {
     'scale'
   ];
   private _selected: Object3D;
-  /*
-   parameter : conf > type: json object
-   {
-   width: number
-   height: number
-   }
+
+  /**
+   * @param conf : JSON object
+   * {
+   *  width: number
+   *  height: number
+   * }
    */
   constructor(conf: any = {}) {
+    // Verification of variables
     if (typeof(conf.width) == 'number')
       this._width = conf.width;
     if (typeof(conf.height) == 'number')
       this._height = conf.height;
 
+    // Initialisation Scene
     this._scene = new Scene();
 
+    //Initialisation Camera
     this._camera = new PerspectiveCamera(75, this._width / this._height, 0.1, 10000);
+    this._camera.lookAt(new Vector3(0, 0, 0));
 
+    // Initialisation Renderer
     this._renderer = new WebGLRenderer();
     this._renderer.setSize(this._width, this._height);
     this._renderer.setClearColor(0xdddddd);
 
+    // Initialisation Orbital Control
     this._controls = new OrbitControls(this._camera, this._renderer.domElement);
     this._controls.constraint.enableDamping = true;
     this._controls.constraint.dampingFactor = 1;
 
+    // Initialisation Transform Controller
     this._controller = new TransformControls(this._camera, this._renderer.domElement);
     this._controller.minScale = new Vector3(0.001, 0.001, 0.001);
 
+    // Creation of Raycaster
     this._raycaster = new Raycaster();
 
+    // Add Grid and Axis Helper
     this._scene.add(new GridHelper(1000, 1000));
     this._scene.add(new AxisHelper(1000));
 
+    // Selected object variable default set to undefined
     this._selected = undefined;
   }
 
