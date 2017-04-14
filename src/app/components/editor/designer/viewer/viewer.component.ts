@@ -5,12 +5,13 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input
 }                   from '@angular/core';
 import { Vector3 }  from 'three';
 
 import {
-  SceneViewer,
+  EditorViewer,
   BoardModelViewer,
   PionModelViewer
 }                   from '../../../../threed-viewer';
@@ -22,8 +23,8 @@ import {
     require('./viewer.component.css'),
   ]
 })
-export class ViewerComponent implements OnInit {
-  public scene: SceneViewer;
+export class ViewerComponent implements OnInit, OnDestroy {
+  public scene: EditorViewer;
   @Input() eventDispatcher;
   private objects = {
     "board3x3" : (args:any) => this.addSquareBoard(args),
@@ -33,23 +34,23 @@ export class ViewerComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.scene = new SceneViewer({
+    this.scene = new EditorViewer({
       width: 1500,
       height: 900
     });
-    this.scene.container = 'editorContainer';
-    this.scene.cameraPosition = new Vector3(0, 50.0, 0);
-    this.scene.render();
-    this.scene.animate();
+    this.scene.defaultLoad('editorContainer');
     this.scene.domElement.addEventListener('mousedown', (event) => {
       this.scene.onMouseDown(event)
     }, false);
-
     this.scene.eventDispatcher = this.eventDispatcher;
     this.eventDispatcher.addEventListener('addObject', (obj:any) => {
       if (obj.name != undefined)
         this.objects[obj.name]();
     });
+  }
+
+  ngOnDestroy() {
+
   }
 
   addObject(args:any) {

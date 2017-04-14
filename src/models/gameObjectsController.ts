@@ -4,6 +4,8 @@
 
 import { EventDispatcher } from 'three';
 
+import { datas } from './temporaryFill';
+
 /**
  * Events :
  * - setGame : Throw when game set
@@ -111,7 +113,7 @@ export class gameObjectsController {
   getSelectedScene() {
     return this.currentScene;
   }
-  
+
   /**
    * Add object in Scene
    * @param obj : Object to add
@@ -132,7 +134,7 @@ export class gameObjectsController {
 
   /**
    * Delete an object
-   * @param id
+   * @param objectId
    */
   deleteObject(objectId) {
     if (this.currentObjects !== undefined) {
@@ -159,5 +161,12 @@ export class gameObjectsController {
 
   renderAllObjects() {
 
+  }
+
+  /**
+   * Temporary function to fill the controller
+   */
+  fillObjectsController() {
+    this.addGroupObjects(datas);
   }
 }
