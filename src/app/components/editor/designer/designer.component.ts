@@ -2,8 +2,6 @@ import { Component }              from '@angular/core';
 import { EventDispatcher }        from 'three';
 import { DND_PROVIDERS }          from "ng2-dnd";
 
-import { GameControllerService }  from '../../../../services/gameController.service';
-
 @Component({
   selector  : 'ia-designer',
   template  : require('./designer.component.html'),
@@ -14,10 +12,8 @@ import { GameControllerService }  from '../../../../services/gameController.serv
 })
 export class DesignerComponent {
   private dispatcher: EventDispatcher;
-  public gameController;
 
-  constructor(private gameControllerService:GameControllerService) {
+  constructor() {
     this.dispatcher = new EventDispatcher();
-    this.gameController = gameControllerService.gameController;
   }
 }

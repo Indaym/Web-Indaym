@@ -2,19 +2,26 @@
  * Created by nicolas on 20/03/17.
  */
 
-import { EventDispatcher } from 'three';
+import { EventDispatcher }  from 'three';
 
-import { datas } from './temporaryFill';
+import { datas }            from './temporaryFill';
 
 /**
  * Events :
  * - setGame : Throw when game set
  * - setScenes : Throw when scenes set
  * - selectScene : Throw when scene is selected
+ *
  * - addObject : Throw when an object is added
  * - addGroupObjects : Throw when a group of objects is added
  * - deleteObject : Throw when an object is deleted
  * - deleteAllObjects : Throw when all object is deleted
+ *
+ * NOT IMPLEMENTED
+ * - addObjectFromView : Throw when an object is added
+ * - addGroupObjectsFromView : Throw when a group of objects is added
+ * - deleteObjectFromView : Throw when an object is deleted
+ * - deleteAllObjectsFromView : Throw when all object is deleted
  */
 
 export class gameObjectsController {
@@ -118,18 +125,23 @@ export class gameObjectsController {
    * Add object in Scene
    * @param obj : Object to add
    */
-  addObject(obj) {
-    this.currentObjects.push(obj);
-    this.emit("addObject", obj);
+  addObject(obj, emit = true) {
+    if (this.currentObjects !== undefined) {
+      this.currentObjects.push(obj);
+      if (emit === true)
+        this.emit("addObject", obj);
+    }
   }
 
   /**
    * Add a group of objects
    * @param objs : Objects to add
+   * @param emit : Decide si on doit emettre un event
    */
-  addGroupObjects(objs) {
+  addGroupObjects(objs, emit = true) {
     this.currentObjects = [ ...this.currentObjects, ...objs];
-    this.emit("addGroupObjects", this.currentObjects);
+    if (emit === true)
+      this.emit("addGroupObjects", this.currentObjects);
   }
 
   /**
@@ -143,8 +155,9 @@ export class gameObjectsController {
   /**
    * Delete an object
    * @param objectId
+   * @param emit : Decide si on doit emettre un event
    */
-  deleteObject(objectId) {
+  deleteObject(objectId, emit = true) {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
         return value.id === objectId;
@@ -158,8 +171,9 @@ export class gameObjectsController {
 
   /**
    * Delete all objects
+   * @param emit : Decide si on doit emettre un event
    */
-  deleteAllObjects() {
+  deleteAllObjects(emit = true) {
     if (this.currentObjects !== undefined) {
       let objects = this.currentObjects;
       this.currentObjects = [];

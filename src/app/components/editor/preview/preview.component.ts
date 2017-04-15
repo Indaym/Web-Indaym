@@ -10,7 +10,10 @@ import {
 import { EventDispatcher }        from 'three';
 
 import { GameControllerService }  from '../../../../services/gameController.service';
-import { PlayerViewer, ModelsLoader }           from '../../../threed-viewer'
+import {
+  PlayerViewer,
+  ModelsLoader
+}                                 from '../../../threed-viewer'
 
 @Component({
   selector  : 'ia-preview',
@@ -38,6 +41,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.scene.eventDispatcher = new EventDispatcher();
     this.modelsLoader = new ModelsLoader(this.scene);
     this.modelsLoader.loadModels(this.gameController.getObjects());
+    this.modelsLoader.initEvents(this.gameController);
     // this.scene.domElement.addEventListener('mousedown', (event) => {
     //   this.scene.onMouseDown(event)
     // }, false);

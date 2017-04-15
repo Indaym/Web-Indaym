@@ -7,14 +7,14 @@ import {
   OnInit,
   OnDestroy,
   Input
-}                   from '@angular/core';
-import { Vector3 }  from 'three';
+}                                 from '@angular/core';
+import { Vector3 }                from 'three';
 
 import {
   EditorViewer,
-  BoardModelViewer,
-  PionModelViewer
-}                   from '../../../../threed-viewer';
+  ModelsLoader
+}                                 from '../../../../threed-viewer';
+import { GameControllerService }  from "../../../../../services/gameController.service";
 
 @Component({
   selector  : 'ia-viewer',
@@ -25,6 +25,9 @@ import {
 })
 export class ViewerComponent implements OnInit, OnDestroy {
   public scene: EditorViewer;
+  private modelsLoader:ModelsLoader;
+  private gameController;
+
   @Input() eventDispatcher;
   private objects = {
     "board3x3" : (args:any) => this.addSquareBoard(args),
@@ -32,6 +35,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
     "pawnWhite" : (args:any) => this.addWhitePion(args),
     "pawnBlack" : (args:any) => this.addBlackPion(args)
   };
+
+  constructor(private gameControllerService:GameControllerService) {
+    this.gameController = gameControllerService.gameController;
+  }
 
   ngOnInit(): void {
     this.scene = new EditorViewer({
@@ -47,10 +54,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
       if (obj.name != undefined)
         this.objects[obj.name]();
     });
+    this.modelsLoader = new ModelsLoader(this.scene);
+    this.modelsLoader.loadModels(this.gameController.getObjects());
+    this.modelsLoader.initEvents(this.gameController);
   }
 
   ngOnDestroy() {
-
   }
 
   addObject(args:any) {
@@ -63,48 +72,57 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   addSquareBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [32.6, 2.0, 32.6],
-    });
-    board.position.copy(position);
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'board3x3',
+      object: {
+        type: 'board',
+        dimension: [32.6, 2.0, 32.6],
+        position: position.toArray()
+      }
     });
   }
 
   addLongBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [77.8, 2.0, 12.2],
-    });
-    board.position.copy(position);
-    board.texturesPaths[2] = 'pion_table.png';
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'board1x9',
+      object: {
+        type: 'board',
+        dimension: [77.8, 2.0, 12.2],
+        position: position.toArray(),
+        texturesPaths: [
+          'side.png', 'side.png',
+          'pion_table.png', 'side.png',
+          'side.png', 'side.png'
+        ]
+      }
     });
   }
 
   addBlackPion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.texturesPaths[0] = 'black.png';
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'blackpawn',
+      object: {
+        type: 'pawn',
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'black.png'
+        ]
+      }
     });
   }
 
   addWhitePion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'whitepawn',
+      object: {
+        type: 'pawn',
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'white.png'
+        ]
+      }
     });
   }
 }
