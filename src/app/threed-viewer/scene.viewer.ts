@@ -13,7 +13,8 @@ import {
   Vector3,
   Object3D,
   Raycaster,
-  EventDispatcher
+  EventDispatcher,
+  Color
 } from 'three';
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
@@ -49,6 +50,7 @@ export class SceneViewer {
 
     // Initialisation Scene
     this._scene = new Scene();
+    this._scene.background = new Color( 0xcccccc );
 
     //Initialisation Camera
     this._camera = new PerspectiveCamera(75, this._width / this._height, 0.1, 10000);
@@ -73,7 +75,7 @@ export class SceneViewer {
 
   defaultLoad(container) {
     this.container = container;
-    this.cameraPosition = new Vector3(0, 50.0, 0);
+    this.cameraPosition = new Vector3(50.0, 50.0, 50.0);
     this.render();
     this.animate();
   }

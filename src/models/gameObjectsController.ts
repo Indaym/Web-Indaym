@@ -133,6 +133,14 @@ export class gameObjectsController {
   }
 
   /**
+   * Get objects of the current scene
+   * @returns {Array}
+   */
+  getObjects() {
+    return this.currentObjects;
+  }
+
+  /**
    * Delete an object
    * @param objectId
    */
