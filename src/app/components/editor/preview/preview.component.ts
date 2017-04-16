@@ -27,6 +27,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private gameController;
   private scene:PlayerViewer;
   private modelsLoader:ModelsLoader;
+  sset = false;
 
   constructor(private gameControllerService:GameControllerService) {
     this.gameController = gameControllerService.gameController;
@@ -38,6 +39,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
       height: 900
     });
     this.scene.defaultLoad('previewContainer');
+    this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
+    this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
+    this.scene.domElement.addEventListener('mouseup',   (event) => this.scene.onMouseUp(event), false);
+
     this.scene.eventDispatcher = new EventDispatcher();
     this.modelsLoader = new ModelsLoader(this.scene);
     this.modelsLoader.loadModels(this.gameController.getObjects());

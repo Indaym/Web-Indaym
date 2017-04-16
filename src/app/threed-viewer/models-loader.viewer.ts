@@ -33,6 +33,7 @@ export class ModelsLoader {
       if (model.object.texturesPaths != undefined)
         model.threeDModel.texturesPaths = model.object.texturesPaths;
       model.threeDModel.init((mesh) => {
+        mesh.LinkModel = model;
         this.scene.addInScene(mesh);
         this.scene.render();
       });

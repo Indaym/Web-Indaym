@@ -5,7 +5,7 @@
 import {
   CubeGeometry,
   MeshBasicMaterial,
-  MeshFaceMaterial,
+  MultiMaterial,
   CubeTextureLoader,
   CubeTexture,
   Texture,
@@ -42,7 +42,7 @@ export class BoardModelViewer extends ModelViewer {
     const materials = new Array(6);
 
     this._textureLoader.load(this._texturesPaths, (textures) => {
-      this.material = new MeshFaceMaterial(materials);
+      this.material = new MultiMaterial(materials);
       const mesh = this.generateMesh();
       onLoad(mesh);
     }, (texture, index) => {
