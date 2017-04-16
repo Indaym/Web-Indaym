@@ -12,6 +12,6 @@ import { GameControllerService }  from '../../../services/gameController.service
 })
 export class EditorComponent {
   constructor(private gameControllerService:GameControllerService) {
-    gameControllerService.gameController.fillObjectsController();
+    //gameControllerService.gameController.fillObjectsController();
   }
 }

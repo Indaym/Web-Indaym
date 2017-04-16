@@ -12,21 +12,20 @@ export class ObjectService {
 
     constructor(private http: Http) { }
 
-    getObjects() {
+    getObjects(cow, callback) {
         console.log("loading objects");
 
         this.http.get(this.objectsUrl)
             .flatMap((res) => res.json())
-            .subscribe(data => {this.objects.push(data);});
-        return this.objects;
+            .subscribe(data => callback(cow, data));
     }
 
     setIds(gameId, sceneId) {
         this.objectsUrl += "/" + gameId + "/scenes/" + sceneId + "/objects";
     }
 
-    postSceneObjects(itemThreeJs) {
-        console.log("posting scene objects : ");
+    postSceneObject(itemThreeJs) {
+        console.log("posting scene object : ");
 
         this.http.post(this.objectsUrl, {itemThreeJs: itemThreeJs})
             .map((res) => res.json())

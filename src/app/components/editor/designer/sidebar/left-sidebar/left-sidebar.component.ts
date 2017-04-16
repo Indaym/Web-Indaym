@@ -15,10 +15,11 @@ import { Subscription }   from "rxjs/Rx";
 
 import { HtmlService }    from "../../../../../../services/html.service";
 import { ObjectService }  from "../../../../../../services/object.service";
+import {GameControllerService} from "../../../../../../services/gameController.service";
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService, ObjectService],
+  providers : [HtmlService, ObjectService, GameControllerService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
@@ -39,27 +40,36 @@ export class LeftSidebarComponent implements OnDestroy {
     }
   };
 
-  lsObjects;
+  lsObjects = [];
   gameId;
   sceneId;
   subscription: Subscription;
+  gameController;
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  constructor(public html: HtmlService, private objects: ObjectService, private route: ActivatedRoute, private router: Router) {
+  constructor(public html: HtmlService, private objects: ObjectService,
+              private gameControllerService:GameControllerService,private route: ActivatedRoute, private router: Router) {
+    this.gameController = this.gameControllerService.gameController;
     this.subscription = route.queryParams.subscribe(
         (queryParam: any) => this.getObjectsList(queryParam)
     );
   }
 
   public getObjectsList(queryParam) {
+    var cow = this;
     this.gameId = queryParam['gameId'];
     this.sceneId = queryParam['sceneId'];
     this.objects.setIds(this.gameId, this.sceneId);
-    this.lsObjects = this.objects.getObjects();
+    this.objects.getObjects(cow, this.handleObjects);
     console.log(this.lsObjects);
+  }
+
+  public handleObjects(data, cow) {
+    cow.lsObjects.push(data);
+    cow.gameController.addGroupObjects(data);
   }
 
   private toggleMode() {

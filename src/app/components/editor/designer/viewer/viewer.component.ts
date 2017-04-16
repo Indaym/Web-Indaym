@@ -41,6 +41,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   saveScene() {
+
   // CARO Ici tu stockes la scene actuelle dans la DB
   // Faut que tu voies avec Nico comment et sous quelle forme les stocker, perso j'en ai pas la moindre idée
   }
