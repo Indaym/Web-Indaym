@@ -4,19 +4,28 @@
 
 import {
   Component,
-  Input
-}                       from '@angular/core';
-import { HtmlService }  from "../../../../../../services/html.service";
+  Input,
+  OnDestroy
+}                         from '@angular/core';
+import { 
+  ActivatedRoute, 
+  Router 
+}                         from '@angular/router';
+import { Subscription }   from "rxjs/Rx";
+
+import { HtmlService }    from "../../../../../../services/html.service";
+import { ObjectService }  from "../../../../../../services/object.service";
 
 @Component({
   selector  : 'ia-left-sidebar',
+  providers : [HtmlService, ObjectService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
     require('../sidebars.css')
   ]
 })
-export class LeftSidebarComponent {
+export class LeftSidebarComponent implements OnDestroy {
   @Input() start;
   @Input() eventDispatcher;
   items = {
@@ -30,7 +39,27 @@ export class LeftSidebarComponent {
     }
   };
 
-  constructor(public html: HtmlService) {
+  lsObjects;
+  gameId;
+  sceneId;
+  subscription: Subscription;
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  constructor(public html: HtmlService, private objects: ObjectService, private route: ActivatedRoute, private router: Router) {
+    this.subscription = route.queryParams.subscribe(
+        (queryParam: any) => this.getObjectsList(queryParam)
+    );
+  }
+
+  public getObjectsList(queryParam) {
+    this.gameId = queryParam['gameId'];
+    this.sceneId = queryParam['sceneId'];
+    this.objects.setIds(this.gameId, this.sceneId);
+    this.lsObjects = this.objects.getObjects();
+    console.log(this.lsObjects);
   }
 
   private toggleMode() {
