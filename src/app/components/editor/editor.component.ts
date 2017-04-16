@@ -1,4 +1,6 @@
-import { Component }    from '@angular/core';
+import { Component }              from '@angular/core';
+
+import { GameControllerService }  from '../../../services/gameController.service';
 
 @Component({
   selector  : 'ia-editor',
@@ -6,7 +8,10 @@ import { Component }    from '@angular/core';
   styles    : [
     require('./editor.component.css')
   ],
-  providers : [],
+  providers : [GameControllerService],
 })
 export class EditorComponent {
+  constructor(private gameControllerService:GameControllerService) {
+    gameControllerService.gameController.fillObjectsController();
+  }
 }

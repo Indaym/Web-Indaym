@@ -26,11 +26,3 @@ li a:hover:not(.active) {
 background-color:#00cccc;
 }
 
-#toCenter {
-  margin-left: 45%;
-  text-transform: uppercase;
-}
-
-#toCapitalize {
-  text-transform: uppercase;
-}

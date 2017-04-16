@@ -13,82 +13,74 @@ import {
   Vector3,
   Object3D,
   Raycaster,
-  GridHelper,
-  AxisHelper,
-  EventDispatcher
+  EventDispatcher,
+  Color
 } from 'three';
 
 var OrbitControls = require('three-orbit-controls')(require('three'));
-var TransformControls = require('threejs-transformcontrols');
 
 export class SceneViewer {
-  private _scene: Scene;
-  private _camera: Camera;
-  private _width: number = 300;
-  private _height: number = 300;
-  private _renderer: WebGLRenderer;
-  private _domElement: HTMLElement;
-  private _controls: any;
-  private _controller: any;
-  private _eventDispatcher: EventDispatcher;
-  private _raycaster: Raycaster;
-  private _mouse: Vector2 = new Vector2(0, 0);
-  private _controllerTypes = [
-    'translate',
-    'rotate',
-    'scale'
-  ];
-  private _selected: Object3D;
-  /*
-   parameter : conf > type: json object
-   {
-   width: number
-   height: number
-   }
+  protected _scene: Scene;
+  protected _camera: Camera;
+  protected _width: number = 300;
+  protected _height: number = 300;
+  protected _renderer: WebGLRenderer;
+  protected _domElement: HTMLElement;
+  protected _controls: any;
+
+  protected _eventDispatcher: EventDispatcher;
+  protected _raycaster: Raycaster;
+  protected _mouse: Vector2 = new Vector2(0, 0);
+
+  protected _selected: Object3D;
+
+  /**
+   * @param conf : JSON object
+   * {
+   *  width: number
+   *  height: number
+   * }
    */
   constructor(conf: any = {}) {
+    // Verification of variables
     if (typeof(conf.width) == 'number')
       this._width = conf.width;
     if (typeof(conf.height) == 'number')
       this._height = conf.height;
 
+    // Initialisation Scene
     this._scene = new Scene();
+    this._scene.background = new Color( 0xcccccc );
 
+    //Initialisation Camera
     this._camera = new PerspectiveCamera(75, this._width / this._height, 0.1, 10000);
+    this._camera.lookAt(new Vector3(0, 0, 0));
 
+    // Initialisation Renderer
     this._renderer = new WebGLRenderer();
     this._renderer.setSize(this._width, this._height);
     this._renderer.setClearColor(0xdddddd);
 
+    // Initialisation Orbital Control
     this._controls = new OrbitControls(this._camera, this._renderer.domElement);
     this._controls.constraint.enableDamping = true;
     this._controls.constraint.dampingFactor = 1;
 
-    this._controller = new TransformControls(this._camera, this._renderer.domElement);
-
+    // Creation of Raycaster
     this._raycaster = new Raycaster();
 
-    this._scene.add(new GridHelper(1000, 1000));
-    this._scene.add(new AxisHelper(1000));
-
+    // Selected object variable default set to undefined
     this._selected = undefined;
   }
 
-  initDispatcherEvents() {
-    if (this._eventDispatcher !== undefined) {
-      this._eventDispatcher.addEventListener("updateObjectView", (e:any) => {
-        if (this.selected !== undefined) {
-          if (e.position !== undefined)
-            this.selected.position.copy(e.position);
-          if (e.rotation !== undefined)
-            this.selected.rotation.copy(e.rotation);
-          if (e.dimension !== undefined)
-            this.selected.scale.copy(e.dimension);
-          this.updateController();
-        }
-      });
+  defaultLoad(container) {
+    this.container = container;
+    this.cameraPosition = new Vector3(50.0, 50.0, 50.0);
+    this.render();
+    this.animate();
+  }
 
-    }
+  initDispatcherEvents() {
   }
 
   get eventDispatcher(): EventDispatcher {
@@ -150,19 +142,6 @@ export class SceneViewer {
     return this._domElement;
   }
 
-  set modeController(mode: string) {
-    console.log(this._controller._gizmo);
-    this._controller.setMode(mode);
-  }
-
-  get modeController(): string {
-    return this._controller.getMode();
-  }
-
-  get controllerTypes(): string[] {
-    return this._controllerTypes;
-  }
-
   get selected(): Object3D {
     return this._selected;
   }
@@ -173,45 +152,6 @@ export class SceneViewer {
 
   deleteFromScene(obj: Object3D) {
     this._scene.remove(obj);
-  }
-
-  updateController() {
-    this._controller.update();
-  }
-
-  selectObject(obj: Object3D) {
-    if (obj !== undefined) {
-      this._selected = obj;
-      this._controller.attach(obj);
-      this._scene.add(this._controller);
-      this._eventDispatcher.dispatchEvent({
-        type:"updateObjectInputs",
-        position:this._selected.position,
-        dimension:this._selected.scale,
-        rotation:this._selected.rotation
-      });
-    }
-  }
-
-  unselectObject(obj:Object3D) {
-    const objSel = [obj, this._controller.object, this._selected].find((elem) => { return elem !== undefined });
-    this._controller.detach(objSel);
-    this._scene.remove(this._controller);
-    this._selected = undefined;
-  }
-
-  deleteSelected() {
-    const objSel = [this._selected, this._controller.object].find((elem) => { return elem !== undefined });
-    if (objSel !== undefined) {
-      this.unselectObject(objSel);
-      this._scene.remove(objSel);
-      this._eventDispatcher.dispatchEvent({
-        type:"updateObjectInputs",
-        position: new Vector3(),
-        dimension: new Vector3(),
-        rotation: new Vector3()
-      });
-    }
   }
 
   render() {
@@ -249,17 +189,5 @@ export class SceneViewer {
     result.z = a.z + t * (b.z - a.z);
 
     return result;
-  }
-
-  onMouseDown(event) {
-    this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
-    this._raycaster.setFromCamera(this._mouse, this._camera);
-
-    var intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
-      return elem instanceof Mesh;
-    }));
-    if (intersected.length > 0)
-      this.selectObject(intersected[0].object);
   }
 }

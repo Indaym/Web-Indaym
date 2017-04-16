@@ -87,6 +87,7 @@ export class ModelViewer {
       return null;
     this._mesh = new Mesh(this._geometry, this._material);
     this._mesh.position.copy(this._position);
+    this._mesh.scale.copy(this._dimension);
     return this._mesh;
   }
 }

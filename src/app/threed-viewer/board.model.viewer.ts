@@ -37,7 +37,7 @@ export class BoardModelViewer extends ModelViewer {
 
   init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
-    this.geometry = new CubeGeometry(this.dimension.x, this.dimension.y, this.dimension.z, 1, 1, 1);
+    this.geometry = new CubeGeometry(1, 1, 1, 1, 1, 1);
 
     const materials = new Array(6);
 
@@ -45,7 +45,6 @@ export class BoardModelViewer extends ModelViewer {
       this.material = new MeshFaceMaterial(materials);
       const mesh = this.generateMesh();
       onLoad(mesh);
-
     }, (texture, index) => {
       //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 

@@ -1,11 +1,11 @@
 /**
  * Created by nicolas on 14/10/16.
  */
+
 import {
   Texture,
   TextureLoader
 } from 'three';
-
 
 export class TexturePoolViewer {
   private processing: boolean = false;
@@ -20,11 +20,11 @@ export class TexturePoolViewer {
   }
 
   load(textures, onLoad, onProgress?) {
-    if (this.processing == true)
+    if (this.processing == true || textures === undefined || textures.length == 0)
       return false;
     this.processing = true;
     this.poolLength = textures.length;
-    this.queue = textures;
+    this.queue = textures.slice();
     this.dones = new Array(this.poolLength);
     for (let tex of this.queue) {
       this.loadImage(tex, onLoad, onProgress);
