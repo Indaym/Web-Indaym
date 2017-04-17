@@ -27,7 +27,6 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private gameController;
   private scene:PlayerViewer;
   private modelsLoader:ModelsLoader;
-  sset = false;
 
   constructor(private gameControllerService:GameControllerService) {
     this.gameController = gameControllerService.gameController;
@@ -47,9 +46,6 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.modelsLoader = new ModelsLoader(this.scene);
     this.modelsLoader.loadModels(this.gameController.getObjects());
     this.modelsLoader.initEvents(this.gameController);
-    // this.scene.domElement.addEventListener('mousedown', (event) => {
-    //   this.scene.onMouseDown(event)
-    // }, false);
   }
 
   ngOnDestroy() {

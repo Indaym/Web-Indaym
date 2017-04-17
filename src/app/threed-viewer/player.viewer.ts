@@ -7,7 +7,6 @@ import {
   Mesh,
   MeshBasicMaterial,
   Geometry,
-  Vector3,
   BackSide
 }                       from 'three';
 
@@ -136,9 +135,7 @@ export class PlayerViewer extends SceneViewer {
             else
               this.moveToDroppable(obj);
           }
-
         }
-
       }
       else
         this.unselectObject();

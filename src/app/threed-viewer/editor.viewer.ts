@@ -2,15 +2,15 @@
  * Created by nicolas on 13/04/17.
  */
 
-import { SceneViewer } from '.';
-
 import {
   Mesh,
   Vector3,
   Object3D,
   GridHelper,
   AxisHelper
-} from 'three';
+}                       from 'three';
+
+import { SceneViewer }  from '.';
 
 var TransformControls = require('threejs-transformcontrols');
 
@@ -33,7 +33,6 @@ export class EditorViewer extends SceneViewer {
     // Add Grid and Axis Helper
     this._scene.add(new GridHelper(1000, 1000));
     this._scene.add(new AxisHelper(1000));
-
   }
 
   initDispatcherEvents() {
