@@ -32,8 +32,6 @@ export class SceneViewer {
   protected _raycaster: Raycaster;
   protected _mouse: Vector2 = new Vector2(0, 0);
 
-  protected _selected: Object3D;
-
   /**
    * @param conf : JSON object
    * {
@@ -68,9 +66,6 @@ export class SceneViewer {
 
     // Creation of Raycaster
     this._raycaster = new Raycaster();
-
-    // Selected object variable default set to undefined
-    this._selected = undefined;
   }
 
   defaultLoad(container) {
@@ -142,10 +137,6 @@ export class SceneViewer {
     return this._domElement;
   }
 
-  get selected(): Object3D {
-    return this._selected;
-  }
-
   addInScene(obj: Object3D) {
     this._scene.add(obj);
   }
@@ -179,13 +170,14 @@ export class SceneViewer {
   }
 
   getIntersection() {
-    let result = new Vector3(0, 0, 0);
+    let result = new Vector3(0, 10, 0);
     const a = this._raycaster.ray.origin;
     const b = new Vector3(a.x, a.y, a.z);
 
     b.add(this._raycaster.ray.direction);
     const t = (result.y - a.y) / (b.y - a.y);
     result.x = a.x + t * (b.x - a.x);
+    result.y = a.y + t * (b.y - a.y);
     result.z = a.z + t * (b.z - a.z);
 
     return result;

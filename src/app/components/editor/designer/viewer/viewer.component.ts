@@ -81,6 +81,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'board3x3',
       object: {
         type: 'board',
+        draggable: false,
+        droppable: true,
         dimension: [32.6, 2.0, 32.6],
         position: position.toArray()
       }
@@ -92,6 +94,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'board1x9',
       object: {
         type: 'board',
+        draggable: false,
+        droppable: true,
         dimension: [77.8, 2.0, 12.2],
         position: position.toArray(),
         texturesPaths: [
@@ -108,6 +112,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'blackpawn',
       object: {
         type: 'pawn',
+        draggable: true,
+        droppable: false,
         dimension: [3.5, 1.5, 3.5],
         position: position.toArray(),
         texturesPaths: [
@@ -122,6 +128,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'whitepawn',
       object: {
         type: 'pawn',
+        draggable: true,
+        droppable: false,
         dimension: [3.5, 1.5, 3.5],
         position: position.toArray(),
         texturesPaths: [

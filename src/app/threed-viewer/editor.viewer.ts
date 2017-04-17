@@ -15,6 +15,7 @@ import {
 var TransformControls = require('threejs-transformcontrols');
 
 export class EditorViewer extends SceneViewer {
+  private _selected:Object3D;
   private _controller: any;
   private _controllerTypes = [
     'translate',
@@ -107,6 +108,10 @@ export class EditorViewer extends SceneViewer {
         rotation: new Vector3()
       });
     }
+  }
+
+  get selected(): Object3D {
+    return this._selected;
   }
 
   onMouseDown(event) {
