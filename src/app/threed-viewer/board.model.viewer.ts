@@ -5,11 +5,7 @@
 import {
   CubeGeometry,
   MeshBasicMaterial,
-  MultiMaterial,
-  CubeTextureLoader,
-  CubeTexture,
-  Texture,
-  Material
+  MultiMaterial
 }                             from 'three'
 
 import { ModelViewer }        from './model.viewer';
@@ -27,14 +23,26 @@ export class BoardModelViewer extends ModelViewer {
     super(conf);
   }
 
+  /**
+   * Get textures paths
+   * @returns {string[]}
+   */
   get texturesPaths(): string[] {
     return this._texturesPaths;
   }
 
+  /**
+   * Set textures paths
+   * @param value
+   */
   set texturesPaths(value: Array<string>) {
     this._texturesPaths = value;
   }
 
+  /**
+   * Init pawn model with textures
+   * @param onLoad : Callback when loaded
+   */
   init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(1, 1, 1, 1, 1, 1);

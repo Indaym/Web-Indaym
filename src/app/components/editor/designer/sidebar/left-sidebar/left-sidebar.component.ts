@@ -59,7 +59,6 @@ export class LeftSidebarComponent implements OnDestroy {
     this.sceneId = queryParam['sceneId'];
     this.objects.setIds(this.gameId, this.sceneId);
     this.lsObjects = this.objects.getObjects();
-    console.log(this.lsObjects);
   }
 
   private toggleMode() {

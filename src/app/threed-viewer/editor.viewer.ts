@@ -35,6 +35,9 @@ export class EditorViewer extends SceneViewer {
     this._scene.add(new AxisHelper(1000));
   }
 
+  /**
+   * Init Events in Dispatcher for View Update
+   */
   initDispatcherEvents() {
     if (this._eventDispatcher !== undefined) {
       this._eventDispatcher.addEventListener("updateObjectView", (e:any) => {
@@ -54,22 +57,41 @@ export class EditorViewer extends SceneViewer {
     }
   }
 
+  /**
+   * Set controller mode for 3D helper
+   * @param mode
+   */
   set modeController(mode: string) {
     this._controller.setMode(mode);
   }
 
+  /**
+   * Get controller mode for 3D helper
+   * @returns {any}
+   */
   get modeController(): string {
     return this._controller.getMode();
   }
 
+  /**
+   * Get controllerTypes for 3D helper
+   * @returns {(string|string|string)[]}
+   */
   get controllerTypes(): string[] {
     return this._controllerTypes;
   }
 
+  /**
+   * Update Controller
+   */
   updateController() {
     this._controller.update();
   }
 
+  /**
+   * Select an Object
+   * @param obj Object to select
+   */
   selectObject(obj: Object3D) {
     if (obj !== undefined) {
       this._selected = obj;
@@ -88,6 +110,10 @@ export class EditorViewer extends SceneViewer {
     }
   }
 
+  /**
+   * Unselect an Object
+   * @param obj : Object to select
+   */
   unselectObject(obj:Object3D) {
     const objSel = [obj, this._controller.object, this._selected].find((elem) => { return elem !== undefined });
     this._controller.detach(objSel);
@@ -95,6 +121,9 @@ export class EditorViewer extends SceneViewer {
     this._selected = undefined;
   }
 
+  /**
+   * Delete selected object
+   */
   deleteSelected() {
     const objSel = [this._selected, this._controller.object].find((elem) => { return elem !== undefined });
     if (objSel !== undefined) {
@@ -109,10 +138,18 @@ export class EditorViewer extends SceneViewer {
     }
   }
 
+  /**
+   * Get selected Object
+   * @returns {Object3D}
+   */
   get selected(): Object3D {
     return this._selected;
   }
 
+  /**
+   * Called when a mouse button is down in 3D view
+   * @param event : MouseEvent
+   */
   onMouseDown(event) {
     this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
     this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;

@@ -13,8 +13,6 @@ export class ObjectService {
     constructor(private http: Http) { }
 
     getObjects() {
-        console.log("loading objects");
-
         this.http.get(this.objectsUrl)
             .flatMap((res) => res.json())
             .subscribe(data => {this.objects.push(data);});
@@ -26,8 +24,6 @@ export class ObjectService {
     }
 
     postSceneObjects(itemThreeJs) {
-        console.log("posting scene objects : ");
-
         this.http.post(this.objectsUrl, {itemThreeJs: itemThreeJs})
             .map((res) => res.json())
             .subscribe(data => console.log(data));

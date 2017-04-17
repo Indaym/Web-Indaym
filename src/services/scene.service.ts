@@ -13,13 +13,10 @@ export class SceneService {
     constructor(private http: Http) { }
 
     setGameId(gameId) {
-        console.log("setting gameId to " + gameId);
         this.scenesUrl += "/" + gameId + "/scenes";
     }
 
     getScenes() {
-        console.log("loading scenes");
-
         this.scenes = [];
         this.http.get(this.scenesUrl)
             .flatMap((res) => res.json())
@@ -28,8 +25,6 @@ export class SceneService {
     }
 
     postScene(name, meuh, callback) {
-        console.log("posting scene : " + name);
-
         this.http.post(this.scenesUrl, {"name": name})
             .map((res) => res.json())
             .subscribe(data => callback(meuh, data));

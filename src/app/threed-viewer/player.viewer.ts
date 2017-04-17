@@ -7,6 +7,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   Geometry,
+  PlaneBufferGeometry,
   BackSide
 }                       from 'three';
 
@@ -14,22 +15,35 @@ import { SceneViewer }  from '.';
 
 export class PlayerViewer extends SceneViewer {
   private _selected;
+  private _intersectPlane;
 
   constructor(conf: any = {}) {
     super(conf);
 
     this._scene.add(new AxisHelper(1000));
     this._controls.enableKeys = false;
+    this._intersectPlane = new Mesh(new PlaneBufferGeometry(500, 500, 8, 8), new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0}));
+    this._scene.add(this._intersectPlane);
   }
 
-  intersectObjects(event) {
+  /**
+   * Get the intersected objects by the mouse position
+   * @param event : mouseEvent
+   * @param objects : Objects to search in
+   * @returns {Intersection[]}
+   */
+  intersectObjects(event, objects = this._scene.children) {
     this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
     this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
 
-    return this._raycaster.intersectObjects(this._scene.children.filter((elem) => elem instanceof Mesh));
+    return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh));
   }
 
+  /**
+   * Select an object on 3D view
+   * @param obj : Mesh to select
+   */
   selectObject(obj: Mesh) {
     if (this._selected !== undefined && this._selected.object !== undefined)
       this.unselectObject();
@@ -45,6 +59,9 @@ export class PlayerViewer extends SceneViewer {
     this._scene.add(this._selected.glow);
   }
 
+  /**
+   * Unselect the selected object
+   */
   unselectObject() {
     if (this._selected === undefined)
       return;
@@ -56,10 +73,19 @@ export class PlayerViewer extends SceneViewer {
       delete this._selected.object;
   }
 
+  /**
+   * Get information if there is an object already selected
+   * @returns {boolean}
+   */
   asSelection() {
     return (this._selected !== undefined && (this._selected.object !== undefined || this._selected.glow !== undefined))
   }
 
+  /**
+   * Get information if Object sent is Draggable or not
+   * @param obj : Intersected object
+   * @returns {boolean}
+   */
   isDraggable(obj) {
     let linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
@@ -67,6 +93,11 @@ export class PlayerViewer extends SceneViewer {
     return (linkModel.object.draggable === true);
   }
 
+  /**
+   * Get information if Object sent is Droppable or not
+   * @param obj : Intersected object
+   * @returns {boolean}
+   */
   isDroppable(obj) {
     let linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
@@ -74,6 +105,12 @@ export class PlayerViewer extends SceneViewer {
     return (linkModel.object.droppable === true);
   }
 
+  /**
+   * Get First object that are Draggable or Droppable
+   * @param objs : Object ti search in
+   * @param ignoreSelect : Ignore the object already selected
+   * @returns {any}
+   */
   getFirstDragOrDrop(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
@@ -84,6 +121,12 @@ export class PlayerViewer extends SceneViewer {
     });
   }
 
+  /**
+   * Get First object that are Draggable
+   * @param objs : Object ti search in
+   * @param ignoreSelect : Ignore the object already selected
+   * @returns {any}
+   */
   getFirstDraggable(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
@@ -93,6 +136,13 @@ export class PlayerViewer extends SceneViewer {
       return (linkModel !== undefined && linkModel.object.draggable === true)
     });
   }
+
+  /**
+   * Get First object that are Droppable
+   * @param objs : Object ti search in
+   * @param ignoreSelect : Ignore the object already selected
+   * @returns {any}
+   */
   getFirstDroppable(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
@@ -103,6 +153,10 @@ export class PlayerViewer extends SceneViewer {
     });
   }
 
+  /**
+   * Move selected object to Droppable object
+   * @param drop : Droppable object
+   */
   moveToDroppable(drop) {
     if (drop === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
       return;
@@ -112,6 +166,10 @@ export class PlayerViewer extends SceneViewer {
     this._selected.oldPosition.copy(this._selected.object.position);
   }
 
+  /**
+   * Called when a mouse button is Down in 3D view
+   * @param event : MouseEvent
+   */
   onMouseDown(event) {
     if(event.button === 0) {
       let intersected = this.intersectObjects(event);
@@ -136,23 +194,34 @@ export class PlayerViewer extends SceneViewer {
               this.moveToDroppable(obj);
           }
         }
+        this._intersectPlane.position.copy(this._selected.object.position);
+        this._intersectPlane.lookAt(this._camera.position);
       }
       else
         this.unselectObject();
     }
   }
 
+  /**
+   * Called when mouse move in 3D view
+   * @param event : MouseEvent
+   */
   onMouseMove(event) {
-    if(event.buttons === 1) {
-      let intersected = this.intersectObjects(event);
-      if (intersected.length > 0 && this._selected !== undefined && intersected[0].object == this._selected.object) {
-        let pos = this.setIntersection(event);
-        this._selected.object.position.copy(pos);
-        this._selected.glow.position.copy(pos);
+    if(event.buttons === 1 && this.asSelection()) {
+      let intersected = this.intersectObjects(event, [this._intersectPlane]);
+      if (intersected.length > 0) {
+        this._intersectPlane.position.copy(intersected[0].point);
+        this._intersectPlane.lookAt(this._camera.position);
+        this._selected.object.position.copy(intersected[0].point);
+        this._selected.glow.position.copy(intersected[0].point);
       }
     }
   }
 
+  /**
+   * Called when a mouse button is up on 3D view
+   * @param event
+   */
   onMouseUp(event) {
     if (event.button === 0 && this._selected !== undefined && this._selected.object !== undefined) {
       let intersected = this.intersectObjects(event);
