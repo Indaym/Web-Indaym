@@ -23,6 +23,7 @@ export class ModelsLoader {
   }
 
   loadOneModel(model) {
+    model.object = JSON.parse(model.object);
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {

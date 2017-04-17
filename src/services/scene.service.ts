@@ -7,31 +7,40 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SceneService {
-    private scenesUrl = 'http://localhost:3000/games';
-    private scenes = [];
+  private initUrl = 'http://localhost:3000/games';
+  private scenesUrl = '';
+  private scenes = [];
 
-    constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.scenesUrl = this.initUrl;
+  }
 
-    setGameId(gameId) {
-        console.log("setting gameId to " + gameId);
-        this.scenesUrl += "/" + gameId + "/scenes";
-    }
+  setGameId(gameId) {
+    console.log("setting gameId to " + gameId);
+    this.scenesUrl = this.initUrl +  "/" + gameId + "/scenes";
+  }
 
-    getScenes() {
-        console.log("loading scenes");
+  getScenes() {
+    console.log("loading scenes");
 
-        this.scenes = [];
-        this.http.get(this.scenesUrl)
-            .flatMap((res) => res.json())
-            .subscribe(data => {this.scenes.push(data);});
-        return this.scenes;
-    }
+    this.scenes = [];
+    this.http.get(this.scenesUrl)
+      .flatMap((res) => res.json())
+      .subscribe(data => {this.scenes.push(data);});
+    return this.scenes;
+  }
 
-    postScene(name, meuh, callback) {
-        console.log("posting scene : " + name);
+  getOneScene(id, callback) {
+    this.http.get(this.scenesUrl + '/' + id)
+      .map((res) => res.json())
+      .subscribe(callback);
+  }
 
-        this.http.post(this.scenesUrl, {"name": name})
-            .map((res) => res.json())
-            .subscribe(data => callback(meuh, data));
-    }
+  postScene(name, meuh, callback) {
+    console.log("posting scene : " + name);
+
+    this.http.post(this.scenesUrl, {"name": name})
+      .map((res) => res.json())
+      .subscribe(data => callback(meuh, data));
+  }
 }
