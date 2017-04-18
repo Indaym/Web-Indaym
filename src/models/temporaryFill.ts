@@ -51,7 +51,7 @@ export let datas = [
     object: {
       type: 'pawn',
       draggable: true,
-      droppable: false,
+      droppable: true,
       dimension: [3.5, 1.5, 3.5],
       position: [10, 10, -10],
       texturesPaths: [
