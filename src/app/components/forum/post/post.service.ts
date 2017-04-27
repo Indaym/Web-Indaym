@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User }  from '../user'
-import { Title }  from '../title'
-import { Http } from '@angular/http';
+import { Title }  from '../title1'
+import { Observable } from 'rxjs/Observable';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 /* Remember
 Avis : fa fa-exclamation
 Discussion : fa fa-comment
@@ -16,20 +19,46 @@ export class PostService {
     private forumUrl = 'http://localhost:3000/forum';
     private forum = [];
 
-    constructor(private http: Http) { }
+    constructor (private http: Http) {}
 
-/*
-    getForum() {
-      console.log("Loading Forum");
+    addPost(title: string, description: string): Promise<Title>
+    {
+      console.log(title, description);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
 
-      this.http.get(this.forumUrl)
-          .flatMap((res) => res.json())
-          .subscribe(data => {this.forum.push(data);});
-      return this.forum;
+      return this.http.post(this.forumUrl, { title, description}, options)
+                    .toPromise()
+                    .then(this.extractData)
+                    .catch(this.handleError);
     }
-*/
 
-    getAll(): Title[] {
+    getPost(): Promise<Title[]> {
+      return this.http.get(this.forumUrl)
+                  .toPromise()
+                  .then(this.extractData)
+                  .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        console.log(body);
+        return body || { };
+      }
+
+    private handleError (error: Response | any) {
+        let errMsg: string;
+        if (error instanceof Response) {
+          const body = error.json() || '';
+          const err = body.error || JSON.stringify(body);
+          errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+          errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
+      }
+    /*getAll(): Title[] {
         return [
             {
                 title: "Lorem Ipsum",
@@ -59,5 +88,5 @@ export class PostService {
                 currentUser: { name: { nameName: "Tokiro", nameLink: "#" }, avatar: 'https://s.gravatar.com/avatar/909ecf5782b2ea2ee8888221dd8beba8?s=80' }
             }
         ]
-    }; 
+    };*/
 }

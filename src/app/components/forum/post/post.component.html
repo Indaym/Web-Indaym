@@ -1,5 +1,32 @@
 <button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
 <ia-post-create *ngIf="hideElement"></ia-post-create>
+
+
+
+<div class="discussion-let-comment" style="transition-duration: 0.4s;-webkit-transition-duration: 0.4s;">
+    <form action="#" method="post" id="comment-form" class="comment-form">
+        <h3 class="discussion-legende" style="color:black; margin-bottom:0px">Titre</h3>
+        <input cols="60" rows="8" aria-required="true" class="discussion-let-comment-field-small" #title/>
+<!--        <input #title/> !-->
+        <div class="discussion-reponse">
+            <h3 class="discussion-legende" style="float:left; margin-top:0px !important; color:black">Message</h3>
+            <div class="stripe-line" style="margin-top:3px!important;"></div>
+        </div>
+        <input cols="60" rows="8" aria-required="true" class="discussion-let-comment-field" #description/>
+        <!--<input #description/>!-->
+        <div class="discussion-title-reponse" style="margin-top:-4px">
+            <button (click)="addPost(title.value, description.value); title.value=''" class="discussion-title-reponse-texte" title>Envoyer</button>
+        </div>
+    </form>
+    <div class="discussion-reponse">
+        <h3 class="discussion-legende" style="float:left; margin-top:0px !important; color:black"></h3>
+        <div class="stripe-line" style="margin-bottom:20px;"></div>
+    </div>
+</div>
+
+<li *ngFor="let currentPost of Post">{{currentPost.title}}</li>
+
+
 <div class="discussion-item" *ngFor="let post of currentPost">
   <div class="discussion-avatar">
     <img src={{post.currentUser.avatar}}>
