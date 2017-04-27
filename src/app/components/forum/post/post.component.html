@@ -1,5 +1,5 @@
-<button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
-<ia-post-create *ngIf="hideElement"></ia-post-create>
+<!--<button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
+<ia-post-create *ngIf="hideElement"></ia-post-create>-->
 
 
 
@@ -7,7 +7,7 @@
     <form action="#" method="post" id="comment-form" class="comment-form">
         <h3 class="discussion-legende" style="color:black; margin-bottom:0px">Titre</h3>
         <input cols="60" rows="8" aria-required="true" class="discussion-let-comment-field-small" #title/>
-<!--        <input #title/> !-->
+        <!--        <input #title/> !-->
         <div class="discussion-reponse">
             <h3 class="discussion-legende" style="float:left; margin-top:0px !important; color:black">Message</h3>
             <div class="stripe-line" style="margin-top:3px!important;"></div>
@@ -15,7 +15,7 @@
         <input cols="60" rows="8" aria-required="true" class="discussion-let-comment-field" #description/>
         <!--<input #description/>!-->
         <div class="discussion-title-reponse" style="margin-top:-4px">
-            <button (click)="addPost(title.value, description.value); title.value=''" class="discussion-title-reponse-texte" title>Envoyer</button>
+            <button (click)="addPost(title.value, description.value); title.value=''" class="discussion-title-reponse-texte-button" title>Envoyer</button>
         </div>
     </form>
     <div class="discussion-reponse">
@@ -24,10 +24,52 @@
     </div>
 </div>
 
-<li *ngFor="let currentPost of Post">{{currentPost.title}}</li>
+<!--<li *ngFor="let currentPost of Post">{{currentPost.title}}</li>!-->
 
 
-<div class="discussion-item" *ngFor="let post of currentPost">
+<div class="discussion-item" *ngFor="let currentPost of Post">
+    <div class="discussion-avatar">
+        <img src="https://s.gravatar.com/avatar/909ecf5782b2ea2ee8888221dd8beba8?s=80">
+    </div>
+    <div class="discussion-title-all">
+        <span class="discussion-title-tag"><i class="fa fa-users"></i></span>
+        <a href="http://localhost:3000/forum/{{currentPost.uuid}}/topics">
+            <span class="discussion-title">{{currentPost.title}} (CATEGORIE)</span>
+        </a>
+    </div>
+    <p class="discussion-tags">
+        <span class="discussion-author">
+        <span class="discussion-user-logo"><i class="fa fa-user"></i></span>
+        <a href="#" title>USER USER NAME</a>
+        </span>
+        <span class="discussion-time">
+        <span class="discussion-time-logo"><i class="fa fa-clock-o"></i></span>
+        <a href="" title>{{currentPost.updatedAt.replace("-", "/").replace("-","/").split("T", 1)}}
+          {{currentPost.updatedAt.split("T")[1].split(".", 1)}}</a>
+        </span>
+        <span class="discussion-com">
+        <span class="discussion-com-logo"><i class="fa fa-comment-o"></i></span>
+        <a href="#" title>COMENT NBR commentaires</a>
+        </span>
+        <span class="discussion-like">
+        <span class="discussion-like-logo"><i class="fa fa-heart-o"></i></span>
+        <a href="#" title>LIKE NBR likes</a>
+        </span>
+        <span class="discussion-game">
+        <span class="discussion-game-logo"><i class="fa fa-puzzle-piece"></i></span>
+        <a href="#" title>GAME GAME NAME</a>
+        </span>
+        <span>
+          <button (click)="deletePost(currentPost.uuid)" style="padding:0px 110px; background-color:transparent">{{currentPost.uuid}}</button>
+        </span>
+    </p>
+    <div class="discussion-blue"></div>
+</div>
+
+
+
+
+<!--<div class="discussion-item" *ngFor="let currentPost of Post">
   <div class="discussion-avatar">
     <img src={{post.currentUser.avatar}}>
   </div>
@@ -60,4 +102,4 @@
       </span>
   </p>
   <div class="discussion-blue"></div>
-</div>
+</div>!-->

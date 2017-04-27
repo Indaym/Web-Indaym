@@ -29,15 +29,21 @@ export class PostComponent implements OnInit {
     this._postService.getPost().then(
       Post => this.Post = Post,
       error => this.errorMessage = <any>error);
-    console.log(this.Post);
   }
 
   addPost(title: string, description: string) {
-    console.log(title);
     if (!title && !description) { return; }
     this._postService.addPost(title, description)
       .then(
       currentPost => this.Post.push(currentPost),
+      error => this.errorMessage = <any>error);
+      console.log(JSON.stringify(this.Post[this.Post.length - 1])[0]);
+      window.location.reload()
+  }
+
+  deletePost(id:string){
+    this._postService.deletePost(id).then(
+      result => console.log(result),
       error => this.errorMessage = <any>error);
   }
 }

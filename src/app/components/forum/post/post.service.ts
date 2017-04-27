@@ -23,7 +23,6 @@ export class PostService {
 
     addPost(title: string, description: string): Promise<Title>
     {
-      console.log(title, description);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
 
@@ -40,9 +39,17 @@ export class PostService {
                   .catch(this.handleError);
     }
 
+    deletePost(id:string): Promise<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.delete(this.forumUrl + "/" + id, options)
+                  .toPromise()
+                  .then(this.extractData)
+                  .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
-        console.log(body);
         return body || { };
       }
 
