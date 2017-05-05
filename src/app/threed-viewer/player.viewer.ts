@@ -16,13 +16,14 @@ import { SceneViewer }  from '.';
 export class PlayerViewer extends SceneViewer {
   private _selected;
   private _intersectPlane;
+  private _hovered;
 
   constructor(conf: any = {}) {
     super(conf);
 
     this._scene.add(new AxisHelper(1000));
     this._controls.enableKeys = false;
-    this._intersectPlane = new Mesh(new PlaneBufferGeometry(500, 500, 8, 8), new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0}));
+    this._intersectPlane = new Mesh(new PlaneBufferGeometry(500, 500, 8, 8), new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false}));
     this._scene.add(this._intersectPlane);
   }
 
@@ -77,7 +78,7 @@ export class PlayerViewer extends SceneViewer {
    * Get information if there is an object already selected
    * @returns {boolean}
    */
-  asSelection() {
+  hasSelection() {
     return (this._selected !== undefined && (this._selected.object !== undefined || this._selected.glow !== undefined))
   }
 
@@ -160,8 +161,7 @@ export class PlayerViewer extends SceneViewer {
   moveToDroppable(drop) {
     if (drop === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
       return;
-    this._selected.object.position.copy(drop.object.position);
-    this._selected.object.position.y += (drop.object.scale.y / 2) + (this._selected.object.scale.y / 2);
+    this._selected.object.position.copy(drop.object.LinkModel.threeDModel.dropPosition(this._selected.object));
     this._selected.glow.position.copy(this._selected.object.position);
     this._selected.oldPosition.copy(this._selected.object.position);
   }
@@ -177,11 +177,10 @@ export class PlayerViewer extends SceneViewer {
       if (intersected.length > 0) {
         if (this.getFirstDraggable(intersected, false) !== undefined)
           this._controls.enableRotate = false;
-        if (!this.asSelection()) {
+        if (!this.hasSelection()) {
           let obj = this.getFirstDraggable(intersected);
-          if (obj !== undefined) {
+          if (obj !== undefined)
             this.selectObject(obj.object);
-          }
         }
         else {
           let obj = this.getFirstDragOrDrop(intersected);
@@ -194,7 +193,8 @@ export class PlayerViewer extends SceneViewer {
               this.selectObject(obj.object);
           }
         }
-        this._intersectPlane.position.copy(this._selected.object.position);
+        if (this.hasSelection())
+          this._intersectPlane.position.copy(this._selected.object.position);
         this._intersectPlane.lookAt(this._camera.position);
       }
       else
@@ -207,13 +207,26 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   onMouseMove(event) {
-    if(event.buttons === 1 && this.asSelection()) {
+    if(event.buttons === 1 && this.hasSelection()) {
       let intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
         this._intersectPlane.position.copy(intersected[0].point);
         this._intersectPlane.lookAt(this._camera.position);
         this._selected.object.position.copy(intersected[0].point);
         this._selected.glow.position.copy(intersected[0].point);
+      }
+    }
+    else {
+      let drop = this.getFirstDroppable(this.intersectObjects(event));
+      if (drop !== undefined) {
+        if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
+          this._hovered = drop.object.LinkModel.threeDModel;
+          this._hovered.hover(true);
+        }
+      }
+      else {
+        if (this._hovered !== undefined)
+          this._hovered.hover(false);
       }
     }
   }

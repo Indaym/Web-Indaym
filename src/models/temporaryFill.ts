@@ -59,4 +59,14 @@ export let datas = [
       ]
     }
   },
+  {
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [10, 10, 1],
+      position: [0, 0, 0]
+    }
+  }
 ];

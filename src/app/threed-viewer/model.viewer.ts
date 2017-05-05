@@ -125,6 +125,24 @@ export class ModelViewer {
   }
 
   /**
+   * Hover function when we hover model
+   * @param activate
+   */
+  hover(activate = true) {}
+
+  /**
+   * Get the position to drop the object
+   * @returns {Vector3}
+   */
+  dropPosition(obj) {
+    let pos = this.mesh.position.clone();
+    pos.y += this.mesh.scale.y / 2;
+    if (obj !== undefined)
+      pos.y += obj.scale.y / 2;
+    return pos;
+  }
+
+  /**
    * Generate Mesh with model informations
    * @returns {any} : Mesh
    */

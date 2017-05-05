@@ -4,13 +4,15 @@
 
 import {
   BoardModelViewer,
-  PawnModelViewer
+  PawnModelViewer,
+  CaseModelViewer
 } from '.'
 
 export class ModelsLoader {
   private types = {
     'board': BoardModelViewer,
-    'pawn': PawnModelViewer
+    'pawn': PawnModelViewer,
+    'case': CaseModelViewer
   };
 
   constructor(private scene) {}
