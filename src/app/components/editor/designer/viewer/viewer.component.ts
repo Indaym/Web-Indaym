@@ -8,7 +8,6 @@ import {
   OnDestroy,
   Input
 }                                 from '@angular/core';
-import { Vector3 }                from 'three';
 
 import {
   EditorViewer,
@@ -30,10 +29,40 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   @Input() eventDispatcher;
   private objects = {
-    "board3x3" : (args:any) => this.addSquareBoard(args),
-    "board1x9" : (args:any) => this.addLongBoard(args),
-    "pawnWhite" : (args:any) => this.addWhitePion(args),
-    "pawnBlack" : (args:any) => this.addBlackPion(args)
+    "board3x3" : {
+      name: 'board3x3',
+      object: {
+        type: 'board',
+        dimension: [32.6, 2.0, 32.6],
+      }
+    },
+    "board1x9" : {
+      name: 'board1x9',
+      object: {
+        type: 'board',
+        dimension: [77.8, 2.0, 12.2],
+        texturesPaths: [
+          'side.png', 'side.png',
+          'pion_table.png', 'side.png',
+          'side.png', 'side.png'
+        ]
+      }
+    },
+    "pawnWhite" : {
+      name: 'whitepawn',
+      object: {
+        type: 'pawn',
+        dimension: [3.5, 1.5, 3.5]
+      }
+    },
+    "pawnBlack" : {
+      name: 'blackpawn',
+      object: {
+        type: 'pawn',
+        dimension: [3.5, 1.5, 3.5],
+        texturesPaths: ['black.png']
+      }
+    }
   };
 
   constructor(private gameControllerService:GameControllerService) {
@@ -41,6 +70,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   saveScene() {
+
   // CARO Ici tu stockes la scene actuelle dans la DB
   // Faut que tu voies avec Nico comment et sous quelle forme les stocker, perso j'en ai pas la moindre idée
   }
@@ -57,7 +87,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.scene.eventDispatcher = this.eventDispatcher;
     this.eventDispatcher.addEventListener('addObject', (obj:any) => {
       if (obj.name != undefined)
-        this.objects[obj.name]();
+        this.gameController.addObject(this.objects[obj.name], true, "Both");
     });
     this.modelsLoader = new ModelsLoader(this.scene);
     this.modelsLoader.loadModels(this.gameController.getObjects());
@@ -71,7 +101,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
     if (args.mouseEvent != undefined) {
       let coord = this.scene.setIntersection(args.mouseEvent);
       if (args.dragData != undefined) {
-        this.objects[args.dragData](coord);
+        let obj = this.objects[args.dragData];
+        obj.object.position = coord.toArray();
+        this.gameController.addObject(obj, true, "Both");
       }
     }
   }
