@@ -4,12 +4,17 @@
 
 import {
   Component,
-  Input
-}                       from '@angular/core';
+  Input,
+  OnDestroy
+}                         from '@angular/core';
+import { 
+  ActivatedRoute, 
+  Router 
+}                         from '@angular/router';
+import { Subscription }   from "rxjs/Rx";
 
-import { HtmlService }  from "../../../../../../services/html.service";
-import {ObjectService} from "../../../../../../services/object.service";
-
+import { HtmlService }    from "../../../../../../services/html.service";
+import { ObjectService }  from "../../../../../../services/object.service";
 
 @Component({
   selector  : 'ia-left-sidebar',
@@ -20,7 +25,7 @@ import {ObjectService} from "../../../../../../services/object.service";
     require('../sidebars.css')
   ]
 })
-export class LeftSidebarComponent {
+export class LeftSidebarComponent implements OnDestroy {
   @Input() start;
   @Input() eventDispatcher;
   items = {
@@ -35,8 +40,24 @@ export class LeftSidebarComponent {
   };
 
   lsObjects;
+  gameId;
+  sceneId;
+  subscription: Subscription;
 
-  constructor(public html: HtmlService, private objects: ObjectService) {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  constructor(public html: HtmlService, private objects: ObjectService, private route: ActivatedRoute, private router: Router) {
+    this.subscription = route.queryParams.subscribe(
+        (queryParam: any) => this.getObjectsList(queryParam)
+    );
+  }
+
+  public getObjectsList(queryParam) {
+    this.gameId = queryParam['gameId'];
+    this.sceneId = queryParam['sceneId'];
+    this.objects.setIds(this.gameId, this.sceneId);
     this.lsObjects = this.objects.getObjects();
   }
 
@@ -44,10 +65,7 @@ export class LeftSidebarComponent {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
   }
 
-  public addObject(name:string) {
-    this.eventDispatcher.dispatchEvent({type:"addObject", name:name});
+  public addObject(name: string) {
+    this.eventDispatcher.dispatchEvent({ type: "addObject", name: name });
   }
 }
-
-
-

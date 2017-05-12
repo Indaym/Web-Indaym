@@ -6,8 +6,8 @@ import {
 import { Tabs }     from './tabs.component';
 
 @Component({
-  selector: 'tab',
-  template: `
+  selector  : 'tab',
+  template  : `
     <div [hidden]="!active">
       <ng-content></ng-content>
     </div>

@@ -27,32 +27,33 @@ body {
 
 
 ul {
-    width: 100%;
-    margin: auto;
-    list-style-type: none;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+  width: 100%;
+  margin: auto;
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
 li {
-    float: left;
+  float: left;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 li a:hover:not(.active) {
-    background-color: #00cccc;
+  background-color: #00cccc;
 }
 
-.active {
-background-color:#00cccc;
+li a.active, li a.active:hover {
+  color: white;
+  background-color:#00cccc;
 }
 
 /* add background image on all site */
@@ -85,13 +86,13 @@ background-color:#00cccc;
 /* Centered Navbar text*/
 
 nav {
-    float:none;
-    margin:0 auto;
-    display: block;
-    text-align: center;
+  float:none;
+  margin:0 auto;
+  display: block;
+  text-align: center;
 }
 
 .navbar-nav > li {
-    display: inline-block;
-    float:none;
+  display: inline-block;
+  float:none;
 }

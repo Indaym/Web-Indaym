@@ -5,25 +5,29 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input
-}                   from '@angular/core';
-import { Vector3 }  from 'three';
+}                                 from '@angular/core';
+import { Vector3 }                from 'three';
 
 import {
-  SceneViewer,
-  BoardModelViewer,
-  PionModelViewer
-}                   from '../../../../threed-viewer';
+  EditorViewer,
+  ModelsLoader
+}                                 from '../../../../threed-viewer';
+import { GameControllerService }  from "../../../../../services/gameController.service";
 
 @Component({
-  selector: 'ia-viewer',
-  template: require('./viewer.component.html'),
-  styles: [
+  selector  : 'ia-viewer',
+  template  : require('./viewer.component.html'),
+  styles    : [
     require('./viewer.component.css'),
   ]
 })
-export class ViewerComponent implements OnInit {
-  public scene: SceneViewer;
+export class ViewerComponent implements OnInit, OnDestroy {
+  public scene: EditorViewer;
+  private modelsLoader:ModelsLoader;
+  private gameController;
+
   @Input() eventDispatcher;
   private objects = {
     "board3x3" : (args:any) => this.addSquareBoard(args),
@@ -32,25 +36,35 @@ export class ViewerComponent implements OnInit {
     "pawnBlack" : (args:any) => this.addBlackPion(args)
   };
 
+  constructor(private gameControllerService:GameControllerService) {
+    this.gameController = gameControllerService.gameController;
+  }
+
+  saveScene() {
+  // CARO Ici tu stockes la scene actuelle dans la DB
+  // Faut que tu voies avec Nico comment et sous quelle forme les stocker, perso j'en ai pas la moindre idée
+  }
+
   ngOnInit(): void {
-    this.scene = new SceneViewer({
+    this.scene = new EditorViewer({
       width: 1500,
       height: 900
     });
-    this.scene.container = 'editorContainer';
-    this.scene.cameraPosition = new Vector3(0, 50.0, 0);
-    this.scene.cameraTarget = new Vector3(0, 0, 0);
-    this.scene.render();
-    this.scene.animate();
+    this.scene.defaultLoad('editorContainer');
     this.scene.domElement.addEventListener('mousedown', (event) => {
       this.scene.onMouseDown(event)
     }, false);
-
     this.scene.eventDispatcher = this.eventDispatcher;
     this.eventDispatcher.addEventListener('addObject', (obj:any) => {
       if (obj.name != undefined)
         this.objects[obj.name]();
     });
+    this.modelsLoader = new ModelsLoader(this.scene);
+    this.modelsLoader.loadModels(this.gameController.getObjects());
+    this.modelsLoader.initEvents(this.gameController);
+  }
+
+  ngOnDestroy() {
   }
 
   addObject(args:any) {
@@ -63,48 +77,65 @@ export class ViewerComponent implements OnInit {
   }
 
   addSquareBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [32.6, 2.0, 32.6],
-    });
-    board.position.copy(position);
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'board3x3',
+      object: {
+        type: 'board',
+        draggable: false,
+        droppable: true,
+        dimension: [32.6, 2.0, 32.6],
+        position: position.toArray()
+      }
     });
   }
 
   addLongBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [77.8, 2.0, 12.2],
-    });
-    board.position.copy(position);
-    board.texturesPaths[2] = 'pion_table.png';
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'board1x9',
+      object: {
+        type: 'board',
+        draggable: false,
+        droppable: true,
+        dimension: [77.8, 2.0, 12.2],
+        position: position.toArray(),
+        texturesPaths: [
+          'side.png', 'side.png',
+          'pion_table.png', 'side.png',
+          'side.png', 'side.png'
+        ]
+      }
     });
   }
 
   addBlackPion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.texturesPaths[0] = 'black.png';
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'blackpawn',
+      object: {
+        type: 'pawn',
+        draggable: true,
+        droppable: false,
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'black.png'
+        ]
+      }
     });
   }
 
   addWhitePion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
+    this.gameController.addObject({
+      name: 'whitepawn',
+      object: {
+        type: 'pawn',
+        draggable: true,
+        droppable: false,
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'white.png'
+        ]
+      }
     });
   }
 }
