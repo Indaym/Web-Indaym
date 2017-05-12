@@ -107,4 +107,67 @@ export class ViewerComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  addSquareBoard(position:Vector3 = new Vector3(0,0,0)) {
+    this.gameController.addObject({
+      name: 'board3x3',
+      object: {
+        type: 'board',
+        draggable: false,
+        droppable: true,
+        dimension: [32.6, 2.0, 32.6],
+        position: position.toArray()
+      }
+    });
+  }
+
+  addLongBoard(position:Vector3 = new Vector3(0,0,0)) {
+    this.gameController.addObject({
+      name: 'board1x9',
+      object: {
+        type: 'board',
+        draggable: false,
+        droppable: true,
+        dimension: [77.8, 2.0, 12.2],
+        position: position.toArray(),
+        texturesPaths: [
+          'side.png', 'side.png',
+          'pion_table.png', 'side.png',
+          'side.png', 'side.png'
+        ]
+      }
+    });
+  }
+
+  addBlackPion(position:Vector3 = new Vector3(0,0,0)) {
+    this.gameController.addObject({
+      name: 'blackpawn',
+      object: {
+        type: 'pawn',
+        draggable: true,
+        droppable: false,
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'black.png'
+        ]
+      }
+    });
+  }
+
+  addWhitePion(position:Vector3 = new Vector3(0,0,0)) {
+    this.gameController.addObject({
+      name: 'whitepawn',
+      object: {
+        type: 'pawn',
+        draggable: true,
+        droppable: false,
+        dimension: [3.5, 1.5, 3.5],
+        position: position.toArray(),
+        texturesPaths: [
+          'white.png'
+        ]
+      }
+    });
+  }
 }

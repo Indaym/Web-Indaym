@@ -4,16 +4,13 @@
 
 import {
   CylinderGeometry,
-  CubeGeometry,
-  MeshBasicMaterial,
-  Texture,
-  Material
-}                           from 'three';
+  MeshBasicMaterial
+}                             from 'three';
 
-import {ModelViewer}        from './model.viewer';
-import {TexturePoolViewer}  from './texture-pool.viewer';
+import { ModelViewer }        from './model.viewer';
+import { TexturePoolViewer }  from './texture-pool.viewer';
 
-export class PionModelViewer extends ModelViewer {
+export class PawnModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
   private _texturesPaths = [
     'white.png'
@@ -23,14 +20,26 @@ export class PionModelViewer extends ModelViewer {
     super(conf);
   }
 
+  /**
+   * Get textures paths
+   * @returns {string[]}
+   */
   get texturesPaths(): string[] {
     return this._texturesPaths;
   }
 
+  /**
+   * Set textures paths
+   * @param value
+   */
   set texturesPaths(value: Array<string>) {
     this._texturesPaths = value;
   }
 
+  /**
+   * Init pion model with textures
+   * @param onLoad : Callback when loaded
+   */
   init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(1, 1, 1, 40);
@@ -42,6 +51,4 @@ export class PionModelViewer extends ModelViewer {
     }, (texture, index) => {
     });
   }
-
-
 }

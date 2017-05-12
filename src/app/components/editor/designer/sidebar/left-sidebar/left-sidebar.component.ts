@@ -41,7 +41,13 @@ export class LeftSidebarComponent implements OnInit{
 
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public getObjectsList(queryParam) {
+    this.gameId = queryParam['gameId'];
+    this.sceneId = queryParam['sceneId'];
+    this.objects.setIds(this.gameId, this.sceneId);
+    this.lsObjects = this.objects.getObjects();
   }
 
   private toggleMode() {

@@ -19,6 +19,13 @@ export class TexturePoolViewer {
     this.path = path;
   }
 
+  /**
+   * Load all texture
+   * @param textures : Textures
+   * @param onLoad : Callback when loaded
+   * @param onProgress : Callback when each texture is laoded
+   * @returns {boolean}
+   */
   load(textures, onLoad, onProgress?) {
     if (this.processing == true || textures === undefined || textures.length == 0)
       return false;
@@ -31,6 +38,12 @@ export class TexturePoolViewer {
     }
   }
 
+  /**
+   * Load one texture
+   * @param img : Image to load
+   * @param onLoad : Callback when loaded
+   * @param onProgress : Callback when each texture is laoded
+   */
   private loadImage(img, onLoad, onProgress?) {
     const textureLoader = new TextureLoader();
     textureLoader.load((this.path != undefined) ? this.path + img : img, (texture) => {
@@ -47,6 +60,11 @@ export class TexturePoolViewer {
     });
   }
 
+  /**
+   * Called when load of texture is finished
+   * @param onLoad : Callback when loaded
+   * @returns {boolean}
+   */
   private finished(onLoad) {
     if (this.processing == false)
       return false;
