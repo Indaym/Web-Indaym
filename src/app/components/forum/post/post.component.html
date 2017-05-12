@@ -1,5 +1,7 @@
-<!--<button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
-<ia-post-create *ngIf="hideElement"></ia-post-create>-->
+<!--
+!-->
+<button (click)="hideElement = !hideElement" class="discussion-button" title>Démarer une discussion</button>
+<ia-post-create *ngIf="hideElement"></ia-post-create>
 
 
 
@@ -24,8 +26,6 @@
     </div>
 </div>
 
-<!--<li *ngFor="let currentPost of Post">{{currentPost.title}}</li>!-->
-
 
 <div class="discussion-item" *ngFor="let currentPost of Post">
     <div class="discussion-avatar">
@@ -33,7 +33,10 @@
     </div>
     <div class="discussion-title-all">
         <span class="discussion-title-tag"><i class="fa fa-users"></i></span>
+        <a [routerLink]="['/forum/discussion']">
+        <!--
         <a href="http://localhost:3000/forum/{{currentPost.uuid}}/topics">
+        !-->
             <span class="discussion-title">{{currentPost.title}} (CATEGORIE)</span>
         </a>
     </div>
