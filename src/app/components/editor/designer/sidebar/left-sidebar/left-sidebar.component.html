@@ -68,7 +68,7 @@
   </tab>
 
   <tab tabTitle="Objects List">
-    <div *ngFor="let item of lsObjects">
+    <div *ngFor="let item of gameController.getObjects()">
       <img src="{{item.icon}}">
       {{item.name}}
     </div>

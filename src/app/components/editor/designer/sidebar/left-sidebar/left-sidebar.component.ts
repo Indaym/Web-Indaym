@@ -4,23 +4,24 @@
 
 import {
   Component,
-  Input
-}                       from '@angular/core';
+  Input, OnInit
+} from '@angular/core';
 
-import { HtmlService }  from "../../../../../../services/html.service";
-import {ObjectService} from "../../../../../../services/object.service";
-
+import {
+  HtmlService,
+  GameControllerService
+} from "../../../../../../services";
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService, ObjectService],
+  providers : [HtmlService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
     require('../sidebars.css')
   ]
 })
-export class LeftSidebarComponent {
+export class LeftSidebarComponent implements OnInit{
   @Input() start;
   @Input() eventDispatcher;
   items = {
@@ -33,10 +34,19 @@ export class LeftSidebarComponent {
       "pawnBlack": "Add Black Pawn",
     }
   };
+  private gameController;
 
-  lsObjects;
+  constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
+    this.gameController = this.gameControllerService.gameController;
 
-  constructor(public html: HtmlService, private objects: ObjectService) {
+  }
+
+  ngOnInit() {}
+
+  public getObjectsList(queryParam) {
+    this.gameId = queryParam['gameId'];
+    this.sceneId = queryParam['sceneId'];
+    this.objects.setIds(this.gameId, this.sceneId);
     this.lsObjects = this.objects.getObjects();
   }
 
@@ -44,10 +54,7 @@ export class LeftSidebarComponent {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
   }
 
-  public addObject(name:string) {
-    this.eventDispatcher.dispatchEvent({type:"addObject", name:name});
+  public addObject(name: string) {
+    this.eventDispatcher.dispatchEvent({ type: "addObject", name: name });
   }
 }
-
-
-

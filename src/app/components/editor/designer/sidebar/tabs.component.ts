@@ -3,8 +3,8 @@ import { Component }  from '@angular/core';
 import { Tab }        from './tab.component';
 
 @Component({
-  selector: 'tabs',
-  template: `
+  selector  : 'tabs',
+  template  : `
   <nav>
     <ul>
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)">

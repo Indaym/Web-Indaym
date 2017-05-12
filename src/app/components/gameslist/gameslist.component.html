@@ -1,15 +1,15 @@
 
 <ul>
-    <li id="toCenter1"><a class="active" [routerLink]="['/editor/designer']">Create a New Game</a></li>
+    <li id="toCenter1"><a id="buttonGame" (click)="gameFunction()" class="active" [routerLink]="['/sceneslist']">Create a New Game</a></li>
 </ul>
 
 <br/><br/>
 <div id="toCenter2">
     <p id="myGames">My Games:</p>
     <div id="toCenter3">
-        <button>Jeu Test 1</button><br/><br/>
-        <button>Jeu Test 2</button><br/><br/>
-        <button>Jeu Test 3</button><br/><br/>
+        <div *ngFor="let item of lsGames">
+            <button (click)="goToScenesPage(item.uuid)">{{item.name}}</button>
+        </div>
     </div>
 </div>
 
