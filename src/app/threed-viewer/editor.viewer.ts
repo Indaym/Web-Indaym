@@ -151,8 +151,8 @@ export class EditorViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   onMouseDown(event) {
-    this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
+    this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
+    this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
 
     var intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
