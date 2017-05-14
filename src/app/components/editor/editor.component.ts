@@ -27,6 +27,7 @@ export class EditorComponent implements OnDestroy, OnInit{
 
   constructor(private gameControllerService:GameControllerService, private route: ActivatedRoute, private gameService:GameService, private sceneService:SceneService, private objectService:ObjectService) {
     this.gameController = gameControllerService.gameController;
+    gameControllerService.gameController.fillObjectsController();
   }
 
   ngOnInit() {
