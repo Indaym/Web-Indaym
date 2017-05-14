@@ -2,7 +2,7 @@
  * Created by Caro on 08/01/2017.
  */
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http }       from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -16,7 +16,6 @@ export class ObjectService {
   }
 
   getObjects(callback) {
-    console.log(this.objectsUrl);
     this.http.get(this.objectsUrl)
       .map((res) => res.json())
       .subscribe(callback);
@@ -27,7 +26,6 @@ export class ObjectService {
   }
 
   postSceneObject(obj) {
-    console.log("posting scene object : ");
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectsUrl, obj)
       .map((res) => res.json())

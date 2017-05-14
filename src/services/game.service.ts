@@ -13,8 +13,6 @@ export class GameService {
   constructor(private http: Http) { }
 
   getGames() {
-    console.log("loading games");
-
     this.games = [];
     this.http.get(this.gamesUrl)
       .flatMap((res) => res.json())
@@ -29,8 +27,6 @@ export class GameService {
   }
 
   postGame(name, meuh, callback) {
-    console.log("posting game : " + name);
-
     this.http.post(this.gamesUrl, {"name": name})
       .map((res) => res.json())
       .subscribe(data => callback(meuh, data));
