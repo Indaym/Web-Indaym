@@ -52,9 +52,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       height: () => window.innerHeight - dom.offsetTop - 5
     });
     this.scene.defaultLoad('editorContainer');
-    this.scene.domElement.addEventListener('mousedown', (event) => {
-      this.scene.onMouseDown(event)
-    }, false);
+    this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
+    this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
     this.scene.eventDispatcher = this.eventDispatcher;
     this.eventDispatcher.addEventListener('addObject', (obj:any) => {
       if (obj.name != undefined)
@@ -70,7 +69,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   addObject(args:any) {
     if (args.mouseEvent != undefined) {
-      let coord = this.scene.setIntersection(args.mouseEvent);
+      this.scene.setIntersection(args.mouseEvent)
+      let coord = this.scene.getIntersection();
       if (args.dragData != undefined) {
         this.objects[args.dragData](coord);
       }

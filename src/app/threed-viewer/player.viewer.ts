@@ -34,10 +34,7 @@ export class PlayerViewer extends SceneViewer {
    * @returns {Intersection[]}
    */
   intersectObjects(event, objects = this._scene.children) {
-    this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
-    this._raycaster.setFromCamera(this._mouse, this._camera);
-
+    this.setIntersection(event);
     return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh));
   }
 

@@ -22,6 +22,7 @@ export class EditorViewer extends SceneViewer {
     'rotate',
     'scale'
   ];
+  private _hovered;
 
   constructor(conf: any = {}) {
     super(conf);
@@ -151,15 +152,28 @@ export class EditorViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   onMouseDown(event) {
-    this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
-    this._raycaster.setFromCamera(this._mouse, this._camera);
-
-    var intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
+    this.setIntersection(event);
+    const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
       return elem instanceof Mesh;
     }));
     if (intersected.length > 0)
       this.selectObject(intersected[0].object);
   }
 
+  onMouseMove(event) {
+    this.setIntersection(event);
+    const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => elem instanceof Mesh));
+    
+    if (intersected !== undefined && intersected.length > 0) {
+      const obj = intersected[0].object as any;
+      if (obj.LinkModel !== undefined && obj.LinkModel !== this._hovered) {
+        this._hovered = obj.LinkModel.threeDModel;
+        this._hovered.hover(true);
+      }
+    }
+    else {
+      if (this._hovered !== undefined)
+        this._hovered.hover(false);
+    }
+  }
 }

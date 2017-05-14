@@ -247,14 +247,11 @@ export class SceneViewer {
   /**
    * Set intersection from Mouse position
    * @param event : MouseEvent
-   * @returns {THREE.Vector3}
    */
   setIntersection(event) {
     this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
     this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
-
-    return this.getIntersection();
   }
 
   /**
