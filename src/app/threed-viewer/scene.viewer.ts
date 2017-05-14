@@ -279,6 +279,5 @@ export class SceneViewer {
     this._camera.aspect = window.innerWidth / window.innerHeight;
     this._camera.updateProjectionMatrix();
     this._renderer.setSize(this.width, this.height);
-    this.animate();
   }
 }
