@@ -38,17 +38,9 @@ export class LeftSidebarComponent implements OnInit{
 
   constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
-
   }
 
   ngOnInit() {}
-
-  public getObjectsList(queryParam) {
-    this.gameId = queryParam['gameId'];
-    this.sceneId = queryParam['sceneId'];
-    this.objects.setIds(this.gameId, this.sceneId);
-    this.lsObjects = this.objects.getObjects();
-  }
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
