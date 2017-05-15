@@ -37,15 +37,11 @@ export class LeftSidebarComponent implements OnInit{
   };
   private gameController;
   private objects;
-  show;
-
-
-
+  private show;
 
   constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
     this.objects = this.gameController.getObjects();
-
   }
 
   ngOnInit() {
@@ -61,21 +57,14 @@ export class LeftSidebarComponent implements OnInit{
     var tmpStock = this.gameController.getObjects();
 
     while (cnt < tmpStock.length) {
-      stock.push(new test(tmpStock[cnt].name, "app/components/editor/designer/sidebar/left-sidebar/tmp/" + tmpStock[cnt].name + ".png"));
+      stock.push({
+        name: tmpStock[cnt].name, 
+        icon: "app/components/editor/designer/sidebar/left-sidebar/tmp/" + tmpStock[cnt].name + ".png"
+      });
       cnt += 1;
     }
     return (stock);
   }
-
-  /*
-    // code a caro ou nico que j'ai laissé au merge mais qui a des erreurs (y'avait rien d'autre au merge j'ai tout laissé, juste commenté):
-    public getObjectsList(queryParam) {
-    this.gameId = queryParam['gameId'];
-    this.sceneId = queryParam['sceneId'];
-    this.objects.setIds(this.gameId, this.sceneId);
-    this.lsObjects = this.objects.getObjects();
-  }
-    */
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
@@ -83,14 +72,5 @@ export class LeftSidebarComponent implements OnInit{
 
   public addObject(name: string) {
     this.eventDispatcher.dispatchEvent({ type: "addObject", name: name });
-  }
-}
-
-class test {
-  name;
-  icon;
-  constructor(name, icon) {
-    this.name = name;
-    this.icon = icon;
   }
 }

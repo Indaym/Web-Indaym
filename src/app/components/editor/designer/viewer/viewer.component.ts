@@ -8,6 +8,7 @@ import {
   OnDestroy,
   Input
 }                                 from '@angular/core';
+import { Vector3 }                from 'three';
 
 import {
   EditorViewer,
