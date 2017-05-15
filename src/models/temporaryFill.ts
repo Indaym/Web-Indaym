@@ -7,6 +7,8 @@ export let datas = [
     name: 'longBoard',
     object: {
       type: 'board',
+      draggable: false,
+      droppable: true,
       dimension: [77.8, 2.0, 12.2],
       position: [-100, 0, 50],
       texturesPaths: [
@@ -20,6 +22,8 @@ export let datas = [
     name: 'Board',
     object: {
       type: 'board',
+      draggable: false,
+      droppable: true,
       dimension: [32.6, 2.0, 32.6],
       position: [100, 0, -50],
       texturesPaths: [
@@ -33,6 +37,8 @@ export let datas = [
     name: 'blackPawn',
     object: {
       type: 'pawn',
+      draggable: true,
+      droppable: false,
       dimension: [3.5, 1.5, 3.5],
       position: [-10, 10, 10],
       texturesPaths: [
@@ -44,6 +50,8 @@ export let datas = [
     name: 'whitePawn',
     object: {
       type: 'pawn',
+      draggable: true,
+      droppable: true,
       dimension: [3.5, 1.5, 3.5],
       position: [10, 10, -10],
       texturesPaths: [
@@ -51,4 +59,14 @@ export let datas = [
       ]
     }
   },
+  {
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [10, 10, 1],
+      position: [0, 0, 0]
+    }
+  }
 ];

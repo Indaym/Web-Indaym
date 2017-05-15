@@ -1,6 +1,7 @@
 import {
   Component,
-  OnDestroy, OnInit
+  OnDestroy,
+  OnInit
 }                         from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Subscription }   from "rxjs";
@@ -59,6 +60,9 @@ export class EditorComponent implements OnDestroy, OnInit{
     });
     this.objectService.setIds(gameId, sceneId);
     this.objectService.getObjects((datas) => {
+      datas.forEach((elem) => {
+        elem.object = JSON.parse(elem.object);
+      });
       this.gameController.addGroupObjects(datas);
     });
   }

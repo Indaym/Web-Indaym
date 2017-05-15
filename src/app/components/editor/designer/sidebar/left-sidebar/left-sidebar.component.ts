@@ -67,6 +67,16 @@ export class LeftSidebarComponent implements OnInit{
     return (stock);
   }
 
+  /*
+    // code a caro ou nico que j'ai laissé au merge mais qui a des erreurs (y'avait rien d'autre au merge j'ai tout laissé, juste commenté):
+    public getObjectsList(queryParam) {
+    this.gameId = queryParam['gameId'];
+    this.sceneId = queryParam['sceneId'];
+    this.objects.setIds(this.gameId, this.sceneId);
+    this.lsObjects = this.objects.getObjects();
+  }
+    */
+
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
   }

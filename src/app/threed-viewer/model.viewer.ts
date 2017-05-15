@@ -6,10 +6,7 @@ import {
   Vector3,
   Mesh,
   Geometry,
-  Material,
-  BoxGeometry,
-  MeshBasicMaterial,
-  MeshFaceMaterial
+  Material
 } from 'three';
 
 
@@ -20,14 +17,19 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  /*
-   parameter : conf => type: json object
-   {
-   position: Array
-   dimensions: Array
-   geometry: THREE.Geometry
-   material: THREE.Material
-   }
+  /**
+   *
+   * parameter :
+   */
+  /**
+   *
+   * @param conf => type: json object
+   * {
+   *   position: Array
+   *   dimension: Array
+   *   geometry: THREE.Geometry
+   *   material: THREE.Material
+   * }
    */
   constructor(conf: any = {}) {
     if (conf.position instanceof Array)
@@ -40,48 +42,110 @@ export class ModelViewer {
       this._material = conf.material;
   }
 
+  /**
+   * Get position of model
+   * @returns {Vector3}
+   */
   get position(): Vector3 {
     return this._position;
   }
 
+  /**
+   * Set position of model
+   * @param value
+   */
   set position(value: Vector3) {
     this._position.copy(value);
     if (this._mesh != null)
       this._mesh.position.copy(this._position);
   }
 
+  /**
+   * Get dimension of model
+   * @returns {Vector3}
+   */
   get dimension(): Vector3 {
     return this._dimension;
   }
 
+  /**
+   * Set dimension of model
+   * @param value
+   */
   set dimension(value: Vector3) {
     this._dimension.copy(value);
   }
 
+  /**
+   * Get geometry of model
+   * @returns {Geometry}
+   */
   get geometry(): Geometry {
     return this._geometry;
   }
 
+  /**
+   * Set geometry of model
+   * @param value
+   */
   set geometry(value: Geometry) {
     this._geometry = value;
   }
 
+  /**
+   * Get material of model
+   * @returns {Material}
+   */
   get material(): Material {
     return this._material;
   }
 
+  /**
+   * Set material of model
+   * @param value
+   */
   set material(value: Material) {
     this._material = value;
   }
 
+  /**
+   * Get Mesh of model
+   * @returns {Mesh}
+   */
   get mesh(): Mesh {
     return this._mesh;
   }
 
+  /**
+   * Set Mesh of model
+   * @param value
+   */
   set mesh(value: Mesh) {
     this._mesh = value;
   }
 
+  /**
+   * Hover function when we hover model
+   * @param activate
+   */
+  hover(activate = true) {}
+
+  /**
+   * Get the position to drop the object
+   * @returns {Vector3}
+   */
+  dropPosition(obj) {
+    let pos = this.mesh.position.clone();
+    pos.y += this.mesh.scale.y / 2;
+    if (obj !== undefined)
+      pos.y += obj.scale.y / 2;
+    return pos;
+  }
+
+  /**
+   * Generate Mesh with model informations
+   * @returns {any} : Mesh
+   */
   generateMesh() {
     if (this._geometry == null || this._material == null)
       return null;
