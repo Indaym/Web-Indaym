@@ -1,0 +1,90 @@
+<br/><br/>
+<div id="toCenter2">
+    <p id="myGames">{{item?.name}}</p>
+</div>
+
+<div id="doMargin">
+          <img id="logos" src="app/components/store/tmp/jeu1.png"/>
+          <div id="note">Global note: 4/5</div>
+          <div id="descTitle">
+          Game Description : <br/>
+          <div id="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec leo urna. Donec elit orci, porttitor nec maximus eget, dignissim sed ligula. Nulla laoreet mauris felis, eu bibendum elit tincidunt ac. Sed viverra, ipsum tempus mattis vehicula, nunc massa consequat dolor, tempus commodo augue velit in dolor. Curabitur feugiat volutpat risus id ultrices. Sed sapien turpis, sollicitudin ut blandit non, facilisis in eros. Nulla facilisi. Morbi ornare pretium tortor eu pretium. Donec nisl sapien, imperdiet in ex a, sodales porttitor est.<br/><br/></div>
+          </div>
+</div>
+
+<form id="myForm" action="" method="post">
+   <legend>Give your opinion on this game :</legend>
+    <div>
+        <label for="rate">Rate :</label>
+        <input type="number" id="rate" name="rate" value="0" min="0" max="5"/>
+    </div>
+    <div>
+        <label for="message">Text :</label>
+        <textarea id="message" name="message" rows="10" cols="30">Give your opinion here</textarea>
+    </div>
+    <div id="send" class="button">
+        <button type="submit">Send</button>
+    </div>
+</form>
+
+<br/><br/>
+
+<div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="page-header">
+                    <h1><small class="pull-right">45 comments</small> Comments </h1>
+                  </div>
+                   <div class="comments-list">
+                       <div class="media">
+                           <p class="pull-right"><small>5 days ago</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/1/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Baltej Singh</h4>
+                              Wow! this is really great.
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+                       <div class="media">
+                           <p class="pull-right"><small>5 days ago</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/2/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Baltej Singh</h4>
+                              Wow! this is really great.
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+                       <div class="media">
+                           <p class="pull-right"><small>5 days ago</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/3/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Baltej Singh</h4>
+                              Wow! this is really great.
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+                       <div class="media">
+                           <p class="pull-right"><small>5 days ago</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/4/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Baltej Singh</h4>
+                              Wow! this is really great.
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+
+<router-outlet></router-outlet>

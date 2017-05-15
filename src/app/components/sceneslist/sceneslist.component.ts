@@ -31,6 +31,7 @@ export class ScenesListComponent implements OnDestroy {
 
   lsScenes;
   gameId;
+  isNew;
   subscription: Subscription;
 
   ngOnDestroy() {
@@ -39,6 +40,11 @@ export class ScenesListComponent implements OnDestroy {
 
   public getScenesList(queryParam) {
     this.gameId = queryParam['gameId'];
+    this.isNew = queryParam['new'];
+
+    if (this.isNew == 1) {
+      this.scenes.postScene('Default', this, this.redirect);
+    }
     this.scenes.setGameId(this.gameId);
     this.lsScenes = this.scenes.getScenes();
   }

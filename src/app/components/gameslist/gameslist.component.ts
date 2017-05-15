@@ -21,19 +21,23 @@ export class GamesListComponent {
 
   lsGames;
 
-  public goToScenesPage(id) {
-    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id } });
+  public goToScenesPage(id, isNew) {
+    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: isNew } });
   }
 
   public redirect(meuh, id) {
-    meuh.goToScenesPage(id.uuid);
+    meuh.goToScenesPage(id.uuid, 0); // existing game
+  }
+
+  public redirectDefaultScene(meuh, id) {
+    meuh.goToScenesPage(id.uuid, 1); // new gameca
   }
 
   public gameFunction() {
     var meuh = this;
     var my_text = prompt('Game Name: ');
     if (my_text) {
-        this.games.postGame(my_text, meuh, this.redirect);
+        this.games.postGame(my_text, meuh, this.redirectDefaultScene);
       }
   }
 
