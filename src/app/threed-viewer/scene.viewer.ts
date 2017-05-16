@@ -19,9 +19,9 @@ var OrbitControls = require('three-orbit-controls')(require('three'));
 
 export class SceneViewer {
   protected _scene: Scene;
-  protected _camera: Camera;
-  protected _width: number = 300;
-  protected _height: number = 300;
+  protected _camera: PerspectiveCamera;
+  protected _width = () => 300;
+  protected _height = () => 300;
   protected _renderer: WebGLRenderer;
   protected _domElement: HTMLElement;
   protected _controls: any;
@@ -39,22 +39,22 @@ export class SceneViewer {
    */
   constructor(conf: any = {}) {
     // Verification of variables
-    if (typeof(conf.width) == 'number')
-      this._width = conf.width;
-    if (typeof(conf.height) == 'number')
-      this._height = conf.height;
+    if (conf.width !== undefined)
+      this.width = conf.width;
+    if (conf.height !== undefined)
+      this.height = conf.height;
 
     // Initialisation Scene
     this._scene = new Scene();
     this._scene.background = new Color( 0xcccccc );
 
     //Initialisation Camera
-    this._camera = new PerspectiveCamera(75, this._width / this._height, 0.1, 10000);
+    this._camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 10000);
     this._camera.lookAt(new Vector3(0, 0, 0));
 
     // Initialisation Renderer
     this._renderer = new WebGLRenderer();
-    this._renderer.setSize(this._width, this._height);
+    this._renderer.setSize(this.width, this.height);
     this._renderer.setClearColor(0xdddddd);
 
     // Initialisation Orbital Control
@@ -64,6 +64,8 @@ export class SceneViewer {
 
     // Creation of Raycaster
     this._raycaster = new Raycaster();
+
+    window.addEventListener( 'resize', () => this.onWindowResize(), false );
   }
 
   /**
@@ -119,9 +121,9 @@ export class SceneViewer {
 
   /**
    * Get camera
-   * @returns {Camera}
+   * @returns {PerspectiveCamera}
    */
-  get camera(): Camera {
+  get camera(): PerspectiveCamera {
     return this._camera;
   }
 
@@ -129,7 +131,7 @@ export class SceneViewer {
    * Set camera
    * @param value
    */
-  set camera(value: Camera) {
+  set camera(value: PerspectiveCamera) {
     this._camera = value;
   }
 
@@ -146,15 +148,18 @@ export class SceneViewer {
    * @returns {number}
    */
   get width(): number {
-    return this._width;
+    return this._width();
   }
 
   /**
    * Set width of the 3D scene
    * @param value
    */
-  set width(value: number) {
-    this._width = value;
+  set width(value) {
+    if (typeof value == 'function')
+      this._width = value;
+    if (typeof value == 'number')
+      this._width = () => value;
   }
 
   /**
@@ -162,15 +167,18 @@ export class SceneViewer {
    * @returns {number}
    */
   get height(): number {
-    return this._height;
+    return this._height();
   }
 
   /**
    * Set height of the 3D scene
    * @param value
    */
-  set height(value: number) {
-    this._height = value;
+  set height(value) {
+    if (typeof value == 'function')
+      this._height = value;
+    if (typeof value == 'number')
+      this._height = () => value;
   }
 
   /**
@@ -220,7 +228,7 @@ export class SceneViewer {
   render() {
     if (this._domElement == undefined)
       return null;
-    this._renderer.setSize(this._width, this._height);
+    this._renderer.setSize(this.width, this.height);
     this._domElement.appendChild(this._renderer.domElement);
     this._renderer.render(this._scene, this._camera);
   }
@@ -239,14 +247,11 @@ export class SceneViewer {
   /**
    * Set intersection from Mouse position
    * @param event : MouseEvent
-   * @returns {THREE.Vector3}
    */
   setIntersection(event) {
-    this._mouse.x = ( event.offsetX / this._width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this._height ) * 2 + 1;
+    this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
+    this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
-
-    return this.getIntersection();
   }
 
   /**
@@ -265,5 +270,11 @@ export class SceneViewer {
     result.z = a.z + t * (b.z - a.z);
 
     return result;
+  }
+
+  onWindowResize() {
+    this._camera.aspect = window.innerWidth / window.innerHeight;
+    this._camera.updateProjectionMatrix();
+    this._renderer.setSize(this.width, this.height);
   }
 }

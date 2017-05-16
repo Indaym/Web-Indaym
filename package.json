@@ -34,7 +34,7 @@
     "server:prod": "http-server dist --cors",
     "webdriver:update": "npm run webdriver-manager update",
     "webdriver:start": "npm run webdriver-manager start",
-    "lint": "npm run tslint 'src/**/*.ts'",
+    "lint": "yarn run tslint 'src/main.browser.ts' 'src/app/**/*.ts' 'src/models/**/*.ts' 'src/services/**/*.ts' -- -c tslint.json",
     "pree2e": "npm run webdriver:update --standalone",
     "e2e": "npm run protractor",
     "e2e:live": "npm run e2e --elementExplorer",

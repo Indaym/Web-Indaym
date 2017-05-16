@@ -21,3 +21,7 @@ button {
 .save {
   margin-left: 10px;
 }
+
+#editorContainer {
+  overflow: hidden;
+}
