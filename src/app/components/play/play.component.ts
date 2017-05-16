@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-play',
   template  : require('./play.component.html'),
   styles    : [
-    require('./play.component.css')
+    require('./play.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class PlayComponent {
 }

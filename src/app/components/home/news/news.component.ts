@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-news',
   template  : require('./news.component.html'),
   styles    : [
-    require('./news.component.css')
+    require('./news.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class NewsComponent {
 }

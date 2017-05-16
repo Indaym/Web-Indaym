@@ -15,32 +15,32 @@ export class SceneService {
     this.scenesUrl = this.initUrl;
   }
 
-  setGameId(gameId) {
-    console.log("setting gameId to " + gameId);
-    this.scenesUrl = this.initUrl +  "/" + gameId + "/scenes";
+  public setGameId(gameId) {
+    console.log('setting gameId to ' + gameId);
+    this.scenesUrl = this.initUrl +  '/' + gameId + '/scenes';
   }
 
-  getScenes() {
-    console.log("loading scenes");
+  public getScenes() {
+    console.log('loading scenes');
 
     this.scenes = [];
     this.http.get(this.scenesUrl)
       .flatMap((res) => res.json())
-      .subscribe(data => {this.scenes.push(data);});
+      .subscribe((data) => {this.scenes.push(data);});
     return this.scenes;
   }
 
-  getOneScene(id, callback) {
+  public getOneScene(id, callback) {
     this.http.get(this.scenesUrl + '/' + id)
       .map((res) => res.json())
       .subscribe(callback);
   }
 
-  postScene(name, meuh, callback) {
-    console.log("posting scene : " + name);
+  public postScene(name, meuh, callback) {
+    console.log('posting scene : ' + name);
 
-    this.http.post(this.scenesUrl, {"name": name})
+    this.http.post(this.scenesUrl, {'name': name})
       .map((res) => res.json())
-      .subscribe(data => callback(meuh, data));
+      .subscribe((data) => callback(meuh, data));
   }
 }

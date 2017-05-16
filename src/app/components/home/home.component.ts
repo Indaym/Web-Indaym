@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-home',
   template  : require('./home.component.html'),
   styles    : [
-    require('./home.component.css')
+    require('./home.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class HomeComponent {
 }

@@ -69,7 +69,7 @@ export class GameObjectsController {
       this.currentScene = undefined;
       this.currentObjects = [];
     }
-    this.emit("setGame", this.gameInfo);
+    this.emit('setGame', this.gameInfo);
   }
 
   /**
@@ -91,7 +91,7 @@ export class GameObjectsController {
       this.currentScene = undefined;
       this.currentObjects = [];
     }
-    this.emit("setScenes", this.scenes);
+    this.emit('setScenes', this.scenes);
   }
 
   /**
@@ -132,15 +132,15 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  addObject(obj, emit = true, typeEvent = "ToView") {
+  public addObject(obj, emit = true, typeEvent = 'ToView') {
     if (this.currentObjects === undefined)
       this.currentObjects = [];
     this.currentObjects.push(obj);
     if (emit === true) {
-      if (typeEvent === "ToView" || typeEvent === "Both")
-        this.emit("addObject", obj);
-      if (typeEvent === "ToService" || typeEvent === "Both")
-        this.emit("addObjectToService", obj);
+      if (typeEvent === 'ToView' || typeEvent === 'Both')
+        this.emit('addObject', obj);
+      if (typeEvent === 'ToService' || typeEvent === 'Both')
+        this.emit('addObjectToService', obj);
     }
   }
 
@@ -150,13 +150,13 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  addGroupObjects(objs, emit = true, typeEvent = "ToView") {
+  public addGroupObjects(objs, emit = true, typeEvent = 'ToView') {
     this.currentObjects = [ ...this.currentObjects, ...objs];
     if (emit === true) {
-      if (typeEvent === "ToView" || typeEvent === "Both")
-        this.emit("addGroupObjects", objs);
-      if (typeEvent === "ToService" || typeEvent === "Both")
-        this.emit("addGroupObjectsToService", objs);
+      if (typeEvent === 'ToView' || typeEvent === 'Both')
+        this.emit('addGroupObjects', objs);
+      if (typeEvent === 'ToService' || typeEvent === 'Both')
+        this.emit('addGroupObjectsToService', objs);
     }
   }
 
@@ -174,7 +174,7 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  deleteObject(objectId, emit = true, typeEvent = "ToView") {
+  public deleteObject(objectId, emit = true, typeEvent = 'ToView') {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
         return value.id === objectId;
@@ -182,10 +182,10 @@ export class GameObjectsController {
       if (objIndex !== -1) {
         let removed = this.currentObjects.splice(objIndex, 1);
         if (emit === true) {
-          if (typeEvent === "ToView" || typeEvent === "Both")
-            this.emit("deleteObject", removed[0]);
-          if (typeEvent === "ToService" || typeEvent === "Both")
-            this.emit("deleteObjectToService", removed[0]);
+          if (typeEvent === 'ToView' || typeEvent === 'Both')
+            this.emit('deleteObject', removed[0]);
+          if (typeEvent === 'ToService' || typeEvent === 'Both')
+            this.emit('deleteObjectToService', removed[0]);
         }
       }
     }
@@ -196,15 +196,15 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  deleteAllObjects(emit = true, typeEvent = "ToView") {
+  public deleteAllObjects(emit = true, typeEvent = 'ToView') {
     if (this.currentObjects !== undefined) {
       let objects = this.currentObjects;
       this.currentObjects = [];
       if (emit === true) {
-        if (typeEvent === "ToView" || typeEvent === "Both")
-          this.emit("deleteAllObjects", objects);
-        if (typeEvent === "ToService" || typeEvent === "Both")
-          this.emit("deleteAllObjectsToService", objects);
+        if (typeEvent === 'ToView' || typeEvent === 'Both')
+          this.emit('deleteAllObjects', objects);
+        if (typeEvent === 'ToService' || typeEvent === 'Both')
+          this.emit('deleteAllObjectsToService', objects);
       }
     }
   }

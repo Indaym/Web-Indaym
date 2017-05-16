@@ -4,9 +4,9 @@ import { Component }    from '@angular/core';
   selector  : 'ia-store',
   template  : require('./store.component.html'),
   styles    : [
-    require('./store.component.css')
+    require('./store.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class StoreComponent {
 }

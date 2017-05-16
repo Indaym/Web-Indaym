@@ -9,28 +9,27 @@ import 'rxjs/add/operator/toPromise';
 export class ObjectService {
   private initUrl = 'http://localhost:3000/games';
   private objectsUrl = '';
-  private objects = [];
 
   constructor(private http: Http) {
     this.objectsUrl = this.initUrl;
   }
 
-  getObjects(callback) {
+  public getObjects(callback) {
     console.log(this.objectsUrl);
     this.http.get(this.objectsUrl)
       .map((res) => res.json())
       .subscribe(callback);
   }
 
-  setIds(gameId, sceneId) {
-    this.objectsUrl = this.initUrl + "/" + gameId + "/scenes/" + sceneId + "/objects";
+  public setIds(gameId, sceneId) {
+    this.objectsUrl = this.initUrl + '/' + gameId + '/scenes/' + sceneId + '/objects';
   }
 
-  postSceneObject(obj) {
-    console.log("posting scene object : ");
+  public postSceneObject(obj) {
+    console.log('posting scene object : ');
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectsUrl, obj)
       .map((res) => res.json())
-      .subscribe(data => console.log(data));
+      .subscribe((data) => console.log(data));
   }
 }

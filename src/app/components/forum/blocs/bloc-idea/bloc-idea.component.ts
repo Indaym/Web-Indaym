@@ -4,8 +4,8 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-bloc-idea',
   template  : require('./bloc-idea.component.html'),
   styles    : [
-    require('../../forum.component.css')
-  ]
+    require('../../forum.component.css'),
+  ],
 })
 export class BlocIdeaComponent {
 }

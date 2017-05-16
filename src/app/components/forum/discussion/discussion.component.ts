@@ -5,8 +5,8 @@ import { Component }  from '@angular/core';
   template  : require('./discussion.component.html'),
   styles    : [
     require('./discussion.component.css'),
-    require('../forum.component.css')
-  ]
+    require('../forum.component.css'),
+  ],
 })
 export class DiscussionComponent {
 }

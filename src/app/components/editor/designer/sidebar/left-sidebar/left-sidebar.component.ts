@@ -4,13 +4,14 @@
 
 import {
   Component,
-  Input, OnInit
+  Input,
+  OnInit,
 } from '@angular/core';
 
 import {
   HtmlService,
-  GameControllerService
-} from "../../../../../../services";
+  GameControllerService,
+} from '../../../../../../services';
 
 @Component({
   selector  : 'ia-left-sidebar',
@@ -18,13 +19,13 @@ import {
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
-    require('../sidebars.css')
-  ]
+    require('../sidebars.css'),
+  ],
 })
-export class LeftSidebarComponent implements OnInit{
-  @Input() start;
-  @Input() eventDispatcher;
-  items = {
+export class LeftSidebarComponent implements OnInit {
+  @Input() public start;
+  @Input() public eventDispatcher;
+  public items = {
     boards: {
       'board3x3': 'Add Board 3x3',
       'board1x9': 'Add Board 1x9',
@@ -32,21 +33,21 @@ export class LeftSidebarComponent implements OnInit{
     pawns: {
       'pawnWhite': 'Add White Pawn',
       'pawnBlack': 'Add Black Pawn',
-    }
+    },
   };
   private gameController;
 
-  constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
+  constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
   }
 
-  ngOnInit() {}
-
-  private toggleMode() {
-    this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
-  }
+  public ngOnInit() {}
 
   public addObject(name: string) {
     this.eventDispatcher.dispatchEvent({ type: 'addObject', name: name });
+  }
+
+  private toggleMode() {
+    this.start.mode = (this.start.mode === 'side') ? 'over' : 'side';
   }
 }

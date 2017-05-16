@@ -4,8 +4,8 @@
 
 <span>Mode : {{start.mode}}</span>
 
-<tabs>
-  <tab tabTitle="Edit">
+<ia-tabs>
+  <ia-tab tabTitle="Edit">
     <form>
       Search:
       <input type="search" name="Search a template">
@@ -16,9 +16,9 @@
     -Le drag and drop à la position voulue<br/>
     <br/>
     <h3>Objects</h3><br/>
-    <tabs>
+    <ia-tabs>
       <!-- Boards (don't change the ids) -->
-      <tab tabTitle="Boards">
+      <ia-tab tabTitle="Boards">
         <h3>Board Templates</h3><br/>
         <form id="customBoard">Custom board:<br/>
           <input type="text" name="later">
@@ -27,10 +27,10 @@
         <div>
           <button *ngFor="let item of html.keys(items.boards)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.boards[item]}}</button><br/>
         </div>
-      </tab>
+      </ia-tab>
 
       <!-- Pawns (don't change the ids) -->
-      <tab tabTitle="Pawns">
+      <ia-tab tabTitle="Pawns">
         <h3>Pawn Templates</h3><br/>
         <form id="customPawn">Custom pawn:<br/>
           <input type="text" name="later">
@@ -39,10 +39,10 @@
         <div>
           <button *ngFor="let item of html.keys(items.pawns)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.pawns[item]}}</button><br/>
         </div>
-      </tab>
+      </ia-tab>
 
       <!-- Cards (don't change the ids) -->
-      <tab tabTitle="Cards">
+      <ia-tab tabTitle="Cards">
         <h3>Card Templates</h3><br/>
         <form id="customCards">Custom card:<br/>
           <input type="text" name="later">
@@ -51,10 +51,10 @@
         <div>
           <div>Not implemented yet</div><br/>
         </div>
-      </tab>
+      </ia-tab>
 
       <!-- Dices (don't change the ids) -->
-      <tab tabTitle="Dices">
+      <ia-tab tabTitle="Dices">
         <h3>Dice Templates</h3><br/>
         <form id="customDices">Custom dice:<br/>
           <input type="text" name="later">
@@ -63,14 +63,14 @@
         <div>
           <div>Not implemented yet</div><br/>
         </div>
-      </tab>
-    </tabs>
-  </tab>
+      </ia-tab>
+    </ia-tabs>
+  </ia-tab>
 
-  <tab tabTitle="Objects List">
+  <ia-tab tabTitle="Objects List">
     <div *ngFor="let item of gameController.getObjects()">
       <img src="{{item.icon}}">
       {{item.name}}
     </div>
-  </tab>
-</tabs>
+  </ia-tab>
+</ia-tabs>
