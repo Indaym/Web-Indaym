@@ -34,6 +34,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'board3x3',
       object: {
         type: 'board',
+        draggable: false,
+        droppable: true,
         dimension: [32.6, 2.0, 32.6],
       },
     },
@@ -41,6 +43,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'board1x9',
       object: {
         type: 'board',
+        draggable: false,
+        droppable: true,
         dimension: [77.8, 2.0, 12.2],
         texturesPaths: [
           'side.png', 'side.png',
@@ -53,6 +57,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'whitepawn',
       object: {
         type: 'pawn',
+        draggable: true,
+        droppable: false,
         dimension: [3.5, 1.5, 3.5],
       },
     },
@@ -60,6 +66,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       name: 'blackpawn',
       object: {
         type: 'pawn',
+        draggable: true,
+        droppable: false,
         dimension: [3.5, 1.5, 3.5],
         texturesPaths: ['black.png'],
       },
@@ -107,68 +115,5 @@ export class ViewerComponent implements OnInit, OnDestroy {
         this.gameController.addObject(obj, true, 'Both');
       }
     }
-  }
-
-  public addSquareBoard(position: Vector3 = new Vector3(0,0,0)) {
-    this.gameController.addObject({
-      name: 'board3x3',
-      object: {
-        type: 'board',
-        draggable: false,
-        droppable: true,
-        dimension: [32.6, 2.0, 32.6],
-        position: position.toArray(),
-      },
-    });
-  }
-
-  public addLongBoard(position: Vector3 = new Vector3(0,0,0)) {
-    this.gameController.addObject({
-      name: 'board1x9',
-      object: {
-        type: 'board',
-        draggable: false,
-        droppable: true,
-        dimension: [77.8, 2.0, 12.2],
-        position: position.toArray(),
-        texturesPaths: [
-          'side.png', 'side.png',
-          'pion_table.png', 'side.png',
-          'side.png', 'side.png',
-        ],
-      },
-    });
-  }
-
-  public addBlackPion(position: Vector3 = new Vector3(0,0,0)) {
-    this.gameController.addObject({
-      name: 'blackpawn',
-      object: {
-        type: 'pawn',
-        draggable: true,
-        droppable: false,
-        dimension: [3.5, 1.5, 3.5],
-        position: position.toArray(),
-        texturesPaths: [
-          'black.png',
-        ],
-      },
-    });
-  }
-
-  public addWhitePion(position: Vector3 = new Vector3(0,0,0)) {
-    this.gameController.addObject({
-      name: 'whitepawn',
-      object: {
-        type: 'pawn',
-        draggable: true,
-        droppable: false,
-        dimension: [3.5, 1.5, 3.5],
-        position: position.toArray(),
-        texturesPaths: [
-          'white.png',
-        ],
-      },
-    });
   }
 }
