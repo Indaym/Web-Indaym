@@ -24,7 +24,7 @@ import { datas }            from './temporaryFill';
  * - deleteAllObjectsFromView : Throw when all object is deleted
  */
 
-export class gameObjectsController {
+export class GameObjectsController {
   private gameInfo;
   private scenes = [];
   private currentScene;
@@ -40,7 +40,7 @@ export class gameObjectsController {
    * @param type : Type of the event
    * @param callback : Callback called when event throw
    */
-  subscribe(type:string, callback) {
+  public subscribe(type: string, callback) {
     this.eventDispatcher.addEventListener(type, callback);
   }
 
@@ -49,10 +49,10 @@ export class gameObjectsController {
    * @param type : Type of the event to emit
    * @param datas : Data to emit
    */
-  emit(type, datas) {
+  public emit(type, datas) {
     this.eventDispatcher.dispatchEvent({
       'type' : type,
-      'datas' : datas
+      'datas' : datas,
     });
   }
 
@@ -61,19 +61,19 @@ export class gameObjectsController {
    * @param game : Informations about game
    * @param reset : Reset scenes ands objects (Default true)
    */
-  setGame(game, reset = true) {
+  public setGame(game, reset = true) {
     this.gameInfo = game;
     this.scenes = [];
     this.currentScene = undefined;
     this.currentObjects = [];
-    this.emit("setGame", this.gameInfo);
+    this.emit('setGame', this.gameInfo);
   }
 
   /**
    * Get game informations
    * @returns {any}
    */
-  getGame() {
+  public getGame() {
     return this.gameInfo;
   }
 
@@ -82,18 +82,18 @@ export class gameObjectsController {
    * @param scenes : scenes of the game
    * @param reset : Reset selected scene and objects (Default true)
    */
-  setScenes(scenes, reset = true) {
+  public setScenes(scenes, reset = true) {
     this.scenes = scenes;
     this.currentScene = undefined;
     this.currentObjects = [];
-    this.emit("setScenes", this.scenes);
+    this.emit('setScenes', this.scenes);
   }
 
   /**
    * Get scenes of a game
    * @returns {Array}
    */
-  getScenes() {
+  public getScenes() {
     return this.scenes;
   }
 
@@ -101,14 +101,14 @@ export class gameObjectsController {
    * Select the current scene
    * @param sceneId : Id of the scene to select
    */
-  selectScene(sceneId) {
+  public selectScene(sceneId) {
     if (this.scenes !== undefined) {
       let scene = this.scenes.find((value) => {
         return value.id === sceneId;
       });
       if (scene !== undefined) {
         this.currentScene = scene;
-        this.emit("selectScene", this.currentScene);
+        this.emit('selectScene', this.currentScene);
       }
     }
   }
@@ -117,7 +117,7 @@ export class gameObjectsController {
    * Get the selected scene
    * @returns {any}
    */
-  getSelectedScene() {
+  public getSelectedScene() {
     return this.currentScene;
   }
 
@@ -125,11 +125,11 @@ export class gameObjectsController {
    * Add object in Scene
    * @param obj : Object to add
    */
-  addObject(obj, emit = true) {
+  public addObject(obj, emit = true) {
     if (this.currentObjects !== undefined) {
       this.currentObjects.push(obj);
       if (emit === true)
-        this.emit("addObject", obj);
+        this.emit('addObject', obj);
     }
   }
 
@@ -138,17 +138,17 @@ export class gameObjectsController {
    * @param objs : Objects to add
    * @param emit : Decide si on doit emettre un event
    */
-  addGroupObjects(objs, emit = true) {
-    this.currentObjects = [ ...this.currentObjects, ...objs];
+  public addGroupObjects(objs, emit = true) {
+    this.currentObjects = [ ...this.currentObjects, ...objs ];
     if (emit === true)
-      this.emit("addGroupObjects", this.currentObjects);
+      this.emit('addGroupObjects', this.currentObjects);
   }
 
   /**
    * Get objects of the current scene
    * @returns {Array}
    */
-  getObjects() {
+  public getObjects() {
     return this.currentObjects;
   }
 
@@ -157,14 +157,14 @@ export class gameObjectsController {
    * @param objectId
    * @param emit : Decide si on doit emettre un event
    */
-  deleteObject(objectId, emit = true) {
+  public deleteObject(objectId, emit = true) {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
         return value.id === objectId;
       });
-      if (objIndex != -1) {
+      if (objIndex !== -1) {
         let removed = this.currentObjects.splice(objIndex, 1);
-        this.emit("deleteObject", removed[0]);
+        this.emit('deleteObject', removed[0]);
       }
     }
   }
@@ -173,22 +173,20 @@ export class gameObjectsController {
    * Delete all objects
    * @param emit : Decide si on doit emettre un event
    */
-  deleteAllObjects(emit = true) {
+  public deleteAllObjects(emit = true) {
     if (this.currentObjects !== undefined) {
       let objects = this.currentObjects;
       this.currentObjects = [];
-      this.emit("deleteAllObjects", objects);
+      this.emit('deleteAllObjects', objects);
     }
   }
 
-  renderAllObjects() {
-
-  }
+  public renderAllObjects() {}
 
   /**
    * Temporary function to fill the controller
    */
-  fillObjectsController() {
+  public fillObjectsController() {
     this.addGroupObjects(datas);
   }
 }

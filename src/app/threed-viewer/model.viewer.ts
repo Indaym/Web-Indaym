@@ -6,9 +6,8 @@ import {
   Vector3,
   Mesh,
   Geometry,
-  Material
+  Material,
 } from 'three';
-
 
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
@@ -17,10 +16,6 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  /**
-   *
-   * parameter :
-   */
   /**
    *
    * @param conf => type: json object
@@ -128,13 +123,13 @@ export class ModelViewer {
    * Hover function when we hover model
    * @param activate
    */
-  hover(activate = true) {}
+  public hover(activate = true) {}
 
   /**
    * Get the position to drop the object
    * @returns {Vector3}
    */
-  dropPosition(obj) {
+  public dropPosition(obj) {
     let pos = this.mesh.position.clone();
     pos.y += this.mesh.scale.y / 2;
     if (obj !== undefined)
@@ -146,7 +141,7 @@ export class ModelViewer {
    * Generate Mesh with model informations
    * @returns {any} : Mesh
    */
-  generateMesh() {
+  public generateMesh() {
     if (this._geometry == null || this._material == null)
       return null;
     this._mesh = new Mesh(this._geometry, this._material);

@@ -14,7 +14,7 @@ import {
   DIRECTIVES,
   PIPES,
   PROVIDERS,
-  MODULES
+  MODULES,
 }                         from '../platform';
 import { routing }        from './app.route';
 
@@ -43,7 +43,7 @@ import { HtmlService }    from '../services/html.service';
     routing,
     FormsModule,
     DndModule.forRoot(),
-  ]
+  ],
 })
 export class AppModule {
 }

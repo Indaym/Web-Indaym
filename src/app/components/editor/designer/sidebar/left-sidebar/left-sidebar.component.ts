@@ -11,10 +11,10 @@ import {
   ActivatedRoute, 
   Router 
 }                         from '@angular/router';
-import { Subscription }   from "rxjs/Rx";
+import { Subscription }   from 'rxjs/Rx';
 
-import { HtmlService }    from "../../../../../../services/html.service";
-import { ObjectService }  from "../../../../../../services/object.service";
+import { HtmlService }    from '../../../../../../services/html.service';
+import { ObjectService }  from '../../../../../../services/object.service';
 
 @Component({
   selector  : 'ia-left-sidebar',
@@ -30,12 +30,12 @@ export class LeftSidebarComponent implements OnDestroy {
   @Input() eventDispatcher;
   items = {
     boards: {
-      "board3x3": "Add Board 3x3",
-      "board1x9": "Add Board 1x9",
+      'board3x3': 'Add Board 3x3',
+      'board1x9': 'Add Board 1x9',
     },
     pawns: {
-      "pawnWhite": "Add White Pawn",
-      "pawnBlack": "Add Black Pawn",
+      'pawnWhite': 'Add White Pawn',
+      'pawnBlack': 'Add Black Pawn',
     }
   };
 
@@ -66,6 +66,6 @@ export class LeftSidebarComponent implements OnDestroy {
   }
 
   public addObject(name: string) {
-    this.eventDispatcher.dispatchEvent({ type: "addObject", name: name });
+    this.eventDispatcher.dispatchEvent({ type: 'addObject', name: name });
   }
 }

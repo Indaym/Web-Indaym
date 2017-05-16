@@ -12,20 +12,20 @@ export class ObjectService {
 
     constructor(private http: Http) { }
 
-    getObjects() {
+    public getObjects() {
         this.http.get(this.objectsUrl)
             .flatMap((res) => res.json())
-            .subscribe(data => {this.objects.push(data);});
+            .subscribe((data) => {this.objects.push(data);});
         return this.objects;
     }
 
-    setIds(gameId, sceneId) {
-        this.objectsUrl += "/" + gameId + "/scenes/" + sceneId + "/objects";
+    public setIds(gameId, sceneId) {
+        this.objectsUrl += '/' + gameId + '/scenes/' + sceneId + '/objects';
     }
 
-    postSceneObjects(itemThreeJs) {
+    public postSceneObjects(itemThreeJs) {
         this.http.post(this.objectsUrl, {itemThreeJs: itemThreeJs})
             .map((res) => res.json())
-            .subscribe(data => console.log(data));
+            .subscribe((data) => console.log(data));
     }
 }

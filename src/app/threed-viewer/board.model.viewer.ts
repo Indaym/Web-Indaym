@@ -5,8 +5,8 @@
 import {
   CubeGeometry,
   MeshBasicMaterial,
-  MultiMaterial
-}                             from 'three'
+  MultiMaterial,
+}                             from 'three';
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
@@ -16,7 +16,7 @@ export class BoardModelViewer extends ModelViewer {
   private _texturesPaths = [
     'side.png', 'side.png',
     'board.png', 'side.png',
-    'side.png', 'side.png'
+    'side.png', 'side.png',
   ];
 
   constructor(conf) {
@@ -43,7 +43,7 @@ export class BoardModelViewer extends ModelViewer {
    * Init pawn model with textures
    * @param onLoad : Callback when loaded
    */
-  init(onLoad) {
+  public init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(1, 1, 1, 1, 1, 1);
 
@@ -54,12 +54,10 @@ export class BoardModelViewer extends ModelViewer {
       const mesh = this.generateMesh();
       onLoad(mesh);
     }, (texture, index) => {
-      //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+      // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
       if (index > -1)
         materials[index] = new MeshBasicMaterial({ map: texture });
     });
   }
-
-
 }

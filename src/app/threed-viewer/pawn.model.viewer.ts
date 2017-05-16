@@ -4,7 +4,7 @@
 
 import {
   CylinderGeometry,
-  MeshBasicMaterial
+  MeshBasicMaterial,
 }                             from 'three';
 
 import { ModelViewer }        from './model.viewer';
@@ -13,7 +13,7 @@ import { TexturePoolViewer }  from './texture-pool.viewer';
 export class PawnModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
   private _texturesPaths = [
-    'white.png'
+    'white.png',
   ];
 
   constructor(conf) {
@@ -40,7 +40,7 @@ export class PawnModelViewer extends ModelViewer {
    * Init pion model with textures
    * @param onLoad : Callback when loaded
    */
-  init(onLoad) {
+  public init(onLoad) {
     this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(1, 1, 1, 40);
 
@@ -48,7 +48,6 @@ export class PawnModelViewer extends ModelViewer {
       this.material = new MeshBasicMaterial({map: textures[0]});
       const mesh = this.generateMesh();
       onLoad(mesh);
-    }, (texture, index) => {
-    });
+    }, (texture, index) => {});
   }
 }

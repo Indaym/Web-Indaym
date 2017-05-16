@@ -12,21 +12,21 @@ export class SceneService {
 
     constructor(private http: Http) { }
 
-    setGameId(gameId) {
-        this.scenesUrl += "/" + gameId + "/scenes";
+    public setGameId(gameId) {
+        this.scenesUrl += '/' + gameId + '/scenes';
     }
 
-    getScenes() {
+    public getScenes() {
         this.scenes = [];
         this.http.get(this.scenesUrl)
             .flatMap((res) => res.json())
-            .subscribe(data => {this.scenes.push(data);});
+            .subscribe((data) => {this.scenes.push(data);});
         return this.scenes;
     }
 
-    postScene(name, meuh, callback) {
-        this.http.post(this.scenesUrl, {"name": name})
+    public postScene(name, meuh, callback) {
+        this.http.post(this.scenesUrl, {'name': name})
             .map((res) => res.json())
-            .subscribe(data => callback(meuh, data));
+            .subscribe((data) => callback(meuh, data));
     }
 }

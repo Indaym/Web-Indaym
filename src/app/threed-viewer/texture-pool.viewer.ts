@@ -4,7 +4,7 @@
 
 import {
   Texture,
-  TextureLoader
+  TextureLoader,
 } from 'three';
 
 export class TexturePoolViewer {
@@ -26,8 +26,8 @@ export class TexturePoolViewer {
    * @param onProgress : Callback when each texture is laoded
    * @returns {boolean}
    */
-  load(textures, onLoad, onProgress?) {
-    if (this.processing == true || textures === undefined || textures.length == 0)
+  public load(textures, onLoad, onProgress?) {
+    if (this.processing === true || textures === undefined || textures.length === 0)
       return false;
     this.processing = true;
     this.poolLength = textures.length;
@@ -55,7 +55,7 @@ export class TexturePoolViewer {
       }
       if (onProgress)
         onProgress(texture, index);
-      if (this.pushed == this.poolLength)
+      if (this.pushed === this.poolLength)
         this.finished(onLoad);
     });
   }
@@ -66,7 +66,7 @@ export class TexturePoolViewer {
    * @returns {boolean}
    */
   private finished(onLoad) {
-    if (this.processing == false)
+    if (this.processing === false)
       return false;
     this.processing = false;
     this.queue = null;

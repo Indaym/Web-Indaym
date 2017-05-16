@@ -12,17 +12,17 @@ export class GameService {
 
     constructor(private http: Http) { }
 
-    getGames() {
+    public getGames() {
         this.games = [];
         this.http.get(this.gamesUrl)
             .flatMap((res) => res.json())
-            .subscribe(data => {this.games.push(data);});
+            .subscribe((data) => {this.games.push(data);});
         return this.games;
     }
 
-    postGame(name, meuh, callback) {
-        this.http.post(this.gamesUrl, {"name": name})
+    public postGame(name, meuh, callback) {
+        this.http.post(this.gamesUrl, {'name': name})
             .map((res) => res.json())
-            .subscribe(data => callback(meuh, data));
+            .subscribe((data) => callback(meuh, data));
     }
 }

@@ -5,7 +5,7 @@
 import { ModuleWithProviders }    from '@angular/core';
 import {
   Routes,
-  RouterModule
+  RouterModule,
 }                                 from '@angular/router';
 
 import { HomeComponent }          from './components/home';
@@ -13,7 +13,7 @@ import {
   EditorComponent,
   PreviewComponent,
   DesignerComponent,
-  BlueprintsComponent
+  BlueprintsComponent,
 }                                 from './components/editor';
 import { GamesListComponent }     from './components/gameslist';
 import { ScenesListComponent }    from './components/sceneslist';
@@ -23,7 +23,6 @@ import { ForumComponent }         from './components/forum';
 import { ContactComponent }       from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
 
-
 export const routes: Routes = [
   { path: '',               redirectTo: '/home', pathMatch: 'full' },
   { path: 'home',           component: HomeComponent },
@@ -31,17 +30,17 @@ export const routes: Routes = [
   { path: 'sceneslist',     component: ScenesListComponent },
   { path: 'editor',         component: EditorComponent,
     children: [
-      { path: '',           redirectTo:'designer' },
+      { path: '',           redirectTo: 'designer' },
       { path: 'designer',   component: DesignerComponent },
       { path: 'blueprints', component: BlueprintsComponent },
-      { path: 'preview',    component: PreviewComponent }
-    ]
+      { path: 'preview',    component: PreviewComponent },
+    ],
   },
   { path: 'play',           component: PlayComponent },
   { path: 'store',          component: StoreComponent },
   { path: 'forum',          component: ForumComponent },
   { path: 'contact',        component: ContactComponent },
-  { path: 'legalMentions',  component: LegalMentionsComponent }
+  { path: 'legalMentions',  component: LegalMentionsComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

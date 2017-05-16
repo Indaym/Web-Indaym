@@ -4,7 +4,6 @@
 
 import {
   Scene,
-  Camera,
   PerspectiveCamera,
   WebGLRenderer,
   Vector2,
@@ -12,16 +11,14 @@ import {
   Object3D,
   Raycaster,
   EventDispatcher,
-  Color
+  Color,
 } from 'three';
 
-var OrbitControls = require('three-orbit-controls')(require('three'));
+const OrbitControls = require('three-orbit-controls')(require('three'));
 
 export class SceneViewer {
   protected _scene: Scene;
   protected _camera: PerspectiveCamera;
-  protected _width = () => 300;
-  protected _height = () => 300;
   protected _renderer: WebGLRenderer;
   protected _domElement: HTMLElement;
   protected _controls: any;
@@ -48,7 +45,7 @@ export class SceneViewer {
     this._scene = new Scene();
     this._scene.background = new Color( 0xcccccc );
 
-    //Initialisation Camera
+    // Initialisation Camera
     this._camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 10000);
     this._camera.lookAt(new Vector3(0, 0, 0));
 
@@ -72,7 +69,7 @@ export class SceneViewer {
    * Default param for load a scene
    * @param container : id of container
    */
-  defaultLoad(container) {
+  public defaultLoad(container) {
     this.container = container;
     this.cameraPosition = new Vector3(50.0, 50.0, 50.0);
     this.render();
@@ -82,7 +79,7 @@ export class SceneViewer {
   /**
    * Init dispatcher Events
    */
-  initDispatcherEvents() {}
+  public initDispatcherEvents() {}
 
   /**
    * Get event Dispatcher
@@ -156,9 +153,9 @@ export class SceneViewer {
    * @param value
    */
   set width(value) {
-    if (typeof value == 'function')
+    if (typeof value === 'function')
       this._width = value;
-    if (typeof value == 'number')
+    if (typeof value === 'number')
       this._width = () => value;
   }
 
@@ -175,9 +172,9 @@ export class SceneViewer {
    * @param value
    */
   set height(value) {
-    if (typeof value == 'function')
+    if (typeof value === 'function')
       this._height = value;
-    if (typeof value == 'number')
+    if (typeof value === 'number')
       this._height = () => value;
   }
 
@@ -209,7 +206,7 @@ export class SceneViewer {
    * Add 3D Object in scene
    * @param obj
    */
-  addInScene(obj: Object3D) {
+  public addInScene(obj: Object3D) {
     this._scene.add(obj);
   }
 
@@ -217,7 +214,7 @@ export class SceneViewer {
    * Delete 3D Object from scene
    * @param obj
    */
-  deleteFromScene(obj: Object3D) {
+  public deleteFromScene(obj: Object3D) {
     this._scene.remove(obj);
   }
 
@@ -225,7 +222,7 @@ export class SceneViewer {
    * Render the 3D scene
    * @returns {null}
    */
-  render() {
+  public render() {
     if (this._domElement == undefined)
       return null;
     this._renderer.setSize(this.width, this.height);
@@ -236,11 +233,11 @@ export class SceneViewer {
   /**
    * Animate controls and scene
    */
-  animate() {
+  public animate() {
     this._controls.update();
     this._renderer.render(this._scene, this._camera);
     requestAnimationFrame(() => {
-      this.animate()
+      this.animate();
     });
   }
 
@@ -248,7 +245,7 @@ export class SceneViewer {
    * Set intersection from Mouse position
    * @param event : MouseEvent
    */
-  setIntersection(event) {
+  public setIntersection(event) {
     this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
     this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
@@ -258,7 +255,7 @@ export class SceneViewer {
    * Get Intersected Object
    * @returns {THREE.Vector3}
    */
-  getIntersection() {
+  public getIntersection() {
     let result = new Vector3(0, 10, 0);
     const a = this._raycaster.ray.origin;
     const b = new Vector3(a.x, a.y, a.z);
@@ -272,9 +269,12 @@ export class SceneViewer {
     return result;
   }
 
-  onWindowResize() {
+  public onWindowResize() {
     this._camera.aspect = window.innerWidth / window.innerHeight;
     this._camera.updateProjectionMatrix();
     this._renderer.setSize(this.width, this.height);
   }
+
+  protected _width = () => 300;
+  protected _height = () => 300;
 }

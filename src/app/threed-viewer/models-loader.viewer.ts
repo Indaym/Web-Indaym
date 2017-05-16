@@ -5,14 +5,14 @@
 import {
   BoardModelViewer,
   PawnModelViewer,
-  CaseModelViewer
-} from '.'
+  CaseModelViewer,
+} from '.';
 
 export class ModelsLoader {
   private types = {
     'board': BoardModelViewer,
     'pawn': PawnModelViewer,
-    'case': CaseModelViewer
+    'case': CaseModelViewer,
   };
 
   constructor(private scene) {}
@@ -21,23 +21,23 @@ export class ModelsLoader {
    * Load models on 3D view
    * @param models : models to load
    */
-  loadModels(models) {
+  public loadModels(models) {
     models.forEach((element) => {
       this.loadOneModel(element);
-    })
+    });
   }
 
   /**
    * Load one model on 3D view
    * @param model : model to load
    */
-  loadOneModel(model) {
+  public loadOneModel(model) {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
       model.threeDModel = new modelViewer({
         dimension: model.object.dimension,
-        position: model.object.position
+        position: model.object.position,
       });
       if (model.object.texturesPaths != undefined)
         model.threeDModel.texturesPaths = model.object.texturesPaths;
@@ -53,19 +53,19 @@ export class ModelsLoader {
    * Delete group of models
    * @param models : Models to load
    */
-  deleteModels(models) {}
+  public deleteModels(models) {}
 
   /**
    * Delete one model
    * @param model : Model to load
    */
-  deleteOneModel(model) {}
+  public deleteOneModel(model) {}
 
   /**
    * Init Event to load and delete models
    * @param gameController : gameController to init events
    */
-  initEvents(gameController) {
+  public initEvents(gameController) {
     gameController.subscribe('addObject', (event) => this.loadOneModel(event.datas));
     gameController.subscribe('addGroupObjects', (event) => this.loadModels(event.datas));
     gameController.subscribe('deleteObject', (event) => this.deleteOneModel(event.datas));

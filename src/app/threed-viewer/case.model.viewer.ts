@@ -5,7 +5,7 @@
 import {
   PlaneGeometry,
   MeshBasicMaterial,
-  DoubleSide
+  DoubleSide,
 }                       from 'three';
 
 import { ModelViewer }  from './model.viewer';
@@ -20,7 +20,7 @@ export class CaseModelViewer extends ModelViewer {
    * Hover function when we hover model
    * @param activate
    */
-  hover(activate = true) {
+  public hover(activate = true) {
     this.material.opacity = (activate) ? 0.5 : 0;
     super.hover(activate);
   }
@@ -30,7 +30,7 @@ export class CaseModelViewer extends ModelViewer {
    * Get the position to drop the object
    * @returns {Vector3}
    */
-  dropPosition(obj) {
+  public dropPosition(obj) {
     let pos = super.dropPosition(obj);
     pos.y = this.mesh.position.y + obj.scale.y / 2;
     return pos;
@@ -40,7 +40,7 @@ export class CaseModelViewer extends ModelViewer {
    * Init case model
    * @param onLoad : Callback when loaded
    */
-  init(onLoad) {
+  public init(onLoad) {
     this.geometry = new PlaneGeometry(1, 1, 8, 8);
     this.material = new MeshBasicMaterial({color: 0xffffff, side: DoubleSide, transparent: true, opacity: 0});
     let mesh = this.generateMesh();

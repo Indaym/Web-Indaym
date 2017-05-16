@@ -59,10 +59,11 @@
       true,
       "check-space"
     ],
-    "member-access": [
+    "max-line-length": [
       true,
-      "check-accessor"
+      150
     ],
+    "member-access": true,
     "no-trailing-whitespace": true,
     "arrow-parens": true,
     "new-parens": true,
@@ -117,6 +118,10 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "no-attribute-parameter-decorator": true,
-    "no-forward-ref": true
+    "no-forward-ref": true,
+    "no-console": [
+      false // true for Production
+    ],
+    "no-empty": false
   }
 }

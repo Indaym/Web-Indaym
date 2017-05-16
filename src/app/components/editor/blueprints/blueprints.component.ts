@@ -4,9 +4,9 @@ import { Component }    from '@angular/core';
   selector  : 'ia-blueprints',
   template  : require('./blueprints.component.html'),
   styles    : [
-    require('./blueprints.component.css')
+    require('./blueprints.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class BlueprintsComponent {
 }
