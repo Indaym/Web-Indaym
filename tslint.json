@@ -47,7 +47,9 @@
       "space"
     ],
     "quotemark": [
-      false
+      true,
+      "single",
+      "avoid-escape"
     ],
     "one-variable-per-declaration": [
       true,
