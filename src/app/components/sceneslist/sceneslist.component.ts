@@ -1,9 +1,17 @@
-import { Component, OnDestroy }    from '@angular/core';
-
-import { HtmlService }  from "../../../services/html.service";
-import {SceneService} from "../../../services/scene.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnDestroy
+}                       from '@angular/core';
+import {
+  ActivatedRoute,
+  Router
+}                       from '@angular/router';
 import { Subscription } from "rxjs/Rx";
+
+import {
+  HtmlService,
+  SceneService
+}                       from "../../../services";
 
 @Component({
   selector  : 'ia-sceneslist',

@@ -7,25 +7,30 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ObjectService {
-    private objectsUrl = 'http://localhost:3000/games';
-    private objects = [];
+  private initUrl = 'http://localhost:3000/games';
+  private objectsUrl = '';
+  private objects = [];
 
-    constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.objectsUrl = this.initUrl;
+  }
 
-    public getObjects() {
-        this.http.get(this.objectsUrl)
-            .flatMap((res) => res.json())
-            .subscribe((data) => {this.objects.push(data);});
-        return this.objects;
-    }
+  getObjects(callback) {
+    console.log(this.objectsUrl);
+    this.http.get(this.objectsUrl)
+      .map((res) => res.json())
+      .subscribe(callback);
+  }
 
-    public setIds(gameId, sceneId) {
-        this.objectsUrl += '/' + gameId + '/scenes/' + sceneId + '/objects';
-    }
+  setIds(gameId, sceneId) {
+    this.objectsUrl = this.initUrl + "/" + gameId + "/scenes/" + sceneId + "/objects";
+  }
 
-    public postSceneObjects(itemThreeJs) {
-        this.http.post(this.objectsUrl, {itemThreeJs: itemThreeJs})
-            .map((res) => res.json())
-            .subscribe((data) => console.log(data));
-    }
+  postSceneObject(obj) {
+    console.log("posting scene object : ");
+    obj.object = JSON.stringify(obj.object);
+    this.http.post(this.objectsUrl, obj)
+      .map((res) => res.json())
+      .subscribe(data => console.log(data));
+  }
 }

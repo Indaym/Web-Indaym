@@ -4,28 +4,24 @@
 
 import {
   Component,
-  Input,
-  OnDestroy
-}                         from '@angular/core';
-import { 
-  ActivatedRoute, 
-  Router 
-}                         from '@angular/router';
-import { Subscription }   from 'rxjs/Rx';
+  Input, OnInit
+} from '@angular/core';
 
-import { HtmlService }    from '../../../../../../services/html.service';
-import { ObjectService }  from '../../../../../../services/object.service';
+import {
+  HtmlService,
+  GameControllerService
+} from "../../../../../../services";
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService, ObjectService],
+  providers : [HtmlService],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
     require('../sidebars.css')
   ]
 })
-export class LeftSidebarComponent implements OnDestroy {
+export class LeftSidebarComponent implements OnInit{
   @Input() start;
   @Input() eventDispatcher;
   items = {
@@ -38,28 +34,13 @@ export class LeftSidebarComponent implements OnDestroy {
       'pawnBlack': 'Add Black Pawn',
     }
   };
+  private gameController;
 
-  lsObjects;
-  gameId;
-  sceneId;
-  subscription: Subscription;
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
+    this.gameController = this.gameControllerService.gameController;
   }
 
-  constructor(public html: HtmlService, private objects: ObjectService, private route: ActivatedRoute, private router: Router) {
-    this.subscription = route.queryParams.subscribe(
-        (queryParam: any) => this.getObjectsList(queryParam)
-    );
-  }
-
-  public getObjectsList(queryParam) {
-    this.gameId = queryParam['gameId'];
-    this.sceneId = queryParam['sceneId'];
-    this.objects.setIds(this.gameId, this.sceneId);
-    this.lsObjects = this.objects.getObjects();
-  }
+  ngOnInit() {}
 
   private toggleMode() {
     this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
