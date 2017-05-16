@@ -59,10 +59,7 @@
       true,
       "check-space"
     ],
-    "member-access": [
-      true,
-      "check-accessor"
-    ],
+    "member-access": true,
     "no-trailing-whitespace": true,
     "arrow-parens": true,
     "new-parens": true,
