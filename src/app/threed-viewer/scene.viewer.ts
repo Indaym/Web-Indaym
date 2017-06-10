@@ -256,7 +256,7 @@ export class SceneViewer {
    * @returns {THREE.Vector3}
    */
   public getIntersection() {
-    let result = new Vector3(0, 10, 0);
+    let result = new Vector3(0, 0, 0);
     const a = this._raycaster.ray.origin;
     const b = new Vector3(a.x, a.y, a.z);
 

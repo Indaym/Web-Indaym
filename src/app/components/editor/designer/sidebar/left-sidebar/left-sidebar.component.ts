@@ -6,12 +6,13 @@ import {
   Component,
   Input,
   OnInit,
-} from '@angular/core';
+}                         from '@angular/core';
 
 import {
   HtmlService,
   GameControllerService,
-} from '../../../../../../services';
+}                         from '../../../../../../services';
+import { buttonsDefault } from '../../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',
@@ -24,7 +25,6 @@ import {
 })
 export class LeftSidebarComponent implements OnInit {
   @Input() public start;
-  @Input() public eventDispatcher;
   public items = {
     boards: {
       'board3x3': 'Add Board 3x3',
@@ -45,7 +45,8 @@ export class LeftSidebarComponent implements OnInit {
   public ngOnInit() {}
 
   public addObject(name: string) {
-    this.eventDispatcher.dispatchEvent({ type: 'addObject', name: name });
+    if (name !== undefined)
+      this.gameController.addObject(buttonsDefault[name], true, 'Both');
   }
 
   private toggleMode() {
