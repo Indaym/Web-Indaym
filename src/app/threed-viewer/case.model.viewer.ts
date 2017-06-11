@@ -32,7 +32,6 @@ export class CaseModelViewer extends ModelViewer {
    */
   public dropPosition(obj) {
     let pos = super.dropPosition(obj);
-    pos.y = this.mesh.position.y + obj.scale.y / 2;
     return pos;
   }
 

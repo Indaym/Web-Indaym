@@ -130,7 +130,8 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   public dropPosition(obj) {
-    let pos = this.mesh.position.clone();
+    let pos = new Vector3();
+    pos.setFromMatrixPosition( this.mesh.matrixWorld );
     pos.y += this.mesh.scale.y / 2;
     if (obj !== undefined)
       pos.y += obj.scale.y / 2;

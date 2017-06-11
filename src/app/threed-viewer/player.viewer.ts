@@ -38,6 +38,14 @@ export class PlayerViewer extends SceneViewer {
    */
   public intersectObjects(event, objects = this._scene.children) {
     this.setIntersection(event);
+    let toAdd = [];
+    objects.forEach((obj) => {
+      let linkModel = (<any>obj).LinkModel;
+      if (linkModel !== undefined && linkModel.object !== undefined && linkModel.object.type === 'grid') {
+        toAdd = [...toAdd, ...linkModel.threeDModel.mesh.children];
+      }
+    });
+    objects = [...objects, ...toAdd];
     return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh));
   }
 
@@ -218,6 +226,8 @@ export class PlayerViewer extends SceneViewer {
       let drop = this.getFirstDroppable(this.intersectObjects(event));
       if (drop !== undefined) {
         if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
+          if (this._hovered !== undefined)
+            this._hovered.hover(false);
           this._hovered = drop.object.LinkModel.threeDModel;
           this._hovered.hover(true);
         }

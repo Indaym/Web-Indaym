@@ -2,9 +2,7 @@
  * Created by nicolas on 5/5/17.
  */
 
-import {
-  CaseModelViewer,
-} from '.';
+import { CaseModelViewer }  from '.';
 
 export class GridModelViewer extends CaseModelViewer {
   private cases = [];
@@ -26,17 +24,23 @@ export class GridModelViewer extends CaseModelViewer {
     for (let x = 0; x < config.caseX; x++) {
       this.cases[x] = [];
       for (let y = 0; y < config.caseY; y++) {
-        this.cases[x][y] = new CaseModelViewer({
+        let object = {
           dimension: [config.caseWidth, config.caseHeight, 1],
           position: [
             topPos[0] + x * (config.caseWidth + config.gap) + config.gap + (config.caseWidth / 2),
             topPos[1] - y * (config.caseHeight + config.gap) - config.gap - (config.caseHeight / 2),
             -0.01,
           ],
-        }, editorMode);
+          droppable: true,
+          draggable: false,
+        };
+        this.cases[x][y] = new CaseModelViewer(object, editorMode);
         this.cases[x][y].init((mesh) => {
           mesh.rotation.x = 0;
-          mesh.LinkModel = this.cases[x][y];
+          mesh.LinkModel = {
+            threeDModel: this.cases[x][y],
+            object: object,
+          };
           this.objs.push(mesh);
         });
       }
@@ -48,20 +52,7 @@ export class GridModelViewer extends CaseModelViewer {
    * Hover function when we hover model
    * @param activate
    */
-  public hover(activate = true) {
-    (<any>this.material).color.setHex(0x424242);
-    this.material.opacity = 1;
-  }
-
-  /**
-   * [ Override ]
-   * Get the position to drop the object
-   * @returns {Vector3}
-   */
-  public dropPosition(obj) {
-    let pos = super.dropPosition(obj);
-    return pos;
-  }
+  public hover(activate = true) {}
 
   /**
    * Init case model
@@ -78,7 +69,7 @@ export class GridModelViewer extends CaseModelViewer {
       });
       if (this.editorMode) {
         mesh.material.color.setHex(0x424242);
-        mesh.material.opacity = 1;
+        mesh.material.opacity = 0.5;
       }
       onLoad(mesh);
     });
