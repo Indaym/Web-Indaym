@@ -19,8 +19,8 @@ export class BoardModelViewer extends ModelViewer {
     'side.png', 'side.png',
   ];
 
-  constructor(conf) {
-    super(conf);
+  constructor(conf, editorMode: Boolean = false) {
+    super(conf, editorMode);
   }
 
   /**

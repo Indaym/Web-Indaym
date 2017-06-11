@@ -17,7 +17,7 @@ export class ModelsLoader {
     'grid': GridModelViewer,
   };
 
-  constructor(private scene) {}
+  constructor(private scene, private editorMode: Boolean = false) {}
 
   /**
    * Load models on 3D view
@@ -37,7 +37,7 @@ export class ModelsLoader {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
-      model.threeDModel = new modelViewer(model.object);
+      model.threeDModel = new modelViewer(model.object, this.editorMode);
       if (model.object.texturesPaths != undefined)
         model.threeDModel.texturesPaths = model.object.texturesPaths;
       model.threeDModel.init((mesh) => {

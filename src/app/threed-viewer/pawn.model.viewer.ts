@@ -16,8 +16,8 @@ export class PawnModelViewer extends ModelViewer {
     'white.png',
   ];
 
-  constructor(conf) {
-    super(conf);
+  constructor(conf, editorMode: Boolean = false) {
+    super(conf, editorMode);
   }
 
   /**

@@ -11,8 +11,8 @@ import {
 import { ModelViewer }  from './model.viewer';
 
 export class CaseModelViewer extends ModelViewer {
-  constructor(conf) {
-    super(conf);
+  constructor(conf, editorMode: Boolean = false) {
+    super(conf, editorMode);
   }
 
   /**

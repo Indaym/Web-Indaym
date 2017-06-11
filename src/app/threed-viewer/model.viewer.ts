@@ -26,7 +26,7 @@ export class ModelViewer {
    *   material: THREE.Material
    * }
    */
-  constructor(conf: any = {}) {
+  constructor(conf: any = {}, editorMode: Boolean = false) {
     if (conf.position instanceof Array)
       this._position.copy(new Vector3().fromArray(conf.position));
     if (conf.dimension instanceof Array)

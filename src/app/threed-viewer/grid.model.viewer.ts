@@ -10,8 +10,8 @@ export class GridModelViewer extends CaseModelViewer {
   private cases = [];
   private objs = [];
 
-  constructor(private conf) {
-    super(conf);
+  constructor(private conf, private editorMode: Boolean = false) {
+    super(conf, editorMode);
     let config = Object.assign({}, {
       caseX: 3,
       caseY: 3,
@@ -33,12 +33,12 @@ export class GridModelViewer extends CaseModelViewer {
             topPos[1] - y * (config.caseHeight + config.gap) - config.gap - (config.caseHeight / 2),
             -0.01,
           ],
-        });
+        }, editorMode);
         this.cases[x][y].init((mesh) => {
           mesh.rotation.x = 0;
+          mesh.LinkModel = this.cases[x][y];
           this.objs.push(mesh);
-          this.cases[x][y].hover(true);
-        })
+        });
       }
     }
   }
@@ -48,7 +48,10 @@ export class GridModelViewer extends CaseModelViewer {
    * Hover function when we hover model
    * @param activate
    */
-  public hover(activate = true) {}
+  public hover(activate = true) {
+    (<any>this.material).color.setHex(0x424242);
+    this.material.opacity = 1;
+  }
 
   /**
    * [ Override ]
@@ -70,9 +73,13 @@ export class GridModelViewer extends CaseModelViewer {
         val.scale.divide(mesh.scale);
         val.position.divide(mesh.scale);
         mesh.add(val);
-        val.material.color.setHex(0x00ff00);
+        if (this.editorMode)
+          val.material.opacity = 0.5;
       });
-      super.hover(true);
+      if (this.editorMode) {
+        mesh.material.color.setHex(0x424242);
+        mesh.material.opacity = 1;
+      }
       onLoad(mesh);
     });
   }
