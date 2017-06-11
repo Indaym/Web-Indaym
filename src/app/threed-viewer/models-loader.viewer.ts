@@ -6,6 +6,7 @@ import {
   BoardModelViewer,
   PawnModelViewer,
   CaseModelViewer,
+  GridModelViewer,
 } from '.';
 
 export class ModelsLoader {
@@ -13,6 +14,7 @@ export class ModelsLoader {
     'board': BoardModelViewer,
     'pawn': PawnModelViewer,
     'case': CaseModelViewer,
+    'grid': GridModelViewer,
   };
 
   constructor(private scene) {}
@@ -35,10 +37,7 @@ export class ModelsLoader {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
-      model.threeDModel = new modelViewer({
-        dimension: model.object.dimension,
-        position: model.object.position,
-      });
+      model.threeDModel = new modelViewer(model.object);
       if (model.object.texturesPaths != undefined)
         model.threeDModel.texturesPaths = model.object.texturesPaths;
       model.threeDModel.init((mesh) => {

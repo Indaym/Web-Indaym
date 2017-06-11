@@ -69,4 +69,16 @@ export let datas = [
       position: [0, 0, 0],
     },
   },
+  {
+    name: 'grid',
+    object: {
+      type: 'grid',
+      caseX: 5,
+      caseY: 5,
+      caseWidth: 10,
+      caseHeight: 10,
+      gap: 1,
+      position: [0, 0, 0]
+    }
+  }
 ];

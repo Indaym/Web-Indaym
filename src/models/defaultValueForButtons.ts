@@ -55,4 +55,18 @@ export const buttonsDefault = {
       position: [0, 0, 0],
     },
   },
+  'grid': {
+    name: 'grid',
+    object: {
+      type: 'grid',
+      draggable: false,
+      droppable: false,
+      position: [0, 0, 0],
+      caseX: 5,
+      caseY: 3,
+      caseWidth: 15,
+      caseHeight: 15,
+      gap: 1,
+    },
+  },
 };
