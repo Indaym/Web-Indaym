@@ -42,7 +42,9 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   get position(): Vector3 {
-    return this._position;
+    const pos = new Vector3();
+    pos.setFromMatrixPosition(this.mesh.matrixWorld);
+    return pos;
   }
 
   /**
@@ -131,7 +133,7 @@ export class ModelViewer {
    */
   public dropPosition(obj) {
     let pos = new Vector3();
-    pos.setFromMatrixPosition( this.mesh.matrixWorld );
+    pos.setFromMatrixPosition(this.mesh.matrixWorld);
     pos.y += this.mesh.scale.y / 2;
     if (obj !== undefined)
       pos.y += obj.scale.y / 2;

@@ -15,7 +15,6 @@ export class ObjectService {
   }
 
   public getObjects(callback) {
-    console.log(this.objectsUrl);
     this.http.get(this.objectsUrl)
       .map((res) => res.json())
       .subscribe(callback);
@@ -26,10 +25,16 @@ export class ObjectService {
   }
 
   public postSceneObject(obj) {
-    console.log('posting scene object : ');
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectsUrl, obj)
       .map((res) => res.json())
       .subscribe((data) => console.log(data));
+  }
+
+  public updateObject(obj, id, success = (datas) => {}, error = (err) => {}) {
+    obj.object = JSON.stringify(obj.object);
+    this.http.put(this.objectsUrl + '/' + id, obj)
+      .map((res) => res.json())
+      .subscribe(success, error);
   }
 }

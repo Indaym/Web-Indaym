@@ -7,14 +7,17 @@ import {
   OnInit,
   OnDestroy,
   Input,
-}                                 from '@angular/core';
+}                         from '@angular/core';
 
 import {
   EditorViewer,
   ModelsLoader,
-}                                 from '../../../../threed-viewer';
-import { GameControllerService }  from '../../../../../services/';
-import { buttonsDefault }         from '../../../../../models/';
+}                         from '../../../../threed-viewer';
+import {
+  GameControllerService,
+  ObjectService,
+ }                        from '../../../../../services/';
+import { buttonsDefault } from '../../../../../models/';
 
 @Component({
   selector  : 'ia-viewer',
@@ -30,14 +33,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private gameController;
 
-  constructor(private gameControllerService: GameControllerService) {
+  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService) {
     this.gameController = gameControllerService.gameController;
-  }
-
-  // To delete ??
-  public saveScene() {
-    // CARO Ici tu stockes la scene actuelle dans la DB
-    // Faut que tu voies avec Nico comment et sous quelle forme les stocker, perso j'en ai pas la moindre idée
   }
 
   public ngOnInit(): void {
@@ -55,7 +52,21 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.modelsLoader.initEvents(this.gameController);
   }
 
-  public ngOnDestroy() {}
+  public ngOnDestroy() {
+    this.savePositions();
+  }
+
+  public savePositions() {
+    const objs = this.gameController.getObjects();
+
+    objs.forEach((elem) => {
+      if (!elem.threeDModel.position.toArray().every((v, i) => (elem.object.position !== undefined && v === elem.object.position[i]))) {
+        elem.object.position = [];
+        elem.threeDModel.position.toArray(elem.object.position);
+        this.objectService.updateObject({ object: elem.object }, elem.uuid);
+      }
+    });
+  }
 
   public addObject(args: any) {
     if (args.mouseEvent != undefined) {

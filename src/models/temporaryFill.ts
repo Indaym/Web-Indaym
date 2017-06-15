@@ -78,7 +78,7 @@ export let datas = [
       caseWidth: 10,
       caseHeight: 10,
       gap: 1,
-      position: [0, 0, 0]
+      position: [100, 1, -50],
     }
   }
 ];
