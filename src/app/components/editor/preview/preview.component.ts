@@ -40,7 +40,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.scene = new PlayerViewer({
       width: () => window.innerWidth,
       height: () => window.innerHeight - dom.offsetTop - 5,
-    });
+    }, this.rulesInterface);
     this.scene.defaultLoad('previewContainer');
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
     this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);

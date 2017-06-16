@@ -9,16 +9,18 @@ import {
   Geometry,
   PlaneBufferGeometry,
   BackSide,
-}                       from 'three';
+}                         from 'three';
 
-import { SceneViewer }  from '.';
+import { SceneViewer }    from '.';
+import { RulesInterface } from '../components/editor/preview/rulesInterface';
 
 export class PlayerViewer extends SceneViewer {
   private _selected;
   private _intersectPlane;
   private _hovered;
+  private rulesInterface: RulesInterface;
 
-  constructor(conf: any = {}) {
+  constructor(conf: any = {}, rulesInterface?: RulesInterface) {
     super(conf);
 
     this._scene.add(new AxisHelper(1000));
@@ -28,6 +30,8 @@ export class PlayerViewer extends SceneViewer {
       new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false})
     );
     this._scene.add(this._intersectPlane);
+    if (rulesInterface)
+      this.rulesInterface = rulesInterface;
   }
 
   /**
@@ -194,8 +198,15 @@ export class PlayerViewer extends SceneViewer {
           if (obj === undefined) {
             this.unselectObject();
           } else {
-            if (this.isDroppable(obj)) {
-              this.moveToDroppable(obj);
+            if (this.isDroppable(obj) && this.rulesInterface !== undefined) {
+              this.rulesInterface.emit('canMoveObject', {
+                  source: this._selected,
+                  target: obj,
+                },
+                () => {
+                  this.moveToDroppable(obj);
+                }
+              );
             } else {
               this.selectObject(obj.object);
             }
@@ -250,7 +261,20 @@ export class PlayerViewer extends SceneViewer {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
       } else
-        this.moveToDroppable(drop);
+        if (this.rulesInterface !== undefined) {
+          this.rulesInterface.emit('canMoveObject', {
+              source: this._selected,
+              target: drop,
+            },
+            () => {
+              this.moveToDroppable(drop);
+            },
+            () => {
+              this._selected.object.position.copy(this._selected.oldPosition);
+              this._selected.glow.position.copy(this._selected.oldPosition);
+            }
+          );
+        }
     }
     this._controls.enableRotate = true;
   }
