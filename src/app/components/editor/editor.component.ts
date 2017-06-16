@@ -45,11 +45,11 @@ export class EditorComponent implements OnDestroy, OnInit {
     );
     this.gameController.subscribe('addObjectToService', (obj) => {
       let pushObject = Object.keys(obj.datas).reduce((result, key) => {
-        if (key !== 'threeDModel')
+        if (key !== 'threeDModel' && key !== 'LinkModel')
           result[key] = obj.datas[key];
         return result;
       }, {});
-      this.objectService.postSceneObject(pushObject);
+      this.objectService.postSceneObject(pushObject, obj.success, obj.error);
     });
   }
 

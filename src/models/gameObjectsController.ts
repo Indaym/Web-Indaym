@@ -50,11 +50,16 @@ export class GameObjectsController {
    * @param type : Type of the event to emit
    * @param datas : Data to emit
    */
-  public emit(type, datas) {
-    this.eventDispatcher.dispatchEvent({
-      'type' : type,
-      'datas' : datas,
-    });
+  public emit(type, datas, success?: Function, error?: Function) {
+    const obj = {
+      type: type,
+      datas: datas,
+    };
+    if (success)
+      obj['success'] = success;
+    if (error)
+      obj['error'] = error;
+    this.eventDispatcher.dispatchEvent(obj);
   }
 
   /**
@@ -132,15 +137,15 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public addObject(obj, emit = true, typeEvent = 'ToView') {
+  public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects === undefined)
       this.currentObjects = [];
     this.currentObjects.push(obj);
     if (emit === true) {
       if (typeEvent === 'ToView' || typeEvent === 'Both')
-        this.emit('addObject', obj);
+        this.emit('addObject', obj, success, error);
       if (typeEvent === 'ToService' || typeEvent === 'Both')
-        this.emit('addObjectToService', obj);
+        this.emit('addObjectToService', obj, success, error);
     }
   }
 
@@ -150,13 +155,13 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public addGroupObjects(objs, emit = true, typeEvent = 'ToView') {
+  public addGroupObjects(objs, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     this.currentObjects = [ ...this.currentObjects, ...objs];
     if (emit === true) {
       if (typeEvent === 'ToView' || typeEvent === 'Both')
-        this.emit('addGroupObjects', objs);
+        this.emit('addGroupObjects', objs, success, error);
       if (typeEvent === 'ToService' || typeEvent === 'Both')
-        this.emit('addGroupObjectsToService', objs);
+        this.emit('addGroupObjectsToService', objs, success, error);
     }
   }
 
@@ -174,7 +179,7 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public deleteObject(objectId, emit = true, typeEvent = 'ToView') {
+  public deleteObject(objectId, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
         return value.id === objectId;
@@ -183,9 +188,9 @@ export class GameObjectsController {
         let removed = this.currentObjects.splice(objIndex, 1);
         if (emit === true) {
           if (typeEvent === 'ToView' || typeEvent === 'Both')
-            this.emit('deleteObject', removed[0]);
+            this.emit('deleteObject', removed[0], success, error);
           if (typeEvent === 'ToService' || typeEvent === 'Both')
-            this.emit('deleteObjectToService', removed[0]);
+            this.emit('deleteObjectToService', removed[0], success, error);
         }
       }
     }
@@ -196,15 +201,15 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public deleteAllObjects(emit = true, typeEvent = 'ToView') {
+  public deleteAllObjects(emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects !== undefined) {
       let objects = this.currentObjects;
       this.currentObjects = [];
       if (emit === true) {
         if (typeEvent === 'ToView' || typeEvent === 'Both')
-          this.emit('deleteAllObjects', objects);
+          this.emit('deleteAllObjects', objects, success, error);
         if (typeEvent === 'ToService' || typeEvent === 'Both')
-          this.emit('deleteAllObjectsToService', objects);
+          this.emit('deleteAllObjectsToService', objects, success, error);
       }
     }
   }

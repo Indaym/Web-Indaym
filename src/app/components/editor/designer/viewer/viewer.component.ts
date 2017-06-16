@@ -68,6 +68,17 @@ export class ViewerComponent implements OnInit, OnDestroy {
     });
   }
 
+  public deleteObject() {
+    const selected = <any>this.scene.selected;
+    if (selected !== undefined && selected.LinkModel !== undefined) {
+      this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
+        this.scene.deleteSelected();
+        this.gameController.deleteObject(selected.LinkModel.uuid);
+
+      });
+    }
+  }
+
   public addObject(args: any) {
     if (args.mouseEvent != undefined) {
       this.scene.setIntersection(args.mouseEvent);
@@ -75,7 +86,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
       if (args.dragData != undefined) {
         let obj = buttonsDefault[args.dragData];
         obj.object.position = coord.toArray();
-        this.gameController.addObject(obj, true, 'Both');
+        this.gameController.addObject(obj, true, 'Both', (id) => {
+          obj.uuid = id.uuid;
+        });
       }
     }
   }

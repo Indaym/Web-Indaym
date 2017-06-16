@@ -14,27 +14,38 @@ export class ObjectService {
     this.objectsUrl = this.initUrl;
   }
 
-  public getObjects(callback) {
-    this.http.get(this.objectsUrl)
-      .map((res) => res.json())
-      .subscribe(callback);
-  }
-
   public setIds(gameId, sceneId) {
     this.objectsUrl = this.initUrl + '/' + gameId + '/scenes/' + sceneId + '/objects';
   }
 
-  public postSceneObject(obj) {
+  public getObjects(success = (datas) => {}, error = (err) => {}) {
+    this.http.get(this.objectsUrl)
+      .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public getOneObject(id, success = (datas) => {}, error = (err) => {}) {
+    this.http.get(this.objectsUrl + '/' + id)
+      .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public postSceneObject(obj, success = (id) => {}, error = (err) => {}) {
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectsUrl, obj)
       .map((res) => res.json())
-      .subscribe((data) => console.log(data));
+      .subscribe(success, error);
   }
 
   public updateObject(obj, id, success = (datas) => {}, error = (err) => {}) {
     obj.object = JSON.stringify(obj.object);
     this.http.put(this.objectsUrl + '/' + id, obj)
       .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public deleteObject(id, success = (datas) => {}, error = (err) => {}) {
+    this.http.delete(this.objectsUrl + '/' + id)
       .subscribe(success, error);
   }
 }

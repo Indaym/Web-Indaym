@@ -79,6 +79,6 @@ export let datas = [
       caseHeight: 10,
       gap: 1,
       position: [100, 1, -50],
-    }
-  }
+    },
+  },
 ];

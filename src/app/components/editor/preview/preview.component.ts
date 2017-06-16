@@ -10,6 +10,7 @@ import {
 import { EventDispatcher }        from 'three';
 
 import { GameControllerService }  from '../../../../services/gameController.service';
+import { RulesInterface }         from '.';
 import {
   PlayerViewer,
   ModelsLoader,
@@ -27,9 +28,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private gameController;
   private scene: PlayerViewer;
   private modelsLoader: ModelsLoader;
+  private rulesInterface: RulesInterface;
 
   constructor(private gameControllerService: GameControllerService) {
     this.gameController = gameControllerService.gameController;
+    this.rulesInterface = new RulesInterface();
   }
 
   public ngOnInit(): void {
