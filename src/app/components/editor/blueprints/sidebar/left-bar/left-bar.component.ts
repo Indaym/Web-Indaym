@@ -22,7 +22,7 @@ import {
     ]
 })
 export class LeftBarComponent implements OnInit{
-    @Input() start;
+    @Input() menu;
     @Input() eventDispatcher;
 
     private gameController;
@@ -34,6 +34,6 @@ export class LeftBarComponent implements OnInit{
     ngOnInit() {}
 
     private toggleMode() {
-        this.start.mode = (this.start.mode == 'side') ? 'over' : 'side';
+        this.menu.mode = (this.menu.mode == 'side') ? 'over' : 'side';
     }
 }

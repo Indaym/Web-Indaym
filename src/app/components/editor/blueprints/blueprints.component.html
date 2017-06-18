@@ -1,11 +1,11 @@
 <nav class='navbar navbar-default'>
     <ul id="grey" class='nav navbar-nav'>
-        <li><a md-button (click)="start.toggle()" >Toggle Left Panel</a></li>
+        <li><a md-button (click)="menu.toggle()" >Toggle Left Panel</a></li>
     </ul>
 </nav><br/>
 
 <md-sidenav-layout>
-    <md-sidenav #start mode="side">
-        <ia-left-bar [start]="start" [eventDispatcher]="dispatcher"></ia-left-bar>
+    <md-sidenav #menu mode="side">
+        <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher"></ia-left-bar>
     </md-sidenav>
 </md-sidenav-layout>
