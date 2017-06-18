@@ -1,4 +1,5 @@
-import { Component }    from '@angular/core';
+import { Component }              from '@angular/core';
+import { EventDispatcher }        from 'three';
 
 @Component({
   selector  : 'ia-blueprints',
@@ -9,4 +10,9 @@ import { Component }    from '@angular/core';
   providers : [],
 })
 export class BlueprintsComponent {
+  private dispatcher: EventDispatcher;
+
+  constructor() {
+    this.dispatcher = new EventDispatcher();
+  }
 }

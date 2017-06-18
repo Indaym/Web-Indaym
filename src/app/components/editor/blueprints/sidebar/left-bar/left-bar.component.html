@@ -1,0 +1,12 @@
+<span md-button (click)="start.close()" class="close-button glyphicon glyphicon-remove"></span>
+
+<button md-button (click)="toggleMode()">Toggle</button>
+
+<span>Mode : {{start.mode}}</span>
+
+<tabs>
+    <tab tabTitle="Objects List">
+        <div *ngFor="let item of gameController.getObjects()">
+        </div>
+    </tab>
+</tabs>
