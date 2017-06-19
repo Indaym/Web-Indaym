@@ -9,3 +9,18 @@
         <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher"></ia-left-bar>
     </md-sidenav>
 </md-sidenav-layout>
+
+<div id="name">
+    <div>Item name</div><br/>
+    <div>Rules applied to this item:</div>
+</div>
+<div id="rules">
+    <div class='container' [dragula]='"first-bag"'>
+        <div>Rule 7</div>
+        <div>Rule 8</div>
+        <div>Rule 9</div>
+    </div>
+  </div>
+<div id="save">
+  <button>Save</button>
+</div>
