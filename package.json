@@ -88,6 +88,7 @@
     "three": "^0.83.0",
     "three-orbit-controls": "^72.0.0",
     "threejs-transformcontrols": "^0.83.0",
+    "threejsaddons": "https://github.com/Indaym/ThreeJsAddons.git",
     "zone.js": "^0.6.23"
   },
   "devDependencies": {

@@ -8,9 +8,12 @@ import {
   Object3D,
   GridHelper,
   AxisHelper,
-}                       from 'three';
+} from 'three';
 
-import { SceneViewer }  from '.';
+import {
+  SceneViewer,
+  ThreeDModelViewer,
+} from '.';
 
 const TransformControls = require('threejs-transformcontrols');
 
@@ -34,6 +37,7 @@ export class EditorViewer extends SceneViewer {
     // Add Grid and Axis Helper
     this._scene.add(new GridHelper(1000, 1000));
     this._scene.add(new AxisHelper(1000));
+    new ThreeDModelViewer(this._scene);
   }
 
   /**
