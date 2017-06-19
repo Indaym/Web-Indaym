@@ -1,16 +1,23 @@
 /**
  * Created by Caro on 02/03/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }     from '@angular/core';
+import { Http }           from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { DefaultService } from './default.service';
+
 @Injectable()
-export class GameService {
-  private gamesUrl = 'http://localhost:3000/games';
+export class GameService extends DefaultService {
+  private gamesUrl;
   private games = [];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    super();
+    this.gamesUrl = this.serverUrl + 'games/';
+    this.setted = true;
+    this.settedErrorMessage = 'URL for *Games* not setted';
+  }
 
   public getGames() {
     this.games = [];
@@ -21,7 +28,7 @@ export class GameService {
   }
 
   public getOneGame(id, callback) {
-    this.http.get(this.gamesUrl + '/' + id)
+    this.http.get(this.gamesUrl + id)
       .map((res) => res.json())
       .subscribe(callback);
   }
