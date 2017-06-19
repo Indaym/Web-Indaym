@@ -56,3 +56,26 @@ md-sidenav {
   margin-bottom: 0px;
   border-bottom: 0px;
 }
+
+#name {
+  position: fixed;
+  left: 47%;
+  top: 30%;
+  font-size: 250%;
+}
+
+#rules {
+  position: fixed;
+  left: 47%;
+  top: 45%;
+  width: 9%;
+  border: 3px solid cadetblue;
+  font-size: 300%;
+}
+
+#save {
+  position: fixed;
+  left: 50%;
+  top: 85%;
+  font-size: 200%;
+}
