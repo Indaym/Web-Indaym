@@ -6,16 +6,29 @@
 
 <tabs>
     <tab tabTitle="Objects List">
-        <div *ngFor="let item of gameController.getObjects()" class={{item.uuid}}>
+      <div>Choose one item in the list below:</div><br/>
+        <div *ngFor="let item of gameController.getObjects()">
+          <input
+            #option
+            type="radio"
+            class = "with-gap"
+            name="group3"
+            id="option"
+            [value]="option"
+            (change) = "radioBtnChange$.next(option.value)"/>
             {{item.name}}
         </div>
     </tab>
     <tab tabTitle="Rules List">
-        <div> Rule 1</div>
-        <div> Rule 2</div>
-        <div> Rule 3</div>
-        <div> Rule 4</div>
-        <div> Rule 5</div>
-        <div> Rule 6</div>
+      <div>
+          <div class='container' [dragula]='"first-bag"'>
+            <div>Rule 1</div>
+            <div>Rule 2</div>
+            <div>Rule 3</div>
+            <div>Rule 4</div>
+            <div>Rule 5</div>
+            <div>Rule 6</div>
+          </div>
+      </div>
     </tab>
 </tabs>
