@@ -52,6 +52,8 @@ export class EditorComponent implements OnDestroy, OnInit{
   }
 
   private initObjectsList(gameId, sceneId) {
+    this.gameController.setGameId(gameId);
+    this.gameController.setSceneId(sceneId);
     this.gameService.getOneGame(gameId, (data) => {
       this.gameController.setGame(data, false);
       // this.sceneService.setGameId(queryParam['gameId']);

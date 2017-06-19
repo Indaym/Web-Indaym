@@ -26,6 +26,9 @@ import { datas }            from './temporaryFill';
  */
 
 export class gameObjectsController {
+  private gameId;
+  private sceneId;
+
   private gameInfo;
   private scenes = [];
   private currentScene;
@@ -68,8 +71,27 @@ export class gameObjectsController {
       this.scenes = [];
       this.currentScene = undefined;
       this.currentObjects = [];
+
+      this.gameId = 0;
+      this.sceneId = 0;
     }
     this.emit("setGame", this.gameInfo);
+  }
+
+  setGameId(id) {
+    this.gameId = id;
+  }
+
+  setSceneId(id) {
+    this.sceneId = id;
+  }
+
+  getGameId() {
+    return this.gameId;
+  }
+
+  getSceneId() {
+    return this.sceneId;
   }
 
   /**
