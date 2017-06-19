@@ -73,8 +73,27 @@ export class GameObjectsController {
       this.scenes = [];
       this.currentScene = undefined;
       this.currentObjects = [];
+
+      this.gameId = 0;
+      this.sceneId = 0;
     }
     this.emit('setGame', this.gameInfo);
+  }
+
+  setGameId(id) {
+    this.gameId = id;
+  }
+
+  setSceneId(id) {
+    this.sceneId = id;
+  }
+
+  getGameId() {
+    return this.gameId;
+  }
+
+  getSceneId() {
+    return this.sceneId;
   }
 
   /**
