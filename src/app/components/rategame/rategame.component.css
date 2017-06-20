@@ -25,22 +25,49 @@ h2 {
   margin-right: 5%;
 }
 
+#descTitle {
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+}
+
 #description {
+  font-weight: normal;
+  font-size: 15px;
   float: left;
 }
 
 #note {
+  text-align: center;
   font-size: 15px;
   font-weight: bold;
-  float: right;
 }
 
 #myGames {
+  margin-left: 6%;
   font-size: 36px;
   font-weight: bold;
 }
 
 #logos {
-    width:100%;
+    margin-left: 30%;
+    width:40%;
     height: auto;
+}
+
+#myForm {
+    margin-left: 45%;
+    margin-right: 38%;
+}
+
+#send {
+    margin-left: 39%;
+}
+
+.user_name {
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media {
+    border-bottom: 1px dotted #ccc;
 }

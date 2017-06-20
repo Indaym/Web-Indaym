@@ -1,1 +1,19 @@
-<h2>Store</h2>
+<br/><br/>
+<div id="toCenter2">
+    <p id="myGames">Store</p>
+</div>
+
+<br/><br/>
+
+<div id="doMargin">
+    <div *ngFor="let item of lsGames">
+        <div id="eachGame" (click)="goToRateGame(item.uuid)">
+          <img id="logos" src="app/components/store/tmp/jeu1.png"/>
+          <div id="toCapitalize" (click)="goToScenesPage(item.uuid)">{{item.name}}</div>
+          <div id="note">Note: 4/5</div>
+          <div id="description">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id semper neque.</div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

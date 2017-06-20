@@ -1,1 +1,12 @@
-<h2>Play</h2>
+<br/><br/>
+<div id="toCenter2">
+    <p id="myGames">Play</p>
+    <br/>
+    <div id="toCenter3">
+        <div *ngFor="let item of lsGames">
+            <button (click)="goToScenesPage(item.uuid)">{{item.name}}</button>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
