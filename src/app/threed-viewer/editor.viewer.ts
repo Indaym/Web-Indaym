@@ -168,9 +168,8 @@ export class EditorViewer extends SceneViewer {
   public onMouseDown(event) {
     this.setIntersection(event);
     const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
-      return elem instanceof Mesh || elem instanceof Group;
+      return elem instanceof Mesh;
     }));
-    console.log(this._scene.children);
     if (intersected.length > 0)
       this.selectObject(intersected[0].object);
   }
