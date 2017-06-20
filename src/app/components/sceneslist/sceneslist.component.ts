@@ -42,10 +42,10 @@ export class ScenesListComponent implements OnDestroy {
     this.gameId = queryParam['gameId'];
     this.isNew = queryParam['new'];
 
+    this.scenes.setGameId(this.gameId);
     if (this.isNew == 1) {
       this.scenes.postScene('Default', this, this.redirect);
     }
-    this.scenes.setGameId(this.gameId);
     this.lsScenes = this.scenes.getScenes();
   }
 
