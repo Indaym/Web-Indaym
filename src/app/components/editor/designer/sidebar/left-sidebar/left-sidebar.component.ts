@@ -58,7 +58,7 @@ export class LeftSidebarComponent implements OnInit{
 
     while (cnt < tmpStock.length) {
       stock.push({
-        name: tmpStock[cnt].name, 
+        name: tmpStock[cnt].name,
         icon: "app/components/editor/designer/sidebar/left-sidebar/tmp/" + tmpStock[cnt].name + ".png"
       });
       cnt += 1;

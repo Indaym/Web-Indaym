@@ -33,9 +33,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const dom = document.getElementById('previewContainer');
     this.scene = new PlayerViewer({
-      width: 1500,
-      height: 900
+      width: () => window.innerWidth,
+      height: () => window.innerHeight - dom.offsetTop - 5
     });
     this.scene.defaultLoad('previewContainer');
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
