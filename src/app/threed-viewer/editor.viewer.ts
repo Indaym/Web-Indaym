@@ -8,6 +8,7 @@ import {
   Object3D,
   GridHelper,
   AxisHelper,
+  DirectionalLight,
 } from 'three';
 
 import {
@@ -37,7 +38,16 @@ export class EditorViewer extends SceneViewer {
     // Add Grid and Axis Helper
     this._scene.add(new GridHelper(1000, 1000));
     this._scene.add(new AxisHelper(1000));
-    new ThreeDModelViewer(this._scene);
+    const light = new DirectionalLight(0xffffff, 1);
+    this._scene.add(light);
+    const model = new ThreeDModelViewer('/assets/models/Pawn.OBJ');
+    model.load((mesh) => {
+      const child = mesh.children[0];
+      // child.geometry.applyMatrix( new Matrix4().makeTranslation(-0.322944 * 1.5, 0.000000, -0.400028 * 1.5) );
+      child.material.emissive.setHex(0x303030);
+      child.scale.multiply(new Vector3(5, 5, 5));
+      this._scene.add(child);
+    });
   }
 
   /**
@@ -158,8 +168,9 @@ export class EditorViewer extends SceneViewer {
   public onMouseDown(event) {
     this.setIntersection(event);
     const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
-      return elem instanceof Mesh;
+      return elem instanceof Mesh || elem instanceof Group;
     }));
+    console.log(this._scene.children);
     if (intersected.length > 0)
       this.selectObject(intersected[0].object);
   }

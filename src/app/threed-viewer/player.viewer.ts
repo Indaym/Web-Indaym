@@ -42,15 +42,7 @@ export class PlayerViewer extends SceneViewer {
    */
   public intersectObjects(event, objects = this._scene.children) {
     this.setIntersection(event);
-    let toAdd = [];
-    objects.forEach((obj) => {
-      let linkModel = (<any>obj).LinkModel;
-      if (linkModel !== undefined && linkModel.object !== undefined && linkModel.object.type === 'grid') {
-        toAdd = [...toAdd, ...linkModel.threeDModel.mesh.children];
-      }
-    });
-    objects = [...objects, ...toAdd];
-    return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh));
+    return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh), true);
   }
 
   /**
