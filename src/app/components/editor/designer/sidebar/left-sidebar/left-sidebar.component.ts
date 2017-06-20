@@ -38,32 +38,29 @@ export class LeftSidebarComponent implements OnInit{
   private gameController;
   private objects;
   private show;
+  private readonly icons = ["board3x3", "board1x9", "blackpawn", "whitepawn"];
 
   constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
-    this.objects = this.gameController.getObjects();
   }
 
   ngOnInit() {
+    this.objects = this.gameController.getObjects();
     this.show = this.setIcons();
   }
 
   private setIcons() {
-    var obj;
-    var tmp;
-    var stock = [];
+    let obj;
+    let stock = [];
 
-    var cnt = 0;
-    var tmpStock = this.gameController.getObjects();
-
-    while (cnt < tmpStock.length) {
-      stock.push({
-        name: tmpStock[cnt].name,
-        icon: "app/components/editor/designer/sidebar/left-sidebar/tmp/" + tmpStock[cnt].name + ".png"
-      });
-      cnt += 1;
+    this.objects = this.gameController.getObjects();
+    for (let elem of this.objects) {
+      obj = { name: elem.name };
+      if (this.icons.indexOf(elem.name) >= 0)
+        obj['icon'] = "/assets/icons/" + elem.name + ".png"
+      stock.push(obj);
     }
-    return (stock);
+    return stock;
   }
 
   private toggleMode() {

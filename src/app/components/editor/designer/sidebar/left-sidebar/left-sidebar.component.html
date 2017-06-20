@@ -69,7 +69,7 @@
 
   <tab tabTitle="Objects List">
     <div *ngFor="let item of setIcons()">
-      <img src={{item.icon}}>
+      <img *ngIf="item.icon" src={{item.icon}}>
       {{item.name}}
     </div>
   </tab>
