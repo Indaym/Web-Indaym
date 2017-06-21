@@ -7,3 +7,4 @@ export { GameControllerService }  from './gameController.service';
 export { GameService }            from './game.service';
 export { SceneService }           from './scene.service';
 export { ObjectService }          from './object.service';
+export { RulesServices }          from './rules.service'
