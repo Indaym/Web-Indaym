@@ -17,6 +17,8 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
+  //  TODO: ajouter la liste des règles instancier ici
+
   /**
    *
    * parameter :
@@ -27,6 +29,7 @@ export class ModelViewer {
    * {
    *   position: Array
    *   dimension: Array
+   *   // rules: Object
    *   geometry: THREE.Geometry
    *   material: THREE.Material
    * }
