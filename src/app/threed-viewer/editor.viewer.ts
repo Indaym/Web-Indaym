@@ -40,7 +40,7 @@ export class EditorViewer extends SceneViewer {
     this._scene.add(new AxisHelper(1000));
     const light = new DirectionalLight(0xffffff, 1);
     this._scene.add(light);
-    
+
     /*
     // Test of loading a 3D model
     const model = new ThreeDModelViewer('/assets/models/Pawn.OBJ');

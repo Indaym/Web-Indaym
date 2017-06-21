@@ -91,7 +91,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
           if (old === undefined)
             delete obj.object['position'];
           else
-            obj.object.position = old
+            obj.object.position = old;
         });
       }
     }

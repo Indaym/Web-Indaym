@@ -1,8 +1,8 @@
 import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
-import { HtmlService }  from "../../../services/html.service";
-import { GameService }  from "../../../services/game.service";
+import { HtmlService }  from '../../../services/html.service';
+import { GameService }  from '../../../services/game.service';
 
 @Component({
   selector  : 'ia-store',
@@ -15,7 +15,7 @@ import { GameService }  from "../../../services/game.service";
 
 export class StoreComponent {
   public lsGames;
-  
+
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
