@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-contact',
   template  : require('./contact.component.html'),
   styleUrls : [
-    require('./contact.component.css')
+    require('./contact.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class ContactComponent {
 }

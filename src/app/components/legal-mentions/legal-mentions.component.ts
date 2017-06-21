@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-legal-mentions',
   template  : require('./legal-mentions.component.html'),
   styles    : [
-    require('./legal-mentions.component.css')
+    require('./legal-mentions.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class LegalMentionsComponent {
 }

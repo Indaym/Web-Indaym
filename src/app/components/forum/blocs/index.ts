@@ -9,5 +9,5 @@ export const BLOC_COMPONENTS = [
   BlocDiscComponent,
   BlocHelpComponent,
   BlocIdeaComponent,
-  BlocLfgComponent
+  BlocLfgComponent,
 ];

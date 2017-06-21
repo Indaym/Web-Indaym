@@ -3,3 +3,4 @@
  */
 
 export { PreviewComponent } from './preview.component';
+export { RulesInterface }   from './rulesInterface';

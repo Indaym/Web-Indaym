@@ -5,39 +5,42 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
 }                                 from '@angular/core';
 import { EventDispatcher }        from 'three';
 
 import { GameControllerService }  from '../../../../services/gameController.service';
+import { RulesInterface }         from '.';
 import {
   PlayerViewer,
-  ModelsLoader
-}                                 from '../../../threed-viewer'
+  ModelsLoader,
+}                                 from '../../../threed-viewer';
 
 @Component({
   selector  : 'ia-preview',
   template  : require('./preview.component.html'),
   styles    : [
-    require('./preview.component.css')
+    require('./preview.component.css'),
   ],
   providers : [],
 })
 export class PreviewComponent implements OnInit, OnDestroy {
   private gameController;
-  private scene:PlayerViewer;
-  private modelsLoader:ModelsLoader;
+  private scene: PlayerViewer;
+  private modelsLoader: ModelsLoader;
+  private rulesInterface: RulesInterface;
 
-  constructor(private gameControllerService:GameControllerService) {
+  constructor(private gameControllerService: GameControllerService) {
     this.gameController = gameControllerService.gameController;
+    this.rulesInterface = new RulesInterface();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const dom = document.getElementById('previewContainer');
     this.scene = new PlayerViewer({
       width: () => window.innerWidth,
-      height: () => window.innerHeight - dom.offsetTop - 5
-    });
+      height: () => window.innerHeight - dom.offsetTop - 5,
+    }, this.rulesInterface);
     this.scene.defaultLoad('previewContainer');
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
     this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
@@ -49,7 +52,5 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.modelsLoader.initEvents(this.gameController);
   }
 
-  ngOnDestroy() {
-
-  }
+  public ngOnDestroy() {}
 }

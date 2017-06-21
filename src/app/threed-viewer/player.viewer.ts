@@ -8,23 +8,30 @@ import {
   MeshBasicMaterial,
   Geometry,
   PlaneBufferGeometry,
-  BackSide
-}                       from 'three';
+  BackSide,
+}                         from 'three';
 
-import { SceneViewer }  from '.';
+import { SceneViewer }    from '.';
+import { RulesInterface } from '../components/editor/preview/rulesInterface';
 
 export class PlayerViewer extends SceneViewer {
   private _selected;
   private _intersectPlane;
   private _hovered;
+  private rulesInterface: RulesInterface;
 
-  constructor(conf: any = {}) {
+  constructor(conf: any = {}, rulesInterface?: RulesInterface) {
     super(conf);
 
     this._scene.add(new AxisHelper(1000));
     this._controls.enableKeys = false;
-    this._intersectPlane = new Mesh(new PlaneBufferGeometry(500, 500, 8, 8), new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false}));
+    this._intersectPlane = new Mesh(
+      new PlaneBufferGeometry(500, 500, 8, 8),
+      new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false})
+    );
     this._scene.add(this._intersectPlane);
+    if (rulesInterface)
+      this.rulesInterface = rulesInterface;
   }
 
   /**
@@ -33,20 +40,20 @@ export class PlayerViewer extends SceneViewer {
    * @param objects : Objects to search in
    * @returns {Intersection[]}
    */
-  intersectObjects(event, objects = this._scene.children) {
+  public intersectObjects(event, objects = this._scene.children) {
     this.setIntersection(event);
-    return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh));
+    return this._raycaster.intersectObjects(objects.filter((elem) => elem instanceof Mesh), true);
   }
 
   /**
    * Select an object on 3D view
    * @param obj : Mesh to select
    */
-  selectObject(obj: Mesh) {
+  public selectObject(obj: Mesh) {
     if (this._selected !== undefined && this._selected.object !== undefined)
       this.unselectObject();
     this._selected = {
-      object:obj
+      object: obj,
     };
     let outlineMaterial1 = new MeshBasicMaterial( { color: 0xff0000, side: BackSide } );
     this._selected.glow = new Mesh(<Geometry>obj.geometry, outlineMaterial1);
@@ -60,7 +67,7 @@ export class PlayerViewer extends SceneViewer {
   /**
    * Unselect the selected object
    */
-  unselectObject() {
+  public unselectObject() {
     if (this._selected === undefined)
       return;
     if (this._selected.glow !== undefined) {
@@ -75,8 +82,8 @@ export class PlayerViewer extends SceneViewer {
    * Get information if there is an object already selected
    * @returns {boolean}
    */
-  hasSelection() {
-    return (this._selected !== undefined && (this._selected.object !== undefined || this._selected.glow !== undefined))
+  public hasSelection() {
+    return (this._selected !== undefined && (this._selected.object !== undefined || this._selected.glow !== undefined));
   }
 
   /**
@@ -84,7 +91,7 @@ export class PlayerViewer extends SceneViewer {
    * @param obj : Intersected object
    * @returns {boolean}
    */
-  isDraggable(obj) {
+  public isDraggable(obj) {
     let linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
       return false;
@@ -96,7 +103,7 @@ export class PlayerViewer extends SceneViewer {
    * @param obj : Intersected object
    * @returns {boolean}
    */
-  isDroppable(obj) {
+  public isDroppable(obj) {
     let linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
       return false;
@@ -109,13 +116,13 @@ export class PlayerViewer extends SceneViewer {
    * @param ignoreSelect : Ignore the object already selected
    * @returns {any}
    */
-  getFirstDragOrDrop(objs, ignoreSelect = true) {
+  public getFirstDragOrDrop(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
-        if(this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
+        if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
       let linkModel = (val.object as any).LinkModel;
-      return (linkModel !== undefined && (linkModel.object.draggable === true || linkModel.object.droppable === true))
+      return (linkModel !== undefined && (linkModel.object.draggable === true || linkModel.object.droppable === true));
     });
   }
 
@@ -125,13 +132,13 @@ export class PlayerViewer extends SceneViewer {
    * @param ignoreSelect : Ignore the object already selected
    * @returns {any}
    */
-  getFirstDraggable(objs, ignoreSelect = true) {
+  public getFirstDraggable(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
-        if(this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
+        if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
       let linkModel = (val.object as any).LinkModel;
-      return (linkModel !== undefined && linkModel.object.draggable === true)
+      return (linkModel !== undefined && linkModel.object.draggable === true);
     });
   }
 
@@ -141,13 +148,13 @@ export class PlayerViewer extends SceneViewer {
    * @param ignoreSelect : Ignore the object already selected
    * @returns {any}
    */
-  getFirstDroppable(objs, ignoreSelect = true) {
+  public getFirstDroppable(objs, ignoreSelect = true) {
     return objs.find((val) => {
       if (ignoreSelect === true)
-        if(this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
+        if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
       let linkModel = (val.object as any).LinkModel;
-      return (linkModel !== undefined && linkModel.object.droppable === true)
+      return (linkModel !== undefined && linkModel.object.droppable === true);
     });
   }
 
@@ -155,7 +162,7 @@ export class PlayerViewer extends SceneViewer {
    * Move selected object to Droppable object
    * @param drop : Droppable object
    */
-  moveToDroppable(drop) {
+  public moveToDroppable(drop) {
     if (drop === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
       return;
     this._selected.object.position.copy(drop.object.LinkModel.threeDModel.dropPosition(this._selected.object));
@@ -167,8 +174,8 @@ export class PlayerViewer extends SceneViewer {
    * Called when a mouse button is Down in 3D view
    * @param event : MouseEvent
    */
-  onMouseDown(event) {
-    if(event.button === 0) {
+  public onMouseDown(event) {
+    if (event.button === 0) {
       let intersected = this.intersectObjects(event);
 
       if (intersected.length > 0) {
@@ -178,23 +185,29 @@ export class PlayerViewer extends SceneViewer {
           let obj = this.getFirstDraggable(intersected);
           if (obj !== undefined)
             this.selectObject(obj.object);
-        }
-        else {
+        } else {
           let obj = this.getFirstDragOrDrop(intersected);
-          if (obj === undefined)
+          if (obj === undefined) {
             this.unselectObject();
-          else {
-            if (this.isDroppable(obj))
-              this.moveToDroppable(obj);
-            else
+          } else {
+            if (this.isDroppable(obj) && this.rulesInterface !== undefined) {
+              this.rulesInterface.emit('canMoveObject', {
+                  source: this._selected,
+                  target: obj,
+                },
+                () => {
+                  this.moveToDroppable(obj);
+                }
+              );
+            } else {
               this.selectObject(obj.object);
+            }
           }
         }
         if (this.hasSelection())
           this._intersectPlane.position.copy(this._selected.object.position);
         this._intersectPlane.lookAt(this._camera.position);
-      }
-      else
+      } else
         this.unselectObject();
     }
   }
@@ -203,8 +216,8 @@ export class PlayerViewer extends SceneViewer {
    * Called when mouse move in 3D view
    * @param event : MouseEvent
    */
-  onMouseMove(event) {
-    if(event.buttons === 1 && this.hasSelection()) {
+  public onMouseMove(event) {
+    if (event.buttons === 1 && this.hasSelection()) {
       let intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
         this._intersectPlane.position.copy(intersected[0].point);
@@ -212,16 +225,16 @@ export class PlayerViewer extends SceneViewer {
         this._selected.object.position.copy(intersected[0].point);
         this._selected.glow.position.copy(intersected[0].point);
       }
-    }
-    else {
+    } else {
       let drop = this.getFirstDroppable(this.intersectObjects(event));
       if (drop !== undefined) {
         if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
+          if (this._hovered !== undefined)
+            this._hovered.hover(false);
           this._hovered = drop.object.LinkModel.threeDModel;
           this._hovered.hover(true);
         }
-      }
-      else {
+      } else {
         if (this._hovered !== undefined)
           this._hovered.hover(false);
       }
@@ -232,16 +245,28 @@ export class PlayerViewer extends SceneViewer {
    * Called when a mouse button is up on 3D view
    * @param event
    */
-  onMouseUp(event) {
+  public onMouseUp(event) {
     if (event.button === 0 && this._selected !== undefined && this._selected.object !== undefined) {
       let intersected = this.intersectObjects(event);
       let drop = this.getFirstDroppable(intersected);
-      if(drop === undefined) {
+      if (drop === undefined) {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
-      }
-      else
-        this.moveToDroppable(drop);
+      } else
+        if (this.rulesInterface !== undefined) {
+          this.rulesInterface.emit('canMoveObject', {
+              source: this._selected,
+              target: drop,
+            },
+            () => {
+              this.moveToDroppable(drop);
+            },
+            () => {
+              this._selected.object.position.copy(this._selected.oldPosition);
+              this._selected.glow.position.copy(this._selected.oldPosition);
+            }
+          );
+        }
     }
     this._controls.enableRotate = true;
   }

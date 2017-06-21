@@ -8,17 +8,17 @@ import { GameService }  from "../../../services/game.service";
   selector  : 'ia-store',
   template  : require('./store.component.html'),
   styles    : [
-    require('./store.component.css')
+    require('./store.component.css'),
   ],
-    providers : [GameService],
+  providers : [GameService],
 })
 
 export class StoreComponent {
+  public lsGames;
+  
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
-
-  lsGames;
 
   public getGamesList() {
     this.lsGames = this.games.getGames();

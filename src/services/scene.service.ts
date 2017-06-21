@@ -1,46 +1,50 @@
 /**
  * Created by Caro on 05/04/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }     from '@angular/core';
+import { Http }           from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { DefaultService } from './default.service';
+
 @Injectable()
-export class SceneService {
-  private initUrl = 'http://localhost:3000/games';
+export class SceneService  extends DefaultService {
   private scenesUrl = '';
   private scenes = [];
 
   constructor(private http: Http) {
-    this.scenesUrl = this.initUrl;
+    super();
+    this.settedErrorMessage = 'URL for *Scenes* not setted';
   }
 
-  setGameId(gameId) {
-    console.log("setting gameId to " + gameId);
-    this.scenesUrl = this.initUrl +  "/" + gameId + "/scenes";
+  public setGameId(gameId) {
+    this.setted = true;
+    this.scenesUrl = this.serverUrl +  'games/' + gameId + '/scenes/';
   }
 
-  getScenes() {
-    console.log("loading scenes");
-
+  public getScenes() {
+    if (!this.isSetted(true))
+      return;
     this.scenes = [];
     this.http.get(this.scenesUrl)
       .flatMap((res) => res.json())
-      .subscribe(data => {this.scenes.push(data);});
+      .subscribe((data) => {this.scenes.push(data);});
     return this.scenes;
   }
 
-  getOneScene(id, callback) {
-    this.http.get(this.scenesUrl + '/' + id)
+  public getOneScene(id, callback) {
+    if (!this.isSetted(true))
+      return;
+    this.http.get(this.scenesUrl + id)
       .map((res) => res.json())
       .subscribe(callback);
   }
 
-  postScene(name, meuh, callback) {
-    console.log("posting scene : " + name);
-
-    this.http.post(this.scenesUrl, {"name": name})
+  public postScene(name, meuh, callback) {
+    if (!this.isSetted(true))
+      return;
+    this.http.post(this.scenesUrl, {'name': name})
       .map((res) => res.json())
-      .subscribe(data => callback(meuh, data));
+      .subscribe((data) => callback(meuh, data));
   }
 }

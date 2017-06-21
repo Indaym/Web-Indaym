@@ -1,25 +1,23 @@
 import {
   Component,
-  Input
+  Input,
 }                   from '@angular/core';
 
-import { Tabs }     from './tabs.component';
+import { TabsComponent }     from './tabs.component';
 
 @Component({
-  selector  : 'tab',
+  selector  : 'ia-tab',
   template  : `
     <div [hidden]="!active">
       <ng-content></ng-content>
     </div>
-  `
+  `,
 })
-export class Tab {
+export class TabComponent {
+  public active: boolean;
+  @Input() public tabTitle: string;
 
-  active: boolean;
-
-  @Input() tabTitle: string;
-
-  constructor(tabs: Tabs) {
+  constructor(tabs: TabsComponent) {
     tabs.addTab(this);
   }
 }

@@ -1,5 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { NgModule }               from '@angular/core';
 
 import { AppModule }              from './app';
 
@@ -9,7 +8,7 @@ import { AppModule }              from './app';
  */
 export function main(initialHmrState?: any): Promise<any> {
   return platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
 }
 
 /*

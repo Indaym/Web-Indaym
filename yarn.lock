@@ -4383,6 +4383,12 @@ threejs-transformcontrols@^0.83.0:
   dependencies:
     three "0.83.0"
 
+"threejsaddons@https://github.com/Indaym/ThreeJsAddons.git":
+  version "1.0.0"
+  resolved "https://github.com/Indaym/ThreeJsAddons.git#55159830645b5189979a4b3a1f1ed53c49a20b35"
+  dependencies:
+    three "0.83.0"
+
 throat@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-3.0.0.tgz#e7c64c867cbb3845f10877642f7b60055b8ec0d6"

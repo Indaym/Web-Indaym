@@ -11,5 +11,5 @@ export { DesignerComponent }    from './designer.component';
 export const DESIGNER_COMPONENTS = [
   DesignerComponent,
   ViewerComponent,
-  SIDEBAR_COMPONENTS
+  SIDEBAR_COMPONENTS,
 ];

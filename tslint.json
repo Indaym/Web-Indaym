@@ -59,6 +59,10 @@
       true,
       "check-space"
     ],
+    "max-line-length": [
+      true,
+      150
+    ],
     "member-access": true,
     "no-trailing-whitespace": true,
     "arrow-parens": true,
@@ -75,6 +79,7 @@
     "use-isnan": true,
     "no-var-requires": false,
     "object-literal-sort-keys": false,
+    "no-string-literal": false,
     "directive-selector-name": [
       true,
       "camelCase"
@@ -114,6 +119,10 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "no-attribute-parameter-decorator": true,
-    "no-forward-ref": true
+    "no-forward-ref": true,
+    "no-console": [
+      false // true for Production
+    ],
+    "no-empty": false
   }
 }

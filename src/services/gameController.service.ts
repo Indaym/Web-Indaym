@@ -2,16 +2,16 @@
  * Created by nicolas on 14/04/17.
  */
 
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { gameObjectsController } from '../models/gameObjectsController';
+import { GameObjectsController } from '../models/gameObjectsController';
 
 @Injectable()
 export class GameControllerService {
-  private _gameController: gameObjectsController;
+  private _gameController: GameObjectsController;
 
   constructor() {
-    this._gameController = new gameObjectsController();
+    this._gameController = new GameObjectsController();
   }
 
   get gameController() {

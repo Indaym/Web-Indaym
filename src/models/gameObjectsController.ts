@@ -25,7 +25,7 @@ import { datas }            from './temporaryFill';
  * - deleteAllObjectsToService : Throw when all object is deleted
  */
 
-export class gameObjectsController {
+export class GameObjectsController {
   private gameInfo;
   private scenes = [];
   private currentScene;
@@ -41,7 +41,7 @@ export class gameObjectsController {
    * @param type : Type of the event
    * @param callback : Callback called when event throw
    */
-  subscribe(type:string, callback) {
+  public subscribe(type: string, callback) {
     this.eventDispatcher.addEventListener(type, callback);
   }
 
@@ -50,11 +50,16 @@ export class gameObjectsController {
    * @param type : Type of the event to emit
    * @param datas : Data to emit
    */
-  emit(type, datas) {
-    this.eventDispatcher.dispatchEvent({
-      'type' : type,
-      'datas' : datas
-    });
+  public emit(type, datas, success?: Function, error?: Function) {
+    const obj = {
+      type: type,
+      datas: datas,
+    };
+    if (success)
+      obj['success'] = success;
+    if (error)
+      obj['error'] = error;
+    this.eventDispatcher.dispatchEvent(obj);
   }
 
   /**
@@ -62,21 +67,21 @@ export class gameObjectsController {
    * @param game : Informations about game
    * @param reset : Reset scenes ands objects (Default true)
    */
-  setGame(game, reset = true) {
+  public setGame(game, reset = true) {
     this.gameInfo = game;
     if (reset === true) {
       this.scenes = [];
       this.currentScene = undefined;
       this.currentObjects = [];
     }
-    this.emit("setGame", this.gameInfo);
+    this.emit('setGame', this.gameInfo);
   }
 
   /**
    * Get game informations
    * @returns {any}
    */
-  getGame() {
+  public getGame() {
     return this.gameInfo;
   }
 
@@ -85,20 +90,20 @@ export class gameObjectsController {
    * @param scenes : scenes of the game
    * @param reset : Reset selected scene and objects (Default true)
    */
-  setScenes(scenes, reset = true) {
+  public setScenes(scenes, reset = true) {
     this.scenes = scenes;
     if (reset === true) {
       this.currentScene = undefined;
       this.currentObjects = [];
     }
-    this.emit("setScenes", this.scenes);
+    this.emit('setScenes', this.scenes);
   }
 
   /**
    * Get scenes of a game
    * @returns {Array}
    */
-  getScenes() {
+  public getScenes() {
     return this.scenes;
   }
 
@@ -106,14 +111,14 @@ export class gameObjectsController {
    * Select the current scene
    * @param sceneId : Id of the scene to select
    */
-  selectScene(sceneId) {
+  public selectScene(sceneId) {
     if (this.scenes !== undefined) {
       let scene = this.scenes.find((value) => {
         return value.uuid === sceneId;
       });
       if (scene !== undefined) {
         this.currentScene = scene;
-        this.emit("selectScene", this.currentScene);
+        this.emit('selectScene', this.currentScene);
       }
     }
   }
@@ -122,7 +127,7 @@ export class gameObjectsController {
    * Get the selected scene
    * @returns {any}
    */
-  getSelectedScene() {
+  public getSelectedScene() {
     return this.currentScene;
   }
 
@@ -132,15 +137,15 @@ export class gameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  addObject(obj, emit = true, typeEvent = "ToView") {
+  public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects === undefined)
       this.currentObjects = [];
     this.currentObjects.push(obj);
     if (emit === true) {
-      if (typeEvent === "ToView" || typeEvent === "Both")
-        this.emit("addObject", obj);
-      if (typeEvent === "ToService" || typeEvent === "Both")
-        this.emit("addObjectToService", obj);
+      if (typeEvent === 'ToView' || typeEvent === 'Both')
+        this.emit('addObject', obj, success, error);
+      if (typeEvent === 'ToService' || typeEvent === 'Both')
+        this.emit('addObjectToService', obj, success, error);
     }
   }
 
@@ -150,13 +155,13 @@ export class gameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  addGroupObjects(objs, emit = true, typeEvent = "ToView") {
+  public addGroupObjects(objs, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     this.currentObjects = [ ...this.currentObjects, ...objs];
     if (emit === true) {
-      if (typeEvent === "ToView" || typeEvent === "Both")
-        this.emit("addGroupObjects", objs);
-      if (typeEvent === "ToService" || typeEvent === "Both")
-        this.emit("addGroupObjectsToService", objs);
+      if (typeEvent === 'ToView' || typeEvent === 'Both')
+        this.emit('addGroupObjects', objs, success, error);
+      if (typeEvent === 'ToService' || typeEvent === 'Both')
+        this.emit('addGroupObjectsToService', objs, success, error);
     }
   }
 
@@ -164,7 +169,7 @@ export class gameObjectsController {
    * Get objects of the current scene
    * @returns {Array}
    */
-  getObjects() {
+  public getObjects() {
     return this.currentObjects;
   }
 
@@ -174,18 +179,18 @@ export class gameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  deleteObject(objectId, emit = true, typeEvent = "ToView") {
+  public deleteObject(objectId, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
         return value.id === objectId;
       });
-      if (objIndex != -1) {
+      if (objIndex !== -1) {
         let removed = this.currentObjects.splice(objIndex, 1);
         if (emit === true) {
-          if (typeEvent === "ToView" || typeEvent === "Both")
-            this.emit("deleteObject", removed[0]);
-          if (typeEvent === "ToService" || typeEvent === "Both")
-            this.emit("deleteObjectToService", removed[0]);
+          if (typeEvent === 'ToView' || typeEvent === 'Both')
+            this.emit('deleteObject', removed[0], success, error);
+          if (typeEvent === 'ToService' || typeEvent === 'Both')
+            this.emit('deleteObjectToService', removed[0], success, error);
         }
       }
     }
@@ -196,15 +201,15 @@ export class gameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  deleteAllObjects(emit = true, typeEvent = "ToView") {
+  public deleteAllObjects(emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects !== undefined) {
       let objects = this.currentObjects;
       this.currentObjects = [];
       if (emit === true) {
-        if (typeEvent === "ToView" || typeEvent === "Both")
-          this.emit("deleteAllObjects", objects);
-        if (typeEvent === "ToService" || typeEvent === "Both")
-          this.emit("deleteAllObjectsToService", objects);
+        if (typeEvent === 'ToView' || typeEvent === 'Both')
+          this.emit('deleteAllObjects', objects, success, error);
+        if (typeEvent === 'ToService' || typeEvent === 'Both')
+          this.emit('deleteAllObjectsToService', objects, success, error);
       }
     }
   }
@@ -212,7 +217,7 @@ export class gameObjectsController {
   /**
    * Temporary function to fill the controller
    */
-  fillObjectsController() {
+  public fillObjectsController() {
     this.addGroupObjects(datas);
   }
 }

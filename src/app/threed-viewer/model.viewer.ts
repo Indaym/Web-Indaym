@@ -6,9 +6,8 @@ import {
   Vector3,
   Mesh,
   Geometry,
-  Material
+  Material,
 } from 'three';
-
 
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
@@ -19,10 +18,6 @@ export class ModelViewer {
 
   /**
    *
-   * parameter :
-   */
-  /**
-   *
    * @param conf => type: json object
    * {
    *   position: Array
@@ -31,7 +26,7 @@ export class ModelViewer {
    *   material: THREE.Material
    * }
    */
-  constructor(conf: any = {}) {
+  constructor(conf: any = {}, editorMode: Boolean = false) {
     if (conf.position instanceof Array)
       this._position.copy(new Vector3().fromArray(conf.position));
     if (conf.dimension instanceof Array)
@@ -47,7 +42,9 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   get position(): Vector3 {
-    return this._position;
+    const pos = new Vector3();
+    pos.setFromMatrixPosition(this.mesh.matrixWorld);
+    return pos;
   }
 
   /**
@@ -128,14 +125,15 @@ export class ModelViewer {
    * Hover function when we hover model
    * @param activate
    */
-  hover(activate = true) {}
+  public hover(activate = true) {}
 
   /**
    * Get the position to drop the object
    * @returns {Vector3}
    */
-  dropPosition(obj) {
-    let pos = this.mesh.position.clone();
+  public dropPosition(obj) {
+    let pos = new Vector3();
+    pos.setFromMatrixPosition(this.mesh.matrixWorld);
     pos.y += this.mesh.scale.y / 2;
     if (obj !== undefined)
       pos.y += obj.scale.y / 2;
@@ -146,7 +144,7 @@ export class ModelViewer {
    * Generate Mesh with model informations
    * @returns {any} : Mesh
    */
-  generateMesh() {
+  public generateMesh() {
     if (this._geometry == null || this._material == null)
       return null;
     this._mesh = new Mesh(this._geometry, this._material);
