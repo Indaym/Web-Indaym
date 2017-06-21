@@ -16,12 +16,15 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
+  //  TODO: ajouter la liste des règles instancier ici
+
   /**
    *
    * @param conf => type: json object
    * {
    *   position: Array
    *   dimension: Array
+   *   // rules: Object
    *   geometry: THREE.Geometry
    *   material: THREE.Material
    * }

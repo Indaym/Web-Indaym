@@ -11,6 +11,7 @@ export let datas = [
       droppable: true,
       dimension: [77.8, 2.0, 12.2],
       position: [-100, 0, 50],
+      // TODO: ajouter un objet listant les règles avec leurs conf
       texturesPaths: [
         'side.png', 'side.png',
         'pion_table.png', 'side.png',
