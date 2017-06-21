@@ -11,7 +11,7 @@ export const enum RULE_TYPE {
 } 
  
 export abstract class BaseRules { 
-  public _id: string; 
+  protected _id: string; 
   protected _ruleType: RULE_TYPE = RULE_TYPE.default; 
   protected _description: string;
   // TODO: ajouter une ref sur la scène et l'obj
