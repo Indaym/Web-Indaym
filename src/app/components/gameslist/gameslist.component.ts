@@ -14,7 +14,7 @@ import { GameService }  from '../../../services/game.service';
 })
 
 export class GamesListComponent {
-  public lsGames;
+  public lsGames = [];
 
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
@@ -32,6 +32,6 @@ export class GamesListComponent {
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas) );
   }
 }
