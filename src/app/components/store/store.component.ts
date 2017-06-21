@@ -12,16 +12,15 @@ import { GameService }  from '../../../services/game.service';
   ],
   providers : [GameService],
 })
-
 export class StoreComponent {
-  public lsGames;
+  public lsGames = [];
 
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas));
   }
 
   public goToRateGame(id, isNew) {

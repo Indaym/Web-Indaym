@@ -12,7 +12,6 @@ import { GameService }    from '../../../services/game.service';
   ],
     providers : [GameService],
 })
-
 export class RateGameComponent {
   public item;
   public gameId;
@@ -29,7 +28,6 @@ export class RateGameComponent {
 
     this.games.getOneGame(this.gameId, (data) => {
       this.item = data;
-
-      });
+    });
   }
 }

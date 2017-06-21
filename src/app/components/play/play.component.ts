@@ -11,13 +11,13 @@ import { GameService }  from '../../../services/game.service';
   providers : [GameService],
 })
 export class PlayComponent {
-  public lsGames;
+  public lsGames = [];
 
   constructor(private games: GameService) {
     this.getGamesList();
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas));
   }
 }
