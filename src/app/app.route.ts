@@ -19,6 +19,7 @@ import { GamesListComponent }     from './components/gameslist';
 import { ScenesListComponent }    from './components/sceneslist';
 import { PlayComponent }          from './components/play';
 import { StoreComponent }         from './components/store';
+import { RateGameComponent }      from './components/rategame';
 import { ForumComponent }         from './components/forum';
 import { ContactComponent }       from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
@@ -38,6 +39,7 @@ export const routes: Routes = [
   },
   { path: 'play',           component: PlayComponent },
   { path: 'store',          component: StoreComponent },
+  { path: 'rategame',       component: RateGameComponent },
   { path: 'forum',          component: ForumComponent },
   { path: 'contact',        component: ContactComponent },
   { path: 'legalMentions',  component: LegalMentionsComponent },

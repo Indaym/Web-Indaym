@@ -38,16 +38,36 @@ export class LeftSidebarComponent implements OnInit {
     },
   };
   private gameController;
+  private objects;
+  private show;
+  private readonly icons = ["board3x3", "board1x9", "blackpawn", "whitepawn"];
 
   constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
   }
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    this.objects = this.gameController.getObjects();
+    this.show = this.setIcons();
+  }
 
   public addObject(name: string) {
     if (name !== undefined)
       this.gameController.addObject(buttonsDefault[name], true, 'Both');
+  }
+
+  private setIcons() {
+    let obj;
+    let stock = [];
+
+    this.objects = this.gameController.getObjects();
+    for (let elem of this.objects) {
+      obj = { name: elem.name };
+      if (this.icons.indexOf(elem.name) >= 0)
+        obj['icon'] = "/assets/icons/" + elem.name + ".png"
+      stock.push(obj);
+    }
+    return stock;
   }
 
   private toggleMode() {

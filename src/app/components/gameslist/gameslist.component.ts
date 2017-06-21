@@ -20,19 +20,23 @@ export class GamesListComponent {
     this.getGamesList();
   }
 
-  public goToScenesPage(id) {
-    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id } });
+  public goToScenesPage(id, isNew) {
+    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: isNew } });
   }
 
   public redirect(meuh, id) {
-    meuh.goToScenesPage(id.uuid);
+    meuh.goToScenesPage(id.uuid, 0); // existing game
+  }
+
+  public redirectDefaultScene(meuh, id) {
+    meuh.goToScenesPage(id.uuid, 1); // new gameca
   }
 
   public gameFunction() {
     let meuh = this;
     let myText = prompt('Game Name: ');
     if (myText) {
-      this.games.postGame(myText, meuh, this.redirect);
+      this.games.postGame(myText, meuh, this.redirectDefaultScene);
     }
   }
 

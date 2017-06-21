@@ -8,7 +8,7 @@
   <ia-tab tabTitle="Edit">
     <form>
       Search:
-      <input type="search" name="Search a template">
+      <input id="toBlack" type="search" name="Search a template">
     </form>
     <br/>
     Pour placer un objet dans l'éditeur:<br/>
@@ -21,7 +21,7 @@
       <ia-tab tabTitle="Boards">
         <h3>Board Templates</h3><br/>
         <form id="customBoard">Custom board:<br/>
-          <input type="text" name="later">
+          <input id="toBlack" type="text" name="later">
           <button>Add</button>
         </form><br/>
         <div>
@@ -33,7 +33,7 @@
       <ia-tab tabTitle="Pawns">
         <h3>Pawn Templates</h3><br/>
         <form id="customPawn">Custom pawn:<br/>
-          <input type="text" name="later">
+          <input id="toBlack" type="text" name="later">
           <button>Add</button>
         </form><br/>
         <div>
@@ -45,7 +45,7 @@
       <ia-tab tabTitle="Cards">
         <h3>Card Templates</h3><br/>
         <form id="customCards">Custom card:<br/>
-          <input type="text" name="later">
+          <input id="toBlack" type="text" name="later">
           <button>Add</button>
         </form><br/>
         <div>
@@ -57,7 +57,7 @@
       <ia-tab tabTitle="Dices">
         <h3>Dice Templates</h3><br/>
         <form id="customDices">Custom dice:<br/>
-          <input type="text" name="later">
+          <input id="toBlack" type="text" name="later">
           <button>Add</button>
         </form><br/>
         <div>
@@ -67,9 +67,9 @@
     </ia-tabs>
   </ia-tab>
 
-  <ia-tab tabTitle="Objects List">
-    <div *ngFor="let item of gameController.getObjects()">
-      <img src="{{item.icon}}">
+  <tab tabTitle="Objects List">
+    <div *ngFor="let item of setIcons()">
+      <img *ngIf="item.icon" src={{item.icon}}>
       {{item.name}}
     </div>
   </ia-tab>

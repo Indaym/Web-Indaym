@@ -24,6 +24,7 @@ import {
 export class ScenesListComponent implements OnDestroy {
   public lsScenes;
   public gameId;
+  public isNew;
   public subscription: Subscription;
 
   constructor(public html: HtmlService, private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
@@ -38,7 +39,12 @@ export class ScenesListComponent implements OnDestroy {
 
   public getScenesList(queryParam) {
     this.gameId = queryParam.gameId;
+    this.isNew = queryParam.new;
+
     this.scenes.setGameId(this.gameId);
+    if (this.isNew == 1) {
+      this.scenes.postScene('Default', this, this.redirect);
+    }
     this.lsScenes = this.scenes.getScenes();
   }
 
