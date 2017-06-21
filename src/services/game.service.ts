@@ -10,7 +10,6 @@ import { DefaultService } from './default.service';
 @Injectable()
 export class GameService extends DefaultService {
   private gamesUrl;
-  private games = [];
 
   constructor(private http: Http) {
     super();
@@ -19,23 +18,21 @@ export class GameService extends DefaultService {
     this.settedErrorMessage = 'URL for *Games* not setted';
   }
 
-  public getGames() {
-    this.games = [];
+  public getGames(success?, error?) {
     this.http.get(this.gamesUrl)
       .flatMap((res) => res.json())
-      .subscribe((data) => {this.games.push(data);});
-    return this.games;
+      .subscribe(success, error);
   }
 
-  public getOneGame(id, callback) {
+  public getOneGame(id, success?, error?) {
     this.http.get(this.gamesUrl + id)
       .map((res) => res.json())
-      .subscribe(callback);
+      .subscribe(success, error);
   }
 
-  public postGame(name, meuh, callback) {
+  public postGame(name, success?, error?) {
     this.http.post(this.gamesUrl, {'name': name})
       .map((res) => res.json())
-      .subscribe((data) => callback(meuh, data));
+      .subscribe(success, error);
   }
 }

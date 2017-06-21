@@ -10,7 +10,6 @@ import { DefaultService } from './default.service';
 @Injectable()
 export class SceneService  extends DefaultService {
   private scenesUrl = '';
-  private scenes = [];
 
   constructor(private http: Http) {
     super();
@@ -22,29 +21,27 @@ export class SceneService  extends DefaultService {
     this.scenesUrl = this.serverUrl +  'games/' + gameId + '/scenes/';
   }
 
-  public getScenes() {
+  public getScenes(success?, error?) {
     if (!this.isSetted(true))
       return;
-    this.scenes = [];
     this.http.get(this.scenesUrl)
       .flatMap((res) => res.json())
-      .subscribe((data) => {this.scenes.push(data);});
-    return this.scenes;
+      .subscribe(success, error);
   }
 
-  public getOneScene(id, callback) {
+  public getOneScene(id, success?, error?) {
     if (!this.isSetted(true))
       return;
     this.http.get(this.scenesUrl + id)
       .map((res) => res.json())
-      .subscribe(callback);
+      .subscribe(success, error);
   }
 
-  public postScene(name, meuh, callback) {
+  public postScene(name, success?, error?) {
     if (!this.isSetted(true))
       return;
     this.http.post(this.scenesUrl, {'name': name})
       .map((res) => res.json())
-      .subscribe((data) => callback(meuh, data));
+      .subscribe(success, error);
   }
 }
