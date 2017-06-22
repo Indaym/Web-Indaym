@@ -10,7 +10,7 @@ import { GameService }  from '../../../services/game.service';
   styles    : [
     require('./store.component.css'),
   ],
-  providers : [GameService],
+  providers : [ GameService ],
 })
 export class StoreComponent {
   public lsGames = [];

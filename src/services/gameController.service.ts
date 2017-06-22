@@ -2,9 +2,9 @@
  * Created by nicolas on 14/04/17.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable }             from '@angular/core';
 
-import { GameObjectsController } from '../models/gameObjectsController';
+import { GameObjectsController }  from '../models/gameObjectsController';
 
 @Injectable()
 export class GameControllerService {

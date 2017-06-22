@@ -8,7 +8,7 @@ import { GameService }  from '../../../services/game.service';
   styles    : [
     require('./play.component.css'),
   ],
-  providers : [GameService],
+  providers : [ GameService ],
 })
 export class PlayComponent {
   public lsGames = [];
@@ -19,5 +19,8 @@ export class PlayComponent {
 
   public getGamesList() {
     this.games.getGames((datas) => this.lsGames.push(datas));
+  }
+
+  public goToScenesPage(id) {
   }
 }

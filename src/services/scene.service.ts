@@ -3,7 +3,6 @@
  */
 import { Injectable }     from '@angular/core';
 import { Http }           from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 
 import { DefaultService } from './default.service';
 
@@ -42,6 +41,21 @@ export class SceneService  extends DefaultService {
       return;
     this.http.post(this.scenesUrl, {'name': name})
       .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public updateScene(obj, id, success?, error?) {
+    if (!this.isSetted(true))
+      return;
+    this.http.put(this.scenesUrl + id, obj)
+      .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public deleteScene(id, success?, error?) {
+    if (!this.isSetted(true))
+      return;
+    this.http.delete(this.scenesUrl + id)
       .subscribe(success, error);
   }
 }

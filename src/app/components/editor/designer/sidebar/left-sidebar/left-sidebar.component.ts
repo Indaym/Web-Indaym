@@ -16,7 +16,7 @@ import { buttonsDefault } from '../../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService],
+  providers : [ HtmlService ],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
@@ -37,6 +37,7 @@ export class LeftSidebarComponent implements OnInit {
       'pawnBlack': 'Add Black Pawn',
     },
   };
+
   private gameController;
   private objects;
   private show;

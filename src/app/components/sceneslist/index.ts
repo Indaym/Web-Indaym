@@ -1,2 +1,1 @@
-
-export { ScenesListComponent }   from './sceneslist.component';
+export { ScenesListComponent }  from './sceneslist.component';

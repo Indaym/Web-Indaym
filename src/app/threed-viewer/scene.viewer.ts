@@ -22,7 +22,6 @@ export class SceneViewer {
   protected _renderer: WebGLRenderer;
   protected _domElement: HTMLElement;
   protected _controls: any;
-
   protected _eventDispatcher: EventDispatcher;
   protected _raycaster: Raycaster;
   protected _mouse: Vector2 = new Vector2(0, 0);

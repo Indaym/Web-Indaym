@@ -10,7 +10,7 @@ import { GameService }    from '../../../services/game.service';
   styles    : [
     require('./rategame.component.css'),
   ],
-    providers : [GameService],
+  providers : [ GameService ],
 })
 export class RateGameComponent {
   public item;

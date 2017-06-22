@@ -1,9 +1,9 @@
 import {
   Component,
   Input,
-}                   from '@angular/core';
+}                         from '@angular/core';
 
-import { TabsComponent }     from './tabs.component';
+import { TabsComponent }  from './tabs.component';
 
 @Component({
   selector  : 'ia-tab',
@@ -12,10 +12,11 @@ import { TabsComponent }     from './tabs.component';
       <ng-content></ng-content>
     </div>
   `,
+  providers : [],
 })
 export class TabComponent {
-  public active: boolean;
   @Input() public tabTitle: string;
+  public active: boolean;
 
   constructor(tabs: TabsComponent) {
     tabs.addTab(this);

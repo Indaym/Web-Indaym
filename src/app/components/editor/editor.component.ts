@@ -19,7 +19,7 @@ import {
   styles    : [
     require('./editor.component.css'),
   ],
-  providers : [GameService, SceneService, ObjectService, GameControllerService],
+  providers : [ GameService, SceneService, ObjectService, GameControllerService ],
 })
 export class EditorComponent implements OnDestroy, OnInit {
   private subscription: Subscription;

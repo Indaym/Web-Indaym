@@ -3,7 +3,6 @@
  */
 import { Injectable }     from '@angular/core';
 import { Http }           from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 
 import { DefaultService } from './default.service';
 
@@ -33,6 +32,17 @@ export class GameService extends DefaultService {
   public postGame(name, success?, error?) {
     this.http.post(this.gamesUrl, {'name': name})
       .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public updateGame(obj, id, success?, error?) {
+    this.http.put(this.gamesUrl + id, obj)
+      .map((res) => res.json())
+      .subscribe(success, error);
+  }
+
+  public deleteGame(id, success?, error?) {
+    this.http.delete(this.gamesUrl + id)
       .subscribe(success, error);
   }
 }

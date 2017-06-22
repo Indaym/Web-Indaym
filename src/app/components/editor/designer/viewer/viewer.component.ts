@@ -25,10 +25,11 @@ import { buttonsDefault } from '../../../../../models/';
   styles    : [
     require('./viewer.component.css'),
   ],
+  providers : [],
 })
 export class ViewerComponent implements OnInit, OnDestroy {
-  public scene: EditorViewer;
   @Input() public eventDispatcher;
+  public scene: EditorViewer;
 
   private modelsLoader: ModelsLoader;
   private gameController;
