@@ -23,14 +23,14 @@ export class RulesServices {
         this.rules = RULES_DEF;
     }
 
-    getRulesById(id: string) {
-        return this.rules.find(rule => rule.id === id);
+    public getRulesById(id: string) {
+        return this.rules[id];
     }
 
-    newRules(id: string, conf: any = {}) {
+    public getRules(id: string, conf: any = {}) {
         const rule = this.getRulesById(id);
 
-        return new rule(conf);
+        return rule;
     }
 }
 

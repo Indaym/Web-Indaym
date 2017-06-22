@@ -9,3 +9,8 @@ export {
 export { RuleManager }  from './rulesManager'; 
 
 export { RULES_DEF }    from './rules-definition';
+
+export {
+  SceneViewer,
+  ModelViewer,
+}                           from '../threed-viewer';

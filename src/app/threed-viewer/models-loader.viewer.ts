@@ -52,8 +52,16 @@ export class ModelsLoader {
       });
 
       if (model.object.rules != undefined) {
+
+        model.rules = {};
+
         model.object.rules.forEach(
-          rule => model.rules.push(this.rulesService.newRules(rule.id, rule.conf))
+          (rule) => {
+            const ruleDef = this.rulesService.getRules(rule.id);
+            const ruleInstance = new ruleDef(this.scene, this, rule.conf);
+
+            model.rules[ruleInstance.id] = ruleInstance;
+          }
         );
       }
     }

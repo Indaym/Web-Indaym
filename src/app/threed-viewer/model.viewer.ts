@@ -18,15 +18,12 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  protected rules: any;
-
   /**
    *
    * @param conf => type: json object
    * {
    *   position: Array
    *   dimension: Array
-   *   // rules: Object
    *   geometry: THREE.Geometry
    *   material: THREE.Material
    * }
