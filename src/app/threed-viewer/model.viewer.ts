@@ -9,6 +9,8 @@ import {
   Material,
 } from 'three';
 
+import { BaseRules }  from '../rules';
+
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
   private _position: Vector3 = new Vector3(0, 0, 0);
@@ -16,7 +18,7 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  //  TODO: ajouter la liste des règles instancier ici
+  protected rules: any;
 
   /**
    *

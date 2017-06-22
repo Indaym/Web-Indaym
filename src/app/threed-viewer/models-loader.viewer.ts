@@ -9,6 +9,8 @@ import {
   GridModelViewer,
 } from '.';
 
+import { RulesServices }  from '../../services/rules.service';
+
 export class ModelsLoader {
   private types = {
     'board': BoardModelViewer,
@@ -16,8 +18,11 @@ export class ModelsLoader {
     'case': CaseModelViewer,
     'grid': GridModelViewer,
   };
+  private rulesService: RulesServices;
 
-  constructor(private scene, private editorMode: Boolean = false) {}
+  constructor(private scene, private editorMode: Boolean = false) {
+    this.rulesService = new RulesServices();
+  }
 
   /**
    * Load models on 3D view
@@ -45,6 +50,12 @@ export class ModelsLoader {
         this.scene.addInScene(mesh);
         this.scene.render();
       });
+
+      if (model.object.rules != undefined) {
+        model.object.rules.forEach(
+          rule => model.rules.push(this.rulesService.newRules(rule.id, rule.conf))
+        );
+      }
     }
   }
 

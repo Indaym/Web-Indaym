@@ -2,8 +2,12 @@
 // created by djavrell on Fri Jun 02 2017 
 // 
  
-import { EventDispatcher } from 'three'; 
- 
+import { EventDispatcher }  from 'three'; 
+import {
+  SceneViewer,
+  ModelViewer,
+}                           from '../threed-viewer';
+
 export const enum RULE_TYPE { 
   "mouvement", 
   "update", 
@@ -14,6 +18,8 @@ export abstract class BaseRules {
   protected _id: string; 
   protected _ruleType: RULE_TYPE = RULE_TYPE.default; 
   protected _description: string;
+  protected _refScene: SceneViewer;
+  protected _refObj: ModelViewer;
   // TODO: ajouter une ref sur la scène et l'obj
  
   /**
@@ -22,6 +28,11 @@ export abstract class BaseRules {
    *  - send un event avec ca pose pour executer d'autres règles
    * 
    */
+
+  constructor(scene: SceneViewer, obj: ModelViewer) {
+    this._refScene = scene;
+    this._refObj = obj;
+  }
 
   abstract run(): boolean; 
  
