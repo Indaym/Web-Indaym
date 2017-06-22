@@ -31,4 +31,4 @@ export class RuleManager implements OnInit {
   set scene(scene: PlayerViewer) { 
     this._scene = scene; 
   } 
-} 
+}

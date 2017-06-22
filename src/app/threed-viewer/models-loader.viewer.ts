@@ -6,7 +6,9 @@ import {
   BoardModelViewer,
   PawnModelViewer,
   CaseModelViewer
-} from '.'
+}                         from '.';
+
+import { RulesServices }  from '../../services/rules.service';
 
 export class ModelsLoader {
   private types = {
@@ -15,7 +17,11 @@ export class ModelsLoader {
     'case': CaseModelViewer
   };
 
-  constructor(private scene) {}
+  private rulesService: RulesServices;
+
+  constructor(private scene) {
+    this.rulesService = new RulesServices();
+  }
 
   /**
    * Load models on 3D view
@@ -46,6 +52,12 @@ export class ModelsLoader {
         this.scene.addInScene(mesh);
         this.scene.render();
       });
+
+      if (model.object.rules != undefined) {
+        model.object.rules.forEach(
+          rule => model.rules.push(this.rulesService.newRules(rule.id, rule.conf))
+        );
+      }
     }
   }
 

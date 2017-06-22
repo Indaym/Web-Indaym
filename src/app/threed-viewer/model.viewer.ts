@@ -7,7 +7,8 @@ import {
   Mesh,
   Geometry,
   Material
-} from 'three';
+}                     from 'three';
+import { BaseRules }  from '../rules';
 
 
 export class ModelViewer {
@@ -17,7 +18,7 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  //  TODO: ajouter la liste des règles instancier ici
+  protected rules: any;
 
   /**
    *
