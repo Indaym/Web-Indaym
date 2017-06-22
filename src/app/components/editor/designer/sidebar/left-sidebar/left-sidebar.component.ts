@@ -16,7 +16,7 @@ import { buttonsDefault } from '../../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [HtmlService],
+  providers : [ HtmlService ],
   template  : require('./left-sidebar.component.html'),
   styles    : [
     require('./left-sidebar.component.css'),
@@ -37,10 +37,11 @@ export class LeftSidebarComponent implements OnInit {
       'pawnBlack': 'Add Black Pawn',
     },
   };
+
   private gameController;
   private objects;
   private show;
-  private readonly icons = ["board3x3", "board1x9", "blackpawn", "whitepawn"];
+  private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
   constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
@@ -64,7 +65,7 @@ export class LeftSidebarComponent implements OnInit {
     for (let elem of this.objects) {
       obj = { name: elem.name };
       if (this.icons.indexOf(elem.name) >= 0)
-        obj['icon'] = "/assets/icons/" + elem.name + ".png"
+        obj['icon'] = '/assets/icons/' + elem.name + '.png';
       stock.push(obj);
     }
     return stock;

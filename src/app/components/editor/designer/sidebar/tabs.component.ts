@@ -17,6 +17,7 @@ import { TabComponent } from './tab.component';
   styles    : [
     require('./tabs.css'),
   ],
+  providers : [],
 })
 export class TabsComponent {
   public tabs: TabComponent[] = [];

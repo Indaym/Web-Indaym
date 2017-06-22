@@ -1,5 +1,5 @@
-import { Component }              from '@angular/core';
-import { EventDispatcher }        from 'three';
+import { Component }        from '@angular/core';
+import { EventDispatcher }  from 'three';
 
 @Component({
   selector  : 'ia-blueprints',

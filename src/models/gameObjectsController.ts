@@ -161,12 +161,19 @@ export class GameObjectsController {
   public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects === undefined)
       this.currentObjects = [];
-    this.currentObjects.push(obj);
+    if (typeEvent === 'ToView')
+      this.currentObjects.push(obj);
     if (emit === true) {
-      if (typeEvent === 'ToView' || typeEvent === 'Both')
+      if (typeEvent === 'ToView')
         this.emit('addObject', obj, success, error);
       if (typeEvent === 'ToService' || typeEvent === 'Both')
-        this.emit('addObjectToService', obj, success, error);
+        this.emit('addObjectToService', obj, (ret) => {
+          this.currentObjects.push(ret);
+          if (typeEvent === 'Both')
+            this.emit('addObject', ret, success, error);
+          if (success !== undefined)
+            success(ret);
+        }, error);
     }
   }
 
@@ -203,7 +210,7 @@ export class GameObjectsController {
   public deleteObject(objectId, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
     if (this.currentObjects !== undefined) {
       let objIndex = this.currentObjects.findIndex((value) => {
-        return value.id === objectId;
+        return value.uuid === objectId;
       });
       if (objIndex !== -1) {
         let removed = this.currentObjects.splice(objIndex, 1);

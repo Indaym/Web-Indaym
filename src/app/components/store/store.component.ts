@@ -1,8 +1,8 @@
 import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
-import { HtmlService }  from "../../../services/html.service";
-import { GameService }  from "../../../services/game.service";
+import { HtmlService }  from '../../../services/html.service';
+import { GameService }  from '../../../services/game.service';
 
 @Component({
   selector  : 'ia-store',
@@ -10,18 +10,17 @@ import { GameService }  from "../../../services/game.service";
   styles    : [
     require('./store.component.css'),
   ],
-  providers : [GameService],
+  providers : [ GameService ],
 })
-
 export class StoreComponent {
-  public lsGames;
-  
+  public lsGames = [];
+
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas));
   }
 
   public goToRateGame(id, isNew) {
