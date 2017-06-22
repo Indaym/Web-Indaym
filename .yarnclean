@@ -3,6 +3,7 @@ __tests__
 test
 tests
 powered-test
+!tslint/lib/test/
 
 # asset directories
 docs

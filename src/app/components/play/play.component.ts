@@ -1,6 +1,6 @@
 import { Component }    from '@angular/core';
 
-import { GameService }  from "../../../services/game.service";
+import { GameService }  from '../../../services/game.service';
 
 @Component({
   selector  : 'ia-play',
@@ -8,16 +8,19 @@ import { GameService }  from "../../../services/game.service";
   styles    : [
     require('./play.component.css'),
   ],
-  providers : [GameService],
+  providers : [ GameService ],
 })
 export class PlayComponent {
-  public lsGames;
-  
+  public lsGames = [];
+
   constructor(private games: GameService) {
     this.getGamesList();
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas));
+  }
+
+  public goToScenesPage(id) {
   }
 }

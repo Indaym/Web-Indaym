@@ -19,7 +19,7 @@ import {
   styles    : [
     require('./editor.component.css'),
   ],
-  providers : [GameService, SceneService, ObjectService, GameControllerService],
+  providers : [ GameService, SceneService, ObjectService, GameControllerService ],
 })
 export class EditorComponent implements OnDestroy, OnInit {
   private subscription: Subscription;
@@ -49,7 +49,12 @@ export class EditorComponent implements OnDestroy, OnInit {
           result[key] = obj.datas[key];
         return result;
       }, {});
-      this.objectService.postSceneObject(pushObject, obj.success, obj.error);
+      this.objectService.postSceneObject(pushObject, (id) => {
+        this.objectService.getOneObject(id.uuid, (ret) => {
+          ret.object = JSON.parse(ret.object);
+          obj.success(ret);
+        });
+      }, obj.error);
     });
   }
 

@@ -1,2 +1,1 @@
-
-export { GamesListComponent }   from './gameslist.component';
+export { GamesListComponent } from './gameslist.component';

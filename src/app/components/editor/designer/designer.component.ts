@@ -1,6 +1,6 @@
-import { Component }              from '@angular/core';
-import { EventDispatcher }        from 'three';
-import { DND_PROVIDERS }          from 'ng2-dnd';
+import { Component }        from '@angular/core';
+import { EventDispatcher }  from 'three';
+import { DND_PROVIDERS }    from 'ng2-dnd';
 
 @Component({
   selector  : 'ia-designer',

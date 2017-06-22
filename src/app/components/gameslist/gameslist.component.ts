@@ -14,33 +14,24 @@ import { GameService }  from '../../../services/game.service';
 })
 
 export class GamesListComponent {
-  public lsGames;
+  public lsGames = [];
 
   constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
 
-  public goToScenesPage(id, isNew) {
+  public goToScenesPage(id, isNew = 0) {
     this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: isNew } });
   }
 
-  public redirect(meuh, id) {
-    meuh.goToScenesPage(id.uuid, 0); // existing game
-  }
-
-  public redirectDefaultScene(meuh, id) {
-    meuh.goToScenesPage(id.uuid, 1); // new gameca
-  }
-
   public gameFunction() {
-    let meuh = this;
     let myText = prompt('Game Name: ');
     if (myText) {
-      this.games.postGame(myText, meuh, this.redirectDefaultScene);
+      this.games.postGame(myText, (id) => this.goToScenesPage(id.uuid, 1));
     }
   }
 
   public getGamesList() {
-    this.lsGames = this.games.getGames();
+    this.games.getGames((datas) => this.lsGames.push(datas) );
   }
 }

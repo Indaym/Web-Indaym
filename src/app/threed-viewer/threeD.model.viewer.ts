@@ -1,14 +1,9 @@
-import {
-  MeshPhongMaterial,
-  Vector3,
-} from 'three';
-
 const OBJLoader2 = require('threejsaddons');
 
 export class ThreeDModelViewer {
   private objloader;
 
-  constructor(private path:string) {
+  constructor(private path: string) {
     this.objloader = new OBJLoader2();
   }
 

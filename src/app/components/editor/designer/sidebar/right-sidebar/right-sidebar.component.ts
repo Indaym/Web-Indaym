@@ -7,7 +7,6 @@ import {
   Input,
   OnInit,
 }                   from '@angular/core';
-
 import { Vector3 }  from 'three';
 
 @Component({
@@ -17,10 +16,12 @@ import { Vector3 }  from 'three';
     require('./right-sidebar.component.css'),
     require('../sidebars.css'),
   ],
+  providers : [],
 })
 export class RightSidebarComponent implements OnInit  {
   @Input() public end;
   @Input() public eventDispatcher;
+
   private minimumScale = new Vector3();
   private objectSelected = {
     position: new Vector3(),
@@ -28,8 +29,7 @@ export class RightSidebarComponent implements OnInit  {
     rotation: new Vector3(),
   };
 
-  constructor() {
-  }
+  constructor() {}
 
   public ngOnInit() {
     this.eventDispatcher.addEventListener('setMinimumScale', (e) => {

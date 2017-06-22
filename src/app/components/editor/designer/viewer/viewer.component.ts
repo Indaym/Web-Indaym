@@ -25,10 +25,11 @@ import { buttonsDefault } from '../../../../../models/';
   styles    : [
     require('./viewer.component.css'),
   ],
+  providers : [],
 })
 export class ViewerComponent implements OnInit, OnDestroy {
-  public scene: EditorViewer;
   @Input() public eventDispatcher;
+  public scene: EditorViewer;
 
   private modelsLoader: ModelsLoader;
   private gameController;
@@ -85,9 +86,13 @@ export class ViewerComponent implements OnInit, OnDestroy {
       let coord = this.scene.getIntersection();
       if (args.dragData != undefined) {
         let obj = buttonsDefault[args.dragData];
+        let old = obj.object.position;
         obj.object.position = coord.toArray();
-        this.gameController.addObject(obj, true, 'Both', (id) => {
-          obj.uuid = id.uuid;
+        this.gameController.addObject(obj, true, 'Both', (objq) => {
+          if (old === undefined)
+            delete obj.object['position'];
+          else
+            obj.object.position = old;
         });
       }
     }

@@ -22,7 +22,7 @@ import {
   providers : [ HtmlService, SceneService ],
 })
 export class ScenesListComponent implements OnDestroy {
-  public lsScenes;
+  public lsScenes = [];
   public gameId;
   public isNew;
   public subscription: Subscription;
@@ -39,29 +39,21 @@ export class ScenesListComponent implements OnDestroy {
 
   public getScenesList(queryParam) {
     this.gameId = queryParam.gameId;
-    this.isNew = queryParam.new;
+    this.isNew = parseInt(queryParam.new);
 
     this.scenes.setGameId(this.gameId);
-    if (this.isNew == 1) {
-      this.scenes.postScene('Default', this, this.redirect);
-    }
-    this.lsScenes = this.scenes.getScenes();
+    this.scenes.getScenes((datas) => this.lsScenes.push(datas));
+    if (this.isNew === 1)
+      this.scenes.postScene('Default', (datas) => this.goToScenePage(datas.uuid));
   }
 
   public goToScenePage(id) {
     this.router.navigate(['/editor/designer'], { queryParams: { gameId: this.gameId, sceneId: id } });
   }
 
-  public redirect(meuh, id) {
-    meuh.goToScenePage(id.uuid);
-  }
-
   public addScene() {
-    let meuh = this;
     let myText = prompt('Scene Name: ');
-    if (myText) {
-      this.scenes.postScene(myText, meuh, this.redirect);
-    }
+    if (myText)
+      this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
   }
-
 }
