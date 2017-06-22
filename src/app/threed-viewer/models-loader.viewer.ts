@@ -53,7 +53,7 @@ export class ModelsLoader {
 
       if (model.object.rules != undefined) {
         model.object.rules.forEach(
-          rule => model.rules.push(this.rulesService.newRules(rule.id, rule.conf))
+          (rule) => model.rules.push(this.rulesService.newRules(rule.id, rule.conf))
         );
       }
     }
