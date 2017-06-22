@@ -18,8 +18,8 @@ import {
   providers : [HtmlService],
   template  : require('./left-bar.component.html'),
   styles    : [
-  require('./left-bar.component.css'),
-  require('../../../designer/sidebar/sidebars.css'),
+    require('./left-bar.component.css'),
+    require('../../../designer/sidebar/sidebars.css'),
   ],
 })
 export class LeftBarComponent implements OnInit {
