@@ -26,6 +26,8 @@ import { datas }            from './temporaryFill';
  */
 
 export class GameObjectsController {
+  private gameId;
+  private sceneId;
   private gameInfo;
   private scenes = [];
   private currentScene;

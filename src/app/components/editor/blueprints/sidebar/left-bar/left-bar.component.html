@@ -4,8 +4,8 @@
 
 <span>Mode : {{menu.mode}}</span>
 
-<tabs>
-    <tab tabTitle="Objects List">
+<ia-tabs>
+    <ia-tab tabTitle="Objects List">
       <div>Choose one item in the list below:</div><br/>
         <div *ngFor="let item of gameController.getObjects()">
           <input
@@ -18,8 +18,8 @@
             (change) = "radioBtnChange$.next(option.value)"/>
             {{item.name}}
         </div>
-    </tab>
-    <tab tabTitle="Rules List">
+    </ia-tab>
+    <ia-tab tabTitle="Rules List">
       <div>
           <div class='container' [dragula]='"first-bag"'>
             <div>Rule 1</div>
@@ -30,5 +30,5 @@
             <div>Rule 6</div>
           </div>
       </div>
-    </tab>
-</tabs>
+    </ia-tab>
+</ia-tabs>
