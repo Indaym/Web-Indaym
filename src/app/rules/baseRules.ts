@@ -18,23 +18,26 @@ export abstract class BaseRules {
   protected _id: string;
   protected _ruleType: RULE_TYPE = RULE_TYPE.default;
   protected _description: string;
+  protected _configuration: any;
   protected _refScene: SceneViewer;
   protected _refObj: ModelViewer;
-  // TODO: ajouter une ref sur la scène et l'obj
 
   /**
    * RFELXION
    *  - clic + dnd sur un obj => run les règles de ce type lié à l'obj
    *  - send un event avec ca pose pour executer d'autres règles
-   * 
+   *
    */
 
-  constructor(scene: SceneViewer, obj: ModelViewer) {
+  constructor(scene: SceneViewer, obj: ModelViewer, conf: any = {}) {
     this._refScene = scene;
     this._refObj = obj;
+    this._configuration = conf;
   }
 
-  public abstract run(): boolean;
+  public run(): boolean {
+    return true;
+  }
 
   get id(): string {
     return this._id;
