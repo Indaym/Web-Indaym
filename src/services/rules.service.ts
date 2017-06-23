@@ -8,8 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 import {
     RULES_DEF,
-    BaseRules
-}                       from '../app/rules'
+}                       from '../app/rules';
 
 /**
  * store all rules we have in the app
@@ -44,26 +43,26 @@ export class ObjectService {
         this.objectUrl = this.initUrl;
     }
 
-    setIds(gameId, sceneId, objId) {
-        this.objectUrl = this.initUrl + "/" + gameId + "/scenes/" + sceneId + "/objects/" + objId;
+    public setIds(gameId, sceneId, objId) {
+        this.objectUrl = this.initUrl + '/' + gameId + '/scenes/' + sceneId + '/objects/' + objId;
     }
 
-    getAllRules(callback) {
+    public getAllRules(callback) {
         this.http.get(this.ruleUrl)
             .map((res) => res.json())
             .subscribe(callback);
     }
 
-    getObjectRules(callback) {
+    public getObjectRules(callback) {
         this.http.get(this.initUrl)
             .map((res) => res.json())
             .subscribe(callback);
     }
 
-    postRuleToObject(obj) {
+    public postRuleToObject(obj) {
         obj.object = JSON.stringify(obj.object);
         this.http.post(this.objectUrl, obj)
             .map((res) => res.json())
-            .subscribe(data => console.log(data));
+            .subscribe((data) => console.log(data));
     }
 }

@@ -45,13 +45,13 @@ export let datas = [
       dimension: [3.5, 1.5, 3.5],
       position: [-10, 10, 10],
       texturesPaths: [
-        'black.png'
+        'black.png',
       ],
       rules: [
         {id: 'SecondRule', conf: { name: 'plop', todo: 'nope' }},
         {id: 'TestRule', conf: { data: 'yolo' }},
       ],
-    }
+    },
   },
   {
     name: 'whitePawn',

@@ -2,12 +2,11 @@
 // created by djavrell on Thu Jun 22 2017
 //
 
-
 import {
   BaseRules,
   SceneViewer,
   ModelViewer,
-  RULE_TYPE
+  RULE_TYPE,
 }                 from '../';
 
 export class SecondRule extends BaseRules {
