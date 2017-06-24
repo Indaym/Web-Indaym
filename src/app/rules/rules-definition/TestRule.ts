@@ -6,7 +6,7 @@ import {
   BaseRules,
   SceneViewer,
   ModelViewer,
-  RULE_TYPE
+  RULE_TYPE,
 }                 from '../';
 
 export class TestRule extends BaseRules {
@@ -14,6 +14,7 @@ export class TestRule extends BaseRules {
     super(scene, model, conf);
 
     this._id = 'TestRule';
+    this._name = 'Test rule';
     this._description = `this is a test rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
   }

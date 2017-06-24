@@ -19,6 +19,6 @@ export class SecondRule extends BaseRules {
   }
 
   public run(): boolean {
-    return true;
+    return false;
   }
 }
