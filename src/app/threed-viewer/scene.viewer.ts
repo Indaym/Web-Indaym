@@ -12,7 +12,8 @@ import {
   Raycaster,
   EventDispatcher,
   Color,
-} from 'three';
+}                     from 'three';
+import { BaseRules }  from '../rules';
 
 const OrbitControls = require('three-orbit-controls')(require('three'));
 
@@ -25,6 +26,8 @@ export class SceneViewer {
   protected _eventDispatcher: EventDispatcher;
   protected _raycaster: Raycaster;
   protected _mouse: Vector2 = new Vector2(0, 0);
+
+  protected _rules = {};
 
   /**
    * @param conf : JSON object
@@ -199,6 +202,20 @@ export class SceneViewer {
    */
   get domElement(): HTMLElement {
     return this._domElement;
+  }
+
+  /**
+   * get rules
+   */
+  get rules(): Object {
+    return this._rules;
+  }
+
+  /**
+   * add rule
+   */
+  public addRule(rule: BaseRules) {
+    this._rules[rule.id] = rule;
   }
 
   /**

@@ -175,6 +175,7 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseDown(event) {
+    // TODO: add call rule here ?
     if (event.button === 0) {
       let intersected = this.intersectObjects(event);
 
@@ -217,6 +218,7 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseMove(event) {
+    // TODO: add call rule here ?
     if (event.buttons === 1 && this.hasSelection()) {
       let intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
@@ -246,6 +248,7 @@ export class PlayerViewer extends SceneViewer {
    * @param event
    */
   public onMouseUp(event) {
+    // TODO: add call rule here ?
     if (event.button === 0 && this._selected !== undefined && this._selected.object !== undefined) {
       let intersected = this.intersectObjects(event);
       let drop = this.getFirstDroppable(intersected);
