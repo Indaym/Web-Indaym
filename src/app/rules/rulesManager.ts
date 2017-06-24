@@ -2,10 +2,10 @@
 // created by djavrell on Fri Jun 02 2017 
 // 
 
-import { OnInit }                 from '@angular/core';
-import { EventDispatcher }        from 'three';
-import { PlayerViewer }           from '../threed-viewer';
-import { BaseRules }              from './baseRules';
+import { OnInit }           from '@angular/core';
+import { EventDispatcher }  from 'three';
+import { PlayerViewer }     from '../threed-viewer';
+import { BaseRules }        from './baseRules';
 
 export class RuleManager implements OnInit {
   private _distpatcher: EventDispatcher;

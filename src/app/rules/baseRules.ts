@@ -17,7 +17,7 @@ export abstract class BaseRules {
   protected _id: string;
   protected _ruleType: RULE_TYPE = RULE_TYPE.default;
   protected _description: string;
-  protected _name: String = 'rule';
+  protected _name: string = 'rule';
   protected _configuration: any;
   protected _refScene: SceneViewer;
   protected _refObj: ModelViewer;
@@ -47,7 +47,7 @@ export abstract class BaseRules {
     return this._ruleType;
   }
 
-  get name(): String {
+  get name(): string {
     return this._name;
   }
 
