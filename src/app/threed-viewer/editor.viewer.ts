@@ -111,7 +111,6 @@ export class EditorViewer extends SceneViewer {
    * @param obj Object to select
    */
   public selectObject(obj: Object3D) {
-    // TODO: add call rule here ?
     if (obj !== undefined) {
       this._selected = obj;
       this._controller.attach(obj);
@@ -170,7 +169,6 @@ export class EditorViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseDown(event) {
-    // TODO: add call rule here ?
     this.setIntersection(event);
     const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
       return elem instanceof Mesh;

@@ -191,18 +191,25 @@ export class PlayerViewer extends SceneViewer {
           if (obj === undefined) {
             this.unselectObject();
           } else {
-            if (this.isDroppable(obj) && this.rulesInterface !== undefined) {
-              this.rulesInterface.emit('canMoveObject', {
-                  source: this._selected,
-                  target: obj,
-                },
-                () => {
-                  this.moveToDroppable(obj);
-                }
-              );
+
+            if (this.execAllRules() == true) {
+              this.moveToDroppable(obj);
             } else {
               this.selectObject(obj.object);
             }
+
+            // if (this.isDroppable(obj) && this.rulesInterface !== undefined) {
+            //   this.rulesInterface.emit('canMoveObject', {
+            //       source: this._selected,
+            //       target: obj,
+            //     },
+            //     () => {
+            //       this.moveToDroppable(obj);
+            //     }
+            //   );
+            // } else {
+            //   this.selectObject(obj.object);
+            // }
           }
         }
         if (this.hasSelection())
@@ -218,7 +225,6 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseMove(event) {
-    // TODO: add call rule here ?
     if (event.buttons === 1 && this.hasSelection()) {
       let intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
@@ -256,21 +262,36 @@ export class PlayerViewer extends SceneViewer {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
       } else
-        if (this.rulesInterface !== undefined) {
-          this.rulesInterface.emit('canMoveObject', {
-              source: this._selected,
-              target: drop,
-            },
-            () => {
-              this.moveToDroppable(drop);
-            },
-            () => {
-              this._selected.object.position.copy(this._selected.oldPosition);
-              this._selected.glow.position.copy(this._selected.oldPosition);
-            }
-          );
+        if (this.execAllRules() == true) {
+          this.moveToDroppable(drop);          
         }
+        // if (this.rulesInterface !== undefined) {
+        //   this.rulesInterface.emit('canMoveObject', {
+        //       source: this._selected,
+        //       target: drop,
+        //     },
+        //     () => {
+        //       this.moveToDroppable(drop);
+        //     },
+        //     () => {
+        //       this._selected.object.position.copy(this._selected.oldPosition);
+        //       this._selected.glow.position.copy(this._selected.oldPosition);
+        //     }
+        //   );
+        // }
     }
     this._controls.enableRotate = true;
+  }
+
+  private execAllRules(): boolean {
+    if (this._selected.rules === undefined)
+      return true;
+
+    for (let rule in this._selected.rules) {
+      if (this._selected.rules[rule].run() === false)
+        return false;
+    }
+
+    return true;
   }
 }
