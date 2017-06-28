@@ -191,9 +191,10 @@ export class PlayerViewer extends SceneViewer {
           if (obj === undefined) {
             this.unselectObject();
           } else {
-
-            if (this.execAllRules() == true) {
-              this.moveToDroppable(obj);
+            if (this.isDroppable(obj)) {
+              if (this.execAllRules() == true) {
+                this.moveToDroppable(obj);
+              }
             } else {
               this.selectObject(obj.object);
             }
