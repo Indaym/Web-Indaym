@@ -264,7 +264,6 @@ export class PlayerViewer extends SceneViewer {
         this._selected.glow.position.copy(this._selected.oldPosition);
       } else
         if (this.execAllRules() == true) {
-          console.log("Exec");
           this.moveToDroppable(drop);
         }
         // if (this.rulesInterface !== undefined) {
@@ -286,12 +285,12 @@ export class PlayerViewer extends SceneViewer {
   }
 
   private execAllRules(): boolean {
-    console.log(this._selected.rules);
-    if (this._selected.rules === undefined)
+    let linkModel = (this._selected.object as any).LinkModel;
+    if (linkModel === undefined)
       return true;
 
-    for (let rule in this._selected.rules) {
-      if (this._selected.rules[rule].run() === false)
+    for (let rule in linkModel.rules) {
+      if (linkModel.rules[rule].run() === false)
         return false;
     }
 
