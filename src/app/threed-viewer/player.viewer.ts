@@ -286,7 +286,7 @@ export class PlayerViewer extends SceneViewer {
 
   private execAllRules(): boolean {
     let linkModel = (this._selected.object as any).LinkModel;
-    if (linkModel === undefined)
+    if (linkModel === undefined || linkModel.rules ===  undefined)
       return true;
 
     for (let rule in linkModel.rules) {
