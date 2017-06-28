@@ -12,7 +12,7 @@ export let datas = [
       dimension: [77.8, 2.0, 12.2],
       position: [5, 0, 20],
       rules: [
-        {id: 'TestRule', conf: {}},
+        {id: 'TestRuleTrue', conf: {}},
       ],
       texturesPaths: [
         'side.png', 'side.png',
@@ -48,7 +48,7 @@ export let datas = [
         'black.png',
       ],
       rules: [
-        {id: 'TestRule', conf: { data: 'yolo' }}
+        {id: 'TestRuleTrue', conf: { data: 'yolo' }}
       ],
     },
   },
