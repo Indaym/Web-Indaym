@@ -17,9 +17,11 @@ export class TestRule extends BaseRules {
     this._name = 'Test rule';
     this._description = `this is a test rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
+    console.log("load");
   }
 
   public run(): boolean {
+    console.log("True");
     return true;
   }
 }

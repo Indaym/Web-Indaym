@@ -263,7 +263,8 @@ export class PlayerViewer extends SceneViewer {
         this._selected.glow.position.copy(this._selected.oldPosition);
       } else
         if (this.execAllRules() == true) {
-          this.moveToDroppable(drop);          
+          console.log("Exec");
+          this.moveToDroppable(drop);
         }
         // if (this.rulesInterface !== undefined) {
         //   this.rulesInterface.emit('canMoveObject', {
@@ -284,6 +285,7 @@ export class PlayerViewer extends SceneViewer {
   }
 
   private execAllRules(): boolean {
+    console.log(this._selected.rules);
     if (this._selected.rules === undefined)
       return true;
 

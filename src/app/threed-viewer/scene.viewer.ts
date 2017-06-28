@@ -208,6 +208,7 @@ export class SceneViewer {
    * get rules
    */
   get rules(): Object {
+    console.log("get rule");
     return this._rules;
   }
 
@@ -215,6 +216,7 @@ export class SceneViewer {
    * add rule
    */
   public addRule(rule: BaseRules) {
+    console.log("Add rule");
     this._rules[rule.id] = rule;
   }
 

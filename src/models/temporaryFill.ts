@@ -10,7 +10,7 @@ export let datas = [
       draggable: false,
       droppable: true,
       dimension: [77.8, 2.0, 12.2],
-      position: [-100, 0, 50],
+      position: [5, 0, 20],
       rules: [
         {id: 'TestRule', conf: {}},
       ],
@@ -28,7 +28,7 @@ export let datas = [
       draggable: false,
       droppable: true,
       dimension: [32.6, 2.0, 32.6],
-      position: [100, 0, -50],
+      position: [-10, 0, -20],
       texturesPaths: [
         'side.png', 'side.png',
         'board.png', 'side.png',
@@ -48,8 +48,7 @@ export let datas = [
         'black.png',
       ],
       rules: [
-        {id: 'SecondRule', conf: { name: 'plop', todo: 'nope' }},
-        {id: 'TestRule', conf: { data: 'yolo' }},
+        {id: 'TestRule', conf: { data: 'yolo' }}
       ],
     },
   },
@@ -85,7 +84,7 @@ export let datas = [
       caseWidth: 10,
       caseHeight: 10,
       gap: 1,
-      position: [100, 1, -50],
+      position: [-10, 1, -20],
     },
   },
 ];

@@ -16,9 +16,11 @@ export class SecondRule extends BaseRules {
     this._id = 'rule2';
     this._description = `this is a test2 rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
+
   }
 
   public run(): boolean {
+    console.log("False");
     return false;
   }
 }

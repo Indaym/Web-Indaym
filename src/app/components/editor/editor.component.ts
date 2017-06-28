@@ -33,7 +33,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     private objectService: ObjectService
     ) {
     this.gameController = gameControllerService.gameController;
-//    this.gameController.fillObjectsController();
+    this.gameController.fillObjectsController();
   }
 
   public ngOnInit() {
