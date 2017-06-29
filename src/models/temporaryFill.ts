@@ -48,7 +48,8 @@ export let datas = [
         'black.png',
       ],
       rules: [
-        {id: 'TestRuleTrue', conf: { data: 'yolo' }}
+        {id: 'TestRuleTrue', conf: {}},
+        {id : 'ChangeColor', conf: { data : "test"}},
       ],
     },
   },
@@ -62,6 +63,9 @@ export let datas = [
       position: [10, 10, -10],
       texturesPaths: [
         'white.png',
+      ],
+      rules: [
+        {id: 'TestRuleFalse', conf: {}}
       ],
     },
   },

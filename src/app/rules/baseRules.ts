@@ -1,6 +1,6 @@
-// 
-// created by djavrell on Fri Jun 02 2017 
-// 
+//
+// created by djavrell on Fri Jun 02 2017
+//
 
 import {
   SceneViewer,
