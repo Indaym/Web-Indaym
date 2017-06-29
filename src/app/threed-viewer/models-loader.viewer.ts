@@ -58,7 +58,7 @@ export class ModelsLoader {
         model.object.rules.forEach(
           (rule) => {
             const ruleDef = this.rulesService.getRules(rule.id);
-            const ruleInstance = new ruleDef(this.scene, this, rule.conf);
+            const ruleInstance = new ruleDef(this.scene, model, rule.conf);
 
             model.rules[ruleInstance.id] = ruleInstance;
           }

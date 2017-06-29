@@ -18,7 +18,7 @@ export class ChangeColor extends BaseRules {
 
 
   public run(): boolean {
-    console.log(this._refObj.position);
+    console.log(this._refScene);
     return true;
   }
 }
