@@ -19,8 +19,8 @@ export abstract class BaseRules {
   protected _description: string;
   protected _name: string = 'rule';
   protected _configuration: any;
-  protected _refScene: SceneViewer;
-  protected _refObj: ModelViewer;
+  protected _refScene: any;
+  protected _refObj: any;
 
   /**
    * RFELXION
@@ -29,7 +29,7 @@ export abstract class BaseRules {
    *
    */
 
-  constructor(scene: SceneViewer, obj: ModelViewer, conf: any = {}) {
+  constructor(scene: any, obj: any, conf: any = {}) {
     this._refScene = scene;
     this._refObj = obj;
     this._configuration = conf;

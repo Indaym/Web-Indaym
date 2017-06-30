@@ -48,8 +48,8 @@ export let datas = [
         'black.png',
       ],
       rules: [
-        {id: 'TestRuleTrue', conf: {}},
-        {id : 'ChangeColor', conf: { data : "test"}},
+        {id: 'TestRuleFalse', conf: {}},
+
       ],
     },
   },
@@ -65,7 +65,8 @@ export let datas = [
         'white.png',
       ],
       rules: [
-        {id: 'TestRuleFalse', conf: {}}
+        {id : 'ChangeColor', conf: { color : "0x0000FF"}},
+        {id : 'MoveForward', conf: { movement : "1"}},
       ],
     },
   },

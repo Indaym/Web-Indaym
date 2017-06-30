@@ -6,7 +6,7 @@ import {
 }                 from '../';
 
 export class ChangeColor extends BaseRules {
-  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
+  constructor(scene: any, model: any, conf: any = {}) {
     super(scene, model, conf);
 
     this._id = 'ChangeColor';
@@ -18,7 +18,7 @@ export class ChangeColor extends BaseRules {
 
 
   public run(): boolean {
-    console.log(this._refObj);
+    this._refScene._selected.object.material.color.setHex(this._configuration.color);
     return true;
   }
 }
