@@ -66,7 +66,7 @@ export let datas = [
       ],
       rules: [
         {id : 'ChangeColor', conf: { color : "0x0000FF"}},
-        {id : 'MoveForward', conf: { movement : "1"}},
+        {id : 'MoveForward', conf: { movement : 1}},
       ],
     },
   },
