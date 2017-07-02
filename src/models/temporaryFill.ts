@@ -4,13 +4,14 @@
 
 export let datas = [
   {
+    uuid: 'A',
     name: 'longBoard',
     object: {
       type: 'board',
       draggable: false,
       droppable: true,
       dimension: [77.8, 2.0, 12.2],
-      position: [5, 0, 20],
+      position: [50, 0, 50],
       rules: [
         {id: 'TestRuleTrue', conf: {}},
       ],
@@ -22,13 +23,14 @@ export let datas = [
     },
   },
   {
+    uuid: 'B',
     name: 'Board',
     object: {
       type: 'board',
       draggable: false,
       droppable: true,
-      dimension: [32.6, 2.0, 32.6],
-      position: [-10, 0, -20],
+      dimension: [39.15, 2.0, 39.15],
+      position: [0, -0.1, 0],
       texturesPaths: [
         'side.png', 'side.png',
         'board.png', 'side.png',
@@ -37,6 +39,7 @@ export let datas = [
     },
   },
   {
+    uuid: 'C',
     name: 'blackPawn',
     object: {
       type: 'pawn',
@@ -54,6 +57,7 @@ export let datas = [
     },
   },
   {
+    uuid: 'D',
     name: 'whitePawn',
     object: {
       type: 'pawn',
@@ -65,21 +69,12 @@ export let datas = [
         'white.png',
       ],
       rules: [
-        {id : 'ChangeColor', conf: { color : "0x0000FF"}},
+        {id : 'ChangeColor', conf: { color : '0x0000FF'}},
         {id : 'MoveForward', conf: { movement : 1}},
       ],
     },
   },
-  {
-    name: 'case',
-    object: {
-      type: 'case',
-      draggable: false,
-      droppable: true,
-      dimension: [10, 10, 1],
-      position: [0, 0, 0],
-    },
-  },
+  /*
   {
     name: 'grid',
     object: {
@@ -90,6 +85,115 @@ export let datas = [
       caseHeight: 10,
       gap: 1,
       position: [-10, 1, -20],
+    },
+  },
+  */
+  {
+    uuid: 'E',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [-10, 1, -10],
+      coord: [0, 0],
+    },
+  },
+  {
+    uuid: 'F',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [0, 1, -10],
+      coord: [1, 0],
+    },
+  },
+  {
+    uuid: 'G',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [10, 1, -10],
+      coord: [2, 0],
+    },
+  },
+  {
+    uuid: 'H',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [-10, 1, 0],
+      coord: [0, 1],
+    },
+  },
+  {
+    uuid: 'I',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [0, 1, 0],
+      coord: [1, 1],
+    },
+  },
+  {
+    uuid: 'J',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [10, 1, 0],
+      coord: [2, 1],
+    },
+  },
+  {
+    uuid: 'K',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [-10, 1, 10],
+      coord: [0, 2],
+    },
+  },
+  {
+    uuid: 'L',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [0, 1, 10],
+      coord: [1, 2],
+    },
+  },
+  {
+    uuid: 'M',
+    name: 'case',
+    object: {
+      type: 'case',
+      draggable: false,
+      droppable: true,
+      dimension: [9.9, 9.9, 1],
+      position: [10, 1, 10],
+      coord: [2, 2],
     },
   },
 ];
