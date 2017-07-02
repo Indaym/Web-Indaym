@@ -11,8 +11,8 @@ import {
 import { ModelViewer }  from './model.viewer';
 
 export class CaseModelViewer extends ModelViewer {
-  constructor(conf, editorMode: Boolean = false) {
-    super(conf, editorMode);
+  constructor(conf, private editMode: Boolean = false) {
+    super(conf, editMode);
   }
 
   /**
@@ -21,7 +21,8 @@ export class CaseModelViewer extends ModelViewer {
    * @param activate
    */
   public hover(activate = true) {
-    this.material.opacity = (activate) ? 0.5 : 0;
+    if (this.editMode === false)
+      this.material.opacity = (activate) ? 0.5 : 0;
     super.hover(activate);
   }
 
@@ -44,6 +45,8 @@ export class CaseModelViewer extends ModelViewer {
     this.material = new MeshBasicMaterial({color: 0xffffff, side: DoubleSide, transparent: true, opacity: 0});
     let mesh = this.generateMesh();
     mesh.rotation.x = 90  * (Math.PI / 180);
+    if (this.editMode === true)
+      this.material.opacity = 0.5;
     onLoad(mesh);
   }
 }
