@@ -173,7 +173,7 @@ export class PlayerViewer extends SceneViewer {
    * @param drop : Droppable object
    */
   public moveToDroppable(drop) {
-    if (drop === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
+    if (drop === undefined || drop.object === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
       return;
     this._selected.object.position.copy(drop.object.LinkModel.threeDModel.dropPosition(this._selected.object));
     this._selected.glow.position.copy(this._selected.object.position);
@@ -202,7 +202,7 @@ export class PlayerViewer extends SceneViewer {
             this.unselectObject();
           } else {
             if (this.isDroppable(obj)) {
-              if (this.execAllRules() === true) {
+              if (this.execAllRules(obj.object) === true) {
                 this.moveToDroppable(obj);
               }
             } else {
@@ -236,6 +236,19 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseMove(event) {
+    let drop = this.getFirstDroppable(this.intersectObjects(event));
+
+    if (drop !== undefined) {
+      if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
+        if (this._hovered !== undefined)
+          this._hovered.hover(false);
+        this._hovered = drop.object.LinkModel.threeDModel;
+        this._hovered.hover(true);
+      }
+    } else {
+      if (this._hovered !== undefined)
+        this._hovered.hover(false);
+    }
     if (event.buttons === 1 && this.hasSelection()) {
       let intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
@@ -243,19 +256,6 @@ export class PlayerViewer extends SceneViewer {
         this._intersectPlane.lookAt(this._camera.position);
         this._selected.object.position.copy(intersected[0].point);
         this._selected.glow.position.copy(intersected[0].point);
-      }
-    } else {
-      let drop = this.getFirstDroppable(this.intersectObjects(event));
-      if (drop !== undefined) {
-        if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
-          if (this._hovered !== undefined)
-            this._hovered.hover(false);
-          this._hovered = drop.object.LinkModel.threeDModel;
-          this._hovered.hover(true);
-        }
-      } else {
-        if (this._hovered !== undefined)
-          this._hovered.hover(false);
       }
     }
   }
@@ -272,9 +272,12 @@ export class PlayerViewer extends SceneViewer {
       if (drop === undefined) {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
-      } else
-        if (this.execAllRules() === true) {
+      } else {
+        if (this.execAllRules(drop.object) === true) {
           this.moveToDroppable(drop);
+        } else {
+          this._selected.object.position.copy(this._selected.oldPosition);
+          this._selected.glow.position.copy(this._selected.oldPosition);
         }
         // if (this.rulesInterface !== undefined) {
         //   this.rulesInterface.emit('canMoveObject', {
@@ -290,17 +293,18 @@ export class PlayerViewer extends SceneViewer {
         //     }
         //   );
         // }
+      }
     }
     this._controls.enableRotate = true;
   }
 
-  private execAllRules(): boolean {
+  private execAllRules(args?: any): boolean {
     let linkModel = (this._selected.object as any).LinkModel;
     if (linkModel === undefined || linkModel.rules ===  undefined)
       return true;
 
     for (let rule in linkModel.rules) {
-      if (linkModel.rules[rule].run() === false)
+      if (linkModel.rules[rule].run(args) === false)
         return false;
     }
 

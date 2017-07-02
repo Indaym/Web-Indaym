@@ -62,7 +62,7 @@ export let datas = [
     object: {
       type: 'pawn',
       draggable: true,
-      droppable: true,
+      droppable: false,
       dimension: [3.5, 1.5, 3.5],
       position: [10, 10, -10],
       texturesPaths: [
@@ -71,6 +71,20 @@ export let datas = [
       rules: [
         {id : 'ChangeColor', conf: { color : '0x0000FF'}},
         {id : 'MoveForward', conf: { movement : 1}},
+      ],
+    },
+  },
+  {
+    uuid: 'Z',
+    name: 'blackPawn',
+    object: {
+      type: 'pawn',
+      draggable: true,
+      droppable: false,
+      dimension: [3.5, 1.5, 3.5],
+      position: [0, 30, 0],
+      texturesPaths: [
+        'black.png',
       ],
     },
   },

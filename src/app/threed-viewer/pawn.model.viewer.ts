@@ -38,7 +38,7 @@ export class PawnModelViewer extends ModelViewer {
     this._texturesPaths = value;
   }
 
-  get oldPosition() : Array<number> {
+  get oldPosition(): Array<number> {
     return this._oldPosition;
   }
 
