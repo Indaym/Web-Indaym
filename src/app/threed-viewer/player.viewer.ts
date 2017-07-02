@@ -3,12 +3,12 @@
  */
 
 import {
-  AxisHelper,
   Mesh,
   MeshBasicMaterial,
   Geometry,
   PlaneBufferGeometry,
   BackSide,
+  Vector3,
 }                         from 'three';
 
 import { SceneViewer }    from '.';
@@ -23,7 +23,7 @@ export class PlayerViewer extends SceneViewer {
   constructor(conf: any = {}, rulesInterface?: RulesInterface) {
     super(conf);
 
-    this._scene.add(new AxisHelper(1000));
+    //this._scene.add(new AxisHelper(1000));
     this._controls.enableKeys = false;
     this._intersectPlane = new Mesh(
       new PlaneBufferGeometry(500, 500, 8, 8),
@@ -32,6 +32,16 @@ export class PlayerViewer extends SceneViewer {
     this._scene.add(this._intersectPlane);
     if (rulesInterface)
       this.rulesInterface = rulesInterface;
+  }
+
+
+  /**
+   * Default param for load a scene
+   * @param container : id of container
+   */
+  public defaultLoad(container) {
+    super.defaultLoad(container);
+    this._camera.position.copy(new Vector3(0.0, 50.0, 70.0));
   }
 
   /**
