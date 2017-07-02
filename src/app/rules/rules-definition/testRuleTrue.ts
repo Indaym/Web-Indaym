@@ -19,8 +19,8 @@ export class TestRuleTrue extends BaseRules {
     this._ruleType = RULE_TYPE.default;
   }
 
-  public run(): boolean {
-    console.log("True");
+  public run(args?: any): boolean {
+    console.log('True');
     return true;
   }
 }

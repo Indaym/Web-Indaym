@@ -35,7 +35,7 @@ export abstract class BaseRules {
     this._configuration = conf;
   }
 
-  public run(): boolean {
+  public run(args?: any): boolean {
     return true;
   }
 

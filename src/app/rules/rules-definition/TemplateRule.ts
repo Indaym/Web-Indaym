@@ -93,7 +93,7 @@ export class TemplateRule extends BaseRules {
    * 
    * you are free to add intermediate method
    */
-  public run(): boolean {
+  public run(args?: any): boolean {
     return true;
   }
 }

@@ -15,30 +15,29 @@ export class MoveDiag extends BaseRules {
     this._ruleType = RULE_TYPE.default;
   }
 
-
-
-  public run(): boolean {
-    if (!this._refScene._hovered._mesh.LinkModel.object.coord) {
+  public run(args?: any): boolean {
+    if (args === undefined || args.LinkModel.object.coord === undefined) {
       return false;
     }
+
     let xOld = this._refObj.threeDModel._oldPosition[0];
     let yOld = this._refObj.threeDModel._oldPosition[1];
-    let xNew = this._refScene._hovered._mesh.LinkModel.object.coord[0];
-    let yNew = this._refScene._hovered._mesh.LinkModel.object.coord[1];
-      if (xOld === -1 && yOld === -1) {
-          this._refObj.threeDModel._oldPosition[0] = xNew;
-          this._refObj.threeDModel._oldPosition[1] = yNew;
-          return true;
-      }
-      if ((this._configuration.movement)
+    let xNew = args.LinkModel.object.coord[0];
+    let yNew = args.LinkModel.object.coord[1];
+    if (xOld === -1 && yOld === -1) {
+      this._refObj.threeDModel._oldPosition[0] = xNew;
+      this._refObj.threeDModel._oldPosition[1] = yNew;
+      return true;
+    }
+    if ((this._configuration.movement)
       &&  ((xOld === xNew + this._configuration.movement && yOld === yNew + this._configuration.movement)
       || (xOld === xNew - this._configuration.movement && yOld === yNew - this._configuration.movement)
       || (xOld === xNew - this._configuration.movement && yOld === yNew + this._configuration.movement)
       || (xOld === xNew + this._configuration.movement && yOld === yNew - this._configuration.movement))) {
-        this._refObj.threeDModel._oldPosition[0] = xNew;
-        this._refObj.threeDModel._oldPosition[1] = yNew;
-        return true;
-      }
+      this._refObj.threeDModel._oldPosition[0] = xNew;
+      this._refObj.threeDModel._oldPosition[1] = yNew;
+      return true;
+    }
     return false;
   }
 }

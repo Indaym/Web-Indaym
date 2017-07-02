@@ -19,8 +19,8 @@ export class TestRuleFalse extends BaseRules {
 
   }
 
-  public run(): boolean {
-    console.log("False");
+  public run(args?: any): boolean {
+    console.log('False');
     return false;
   }
 }
