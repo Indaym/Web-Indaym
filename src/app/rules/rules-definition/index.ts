@@ -12,10 +12,10 @@
  * Ps: to prevent any git conflict, add a `,` at the end
  */
 
-import { TestRuleTrue }                 from './TestRuleTrue';
-import { TestRuleFalse }               from './testRuleFalse';
-import { ChangeColor }                from './changeColor';
-import { MoveForward }                from './moveForward';
+import { TestRuleTrue }   from './testRuleTrue';
+import { TestRuleFalse }  from './testRuleFalse';
+import { ChangeColor }    from './changeColor';
+import { MoveForward }    from './moveForward';
 
 export const RULES_DEF = {
   TestRuleTrue,
