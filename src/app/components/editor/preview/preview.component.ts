@@ -101,7 +101,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     for (let z = 0; z < 10; z++) {
       for (let x = 0; x < 10; x++) {
         if (z > 5)
-          obj.object.texturesPaths = ['white.png']
+          obj.object.texturesPaths = ['white.png'];
         if (x % 2 + z % 2 === 1 && z !== 4 && z !== 5) {
           obj.object.position[0] = x * 8.2 + 4.1 - 41;
           obj.object.position[2] = z * 8.2 + 4.1 - 41;

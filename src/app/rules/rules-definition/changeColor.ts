@@ -15,8 +15,6 @@ export class ChangeColor extends BaseRules {
     this._ruleType = RULE_TYPE.default;
   }
 
-
-
   public run(args?: any): boolean {
     this._refScene._selected.object.material.color.setHex(this._configuration.color);
     return true;

@@ -23,7 +23,6 @@ export class PlayerViewer extends SceneViewer {
   constructor(conf: any = {}, rulesInterface?: RulesInterface) {
     super(conf);
 
-    //this._scene.add(new AxisHelper(1000));
     this._controls.enableKeys = false;
     this._intersectPlane = new Mesh(
       new PlaneBufferGeometry(500, 500, 8, 8),
@@ -33,7 +32,6 @@ export class PlayerViewer extends SceneViewer {
     if (rulesInterface)
       this.rulesInterface = rulesInterface;
   }
-
 
   /**
    * Default param for load a scene
