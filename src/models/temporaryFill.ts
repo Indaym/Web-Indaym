@@ -51,7 +51,7 @@ export let datas = [
         'black.png',
       ],
       rules: [
-        {id: 'TestRuleFalse', conf: {}},
+        {id: 'MoveDiag', conf: { movement : 1}},
 
       ],
     },

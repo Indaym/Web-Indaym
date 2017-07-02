@@ -16,10 +16,12 @@ import { TestRuleTrue }   from './testRuleTrue';
 import { TestRuleFalse }  from './testRuleFalse';
 import { ChangeColor }    from './changeColor';
 import { MoveForward }    from './moveForward';
+import { MoveDiag }    from './moveDiag';
 
 export const RULES_DEF = {
   TestRuleTrue,
   TestRuleFalse,
   ChangeColor,
   MoveForward,
+  MoveDiag,
 };

@@ -5,13 +5,13 @@ import {
   RULE_TYPE,
 }                 from '../';
 
-export class MoveForward extends BaseRules {
+export class MoveDiag extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {
     super(scene, model, conf);
 
-    this._id = 'MoveForward';
-    this._name = 'Move Forward';
-    this._description = `this is a rules for moving Forward`;
+    this._id = 'MoveDiag';
+    this._name = 'Move Diagonal';
+    this._description = `this is a rules for moving in diagonal`;
     this._ruleType = RULE_TYPE.default;
   }
 
@@ -31,15 +31,14 @@ export class MoveForward extends BaseRules {
           return true;
       }
       if ((this._configuration.movement)
-      && ((xOld === xNew + this._configuration.movement && yOld === yNew)
-      || (xOld === xNew - this._configuration.movement && yOld === yNew)
-      || (xOld === xNew && yOld === yNew + this._configuration.movement)
-      || (xOld === xNew && yOld === yNew - this._configuration.movement))) {
+      &&  ((xOld === xNew + this._configuration.movement && yOld === yNew + this._configuration.movement)
+      || (xOld === xNew - this._configuration.movement && yOld === yNew - this._configuration.movement)
+      || (xOld === xNew - this._configuration.movement && yOld === yNew + this._configuration.movement)
+      || (xOld === xNew + this._configuration.movement && yOld === yNew - this._configuration.movement))) {
         this._refObj.threeDModel._oldPosition[0] = xNew;
         this._refObj.threeDModel._oldPosition[1] = yNew;
         return true;
       }
-    console.log("false");
     return false;
   }
 }
