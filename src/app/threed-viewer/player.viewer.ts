@@ -202,7 +202,7 @@ export class PlayerViewer extends SceneViewer {
             this.unselectObject();
           } else {
             if (this.isDroppable(obj)) {
-              if (this.execAllRules() == true) {
+              if (this.execAllRules() === true) {
                 this.moveToDroppable(obj);
               }
             } else {
@@ -273,7 +273,7 @@ export class PlayerViewer extends SceneViewer {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
       } else
-        if (this.execAllRules() == true) {
+        if (this.execAllRules() === true) {
           this.moveToDroppable(drop);
         }
         // if (this.rulesInterface !== undefined) {

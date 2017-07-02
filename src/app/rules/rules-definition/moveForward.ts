@@ -25,17 +25,17 @@ export class MoveForward extends BaseRules {
     let yOld = this._refObj.threeDModel._oldPosition[1];
     let xNew = this._refScene._hovered._mesh.LinkModel.object.coord[0];
     let yNew = this._refScene._hovered._mesh.LinkModel.object.coord[1];
-    if (this._refScene._hovered._mesh.LinkModel.object.empty == true) {
-      if (xOld == -1 && yOld == -1) {
+    if (this._refScene._hovered._mesh.LinkModel.object.empty === true) {
+      if (xOld === -1 && yOld === -1) {
           this._refObj.threeDModel._oldPosition[0] = xNew;
           this._refObj.threeDModel._oldPosition[1] = yNew;
           return true;
       }
       //console.log(this._refObj.threeDModel._oldPosition);
-      if ((xOld == xNew + this._configuration.movement && yOld == yNew)
-      || (xOld == xNew - this._configuration.movement && yOld == yNew)
-      || (xOld == xNew && yOld == yNew + this._configuration.movement)
-      || (xOld == xNew && yOld == yNew - this._configuration.movement)) {
+      if ((xOld === xNew + this._configuration.movement && yOld === yNew)
+      || (xOld === xNew - this._configuration.movement && yOld === yNew)
+      || (xOld === xNew && yOld === yNew + this._configuration.movement)
+      || (xOld === xNew && yOld === yNew - this._configuration.movement)) {
         this._refObj.threeDModel._oldPosition[0] = xNew;
         this._refObj.threeDModel._oldPosition[1] = yNew;
         return true;
