@@ -41,7 +41,8 @@ export class BlueprintsComponent {
   private saveRules() {
     this.objInfo.object["rules"] = [];
 
-    this.rules = document.getElementById("rulesContainer");
+    this.rules = document.getElementById("rulesContainer").innerHTML;
+    console.log("pipup");
     console.log(this.rules);
 
     this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);

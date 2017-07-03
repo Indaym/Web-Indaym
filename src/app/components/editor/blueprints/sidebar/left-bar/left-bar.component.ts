@@ -31,8 +31,6 @@ export class LeftBarComponent implements OnInit{
 
   constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
-    console.log("leftbarcomponent");
-    console.log(this.objs);
   }
 
   ngOnInit() {}
