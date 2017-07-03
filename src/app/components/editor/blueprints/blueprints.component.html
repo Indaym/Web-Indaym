@@ -11,13 +11,11 @@
 </md-sidenav-layout>
 
 <div id="name">
-    <div>Item name</div>
+    <div id="itemName">Item Name: {{itemName}}</div>
     <div>Rules applied to this item:</div>
 </div>
 <div id="rules">
     <div class='container' [dragula]='"first-bag"' id="rulesContainer">
-        <div>toto</div>
-    </div>
 </div>
 <div id="save">
     <button (click)="saveRules()">Save</button>

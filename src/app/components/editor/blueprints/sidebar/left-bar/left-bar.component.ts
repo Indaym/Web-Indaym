@@ -12,6 +12,13 @@ import {
     GameControllerService,
 } from "../../../../../../services";
 
+import {
+  BaseRules,
+  SceneViewer,
+  ModelViewer,
+  RULE_TYPE,
+}                 from '../../../../../rules/';
+
 @Component({
   selector  : 'ia-left-bar',
   providers : [HtmlService],

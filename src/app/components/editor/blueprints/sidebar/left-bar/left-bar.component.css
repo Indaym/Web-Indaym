@@ -9,3 +9,7 @@ button {
     font-size: 15px;
     margin: 5px;
 }
+
+.container {
+    min-height:150px;
+}

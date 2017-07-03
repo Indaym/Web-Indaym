@@ -68,14 +68,19 @@ md-sidenav {
   position: fixed;
   left: 47%;
   top: 45%;
-  width: 9%;
+  width: 25%;
   border: 3px solid cadetblue;
   font-size: 300%;
+}
+
+#rulesContainer {
+    min-height:150px;
+    min-width: 90%;
 }
 
 #save {
   position: fixed;
   left: 50%;
   top: 85%;
-  font-size: 200%;
+  font-size: 100%;
 }
