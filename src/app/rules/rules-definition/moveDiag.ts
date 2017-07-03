@@ -24,18 +24,25 @@ export class MoveDiag extends BaseRules {
     let yOld = this._refObj.threeDModel._oldPosition[1];
     let xNew = args.LinkModel.object.coord[0];
     let yNew = args.LinkModel.object.coord[1];
-    if (xOld === -1 && yOld === -1) {
+    if (xOld === -1 && yOld === -1
+      && this._refScene.grid[xNew][yNew] === null) {
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
+      this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
+      console.log(this._refScene.grid)
       return true;
     }
     if ((this._configuration.movement)
+      && (this._refScene.grid[xNew][yNew] === null)
       &&  ((xOld === xNew + this._configuration.movement && yOld === yNew + this._configuration.movement)
       || (xOld === xNew - this._configuration.movement && yOld === yNew - this._configuration.movement)
       || (xOld === xNew - this._configuration.movement && yOld === yNew + this._configuration.movement)
       || (xOld === xNew + this._configuration.movement && yOld === yNew - this._configuration.movement))) {
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
+      this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
+      this._refScene.grid[xOld][yOld] = null;
+      console.log(this._refScene.grid)
       return true;
     }
     return false;

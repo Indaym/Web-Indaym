@@ -12,6 +12,7 @@ import {
   Raycaster,
   EventDispatcher,
   Color,
+  Mesh,
 }                     from 'three';
 import { BaseRules }  from '../rules';
 
@@ -28,6 +29,7 @@ export class SceneViewer {
   protected _mouse: Vector2 = new Vector2(0, 0);
 
   protected _rules = {};
+  protected _grid : Array<Array<Mesh>>;
 
   /**
    * @param conf : JSON object
@@ -65,6 +67,14 @@ export class SceneViewer {
     this._raycaster = new Raycaster();
 
     window.addEventListener( 'resize', () => this.onWindowResize(), false );
+
+    this.grid = [];
+    for(var i: number = 0; i < 3; i++) {
+            this.grid[i] = [];
+            for(var j: number = 0; j< 3; j++) {
+                this.grid[i][j] = null;
+            }
+        }
   }
 
   /**
@@ -211,6 +221,13 @@ export class SceneViewer {
     return this._rules;
   }
 
+  get grid(): Array<Array<Mesh>> {
+    return this._grid;
+  }
+
+  set grid(value: Array<Array<Mesh>>) {
+    this._grid = value;
+  }
   /**
    * add rule
    */
