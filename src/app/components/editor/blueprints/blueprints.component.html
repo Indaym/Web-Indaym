@@ -6,21 +6,20 @@
 
 <md-sidenav-layout>
     <md-sidenav #menu mode="side">
-        <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher"></ia-left-bar>
+        <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher" [selectRules]="selectRules" [objs]="gameController.getObjects()"></ia-left-bar>
     </md-sidenav>
 </md-sidenav-layout>
 
 <div id="name">
-    <div>Item name</div><br/>
+    <div>Item name</div>
     <div>Rules applied to this item:</div>
 </div>
 <div id="rules">
-    <div class='container' [dragula]='"first-bag"'>
-        <div>Rule 7</div>
+    <div class='container' [dragula]='"first-bag"' id="rulesContainer">
         <div>Rule 8</div>
         <div>Rule 9</div>
     </div>
-  </div>
+</div>
 <div id="save">
-  <button>Save</button>
+    <button (click)="saveRules()">Save</button>
 </div>

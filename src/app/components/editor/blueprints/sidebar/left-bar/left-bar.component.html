@@ -7,16 +7,8 @@
 <ia-tabs>
     <ia-tab tabTitle="Objects List">
       <div>Choose one item in the list below:</div><br/>
-        <div *ngFor="let item of gameController.getObjects()">
-          <input
-            #option
-            type="radio"
-            class = "with-gap"
-            name="group3"
-            id="option"
-            [value]="option"
-            (change) = "radioBtnChange$.next(option.value)"/>
-            {{item.name}}
+        <div *ngFor="let item of objs">
+            <span (click)="loadRules(item.uuid)"> {{item.name}} </span>
         </div>
     </ia-tab>
     <ia-tab tabTitle="Rules List">
