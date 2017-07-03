@@ -19,6 +19,7 @@ export class MoveForward extends BaseRules {
     if (args === undefined || args.LinkModel.object.coord === undefined) {
       return false;
     }
+    let mouvement = this._configuration.movement;
     let xOld = this._refObj.threeDModel._oldPosition[0];
     let yOld = this._refObj.threeDModel._oldPosition[1];
     let xNew = args.LinkModel.object.coord[0];
@@ -28,47 +29,44 @@ export class MoveForward extends BaseRules {
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
-      console.log(this._refScene.grid)
       return true;
     }
-    if ((this._configuration.movement)
+    if ((mouvement)
       && (this._refScene.grid[xNew][yNew] === null)
-      && ((xOld === xNew + this._configuration.movement && yOld === yNew)
-        || (xOld === xNew - this._configuration.movement && yOld === yNew)
-        || (xOld === xNew && yOld === yNew + this._configuration.movement)
-        || (xOld === xNew && yOld === yNew - this._configuration.movement))) {
-      this._refObj.threeDModel._oldPosition[0] = xNew;
-      this._refObj.threeDModel._oldPosition[1] = yNew;
-      this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
-      this._refScene.grid[xOld][yOld] = null;
-      console.log(this._refScene.grid)
-      return true;
-    }
-    if ((this._configuration.movement)
-      && (this._refScene.grid[xNew][yNew] === null)
-      && ((xOld === xNew + this._configuration.movement + 1 && yOld === yNew
-        && this._refScene.grid[xNew + this._configuration.movement][yNew] !== null)
-        || (xOld === xNew - this._configuration.movement - 1 && yOld === yNew
-          && this._refScene.grid[xNew - this._configuration.movement][yNew] !== null)
-        || (xOld === xNew && yOld === yNew + this._configuration.movement + 1
-          && this._refScene.grid[xNew][yNew + this._configuration.movement] !== null)
-        || (xOld === xNew && yOld === yNew - this._configuration.movement - 1
-          && this._refScene.grid[xNew][yNew - this._configuration.movement] !== null))) {
-      if (xNew + this._configuration.movement + 1 && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew + this._configuration.movement][yNew]);
-      else if (xNew - this._configuration.movement - 1 && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew - this._configuration.movement][yNew]);
-      else if (xNew && yOld + this._configuration.movement + 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew  + this._configuration.movement]);
-      else if (xNew && yOld - this._configuration.movement - 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew - this._configuration.movement]);
+      && ((xOld === xNew + mouvement && yOld === yNew)
+        || (xOld === xNew - mouvement && yOld === yNew)
+        || (xOld === xNew && yOld === yNew + mouvement)
+        || (xOld === xNew && yOld === yNew - mouvement))) {
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
       this._refScene.grid[xOld][yOld] = null;
       return true;
     }
-    console.log('false');
+    if ((mouvement)
+      && (this._refScene.grid[xNew][yNew] === null)
+      && ((xOld === xNew + mouvement + 1 && yOld === yNew
+        && this._refScene.grid[xNew + mouvement][yNew] !== null)
+        || (xOld === xNew - mouvement - 1 && yOld === yNew
+          && this._refScene.grid[xNew - mouvement][yNew] !== null)
+        || (xOld === xNew && yOld === yNew + mouvement + 1
+          && this._refScene.grid[xNew][yNew + mouvement] !== null)
+        || (xOld === xNew && yOld === yNew - mouvement - 1
+          && this._refScene.grid[xNew][yNew - mouvement] !== null))) {
+      if (xNew + mouvement + 1 && yOld === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew + mouvement][yNew]);
+      else if (xNew - mouvement - 1 && yOld === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew - mouvement][yNew]);
+      else if (xNew && yOld + mouvement + 1 === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew  + mouvement]);
+      else if (xNew && yOld - mouvement - 1 === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew - mouvement]);
+      this._refObj.threeDModel._oldPosition[0] = xNew;
+      this._refObj.threeDModel._oldPosition[1] = yNew;
+      this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
+      this._refScene.grid[xOld][yOld] = null;
+      return true;
+    }
     return false;
   }
 }
