@@ -18,6 +18,7 @@ import {
   ],
   providers : []
 })
+
 export class BlueprintsComponent {
   private dispatcher: EventDispatcher;
   public  selectRules = (id) => {this.affRules(id)};
@@ -44,9 +45,8 @@ export class BlueprintsComponent {
     // display name:
     this.itemName = this.objInfo.name;
 
-    console.log("affRules");
     console.log(this.objInfo);
-    console.log(id);
+    //console.log(id);
     this.saveRules();
   }
 
@@ -59,28 +59,17 @@ export class BlueprintsComponent {
     // delete last elem of the list:
     this.rules.pop();
 
-    console.log("pipup");
-    // show champs html bidons
-    console.log("this.rules: " + this.rules);
-
-    var newRule = {
-        id: <string> null,
-        conf: {
-          color: <string> null,
-          movement: <number> null,
-        },
-    };
+    var newRule = null;
 
     // for each rule in this.rules:
     for (var rule of this.rules)
     {
-      //add a this.objInfo.object.rules.id (+arguments necessaires)
-      console.log("rule before adding : " + this.objInfo.object.rules + " / Rule to be added : " + rule);
+      // reset newRule:
+      newRule = new NewRule();
 
       newRule.id = rule;
 
-      // ici add les conf des rules if needed (chaque regle a des config différentes -suite de if-)
-      // magnifique bosquet de if:
+      // ici add les conf des rules if needed (chaque regle a des config différentes)
       if (rule === "ChangeColor")
         newRule.conf.color = "0x0000FF";
       else if (rule === "MoveDiag")
@@ -91,13 +80,19 @@ export class BlueprintsComponent {
         newRule.conf.movement = null;
 
       this.objInfo.object.rules.push(newRule);
+      //console.log("rule before updating obj : " + JSON.stringify(this.objInfo.object.rules));
 
-      // update de l'objet qui add les rules?
+      // update de l'objet qui add les rules
       this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
     }
-
     //this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
-
-    console.log("update done");
   }
-}
+};
+
+class NewRule {
+    private id;
+    private conf = {
+      color: <string> null,
+      movement: <number> null,
+    };
+};
