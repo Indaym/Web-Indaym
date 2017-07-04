@@ -53,14 +53,14 @@ export class MoveForward extends BaseRules {
           && this._refScene.grid[xNew][yNew + mouvement] !== null)
         || (xOld === xNew && yOld === yNew - mouvement - 1
           && this._refScene.grid[xNew][yNew - mouvement] !== null))) {
-      if (xNew + mouvement + 1 && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew + mouvement][yNew]);
-      else if (xNew - mouvement - 1 && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew - mouvement][yNew]);
-      else if (xNew && yOld + mouvement + 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew  + mouvement]);
-      else if (xNew && yOld - mouvement - 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yNew - mouvement]);
+      if (xOld + mouvement + 1 === xNew && yOld === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xOld + mouvement][yNew]);
+      else if (xOld - mouvement - 1 === xNew && yOld === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xOld - mouvement][yNew]);
+      else if (xOld === xNew && yOld + mouvement + 1 === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew][yOld  + mouvement]);
+      else if (xOld === xNew && yOld - mouvement - 1 === yNew)
+        this._refScene.deleteFromScene(this._refScene.grid[xNew][yOld - mouvement]);
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
