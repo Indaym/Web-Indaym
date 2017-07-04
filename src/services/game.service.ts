@@ -47,10 +47,10 @@ export class GameService extends DefaultService {
   }
 
 
-  public postComment(comment, rating, id, success?, error?) {
-    var arr = {"message":comment, "rating":rating, "date":"today"};
-    var myJSON = JSON.stringify(arr);
-    this.http.put(this.gamesUrl + id, {'comments': comment + " Note : " + rating})
+  public postComment(comment, id, success?, error?) {
+    /*var arr = {"message":comment, "rating":rating, "date":"today"};
+    var myJSON = JSON.stringify(arr);*/
+    this.http.put(this.gamesUrl + id, {'comments': JSON.stringify(comment)})
     .map((res) => res.json())
     .subscribe(success, error);
   }

@@ -19,6 +19,7 @@ export class RateGameComponent {
   public subscription: Subscription;
   public comment: string;
   public rating: number;
+  public parseComment;
 
   model = new Comment(42, 'Your message...', 0);
 
@@ -34,26 +35,20 @@ export class RateGameComponent {
 
     this.games.getOneGame(this.gameId, (data) => {
       this.item = data;
+      this.parseComment = this.item.comments.split("//");
     });
   }
 
   public postComments(queryParam) {
     this.model = new Comment(this.gameId, this.model.message, this.model.rating);
+    var comments = JSON.parse(this.item.comments);
 
-    this.games.postComment(this.model.message, this.model.rating, this.gameId,
-      this.callbackComment, this.callbackComment);
-  }
-
-
-    
-  public callbackComment() {
-  }
-  
-}
-/*
-
-/*(data) => {
+    comments += "//" + this.model.message + " Note : " + this.model.rating 
+    this.games.postComment(comments, this.gameId,
+      (data) => {
       this.item = data;
-      this.comment = this.item.comment;
-      this.rating = this.item.rating;
-    });*/
+      this.parseComment = this.item.comments.split("//");
+      console.log(this.parseComment);
+      });
+  }
+}
