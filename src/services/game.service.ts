@@ -45,4 +45,15 @@ export class GameService extends DefaultService {
     this.http.delete(this.gamesUrl + id)
       .subscribe(success, error);
   }
+
+
+  public postComment(comment, rating, id, success?, error?) {
+    var arr = {"message":comment, "rating":rating, "date":"today"};
+    var myJSON = JSON.stringify(arr);
+    this.http.put(this.gamesUrl + id, {'comments': comment + " Note : " + rating})
+    .map((res) => res.json())
+    .subscribe(success, error);
+  }
+
+
 }

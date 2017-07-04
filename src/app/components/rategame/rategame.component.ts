@@ -1,8 +1,9 @@
 import { Component }      from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription }   from 'rxjs/Rx';
-
+import { NgForm }         from '@angular/forms';
 import { GameService }    from '../../../services/game.service';
+import { Comment }        from '../../../models/comment'
 
 @Component({
   selector  : 'ia-rategame',
@@ -16,6 +17,11 @@ export class RateGameComponent {
   public item;
   public gameId;
   public subscription: Subscription;
+  public comment: string;
+  public rating: number;
+
+  model = new Comment(42, 'Your message...', 0);
+
 
   constructor(private games: GameService, private route: ActivatedRoute) {
     this.subscription = route.queryParams.subscribe(
@@ -30,4 +36,24 @@ export class RateGameComponent {
       this.item = data;
     });
   }
+
+  public postComments(queryParam) {
+    this.model = new Comment(this.gameId, this.model.message, this.model.rating);
+
+    this.games.postComment(this.model.message, this.model.rating, this.gameId,
+      this.callbackComment, this.callbackComment);
+  }
+
+
+    
+  public callbackComment() {
+  }
+  
 }
+/*
+
+/*(data) => {
+      this.item = data;
+      this.comment = this.item.comment;
+      this.rating = this.item.rating;
+    });*/

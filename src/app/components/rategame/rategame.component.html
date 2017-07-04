@@ -13,22 +13,28 @@
           </div>
 </div>
 
-<form id="myForm" action="" method="post">
-   <legend>Give your opinion on this game :</legend>
-    <div>
-        <label for="rate">Rate :</label>
-        <input type="number" id="rate" name="rate" value="0" min="0" max="5"/>
-    </div>
-    <div>
-        <label for="message">Text :</label>
-        <textarea id="message" name="message" rows="10" cols="30">Give your opinion here</textarea>
-    </div>
-    <div id="send" class="button">
-        <button type="submit">Send</button>
-    </div>
-</form>
 
-<br/><br/>
+<div class="container">
+     <legend>Give your opinion on this game :</legend>
+      <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
+       
+          <div class="form-group">
+            <label for="message">Comment</label>
+            <input type="text" class="form-control" id="message"
+                    [(ngModel)]="model.message" name="message"
+                    #message="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input type="number" value="0" min="0" max="5" class="form-control" id="rating"
+                    [(ngModel)]="model.rating" name="rating">
+          </div>
+
+
+          <button type="button" class="btn btn-default" (click)="postComments(); commentForm.reset()">New Comment</button>
+
+
 
 <div class="container">
             <div class="row">
@@ -36,7 +42,20 @@
                   <div class="page-header">
                     <h1><small class="pull-right">45 comments</small> Comments </h1>
                   </div>
+
                    <div class="comments-list">
+                      <div class="media">
+                           <p class="pull-right"><small>Now</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/1/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Anonymous</h4>
+                              {{item?.comments}}
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+
                        <div class="media">
                            <p class="pull-right"><small>5 days ago</small></p>
                             <a class="media-left" href="#">
