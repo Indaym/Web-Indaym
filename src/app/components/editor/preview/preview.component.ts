@@ -70,10 +70,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
         texturesPaths: ['side.png','side.png','board10.png','side.png','side.png','side.png'],
         position: [0,0,0],
       },
-    });
+    }, true, 'Both');
 
     // Add Grid
-    this.gameController.addOject({
+    this.gameController.addObject({
       name: 'grid',
       object: {
         type: 'grid',
@@ -96,6 +96,9 @@ export class PreviewComponent implements OnInit, OnDestroy {
         dimension: [3.5, 1.5, 3.5],
         position: [0, 1.75, 0],
         texturesPaths: ['black.png'],
+        rules: [
+          {id: 'MoveDiag', conf: { movement: 1 }},
+        ],
       },
     };
     for (let z = 0; z < 10; z++) {
