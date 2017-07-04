@@ -54,13 +54,13 @@ export class MoveForward extends BaseRules {
         || (xOld === xNew && yOld === yNew - mouvement - 1
           && this._refScene.grid[xNew][yNew - mouvement] !== null))) {
       if (xOld + mouvement + 1 === xNew && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xOld + mouvement][yNew]);
+        this._refScene.deleteFromScene(this._refScene.grid[xOld + mouvement][yOld]);
       else if (xOld - mouvement - 1 === xNew && yOld === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xOld - mouvement][yNew]);
+        this._refScene.deleteFromScene(this._refScene.grid[xOld - mouvement][yOld]);
       else if (xOld === xNew && yOld + mouvement + 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yOld  + mouvement]);
+        this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld + mouvement]);
       else if (xOld === xNew && yOld - mouvement - 1 === yNew)
-        this._refScene.deleteFromScene(this._refScene.grid[xNew][yOld - mouvement]);
+        this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld - mouvement]);
       this._refObj.threeDModel._oldPosition[0] = xNew;
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
