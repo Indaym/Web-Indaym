@@ -69,9 +69,9 @@ export class SceneViewer {
     window.addEventListener( 'resize', () => this.onWindowResize(), false );
 
     this.grid = [];
-    for(var i: number = 0; i < 3; i++) {
+    for(var i: number = 0; i < 10; i++) {
             this.grid[i] = [];
-            for(var j: number = 0; j< 3; j++) {
+            for(var j: number = 0; j< 10; j++) {
                 this.grid[i][j] = null;
             }
         }
