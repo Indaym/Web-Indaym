@@ -43,12 +43,13 @@ export class RateGameComponent {
     this.model = new Comment(this.gameId, this.model.message, this.model.rating);
     var comments = JSON.parse(this.item.comments);
 
-    comments += "//" + this.model.message + " Note : " + this.model.rating 
+    comments = "//" + this.model.message + " Note : " + this.model.rating + comments;
     this.games.postComment(comments, this.gameId,
       (data) => {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
       console.log(this.parseComment);
+
       });
   }
 }
