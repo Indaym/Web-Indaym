@@ -90,7 +90,7 @@ export class BlueprintsComponent {
         }
       });
 
-    console.log(this.objInfo);
+    //console.log(this.objInfo);
     //console.log(id);
   //  this.saveRules();
   }
@@ -135,7 +135,7 @@ export class BlueprintsComponent {
         newRule.conf.movement = null;
 */
       this.objInfo.object.rules.push(rule);
-      console.log("rule before updating obj : " + JSON.stringify(this.objInfo.object.rules));
+      //console.log("rule before updating obj : " + JSON.stringify(this.objInfo.object.rules));
 
       // update de l'objet qui add les rules
       this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);

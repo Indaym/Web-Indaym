@@ -47,7 +47,7 @@ export class LeftBarComponent implements OnInit{
   }
 
   private loadRules(objId) {
-    console.log("hello nico" + objId);
+    //console.log("hello nico" + objId);
     this.selectRules(objId);
   }
 }
