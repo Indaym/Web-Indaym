@@ -17,11 +17,11 @@ export class RateGameComponent {
   public item;
   public gameId;
   public subscription: Subscription;
-  public comment: string;
-  public rating: number;
+  public ratings: number;
+  public tmpNum: number = 0;
   public parseComment;
-
-  model = new Comment(42, 'Your message...', 0);
+  public globalRating: number;
+  model = new Comment(42, '', 0);
 
 
   constructor(private games: GameService, private route: ActivatedRoute) {
@@ -36,6 +36,14 @@ export class RateGameComponent {
     this.games.getOneGame(this.gameId, (data) => {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
+      this.ratings = this.parseComment.length - 1;
+
+      for (var comm of this.parseComment)
+      {
+        if (comm == this.parseComment[0]) continue;
+        this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
+      }
+      this.globalRating = this.tmpNum / this.ratings;
     });
   }
 
@@ -48,8 +56,16 @@ export class RateGameComponent {
       (data) => {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
-      console.log(this.parseComment);
+      this.ratings = this.parseComment.length - 1;
+      for (var comm of this.parseComment)
+      {
+        if (comm == this.parseComment[0]) continue;
+        this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
+      }
+      this.globalRating = this.tmpNum / this.ratings;
 
       });
+    window.location.reload();
   }
+
 }
