@@ -84,3 +84,10 @@ md-sidenav {
   top: 85%;
   font-size: 100%;
 }
+
+#right {
+  position: fixed;
+  left: 75%;
+  top: 45%;
+  font-size: 30%;
+}
