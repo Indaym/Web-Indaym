@@ -46,6 +46,12 @@ export class GameService extends DefaultService {
       .subscribe(success, error);
   }
 
+  public updateRating(globalRating, id, success?, error?) {
+    console.log(globalRating);
+    this.http.put(this.gamesUrl + id, {'rate': globalRating})
+    .map((res) => res.json())
+    .subscribe(success, error);
+  }
 
   public postComment(comment, id, success?, error?) {
     /*var arr = {"message":comment, "rating":rating, "date":"today"};
@@ -54,6 +60,8 @@ export class GameService extends DefaultService {
     .map((res) => res.json())
     .subscribe(success, error);
   }
+
+
 
 
 }

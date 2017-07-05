@@ -37,35 +37,55 @@ export class RateGameComponent {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
       this.ratings = this.parseComment.length - 1;
-
-      for (var comm of this.parseComment)
-      {
-        if (comm == this.parseComment[0]) continue;
-        this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
-      }
-      this.globalRating = this.tmpNum / this.ratings;
     });
   }
 
   public postComments(queryParam) {
     this.model = new Comment(this.gameId, this.model.message, this.model.rating);
     var comments = JSON.parse(this.item.comments);
-
+    //comments="";
     comments = "//" + this.model.message + " Note : " + this.model.rating + comments;
+    this.updateRatings(queryParam);
     this.games.postComment(comments, this.gameId,
       (data) => {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
       this.ratings = this.parseComment.length - 1;
-      for (var comm of this.parseComment)
-      {
+      },
+      (data) => {
+      this.item = data;
+      this.parseComment = this.item.comments.split("//");
+      this.ratings = this.parseComment.length - 1;
+      window.location.reload();
+      });
+    }
+
+    public updateRatings(queryParam) {
+    if (this.parseComment[1]) {
+     for (var comm of this.parseComment) {
         if (comm == this.parseComment[0]) continue;
         this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
       }
-      this.globalRating = this.tmpNum / this.ratings;
-
+      this.tmpNum += this.model.rating;
+    }
+    else {
+      this.tmpNum = this.model.rating;
+    }
+    if (this.ratings > 0) {
+      this.globalRating = this.tmpNum / (this.ratings + 1);
+    }
+    else {
+      this.globalRating = this.tmpNum;
+    }
+    this.games.updateRating(this.globalRating, this.gameId,
+      (data) => {
+        window.location.reload();
+      },
+      (data) => {
+        window.location.reload();
       });
-    window.location.reload();
+ 
+
   }
 
 }

@@ -5,7 +5,7 @@
 
 <div id="doMargin">
           <img id="logos" src="app/components/store/tmp/jeu1.png"/>
-          <div id="note">Note Moyenne : {{globalRating}}</div>
+          <div id="note">Note Moyenne : {{item?.rate}}</div>
           <div id="descTitle">
           Game Description : <br/>
           <div id="description">
@@ -22,7 +22,7 @@
             <label for="message">Comment</label>
             <input type="text" placeholder="Your message..." class="form-control" id="message" 
                     [(ngModel)]="model.message" name="message" 
-                    #message="ngModel">
+                    #message="ngModel" ngmodel required>
           </div>
 
           <div class="form-group">
@@ -33,7 +33,6 @@
 
 
           <button type="button" class="btn btn-default" (click)="postComments(); ">New Comment</button>
-
 
 
 <div class="container">

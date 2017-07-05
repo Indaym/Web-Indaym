@@ -10,7 +10,7 @@
         <div id="eachGame" (click)="goToRateGame(item.uuid)">
           <img id="logos" src="app/components/store/tmp/jeu1.png"/>
           <div id="toCapitalize" (click)="goToScenesPage(item.uuid)">{{item.name}}</div>
-          <div id="note">Note: 4/5</div>
+          <div id="note">Note: {{item.rate}}</div>
           <div id="description">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id semper neque.</div>
         </div>
     </div>
