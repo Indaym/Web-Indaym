@@ -18,6 +18,7 @@ export class RateGameComponent {
   public gameId;
   public subscription: Subscription;
   public ratings: number;
+  public tmpNum: number = 0;
   public parseComment;
   public globalRating: number;
   model = new Comment(42, '', 0);
@@ -36,6 +37,13 @@ export class RateGameComponent {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
       this.ratings = this.parseComment.length - 1;
+
+      for (var comm of this.parseComment)
+      {
+        if (comm == this.parseComment[0]) continue;
+        this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
+      }
+      this.globalRating = this.tmpNum / this.ratings;
     });
   }
 
@@ -49,6 +57,12 @@ export class RateGameComponent {
       this.item = data;
       this.parseComment = this.item.comments.split("//");
       this.ratings = this.parseComment.length - 1;
+      for (var comm of this.parseComment)
+      {
+        if (comm == this.parseComment[0]) continue;
+        this.tmpNum += Number.parseInt(comm.match(/\d+/)[0].toString());
+      }
+      this.globalRating = this.tmpNum / this.ratings;
 
       });
     window.location.reload();
