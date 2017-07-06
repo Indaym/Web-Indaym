@@ -74,12 +74,15 @@ export class BlueprintsComponent {
           newRule.conf.color = color;
           newRule.conf.movement = movement;
           if (!document.getElementById("color"))
-            document.getElementById("right").innerHTML = "<div>Color: <input type=\"color\" id=\"color\"  name=\"color\"><br>Movement: <input id=\"movement\" type=\"number\" name=\"movement\"><br></div>";
+            document.getElementById("right").innerHTML = "<div>Color: <input type=\"color\" id=\"color\"  name=\"color\"><br>Movement: <input id=\"movement\" type=\"number\" name=\"movement\" value=1><br></div>";
           if (rulesList.length !== 0)
           {
             currRule.conf.color = (<HTMLInputElement>document.getElementById("color")).value;
             currRule.conf.color = currRule.conf.color.replace("#", "0x");
-            currRule.conf.movement = parseInt((<HTMLInputElement>document.getElementById("movement")).value);
+            if (parseInt((<HTMLInputElement>document.getElementById("movement")).value) === null)
+              currRule.conf.movement = 1;
+            else
+              currRule.conf.movement = parseInt((<HTMLInputElement>document.getElementById("movement")).value);
           }
           rulesList.push(newRule);
           currRule = newRule;
@@ -146,8 +149,8 @@ export class BlueprintsComponent {
 };
 
 class NewRule {
-    private id;
-    private conf = {
+    public id;
+    public conf = {
       color: <string> null,
       movement: <number> null,
     };
