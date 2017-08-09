@@ -10,9 +10,14 @@
     </md-sidenav>
 </md-sidenav-layout>
 
+<div id="previousContainer">
+  <div>Rules previously applied to this item: </div>
+  <div id="previousRules"></div>
+</div>
+
 <div id="name">
     <div id="itemName">Item Name: {{itemName}}</div>
-    <div>Rules applied to this item: {{color}}</div>
+    <div>Rules to apply to this item: {{color}}</div>
 </div>
 <div id="rules">
     <div class='container' [dragula]='"first-bag"' id="rulesContainer">

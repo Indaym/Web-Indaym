@@ -91,3 +91,10 @@ md-sidenav {
   top: 45%;
   font-size: 30%;
 }
+
+#previousContainer {
+  position:fixed;
+  left: 25%;
+  top: 38%;
+  font-size: 100%;
+}

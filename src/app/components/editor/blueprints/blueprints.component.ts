@@ -34,7 +34,7 @@ export class BlueprintsComponent {
   private objInfo;
   private rules;
   private itemName;
-  private newRules;
+  //private newRules;
   private color;
   private movement;
 
@@ -116,6 +116,7 @@ export class BlueprintsComponent {
 
     var newRule = null;
     */
+
     // for each rule in this.rules:
     for (var rule of rulesList)
     {
@@ -143,6 +144,11 @@ export class BlueprintsComponent {
       // update de l'objet qui add les rules
       this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
     }
+
+
+    // TODO here for Nico, update objects with their new rules we just applied
+
+
     rulesList = [];
     //this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
   }

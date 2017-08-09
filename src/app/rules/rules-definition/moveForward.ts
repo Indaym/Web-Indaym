@@ -11,7 +11,7 @@ export class MoveForward extends BaseRules {
 
     this._id = 'MoveForward';
     this._name = 'Move Forward';
-    this._description = `This is a rules for moving Forward`;
+    this._description = `This is a rule to move forward`;
     this._ruleType = RULE_TYPE.default;
   }
 

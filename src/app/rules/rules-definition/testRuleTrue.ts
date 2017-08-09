@@ -15,7 +15,7 @@ export class TestRuleTrue extends BaseRules {
 
     this._id = 'TestRuleTrue';
     this._name = 'Test rule true';
-    this._description = `this is a test rule with ${this.id} id`;
+    this._description = `This is a test True rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
   }
 

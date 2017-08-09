@@ -11,7 +11,7 @@ export class ChangeColor extends BaseRules {
 
     this._id = 'ChangeColor';
     this._name = 'Change Color';
-    this._description = `this is a rules for changing color with ${this.id} id`;
+    this._description = `This is a rule to change color with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
   }
 

@@ -11,7 +11,7 @@ export class MoveDiag extends BaseRules {
 
     this._id = 'MoveDiag';
     this._name = 'Move Diagonal';
-    this._description = `this is a rules for moving in diagonal`;
+    this._description = `This is a rule to move in diagonal`;
     this._ruleType = RULE_TYPE.default;
   }
 
