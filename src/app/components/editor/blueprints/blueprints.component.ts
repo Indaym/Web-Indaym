@@ -1,16 +1,12 @@
-import { Component }              from '@angular/core';
-import { EventDispatcher }        from 'three';
-import { GameControllerService }  from '../../../../services';
-import { ObjectService } from "../../../../services/object.service";
-
-import { dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
+import { Component }        from '@angular/core';
+import { EventDispatcher }  from 'three';
+import { dragula }          from 'ng2-dragula/ng2-dragula';
 
 import {
-  BaseRules,
-  SceneViewer,
-  ModelViewer,
-  RULE_TYPE,
-}                 from '../../../rules/';
+  GameControllerService,
+  ObjectService,
+}                           from '../../../../services';
+import { RULES_DEF }        from '../../../rules/';
 
 var rulesList = [];
 var currRule = null;
@@ -144,14 +140,36 @@ export class BlueprintsComponent {
 
       // update de l'objet qui add les rules
       this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
+
+      let index = this.objs.findIndex((element) => element.uuid === this.objInfo.uuid);
+      this.objs.splice(index, 1, this.objInfo);
+
+      const ruleDef = RULES_DEF[rule.id];
+      if (ruleDef !== undefined) {
+        const ruleInstance = new ruleDef(null, this.objInfo, rule.conf);
+        this.objInfo.rules[ruleInstance.id] = ruleInstance;
+      }
+
+      this.reloadRules(this.objInfo.uuid);
     }
-
-
-    // TODO here for Nico, update objects with their new rules we just applied
-
 
     rulesList = [];
     //this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
+  }
+
+  private reloadRules(objId){
+    document.getElementById("previousRules").innerText = "";
+    if (this.objs === undefined)
+      return;
+    console.log(this.objs);
+    let obj = this.objs.find(element => element.uuid === objId);
+    if (obj === undefined || obj.rules === undefined)
+      return;
+    let rules = Object.values(obj.rules);
+    for (let r of rules) {
+      console.log(r);
+      document.getElementById("previousRules").innerText += r.name + '\n';
+    }
   }
 }
 

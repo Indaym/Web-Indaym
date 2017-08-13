@@ -8,9 +8,9 @@ import {
 }                           from '../threed-viewer';
 
 export const enum RULE_TYPE {
-  'mouvement',
-  'update',
-  'default',
+  mouvement,
+  update,
+  default,
 }
 
 export abstract class BaseRules {
