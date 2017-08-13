@@ -99,7 +99,8 @@ export class BlueprintsComponent {
   }
 
   private saveRules() {
-    this.objInfo.object["rules"] = [];
+    if (this.objInfo.object.rules === undefined)
+      this.objInfo.object["rules"] = [];
 
     if (currRule && document.getElementById("color")) {
         currRule.conf.color = String((<HTMLInputElement>document.getElementById("color")).value);
@@ -152,7 +153,7 @@ export class BlueprintsComponent {
     rulesList = [];
     //this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
   }
-};
+}
 
 class NewRule {
     public id;
@@ -160,4 +161,4 @@ class NewRule {
       color: <string> null,
       movement: <number> null,
     };
-};
+}
