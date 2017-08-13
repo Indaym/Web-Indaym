@@ -47,28 +47,29 @@ export class LeftBarComponent implements OnInit{
   }
 
   private loadRules(objId) {
-    //console.log("hello nico" + objId);
     this.selectRules(objId);
 
     document.getElementById("previousRules").innerText = "";
-    for (var obj of this.objs) // objets
-    {
-      if (obj.uuid === objId) // selected obj
+    if (this.objs !== undefined && this.objs !== null) {
+      for (let obj of this.objs) // objets
       {
-        var arr = Object.values(obj.rules);
-
-        console.log(obj.rules); // test
-
-        for (var r of arr)
+        if (obj.uuid === objId && obj.rules !== undefined && obj.rules !== null) // selected obj
         {
-          // rules already on the selected object:
-          if (r.name != "rule")
+          let arr = Object.values(obj.rules);
+
+          console.log(obj.rules); // test
+          for (let r of arr)
           {
-            console.log(r.name);
-            document.getElementById("previousRules").innerText += r.name + '\n';
+            // rules already on the selected object:
+            if (r.name != "rule")
+            {
+              console.log(r.name);
+              document.getElementById("previousRules").innerText += r.name + '\n';
+            }
           }
         }
       }
+
     }
   }
 }

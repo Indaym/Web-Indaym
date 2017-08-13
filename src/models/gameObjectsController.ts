@@ -159,7 +159,9 @@ export class GameObjectsController {
    * @param typeEvent : Select if Event must be for view, for service or both
    */
   public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
-    if (this.currentObjects === undefined)
+    if (obj === undefined || obj === null)
+      return;
+    if (this.currentObjects === undefined || this.currentObjects === null)
       this.currentObjects = [];
     if (typeEvent === 'ToView')
       this.currentObjects.push(obj);
