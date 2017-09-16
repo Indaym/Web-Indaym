@@ -15,6 +15,24 @@ export class MoveForward extends BaseRules {
     this._ruleType = RULE_TYPE.default;
   }
 
+  public capture_rule(model: any): boolean {
+    if (model.LinkModel.name === "whitepawn")
+    {
+      this._refScene.capture[0] -= 1;
+      if (this._refScene.capture[0] === 0)
+        /// HERE
+        console.log("Black WIN");
+    }
+    else if (model.LinkModel.name === "blackpawn")
+    {
+      this._refScene.capture[1] -= 1;
+      if (this._refScene.capture[1] === 0)
+        /// HERE
+        console.log("White WIN");
+    }
+    return true;
+  }
+
   public run(args?: any): boolean {
     if (args === undefined || args.LinkModel.object.coord === undefined) {
       return false;
@@ -54,18 +72,22 @@ export class MoveForward extends BaseRules {
         || (xOld === xNew && yOld === yNew - mouvement - 1
           && this._refScene.grid[xNew][yNew - mouvement] !== null))) {
       if (xOld + mouvement + 1 === xNew && yOld === yNew) {
+        this.capture_rule(this._refScene.grid[xOld + mouvement][yOld]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld + mouvement][yOld]);
         this._refScene.grid[xOld + mouvement][yOld] = null;
       }
       else if (xOld - mouvement - 1 === xNew && yOld === yNew) {
+        this.capture_rule(this._refScene.grid[xOld - mouvement][yOld]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld - mouvement][yOld]);
         this._refScene.grid[xOld - mouvement][yOld] = null;
       }
       else if (xOld === xNew && yOld + mouvement + 1 === yNew) {
+        this.capture_rule(this._refScene.grid[xOld][yOld + mouvement]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld + mouvement]);
         this._refScene.grid[xOld][yOld + mouvement] = null;
       }
       else if (xOld === xNew && yOld - mouvement - 1 === yNew) {
+        this.capture_rule(this._refScene.grid[xOld][yOld - mouvement]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld - mouvement]);
         this._refScene.grid[xOld][yOld - mouvement] = null;
       }

@@ -18,6 +18,7 @@ import { ChangeColor }    from './changeColor';
 import { MoveForward }    from './moveForward';
 import { MoveDiag }    from './moveDiag';
 import { ChangeTurn }   from './changeTurn';
+import { CaptureSet }   from './captureSet';
 
 export const RULES_DEF = {
   TestRuleTrue,
@@ -26,4 +27,5 @@ export const RULES_DEF = {
   MoveForward,
   MoveDiag,
   ChangeTurn,
+  CaptureSet,
 };

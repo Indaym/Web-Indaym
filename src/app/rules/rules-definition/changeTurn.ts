@@ -18,7 +18,6 @@ export class ChangeTurn extends BaseRules {
   }
 
   public run(args?: any): boolean {
-    console.log(this._refObj);
     if (this._refObj.threeDModel.oldPosition[0] === -1 && this._refObj.threeDModel.oldPosition[1] === -1)
       return true;
     if ((this._refScene.player === 0 || this._refScene.player === 1) && this._refObj.name === "whitepawn")
@@ -31,14 +30,8 @@ export class ChangeTurn extends BaseRules {
     }
     else
     {
-      console.log("ERROR : on changeTurn");
-      console.log(this._refScene.player);
-      console.log(this._refObj.name)
       return false;
     }
-    console.log("Ok");
-    console.log(this._refScene.player);
-    console.log(this._refObj.name)
     return true;
   }
 }

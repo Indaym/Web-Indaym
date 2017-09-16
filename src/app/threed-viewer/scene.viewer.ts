@@ -31,6 +31,7 @@ export class SceneViewer {
   protected _rules = {};
   protected _player : number;
   protected _grid : Array<Array<Mesh>>;
+  protected _capture : Array<number>;
 
   /**
    * @param conf : JSON object
@@ -70,6 +71,7 @@ export class SceneViewer {
     window.addEventListener( 'resize', () => this.onWindowResize(), false );
 
     this._player = 0;
+    this._capture = [-1, -1];
 
     this.grid = [];
     for(var i: number = 0; i < 10; i++) {
@@ -230,6 +232,14 @@ export class SceneViewer {
 
   set grid(value: Array<Array<Mesh>>) {
     this._grid = value;
+  }
+
+  get capture() {
+    return this._capture;
+  }
+
+  set capture(value: Array<number>) {
+    this._capture = value;
   }
 
   get player() {
