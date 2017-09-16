@@ -66,10 +66,16 @@ for ()
 
 
     dragula([document.getElementById("rulesContainerSource"), document.getElementById("rulesContainer")])
-      .on('drop', function (el, target, source) {
+    .on('drag', function (el) {
+      el.className = el.className.replace('ex-moved', '');
+      console.log("draggin");
+    })
+    .on('drop', function (el, target, source) {
         var newRule;
         var deleteRule = false;
         el.className += ' ex-moved';
+
+        console.log("droppin");
 
         if (target.id === "rulesContainerSource" && source.id === "rulesContainer")
         {
@@ -107,8 +113,39 @@ for ()
         else if (target.id === "rulesContainer" && source.id === "rulesContainerSource")
         {
           console.log("drag&drop gauche vers droite");
+
+          var myBool = false;
+          var myArr = document.getElementById("rulesContainerSource").innerText.split('\n');
+          for (var myI of myArr)
+          {
+            if (myI == el.innerText)
+            {
+              myBool = true;
+            }
+          }
+
+
+          newRule = new NewRule();
+          newRule.id = el.innerText;
+          newRule.conf.color = color;
+          newRule.conf.movement = movement;
+          if (!document.getElementById("color"))
+            document.getElementById("right").innerHTML = "<div>Color: <input type=\"color\" id=\"color\"  name=\"color\"><br>Movement: <input id=\"movement\" type=\"number\" name=\"movement\" value=1><br></div>";
+          if (rulesList.length !== 0)
+          {
+            currRule.conf.color = (<HTMLInputElement>document.getElementById("color")).value;
+            currRule.conf.color = currRule.conf.color.replace("#", "0x");
+            if (parseInt((<HTMLInputElement>document.getElementById("movement")).value) === null)
+              currRule.conf.movement = 1;
+            else
+              currRule.conf.movement = parseInt((<HTMLInputElement>document.getElementById("movement")).value);
+          }
+
+
             // remettre rule a gauche
-            document.getElementById("rulesContainerSource").innerHTML += "<div id=\"" + el.id + "\">" + el.id + "</div>";
+            if (myBool == false)
+              document.getElementById("rulesContainerSource").innerHTML += "<div id=\"" + el.id + "\">" + el.id + "</div>";
+
 
             // enlever doublons
             var arr = document.getElementById("rulesContainer").innerText.split('\n');
@@ -152,33 +189,27 @@ for ()
             {
 
               rulesList.splice(i, 1);
-              console.log("yoloswagXX lol");
+              //console.log("yoloswagXXlol");
             }
           }
         }
-        else // false
+        else if (cnt <= 1)
         {
           console.log("is fal!!");
-          newRule = new NewRule();
-          newRule.id = el.innerText;
-          newRule.conf.color = color;
-          newRule.conf.movement = movement;
-          if (!document.getElementById("color"))
-            document.getElementById("right").innerHTML = "<div>Color: <input type=\"color\" id=\"color\"  name=\"color\"><br>Movement: <input id=\"movement\" type=\"number\" name=\"movement\" value=1><br></div>";
-          if (rulesList.length !== 0)
+          var cnt = 0;
+          for (var rule of rulesList)
           {
-            currRule.conf.color = (<HTMLInputElement>document.getElementById("color")).value;
-            currRule.conf.color = currRule.conf.color.replace("#", "0x");
-            if (parseInt((<HTMLInputElement>document.getElementById("movement")).value) === null)
-              currRule.conf.movement = 1;
-            else
-              currRule.conf.movement = parseInt((<HTMLInputElement>document.getElementById("movement")).value);
+            if (newRule.id == rule.id)
+            {
+              cnt += 1;
+            }
           }
-          rulesList.push(newRule);
-          currRule = newRule;
+          if (cnt == 0)
+          {
+            rulesList.push(newRule);
+            currRule = newRule;
+          }
         }
-
-
       });
 
     //console.log(this.objInfo);
@@ -211,6 +242,12 @@ for ()
       const ruleDef = RULES_DEF[rule.id];
       if (ruleDef !== undefined) {
         const ruleInstance = new ruleDef(null, this.objInfo, rule.conf);
+
+        if (this.objInfo.rules == undefined)
+        {
+          this.objInfo.rules = [];
+        }
+
         this.objInfo.rules[ruleInstance.id] = ruleInstance;
       }
 
@@ -233,13 +270,13 @@ for ()
 
     document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
 
+console.log(rulesList);
     for (let r of rulesList) {
       console.log("regles d'avant (qui doivent partir) + actuelles: ");
-      console.log(r);
+      //console.log(r);
+      //console.log(rulesList);
 
-console.log(rulesList);
-
-      if (true) // TODO Caro : recup objet depuis la db et voir ses vraies regles actuelles
+      if (true) // if rule n'y est pas
       {
         document.getElementById("previousContainer").innerHTML += "<div> " + r.id + "</div>";
       }
