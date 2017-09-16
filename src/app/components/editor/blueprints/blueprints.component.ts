@@ -72,6 +72,29 @@ for ()
         if (target.id === "rulesContainerSource" && source.id === "rulesContainer")
         {
           console.log("drag&drop droite vers gauche");
+
+            // enlever doublons
+            var arr = document.getElementById("rulesContainerSource").innerText.split('\n');
+            var cnt = 0;
+            var newArr = [];
+            for (var line of arr)
+            {
+              if (line == el.id)
+              {
+                if (cnt === 0)
+                {
+                  newArr.push("<div id=\"" + line + "\">" + line + "</div>");
+                }
+                cnt += 1;
+              }
+              else
+              {
+                newArr.push("<div id=\"" + line + "\">" + line + "</div>");
+              }
+            }
+            document.getElementById("rulesContainerSource").innerHTML = newArr.join('\n');
+
+
           el = "<div>" + el.innerText + "</div>";
           if (document.getElementById("rulesContainer").childElementCount === 0)
           {
@@ -81,6 +104,33 @@ for ()
         else if (target.id === "rulesContainer" && source.id === "rulesContainerSource")
         {
           console.log("drag&drop gauche vers droite");
+
+            // remettre rule a gauche
+            document.getElementById("rulesContainerSource").innerHTML += "<div id=\"" + el.id + "\">" + el.id + "</div>";
+
+            // enlever doublons
+            var arr = document.getElementById("rulesContainer").innerText.split('\n');
+            var cnt = 0;
+            var newArr = [];
+            for (var line of arr)
+            {
+              if (line == el.id)
+              {
+                if (cnt === 0)
+                {
+                  newArr.push("<div id=\"" + line + "\">" + line + "</div>");
+                }
+                cnt += 1;
+              }
+              else
+              {
+                newArr.push("<div id=\"" + line + "\">" + line + "</div>");
+              }
+            }
+            document.getElementById("rulesContainer").innerHTML = newArr.join('\n');
+          // } ?
+          
+
           newRule = new NewRule();
           newRule.id = el.innerText;
           newRule.conf.color = color;
