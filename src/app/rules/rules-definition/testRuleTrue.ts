@@ -14,7 +14,7 @@ export class TestRuleTrue extends BaseRules {
     super(scene, model, conf);
 
     this._id = 'TestRuleTrue';
-    this._name = 'Test rule true';
+    this._name = 'Test Rule True';
     this._description = `This is a test True rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
   }

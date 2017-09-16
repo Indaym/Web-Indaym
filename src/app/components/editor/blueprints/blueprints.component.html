@@ -10,10 +10,12 @@
     </md-sidenav>
 </md-sidenav-layout>
 
+
 <div id="previousContainer">
-  <div>Rules previously applied to this item: </div>
+  <div>Rules currently applied to this item: </div>
   <div id="previousRules"></div>
 </div>
+
 
 <div id="name">
     <div id="itemName">Item Name: {{itemName}}</div>
@@ -23,6 +25,7 @@
     <div class='container' [dragula]='"first-bag"' id="rulesContainer"></div>
 </div>
 <div id="save">
+    <p>Warning: Saving will override previous rules and only keep the new ones</p>
     <button (click)="saveRules()">Save</button>
 </div>
 

@@ -40,7 +40,20 @@ export class BlueprintsComponent {
     this.objs = this.gameController.getObjects();
   }
 
+
   private affRules(id) {
+
+
+ /*
+for ()
+{
+    var newRule = new NewRule();
+
+    rulesList.push(newRule);
+  }
+ */
+
+
     this.objInfo = this.objs.find((lm, index, array) => {
       if (lm.uuid == id)
         return true;
@@ -48,8 +61,9 @@ export class BlueprintsComponent {
         return false;
     });
 
-    // display name:
+    // display object name:
     this.itemName = this.objInfo.name;
+
 
     dragula([document.getElementById("rulesContainerSource"), document.getElementById("rulesContainer")])
       .on('drop', function (el, target, source) {
@@ -57,6 +71,7 @@ export class BlueprintsComponent {
         el.className += ' ex-moved';
         if (target.id === "rulesContainerSource" && source.id === "rulesContainer")
         {
+          console.log("drag&drop droite vers gauche");
           el = "<div>" + el.innerText + "</div>";
           if (document.getElementById("rulesContainer").childElementCount === 0)
           {
@@ -65,6 +80,7 @@ export class BlueprintsComponent {
         }
         else if (target.id === "rulesContainer" && source.id === "rulesContainerSource")
         {
+          console.log("drag&drop gauche vers droite");
           newRule = new NewRule();
           newRule.id = el.innerText;
           newRule.conf.color = color;
@@ -95,7 +111,7 @@ export class BlueprintsComponent {
   }
 
   private saveRules() {
-    if (this.objInfo.object.rules === undefined)
+    /* if (this.objInfo.object.rules === undefined) */
       this.objInfo.object["rules"] = [];
 
     if (currRule && document.getElementById("color")) {
@@ -104,37 +120,9 @@ export class BlueprintsComponent {
         currRule.conf.movement = parseInt((<HTMLInputElement>document.getElementById("movement")).value);
     }
 
-    // stocker html dans this.rules:
-    /*
-    this.rules = document.getElementById("rulesContainer").innerText;
-    this.rules = this.rules.split('\n');
-    // delete last elem of the list:
-    this.rules.pop();
-
-    var newRule = null;
-    */
-
     // for each rule in this.rules:
     for (var rule of rulesList)
     {
-      // reset newRule:
-      /*
-      newRule = new NewRule();
-
-      newRule.id = rule;
-
-      // ici add les conf des rules if needed (chaque regle a des config différentes)
-      if (rule === "ChangeColor")
-      {
-        newRule.conf.color = "0x0000FF";
-      }
-      else if (rule === "MoveDiag")
-        newRule.conf.movement = 1;
-      else if (rule === "MoveForward")
-        newRule.conf.movement = 1;
-      else // TestRuleTrue et False
-        newRule.conf.movement = null;
-*/
       this.objInfo.object.rules.push(rule);
       //console.log("rule before updating obj : " + JSON.stringify(this.objInfo.object.rules));
 
@@ -158,7 +146,7 @@ export class BlueprintsComponent {
   }
 
   private reloadRules(objId){
-    document.getElementById("previousRules").innerText = "";
+    document.getElementById("rulesContainer").innerText = "";
     if (this.objs === undefined)
       return;
     console.log(this.objs);
@@ -166,9 +154,16 @@ export class BlueprintsComponent {
     if (obj === undefined || obj.rules === undefined)
       return;
     let rules = Object.values(obj.rules);
+
+    document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
+
     for (let r of rules) {
+      console.log("regles d'avant (qui doivent partir) + actuelles: ");
       console.log(r);
-      document.getElementById("previousRules").innerText += r.name + '\n';
+      if (true) // TODO Caro : recup objet depuis la db et voir ses vraies regles actuelles
+      {
+        document.getElementById("previousContainer").innerHTML += "<div> " + r.id + "</div>";
+      }
     }
   }
 }

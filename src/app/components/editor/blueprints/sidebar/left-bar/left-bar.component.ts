@@ -48,8 +48,8 @@ export class LeftBarComponent implements OnInit{
 
   private loadRules(objId) {
     this.selectRules(objId);
-
-    document.getElementById("previousRules").innerText = "";
+    document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
+    document.getElementById("rulesContainer").innerText = "";
     if (this.objs !== undefined && this.objs !== null) {
       for (let obj of this.objs) // objets
       {
@@ -61,11 +61,12 @@ export class LeftBarComponent implements OnInit{
           for (let r of arr)
           {
             // rules already on the selected object:
-            if (r.name != "rule")
-            {
+            /* if (r.name != "rule")
+            { */
+
               console.log(r.name);
-              document.getElementById("previousRules").innerText += r.name + '\n';
-            }
+              document.getElementById("previousContainer").innerText += r.id + '\n';
+            /* } */
           }
         }
       }
