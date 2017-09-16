@@ -68,11 +68,14 @@ for ()
     dragula([document.getElementById("rulesContainerSource"), document.getElementById("rulesContainer")])
       .on('drop', function (el, target, source) {
         var newRule;
+        var deleteRule = false;
         el.className += ' ex-moved';
+
         if (target.id === "rulesContainerSource" && source.id === "rulesContainer")
         {
+          deleteRule = true;
           console.log("drag&drop droite vers gauche");
-
+          console.log("deleteRule: " + deleteRule);
             // enlever doublons
             var arr = document.getElementById("rulesContainerSource").innerText.split('\n');
             var cnt = 0;
@@ -104,7 +107,6 @@ for ()
         else if (target.id === "rulesContainer" && source.id === "rulesContainerSource")
         {
           console.log("drag&drop gauche vers droite");
-
             // remettre rule a gauche
             document.getElementById("rulesContainerSource").innerHTML += "<div id=\"" + el.id + "\">" + el.id + "</div>";
 
@@ -129,8 +131,34 @@ for ()
             }
             document.getElementById("rulesContainer").innerHTML = newArr.join('\n');
           // } ?
-          
 
+
+
+
+
+          // user can choose a color and a movement number:
+          // associate ngModel to both values. Set to attributes of object currently selected. Simply change currently selected object when a drop happens.
+          // Win. (Maybe have to copy values.)
+        }
+
+        if (deleteRule == true)
+        {
+          console.log("is tru!!");
+          for (var i = 0; i < rulesList.length; i++)
+          {
+            console.log("i: " + i);
+            console.log(rulesList[i]);
+            if (rulesList[i].id == el.id)
+            {
+
+              rulesList.splice(i, 1);
+              console.log("yoloswagXX lol");
+            }
+          }
+        }
+        else // false
+        {
+          console.log("is fal!!");
           newRule = new NewRule();
           newRule.id = el.innerText;
           newRule.conf.color = color;
@@ -148,11 +176,9 @@ for ()
           }
           rulesList.push(newRule);
           currRule = newRule;
-
-          // user can choose a color and a movement number:
-          // associate ngModel to both values. Set to attributes of object currently selected. Simply change currently selected object when a drop happens.
-          // Win. (Maybe have to copy values.)
         }
+
+
       });
 
     //console.log(this.objInfo);
