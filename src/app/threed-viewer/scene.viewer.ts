@@ -29,6 +29,7 @@ export class SceneViewer {
   protected _mouse: Vector2 = new Vector2(0, 0);
 
   protected _rules = {};
+  protected _player : number;
   protected _grid : Array<Array<Mesh>>;
 
   /**
@@ -67,6 +68,8 @@ export class SceneViewer {
     this._raycaster = new Raycaster();
 
     window.addEventListener( 'resize', () => this.onWindowResize(), false );
+
+    this._player = 0;
 
     this.grid = [];
     for(var i: number = 0; i < 10; i++) {
@@ -228,6 +231,15 @@ export class SceneViewer {
   set grid(value: Array<Array<Mesh>>) {
     this._grid = value;
   }
+
+  get player() {
+    return this._player;
+  }
+
+  set player(value: number)
+   {
+     this._player = value;
+   }
   /**
    * add rule
    */
