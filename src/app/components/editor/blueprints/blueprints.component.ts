@@ -233,9 +233,12 @@ for ()
 
     document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
 
-    for (let r of rules) {
+    for (let r of rulesList) {
       console.log("regles d'avant (qui doivent partir) + actuelles: ");
       console.log(r);
+
+console.log(rulesList);
+
       if (true) // TODO Caro : recup objet depuis la db et voir ses vraies regles actuelles
       {
         document.getElementById("previousContainer").innerHTML += "<div> " + r.id + "</div>";
