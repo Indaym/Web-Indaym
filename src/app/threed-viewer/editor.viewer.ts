@@ -13,6 +13,7 @@ import {
 
 import {
   SceneViewer,
+  ThreeDModelViewer,
 } from '.';
 
 const TransformControls = require('threejs-transformcontrols');

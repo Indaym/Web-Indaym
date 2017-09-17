@@ -9,4 +9,8 @@ import { Component }  from '@angular/core';
   providers : [],
 })
 export class AppComponent {
+  constructor() {
+    // Marre des warn de threejs souvent inutiles
+    console.warn = () => {};
+  }
 }

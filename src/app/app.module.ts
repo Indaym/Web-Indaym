@@ -2,12 +2,13 @@
  * Created by djavrell on 16/08/16.
  */
 
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { MaterialModule } from '@angular/material';
-import { FormsModule }    from '@angular/forms';
-import { DndModule }      from 'ng2-dnd';
-import { HttpModule }     from '@angular/http';
+import { NgModule }         from '@angular/core';
+import { BrowserModule }    from '@angular/platform-browser';
+import { MaterialModule }   from '@angular/material';
+import { FormsModule }      from '@angular/forms';
+import { DndModule }        from 'ng2-dnd';
+import { HttpModule }       from '@angular/http';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import {
   ENV_PROVIDERS,
@@ -15,15 +16,15 @@ import {
   PIPES,
   PROVIDERS,
   MODULES,
-}                         from '../platform';
-import { routing }        from './app.route';
+}                           from '../platform';
+import { routing }          from './app.route';
 
 import {
   AppComponent,
   APP_COMPONENTS,
-}                         from './components';
+}                           from './components';
 
-import { HtmlService }    from '../services/html.service';
+import { HtmlService }      from '../services/html.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HtmlService }    from '../services/html.service';
     routing,
     FormsModule,
     DndModule.forRoot(),
+    FileUploadModule,
   ],
 })
 export class AppModule {
