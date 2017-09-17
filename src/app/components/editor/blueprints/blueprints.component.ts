@@ -103,6 +103,16 @@ for ()
             }
             document.getElementById("rulesContainerSource").innerHTML = newArr.join('\n');
 
+            // patcher bug du save rule quand la regle a ete enlevee
+            for (var i = 0; i < rulesList.length; i++)
+            {
+              if (rulesList[i].id == el.id)
+              {
+                rulesList.splice(i, 1);
+                break;
+              }
+            }
+
 
           el = "<div>" + el.innerText + "</div>";
           if (document.getElementById("rulesContainer").childElementCount === 0)
