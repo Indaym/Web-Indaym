@@ -6,15 +6,18 @@ import {
   Component,
   OnInit,
   OnDestroy,
-}                                 from '@angular/core';
-import { EventDispatcher }        from 'three';
+}                           from '@angular/core';
+import { EventDispatcher }  from 'three';
 
-import { GameControllerService }  from '../../../../services/gameController.service';
-import { RulesInterface }         from '.';
+import {
+  GameControllerService,
+  TextureService,
+}                           from '../../../../services/';
+import { RulesInterface }   from '.';
 import {
   PlayerViewer,
   ModelsLoader,
-}                                 from '../../../threed-viewer';
+}                           from '../../../threed-viewer';
 
 @Component({
   selector  : 'ia-preview',
@@ -30,7 +33,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private rulesInterface: RulesInterface;
 
-  constructor(private gameControllerService: GameControllerService) {
+  constructor(private gameControllerService: GameControllerService, private textureService: TextureService) {
     this.gameController = gameControllerService.gameController;
     this.rulesInterface = new RulesInterface();
   }
@@ -48,7 +51,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.scene.domElement.addEventListener('mouseup',   (event) => this.scene.onMouseUp(event), false);
 
     this.scene.eventDispatcher = new EventDispatcher();
-    this.modelsLoader = new ModelsLoader(this.scene);
+    this.modelsLoader = new ModelsLoader(this.scene, this.textureService);
     this.modelsLoader.loadModels(this.gameController.getObjects());
     this.modelsLoader.initEvents(this.gameController);
   }

@@ -7,10 +7,14 @@ import {
   Mesh,
   Geometry,
   Material,
+  MeshBasicMaterial,
+  TextureLoader,
+  Euler,
 } from 'three';
 
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
+  private _rotation: Euler = new Euler(0, 0, 0);
   private _position: Vector3 = new Vector3(0, 0, 0);
   private _mesh: Mesh;
   private _geometry: Geometry;
@@ -31,6 +35,8 @@ export class ModelViewer {
       this._position.copy(new Vector3().fromArray(conf.position));
     if (conf.dimension instanceof Array)
       this._dimension.copy(new Vector3().fromArray(conf.dimension));
+    if (conf.rotation instanceof Array)
+      this._rotation.copy(new Euler().fromArray(conf.rotation));
     if (conf.geometry instanceof Geometry)
       this._geometry = conf.geometry;
     if (conf.material instanceof Material)
@@ -62,6 +68,8 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   get dimension(): Vector3 {
+    if (this.mesh != undefined)
+      this._dimension.copy(this.mesh.scale);
     return this._dimension;
   }
 
@@ -71,6 +79,27 @@ export class ModelViewer {
    */
   set dimension(value: Vector3) {
     this._dimension.copy(value);
+    if (this.mesh != undefined)
+      this.mesh.scale.copy(this._dimension);
+  }
+
+  /**
+   * Get rotation of model
+   * @returns {Vector3}
+   */
+  get rotation(): Euler {
+    if (this.mesh != undefined)
+      this._rotation.copy(this.mesh.rotation);
+    return this._rotation;
+  }
+
+  /**
+   * Set rotation of model
+   * @param value
+   */
+  set rotation(value: Euler) {
+    this._rotation.copy(value);
+    this.mesh.rotation.copy(this._rotation);
   }
 
   /**
@@ -87,6 +116,16 @@ export class ModelViewer {
    */
   set geometry(value: Geometry) {
     this._geometry = value;
+  }
+
+  /**
+   * Set texture by url
+   */
+  set texture(texture) {
+    this._material = new MeshBasicMaterial( { map: new TextureLoader().load(texture) } )
+    this._material.needsUpdate = true;
+    if (this.mesh != undefined)
+      this.mesh.material = this.material;
   }
 
   /**
@@ -145,11 +184,14 @@ export class ModelViewer {
    * @returns {any} : Mesh
    */
   public generateMesh() {
-    if (this._geometry == null || this._material == null)
+    if (this._geometry == undefined)
       return null;
+    if (this._material === undefined)
+      this._material = new MeshBasicMaterial({color: 0xffffff});
     this._mesh = new Mesh(this._geometry, this._material);
     this._mesh.position.copy(this._position);
     this._mesh.scale.copy(this._dimension);
+    this._mesh.rotation.copy(this._rotation);
     return this._mesh;
   }
 }

@@ -44,10 +44,12 @@ export class BoardModelViewer extends ModelViewer {
    * @param onLoad : Callback when loaded
    */
   public init(onLoad) {
-    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
+//    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(1, 1, 1, 1, 1, 1);
+    const mesh = this.generateMesh();
+    onLoad(mesh);
 
-    const materials = new Array(6);
+/*     const materials = new Array(6);
 
     this._textureLoader.load(this._texturesPaths, (textures) => {
       this.material = new MultiMaterial(materials);
@@ -59,5 +61,6 @@ export class BoardModelViewer extends ModelViewer {
       if (index > -1)
         materials[index] = new MeshBasicMaterial({ map: texture });
     });
+ */
   }
 }

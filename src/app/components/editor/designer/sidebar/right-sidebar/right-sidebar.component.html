@@ -4,11 +4,6 @@
 <span>Mode : {{end.mode}}</span>
 
 <form>
-  Search:
-  <input type="search" name="Search a property">
-</form>
-
-<form>
   <h6>Position :</h6>
   <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]" (ngModelChange)="updateValues('position')"/><br/>
   <h6>Rotation :</h6>
@@ -19,7 +14,7 @@
 
 <hr>
 <h6>Select an existing texture :</h6>
-<select id="sel" [(ngModel)]="vam">
+<select id="sel" [(ngModel)]="imgSelected" (ngModelChange)="previewTexture()">
   <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
 </select>
 
@@ -40,4 +35,7 @@
 <button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()" >
   <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
 </button>
-    
+
+<hr>
+<p>Preview :</p>
+<img *ngIf="imgPreview.length > 0" [src]="imgPreview" width="250"/>

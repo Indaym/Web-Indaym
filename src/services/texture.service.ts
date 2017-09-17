@@ -35,6 +35,24 @@ export class TextureService extends DefaultService {
   }
 
   /**
+   * Get the texture saved in localStorage, if not exist load from Back and save in LocalStorage
+   */
+  public getLocalTexture(id, success) {
+    if (id === undefined || id === null) {
+      success(undefined);
+      return;
+    }
+    if (id in localStorage) {
+      success(localStorage.getItem(id));
+    } else {
+      this.getBlob(id, (datas) => {
+        localStorage.setItem(datas.uuid, datas.img);
+        success(datas.img);
+      });
+    }
+  }
+
+  /**
    * Get the name with the uuid
    */
   public getName(textures, uuid, success) {

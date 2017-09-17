@@ -41,13 +41,16 @@ export class PawnModelViewer extends ModelViewer {
    * @param onLoad : Callback when loaded
    */
   public init(onLoad) {
-    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
+    //this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(1, 1, 1, 40);
+    const mesh = this.generateMesh();
+    onLoad(mesh);
 
-    this._textureLoader.load(this._texturesPaths, (textures) => {
+/*     this._textureLoader.load(this._texturesPaths, (textures) => {
       this.material = new MeshBasicMaterial({map: textures[0]});
       const mesh = this.generateMesh();
       onLoad(mesh);
     }, (texture, index) => {});
+ */
   }
 }

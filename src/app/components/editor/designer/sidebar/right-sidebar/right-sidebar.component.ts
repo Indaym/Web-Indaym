@@ -7,7 +7,10 @@ import {
   Input,
   OnInit,
 }                         from '@angular/core';
-import { Vector3 }        from 'three';
+import {
+  Vector3,
+  Euler,
+}                         from 'three';
 import { FileUploader }   from 'ng2-file-upload';
 
 import { TextureService } from '../../../../../../services';
@@ -20,7 +23,7 @@ import { serverConfig }   from '../../../../../../../config/server.conf';
     require('./right-sidebar.component.css'),
     require('../sidebars.css'),
   ],
-  providers : [ TextureService ],
+  providers : [],
 })
 export class RightSidebarComponent implements OnInit  {
   @Input() public end;
@@ -28,15 +31,16 @@ export class RightSidebarComponent implements OnInit  {
   private urlImg;
   private warnMessage = '';
   private uploaded = false;
-  private textures = [{name: "salut", uuid: "42"}, {name: "salutA", uuid: "43"}, {name: "salutB", uuid: "44"}];
-  private vam = '';
+  private textures = [];
+  private imgSelected;
+  private imgPreview = '';
 
   public uploader: FileUploader = new FileUploader({url: serverConfig.serverURL + 'textures/' });
   private minimumScale = new Vector3();
   private objectSelected = {
     position: new Vector3(),
     dimension: new Vector3(),
-    rotation: new Vector3(),
+    rotation: new Euler(),
   };
 
   constructor(private textureService: TextureService) {
@@ -59,8 +63,14 @@ export class RightSidebarComponent implements OnInit  {
         this.uploaded = false;
       }, 5000);
 
-      this.textureService.getBlob(JSON.parse(response).uuid, (datas) => {
+      this.refreshList();
+
+      const res = JSON.parse(response);
+
+      this.textureService.getBlob(res.uuid, (datas) => {
         localStorage.setItem(datas.uuid, datas.img);
+        this.imgSelected = res.uuid;
+        this.previewTexture();
       });
     };
   }
@@ -100,8 +110,20 @@ export class RightSidebarComponent implements OnInit  {
    * Apply texture to selected object
    */
   public applyTexture() {
-    console.log(this.vam);
+    this.eventDispatcher.dispatchEvent({
+      type: 'updateTexture',
+      texture: this.imgSelected
+    });
   };
+
+  /**
+   * When selected item change, automatic set preview item
+   */
+  public previewTexture() {
+    this.textureService.getLocalTexture(this.imgSelected, (texture) => {
+      this.imgPreview = texture;
+    });
+  }
 
   public refreshList() {
     this.textureService.getTextures((results) => {

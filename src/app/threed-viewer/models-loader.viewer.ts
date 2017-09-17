@@ -9,6 +9,10 @@ import {
   GridModelViewer,
 } from '.';
 
+import {
+  TextureService
+} from '../../services/';
+
 export class ModelsLoader {
   private types = {
     'board': BoardModelViewer,
@@ -17,7 +21,7 @@ export class ModelsLoader {
     'grid': GridModelViewer,
   };
 
-  constructor(private scene, private editorMode: Boolean = false) {}
+  constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {}
 
   /**
    * Load models on 3D view
@@ -25,25 +29,31 @@ export class ModelsLoader {
    */
   public loadModels(models) {
     models.forEach((element) => {
-      this.loadOneModel(element);
+      this.loadOneModel(element, false);
     });
+    this.scene.render();
   }
 
   /**
    * Load one model on 3D view
    * @param model : model to load
    */
-  public loadOneModel(model) {
+  public loadOneModel(model, render = true) {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
       model.threeDModel = new modelViewer(model.object, this.editorMode);
-      if (model.object.texturesPaths != undefined)
-        model.threeDModel.texturesPaths = model.object.texturesPaths;
-      model.threeDModel.init((mesh) => {
-        mesh.LinkModel = model;
-        this.scene.addInScene(mesh);
-        this.scene.render();
+
+      this.textureService.getLocalTexture(model.textureRef, (texture) => {
+        if (texture)
+          model.threeDModel.texture = texture;
+
+        model.threeDModel.init((mesh) => {
+          mesh.LinkModel = model;
+          this.scene.addInScene(mesh);
+          if (render)
+            this.scene.render();
+        });
       });
     }
   }
