@@ -23,6 +23,7 @@ import { RateGameComponent }      from './components/rategame';
 import { ForumComponent }         from './components/forum';
 import { ContactComponent }       from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
+import { DiscussionComponent }    from './components/forum/discussion';
 
 export const routes: Routes = [
   { path: '',               redirectTo: '/home', pathMatch: 'full' },
@@ -40,7 +41,10 @@ export const routes: Routes = [
   { path: 'play',           component: PlayComponent },
   { path: 'store',          component: StoreComponent },
   { path: 'rategame',       component: RateGameComponent },
-  { path: 'forum',          component: ForumComponent },
+  { path: 'forum',          component: ForumComponent,
+    children: [
+      { path: 'discussion', component: DiscussionComponent }
+    ]},
   { path: 'contact',        component: ContactComponent },
   { path: 'legalMentions',  component: LegalMentionsComponent },
 ];
