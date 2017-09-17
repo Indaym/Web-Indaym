@@ -1,10 +1,10 @@
-import { Component }  from '@angular/core';
+import { Component }    from '@angular/core';
 
-import { Tab }        from './tab.component';
+import { TabComponent } from './tab.component';
 
 @Component({
-  selector: 'tabs',
-  template: `
+  selector  : 'ia-tabs',
+  template  : `
   <nav>
     <ul>
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)">
@@ -15,20 +15,21 @@ import { Tab }        from './tab.component';
     <ng-content></ng-content>
   `,
   styles    : [
-    require('./tabs.css')
-  ]
+    require('./tabs.css'),
+  ],
+  providers : [],
 })
-export class Tabs {
-  tabs: Tab[] = [];
+export class TabsComponent {
+  public tabs: TabComponent[] = [];
 
-  selectTab(tab: Tab) {
-    this.tabs.forEach((tab) => {
-      tab.active = false;
+  public selectTab(tab: TabComponent) {
+    this.tabs.forEach((inTab) => {
+      inTab.active = false;
     });
     tab.active = true;
   }
 
-  addTab(tab: Tab) {
+  public addTab(tab: TabComponent) {
     if (this.tabs.length === 0) {
       tab.active = true;
     }

@@ -1,11 +1,11 @@
 /**
  * Created by nicolas on 14/10/16.
  */
+
 import {
   Texture,
-  TextureLoader
+  TextureLoader,
 } from 'three';
-
 
 export class TexturePoolViewer {
   private processing: boolean = false;
@@ -19,18 +19,31 @@ export class TexturePoolViewer {
     this.path = path;
   }
 
-  load(textures, onLoad, onProgress?) {
-    if (this.processing == true)
+  /**
+   * Load all texture
+   * @param textures : Textures
+   * @param onLoad : Callback when loaded
+   * @param onProgress : Callback when each texture is laoded
+   * @returns {boolean}
+   */
+  public load(textures, onLoad, onProgress?) {
+    if (this.processing === true || textures === undefined || textures.length === 0)
       return false;
     this.processing = true;
     this.poolLength = textures.length;
-    this.queue = textures;
+    this.queue = textures.slice();
     this.dones = new Array(this.poolLength);
     for (let tex of this.queue) {
       this.loadImage(tex, onLoad, onProgress);
     }
   }
 
+  /**
+   * Load one texture
+   * @param img : Image to load
+   * @param onLoad : Callback when loaded
+   * @param onProgress : Callback when each texture is laoded
+   */
   private loadImage(img, onLoad, onProgress?) {
     const textureLoader = new TextureLoader();
     textureLoader.load((this.path != undefined) ? this.path + img : img, (texture) => {
@@ -42,13 +55,18 @@ export class TexturePoolViewer {
       }
       if (onProgress)
         onProgress(texture, index);
-      if (this.pushed == this.poolLength)
+      if (this.pushed === this.poolLength)
         this.finished(onLoad);
     });
   }
 
+  /**
+   * Called when load of texture is finished
+   * @param onLoad : Callback when loaded
+   * @returns {boolean}
+   */
   private finished(onLoad) {
-    if (this.processing == false)
+    if (this.processing === false)
       return false;
     this.processing = false;
     this.queue = null;

@@ -1,3 +1,22 @@
 h2 {
-  text-align: center;
+	text-align: center;
+}
+
+.news {
+	column-count: 3;
+	column-gap: 0px;
+}
+
+.group-pic {
+	text-align: center;
+}
+
+.home-pic {
+	width: 100%;
+	max-width: 90%;
+	margin-top: 5%;
+}
+
+.w3-content {
+	 max-width: 700px;
 }

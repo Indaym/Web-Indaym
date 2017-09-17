@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-app',
   template  : require('./app.component.html'),
   styles    : [
-    require('./app.component.css')
+    require('./app.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class AppComponent {
 }

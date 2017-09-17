@@ -4,9 +4,9 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum',
   template  : require('./forum.component.html'),
   styles    : [
-    require('./forum.component.css')
+    require('./forum.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class ForumComponent {
 }

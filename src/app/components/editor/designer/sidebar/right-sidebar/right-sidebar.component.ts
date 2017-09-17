@@ -5,9 +5,8 @@
 import {
   Component,
   Input,
-  OnInit
+  OnInit,
 }                   from '@angular/core';
-
 import { Vector3 }  from 'three';
 
 @Component({
@@ -15,23 +14,29 @@ import { Vector3 }  from 'three';
   template  : require('./right-sidebar.component.html'),
   styles    : [
     require('./right-sidebar.component.css'),
-    require('../sidebars.css')
-  ]
+    require('../sidebars.css'),
+  ],
+  providers : [],
 })
 export class RightSidebarComponent implements OnInit  {
-  @Input() end;
-  @Input() eventDispatcher;
+  @Input() public end;
+  @Input() public eventDispatcher;
+
+  private minimumScale = new Vector3();
   private objectSelected = {
-    position: new Vector3(0, 0, 0),
-    dimension: new Vector3(0, 0, 0),
-    rotation: new Vector3(0, 0, 0)
+    position: new Vector3(),
+    dimension: new Vector3(),
+    rotation: new Vector3(),
   };
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.eventDispatcher.addEventListener("updateObjectInputs", (e) => {
+  public ngOnInit() {
+    this.eventDispatcher.addEventListener('setMinimumScale', (e) => {
+      if (e.minimumScale !== undefined)
+        this.minimumScale = e.minimumScale;
+    });
+    this.eventDispatcher.addEventListener('updateObjectInputs', (e) => {
       if (e.position !== undefined)
         this.objectSelected.position = e.position;
       if (e.rotation !== undefined)
@@ -41,20 +46,15 @@ export class RightSidebarComponent implements OnInit  {
     });
   }
 
+  public updateValues(type) {
+    if (Object.keys(this.objectSelected).indexOf(type) === -1)
+      return;
+    let obj = { type : 'updateObjectView' };
+    obj[type] = this.objectSelected[type];
+    this.eventDispatcher.dispatchEvent(obj);
+  }
+
   private toggleMode() {
-    this.end.mode = (this.end.mode == 'side') ? 'over' : 'side';
+    this.end.mode = (this.end.mode === 'side') ? 'over' : 'side';
   }
-
-  public changePosition() {
-    this.eventDispatcher.dispatchEvent({type:"updateObjectView", position: this.objectSelected.position});
-  }
-
-  public changeRotation() {
-    this.eventDispatcher.dispatchEvent({type:"updateObjectView", rotation: this.objectSelected.rotation});
-  }
-
-  public changeDimension() {
-    this.eventDispatcher.dispatchEvent({type:"updateObjectView", dimension: this.objectSelected.dimension});
-  }
-
 }

@@ -1,12 +1,12 @@
-import { Component }    from '@angular/core';
+import { Component }  from '@angular/core';
 
 @Component({
   selector  : 'ia-blueprints',
   template  : require('./blueprints.component.html'),
   styles    : [
-    require('./blueprints.component.css')
+    require('./blueprints.component.css'),
   ],
-  providers : []
+  providers : [],
 })
 export class BlueprintsComponent {
 }

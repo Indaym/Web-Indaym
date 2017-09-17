@@ -1,0 +1,73 @@
+h2 {
+  text-align: center;
+}
+
+#toCenter2 {
+  margin-left: 46%;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+#doMargin {
+  margin-left: 5%;
+}
+
+#toCapitalize {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+}
+
+#eachGame  {
+  width: 20%;
+  float: left;
+  margin-right: 5%;
+}
+
+#descTitle {
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+}
+
+#description {
+  font-weight: normal;
+  font-size: 15px;
+  float: left;
+}
+
+#note {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#myGames {
+  margin-left: 6%;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#logos {
+    margin-left: 30%;
+    width:40%;
+    height: auto;
+}
+
+#myForm {
+    margin-left: 45%;
+    margin-right: 38%;
+}
+
+#send {
+    margin-left: 39%;
+}
+
+.user_name {
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media {
+    border-bottom: 1px dotted #ccc;
+}

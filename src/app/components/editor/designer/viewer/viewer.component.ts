@@ -5,106 +5,96 @@
 import {
   Component,
   OnInit,
-  Input
-}                   from '@angular/core';
-import { Vector3 }  from 'three';
+  OnDestroy,
+  Input,
+}                         from '@angular/core';
 
 import {
-  SceneViewer,
-  BoardModelViewer,
-  PionModelViewer
-}                   from '../../../../threed-viewer';
+  EditorViewer,
+  ModelsLoader,
+}                         from '../../../../threed-viewer';
+import {
+  GameControllerService,
+  ObjectService,
+ }                        from '../../../../../services/';
+import { buttonsDefault } from '../../../../../models/';
 
 @Component({
-  selector: 'ia-viewer',
-  template: require('./viewer.component.html'),
-  styles: [
+  selector  : 'ia-viewer',
+  template  : require('./viewer.component.html'),
+  styles    : [
     require('./viewer.component.css'),
-  ]
+  ],
+  providers : [],
 })
-export class ViewerComponent implements OnInit {
-  public scene: SceneViewer;
-  @Input() eventDispatcher;
-  private objects = {
-    "board3x3" : (args:any) => this.addSquareBoard(args),
-    "board1x9" : (args:any) => this.addLongBoard(args),
-    "pawnWhite" : (args:any) => this.addWhitePion(args),
-    "pawnBlack" : (args:any) => this.addBlackPion(args)
-  };
+export class ViewerComponent implements OnInit, OnDestroy {
+  @Input() public eventDispatcher;
+  public scene: EditorViewer;
 
-  ngOnInit(): void {
-    this.scene = new SceneViewer({
-      width: 1500,
-      height: 900
+  private modelsLoader: ModelsLoader;
+  private gameController;
+
+  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService) {
+    this.gameController = gameControllerService.gameController;
+  }
+
+  public ngOnInit(): void {
+    const dom = document.getElementById('editorContainer');
+    this.scene = new EditorViewer({
+      width: () => window.innerWidth,
+      height: () => window.innerHeight - dom.offsetTop - 5,
     });
-    this.scene.container = 'editorContainer';
-    this.scene.cameraPosition = new Vector3(0, 50.0, 0);
-    this.scene.cameraTarget = new Vector3(0, 0, 0);
-    this.scene.render();
-    this.scene.animate();
-    this.scene.domElement.addEventListener('mousedown', (event) => {
-      this.scene.onMouseDown(event)
-    }, false);
-
+    this.scene.defaultLoad('editorContainer');
+    this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
+    this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
     this.scene.eventDispatcher = this.eventDispatcher;
-    this.eventDispatcher.addEventListener('addObject', (obj:any) => {
-      if (obj.name != undefined)
-        this.objects[obj.name]();
+    this.modelsLoader = new ModelsLoader(this.scene, true);
+    this.modelsLoader.loadModels(this.gameController.getObjects());
+    this.modelsLoader.initEvents(this.gameController);
+  }
+
+  public ngOnDestroy() {
+    this.savePositions();
+  }
+
+  public savePositions() {
+    const objs = this.gameController.getObjects();
+
+    objs.forEach((elem) => {
+      if (!elem.threeDModel.position.toArray().every((v, i) => (elem.object.position !== undefined && v === elem.object.position[i]))) {
+        elem.object.position = [];
+        elem.threeDModel.position.toArray(elem.object.position);
+        this.objectService.updateObject({ object: elem.object }, elem.uuid);
+      }
     });
   }
 
-  addObject(args:any) {
-    if (args.mouseEvent != undefined) {
-      let coord = this.scene.setIntersection(args.mouseEvent);
-      if (args.dragData != undefined) {
-        this.objects[args.dragData](coord);
-      }
+  public deleteObject() {
+    const selected = <any>this.scene.selected;
+    if (selected !== undefined && selected.LinkModel !== undefined) {
+      this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
+        this.scene.deleteSelected();
+        this.gameController.deleteObject(selected.LinkModel.uuid);
+
+      });
     }
   }
 
-  addSquareBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [32.6, 2.0, 32.6],
-    });
-    board.position.copy(position);
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-  }
-
-  addLongBoard(position:Vector3 = new Vector3(0,0,0)) {
-    const board = new BoardModelViewer({
-      dimension: [77.8, 2.0, 12.2],
-    });
-    board.position.copy(position);
-    board.texturesPaths[2] = 'pion_table.png';
-    board.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-  }
-
-  addBlackPion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.texturesPaths[0] = 'black.png';
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
-  }
-
-  addWhitePion(position:Vector3 = new Vector3(0,0,0)) {
-    const pion = new PionModelViewer({
-      dimension: [3.5, 3.5, 1.5],
-    });
-    pion.position.copy(position);
-    pion.init((mesh) => {
-      this.scene.addInScene(mesh);
-      this.scene.render();
-    });
+  public addObject(args: any) {
+    if (args.mouseEvent != undefined) {
+      this.scene.setIntersection(args.mouseEvent);
+      let coord = this.scene.getIntersection();
+      if (args.dragData != undefined) {
+        let obj = buttonsDefault[args.dragData];
+        let old = obj.object.position;
+        obj.object.position = coord.toArray();
+        this.gameController.addObject(obj, true, 'Both', (objq) => {
+          if (old === undefined)
+            delete obj.object['position'];
+          else
+            obj.object.position = old;
+        });
+      }
+    }
   }
 }

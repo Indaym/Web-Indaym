@@ -9,11 +9,12 @@
 	</ul>
 </nav>
 
-<div class="background-image" style="background-image : url(../assets/img/bg/indaymlogo.png)">
+<div class="background-image" [ngStyle]="{'background-image' : 'url(../assets/img/bg/indaymlogo.png)'}">
 </div>
 
 <router-outlet> </router-outlet>
+
 <!--<nav class="footer">
   <a routerLink="/contact" routerLinkActive="active">Contact</a>
   <a routerLink="/legalMentions" routerLinkActive="active">Legal Mentions</a>
-</nav>!-->
+</nav>-->
