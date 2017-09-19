@@ -26,3 +26,75 @@ li a:hover:not(.active) {
 background-color:#00cccc;
 }
 
+#grey {
+  background-color: #555;
+}
+
+#goRight {
+  float: right;
+}
+
+md-sidenav-layout {
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  min-height:500px;
+  height:100%;
+  width: 100%;
+}
+
+md-sidenav {
+  background: rgba(55,55,55,0.95);
+  padding: 10px;
+  width:300px;
+  border-radius: 5px;
+  color:white;
+}
+
+.navbar {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  border-bottom: 0px;
+}
+
+#name {
+  position: fixed;
+  left: 47%;
+  top: 30%;
+  font-size: 250%;
+}
+
+#rules {
+  position: fixed;
+  left: 47%;
+  top: 45%;
+  width: 25%;
+  border: 3px solid cadetblue;
+  font-size: 300%;
+}
+
+#rulesContainer {
+    min-height:150px;
+    min-width: 90%;
+}
+
+#save {
+  position: fixed;
+  left: 50%;
+  top: 85%;
+  font-size: 100%;
+}
+
+#right {
+  position: fixed;
+  left: 75%;
+  top: 45%;
+  font-size: 150%;
+}
+
+#previousContainer {
+  position:fixed;
+  left: 25%;
+  top: 38%;
+  font-size: 100%;
+}

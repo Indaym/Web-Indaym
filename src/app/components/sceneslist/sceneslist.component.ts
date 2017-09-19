@@ -8,6 +8,8 @@ import {
 }                       from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { comeFrom } from '../../components/play';
+
 import {
   HtmlService,
   SceneService,
@@ -32,6 +34,13 @@ export class ScenesListComponent implements OnDestroy {
         (queryParam: any) => this.getScenesList(queryParam)
     );
   }
+
+/*
+  public ngOnInit() {
+    if (comeFrom == "Play")
+      document.getElementById("toHideIfPlay").innerHTML = "";
+  }
+  */
 
   public ngOnDestroy() {
     this.subscription.unsubscribe();

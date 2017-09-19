@@ -26,6 +26,8 @@ import { datas }            from './temporaryFill';
  */
 
 export class GameObjectsController {
+  private _gameId;
+  private _sceneId;
   private gameInfo;
   private scenes = [];
   private currentScene;
@@ -73,8 +75,27 @@ export class GameObjectsController {
       this.scenes = [];
       this.currentScene = undefined;
       this.currentObjects = [];
+
+      this.gameId = 0;
+      this.sceneId = 0;
     }
     this.emit('setGame', this.gameInfo);
+  }
+
+  set gameId(id) {
+    this._gameId = id;
+  }
+
+  get gameId() {
+    return this._gameId;
+  }
+
+  set sceneId(id) {
+    this._sceneId = id;
+  }
+
+  get sceneId() {
+    return this._sceneId;
   }
 
   /**
@@ -138,7 +159,9 @@ export class GameObjectsController {
    * @param typeEvent : Select if Event must be for view, for service or both
    */
   public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
-    if (this.currentObjects === undefined)
+    if (obj === undefined || obj === null)
+      return;
+    if (this.currentObjects === undefined || this.currentObjects === null)
       this.currentObjects = [];
     if (typeEvent === 'ToView')
       this.currentObjects.push(obj);

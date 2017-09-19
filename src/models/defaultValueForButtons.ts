@@ -26,6 +26,20 @@ export const buttonsDefault = {
       ],
     },
   },
+  'board10x10': {
+    name: 'board10x10',
+    object: {
+      type: 'board',
+      draggable: false,
+      droppable: true,
+      dimension: [90, 2, 90],
+      texturesPaths: [
+        'side.png', 'side.png',
+        'board10.png', 'side.png',
+        'side.png', 'side.png',
+      ],
+    },
+  },
   'pawnWhite': {
     name: 'whitepawn',
     object: {
@@ -67,6 +81,20 @@ export const buttonsDefault = {
       caseWidth: 8.2,
       caseHeight: 8.2,
       gap: 0.1,
+    },
+  },
+  'grid10x10': {
+    name: 'grid',
+    object: {
+      type: 'grid',
+      draggable: false,
+      droppable: false,
+      position: [0, 1.01, 0],
+      caseX: 10,
+      caseY: 10,
+      caseWidth: 8,
+      caseHeight: 8,
+      gap: 0.2,
     },
   },
 };

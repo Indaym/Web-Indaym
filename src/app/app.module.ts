@@ -25,6 +25,8 @@ import {
 
 import { HtmlService }    from '../services/html.service';
 
+import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula';
+
 @NgModule({
   declarations: [
     APP_COMPONENTS,
@@ -43,6 +45,7 @@ import { HtmlService }    from '../services/html.service';
     routing,
     FormsModule,
     DndModule.forRoot(),
+    DragulaModule,
   ],
 })
 export class AppModule {

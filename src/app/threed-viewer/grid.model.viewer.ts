@@ -34,6 +34,7 @@ export class GridModelViewer extends CaseModelViewer {
           droppable: true,
           draggable: false,
           coord: [x, y],
+          empty: true,
         };
         this.cases[x][y] = new CaseModelViewer(object, editorMode);
         this.cases[x][y].init((mesh) => {

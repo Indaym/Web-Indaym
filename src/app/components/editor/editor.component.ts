@@ -33,7 +33,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     private objectService: ObjectService
     ) {
     this.gameController = gameControllerService.gameController;
-//    this.gameController.fillObjectsController();
+    //this.gameController.fillObjectsController();
   }
 
   public ngOnInit() {
@@ -63,6 +63,8 @@ export class EditorComponent implements OnDestroy, OnInit {
   }
 
   private initObjectsList(gameId, sceneId) {
+    this.gameController.gameId = gameId;
+    this.gameController.sceneId = sceneId;
     this.gameService.getOneGame(gameId, (data) => {
       this.gameController.setGame(data, false);
       // this.sceneService.setGameId(queryParam['gameId']);
