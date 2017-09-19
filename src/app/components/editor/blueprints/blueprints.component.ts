@@ -66,22 +66,16 @@ for ()
 
 
     dragula([document.getElementById("rulesContainerSource"), document.getElementById("rulesContainer")])
-    .on('drag', function (el) {
-      el.className = el.className.replace('ex-moved', '');
-      console.log("draggin");
-    })
     .on('drop', function (el, target, source) {
         var newRule;
         var deleteRule = false;
         el.className += ' ex-moved';
 
-        console.log("droppin");
-
         if (target.id === "rulesContainerSource" && source.id === "rulesContainer")
         {
           deleteRule = true;
           console.log("drag&drop droite vers gauche");
-          console.log("deleteRule: " + deleteRule);
+          //console.log("deleteRule: " + deleteRule);
             // enlever doublons
             var arr = document.getElementById("rulesContainerSource").innerText.split('\n');
             var cnt = 0;
@@ -190,11 +184,11 @@ for ()
 
         if (deleteRule == true)
         {
-          console.log("is tru!!");
+          //console.log("is tru!!");
           for (var i = 0; i < rulesList.length; i++)
           {
-            console.log("i: " + i);
-            console.log(rulesList[i]);
+            //console.log("i: " + i);
+            //console.log(rulesList[i]);
             if (rulesList[i].id == el.id)
             {
 
@@ -205,7 +199,7 @@ for ()
         }
         else if (cnt <= 1)
         {
-          console.log("is fal!!");
+          //console.log("is fal!!");
           var cnt = 0;
           for (var rule of rulesList)
           {
@@ -280,9 +274,9 @@ for ()
 
     document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
 
-console.log(rulesList);
+    console.log(rulesList);
     for (let r of rulesList) {
-      console.log("regles d'avant (qui doivent partir) + actuelles: ");
+      //console.log("regles d'avant (qui doivent partir) + actuelles: ");
       //console.log(r);
       //console.log(rulesList);
 
