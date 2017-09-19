@@ -13,6 +13,7 @@ import { LegalMentionsComponent } from './legal-mentions';
 import { PlayComponent }          from './play';
 import { StoreComponent }         from './store';
 import { RateGameComponent }      from './rategame';
+import { LoginComponent }         from './login';
 
 export { AppComponent }           from './app.component';
 
@@ -28,4 +29,5 @@ export const APP_COMPONENTS = [
   PlayComponent,
   StoreComponent,
   RateGameComponent,
+  LoginComponent,
 ];

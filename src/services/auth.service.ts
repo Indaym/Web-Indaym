@@ -12,19 +12,10 @@ export class AuthService {
     this.token = JSON.parse(localStorage.getItem('jwt')) || undefined;
   }
 
-  login(username: string, password: string, email: string): Observable<boolean> {
-    return this.http.post(
-      'http://localhost:3000/auth/login',
-      JSON.stringify({ username, password, email })
-    ).map((response: Response) => {
-      let token = response.json().jwt;
-      if (token) {
-        this.token = token;
-        localStorage.setItem('jwt', JSON.stringify({username, token}));
-        return true;
-      }
-      return false;
-    });
+  login(username: string, password: string, email: string, error?, success?) {
+    return this.http.post('http://localhost:3000/auth/login', { 'username': username, 'password': password, 'email': email })
+      .flatMap(res => res.json())
+      .subscribe(success, error);
   }
 
   logout() {

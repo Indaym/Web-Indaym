@@ -23,6 +23,7 @@ import {
   APP_COMPONENTS,
 }                         from './components';
 
+import { AuthGuard }      from '../guards';
 import { HtmlService }    from '../services/html.service';
 
 @NgModule({
@@ -30,7 +31,10 @@ import { HtmlService }    from '../services/html.service';
     APP_COMPONENTS,
   ],
   bootstrap : [ AppComponent ],
-  providers : [ HtmlService ],
+  providers : [
+    HtmlService,
+    AuthGuard,
+  ],
   imports   : [
     MaterialModule.forRoot(),
     BrowserModule,
