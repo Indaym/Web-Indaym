@@ -23,6 +23,7 @@ import {
   APP_COMPONENTS,
 }                         from './components';
 
+import { AuthGuard }      from '../guards';
 import { HtmlService }    from '../services/html.service';
 
 import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula';
@@ -32,7 +33,10 @@ import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula';
     APP_COMPONENTS,
   ],
   bootstrap : [ AppComponent ],
-  providers : [ HtmlService ],
+  providers : [
+    HtmlService,
+    AuthGuard,
+  ],
   imports   : [
     MaterialModule.forRoot(),
     BrowserModule,
