@@ -8,3 +8,4 @@ export { GameService }            from './game.service';
 export { SceneService }           from './scene.service';
 export { ObjectService }          from './object.service';
 export { AuthService }            from './auth.service';
+export { RulesServices }          from './rules.service';

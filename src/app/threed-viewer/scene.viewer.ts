@@ -12,7 +12,9 @@ import {
   Raycaster,
   EventDispatcher,
   Color,
-} from 'three';
+  Mesh,
+}                     from 'three';
+import { BaseRules }  from '../rules';
 
 const OrbitControls = require('three-orbit-controls')(require('three'));
 
@@ -25,6 +27,11 @@ export class SceneViewer {
   protected _eventDispatcher: EventDispatcher;
   protected _raycaster: Raycaster;
   protected _mouse: Vector2 = new Vector2(0, 0);
+
+  protected _rules = {};
+  protected _player : number;
+  protected _grid : Array<Array<Mesh>>;
+  protected _capture : Array<number>;
 
   /**
    * @param conf : JSON object
@@ -62,6 +69,17 @@ export class SceneViewer {
     this._raycaster = new Raycaster();
 
     window.addEventListener( 'resize', () => this.onWindowResize(), false );
+
+    this._player = 0;
+    this._capture = [-1, -1];
+
+    this.grid = [];
+    for(var i: number = 0; i < 10; i++) {
+            this.grid[i] = [];
+            for(var j: number = 0; j< 10; j++) {
+                this.grid[i][j] = null;
+            }
+        }
   }
 
   /**
@@ -199,6 +217,44 @@ export class SceneViewer {
    */
   get domElement(): HTMLElement {
     return this._domElement;
+  }
+
+  /**
+   * get rules
+   */
+  get rules(): Object {
+    return this._rules;
+  }
+
+  get grid(): Array<Array<Mesh>> {
+    return this._grid;
+  }
+
+  set grid(value: Array<Array<Mesh>>) {
+    this._grid = value;
+  }
+
+  get capture() {
+    return this._capture;
+  }
+
+  set capture(value: Array<number>) {
+    this._capture = value;
+  }
+
+  get player() {
+    return this._player;
+  }
+
+  set player(value: number)
+   {
+     this._player = value;
+   }
+  /**
+   * add rule
+   */
+  public addRule(rule: BaseRules) {
+    this._rules[rule.id] = rule;
   }
 
   /**

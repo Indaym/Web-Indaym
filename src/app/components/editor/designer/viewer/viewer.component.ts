@@ -89,10 +89,11 @@ export class ViewerComponent implements OnInit, OnDestroy {
         let old = obj.object.position;
         obj.object.position = coord.toArray();
         this.gameController.addObject(obj, true, 'Both', (objq) => {
-          if (old === undefined)
+          if (old === undefined) {
             delete obj.object['position'];
-          else
+          } else {
             obj.object.position = old;
+          }
         });
       }
     }

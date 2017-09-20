@@ -45,4 +45,27 @@ export class GameService extends DefaultService {
     this.http.delete(this.gamesUrl + id)
       .subscribe(success, error);
   }
+
+  public updateRating(averageRate, id, success?, error?) {
+    console.log('updateRating');
+    console.log(averageRate);
+    this.http.put(this.gamesUrl + id, {'rate': averageRate})
+    .map((res) => res.json())
+    .subscribe(success, error);
+  }
+
+  public postComment(comment, id, success?, error?) {
+    console.log('postComment');
+    console.log(comment);
+    this.http.put(this.gamesUrl + id, {'comments': comment})
+    .map((res) => res.json())
+    .subscribe(success, error);
+  }
+  
+  public postDescription(description, id, success?, error?) {
+    this.http.put(this.gamesUrl + id, {'description': JSON.stringify(description)})
+        .map((res) => res.json())
+        .subscribe(success, error);
+  }
+
 }

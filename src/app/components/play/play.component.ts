@@ -1,6 +1,10 @@
 import { Component }    from '@angular/core';
+import { Router }       from '@angular/router';
 
+import { HtmlService }  from '../../../services/html.service';
 import { GameService }  from '../../../services/game.service';
+
+export var comeFrom = "";
 
 @Component({
   selector  : 'ia-play',
@@ -8,12 +12,12 @@ import { GameService }  from '../../../services/game.service';
   styles    : [
     require('./play.component.css'),
   ],
-  providers : [ GameService ],
+  providers : [ GameService, GameService ],
 })
 export class PlayComponent {
   public lsGames = [];
 
-  constructor(private games: GameService) {
+  constructor(public html: HtmlService, private games: GameService, private router: Router) {
     this.getGamesList();
   }
 
@@ -22,5 +26,9 @@ export class PlayComponent {
   }
 
   public goToScenesPage(id) {
+
+      comeFrom = "Play";
+
+      this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: 0 } });
   }
 }
