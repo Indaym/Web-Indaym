@@ -17,6 +17,7 @@ import {
   GameControllerService,
   ObjectService,
   TextureService,
+  GridCreationService,
  }                        from '../../../../../services/';
 import { buttonsDefault } from '../../../../../models/';
 
@@ -35,7 +36,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private gameController;
 
-  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService, private textureService: TextureService) {
+  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService, private textureService: TextureService, private gridCreationService: GridCreationService) {
     this.gameController = gameControllerService.gameController;
   }
 
@@ -102,6 +103,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       let coord = this.scene.getIntersection();
       if (args.dragData != undefined) {
         let obj = buttonsDefault[args.dragData];
+        if (args.dragData === 'grid')
+          this.gridCreationService.open((datas) => { console.log(datas); });
         let old = obj.object.position;
         obj.object.position = coord.toArray();
         this.gameController.addObject(obj, true, 'Both', (objq) => {

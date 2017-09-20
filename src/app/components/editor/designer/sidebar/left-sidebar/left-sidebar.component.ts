@@ -11,6 +11,7 @@ import {
 import {
   HtmlService,
   GameControllerService,
+  GridCreationService,
 }                         from '../../../../../../services';
 import { buttonsDefault } from '../../../../../../models';
 
@@ -43,7 +44,7 @@ export class LeftSidebarComponent implements OnInit {
   private show;
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
-  constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
+  constructor(public html: HtmlService, private gameControllerService: GameControllerService, private gridCreationService: GridCreationService) {
     this.gameController = this.gameControllerService.gameController;
   }
 
@@ -53,8 +54,24 @@ export class LeftSidebarComponent implements OnInit {
   }
 
   public addObject(name: string) {
-    if (name !== undefined)
-      this.gameController.addObject(buttonsDefault[name], true, 'Both');
+    if (name !== undefined) {
+      if (name === 'grid')
+        this.gridCreationService.open((datas) => {
+          let model = buttonsDefault['grid'];
+          model.object.caseX = datas.horizontal;
+          model.object.caseY = datas.vertical;
+          model.object.caseWidth = datas.width;
+          model.object.caseHeight = datas.height;
+          model.object['color'] = datas.color;
+          model.object['alternate'] = datas.alternate;
+          model.object['textureEven'] = datas.textureEven;
+          if (datas.alternate)
+            model.object['textureOdd'] = datas.textureOdd;
+          this.gameController.addObject(model, true, 'Both');
+        });
+      else
+        this.gameController.addObject(buttonsDefault[name], true, 'Both');
+    }
   }
 
   private setIcons() {
