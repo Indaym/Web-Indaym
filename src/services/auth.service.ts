@@ -18,6 +18,14 @@ export class AuthService {
       .subscribe(success, error);
   }
 
+  register(username: string, password: string, email: string, error?, success?) {
+    const body = {'data': { 'username': username, 'password': password, 'email': email }}
+    
+    return this.http.post('http://localhost:3000/auth/register', body)
+      .flatMap(res => res.json())
+      .subscribe(success, error);
+  }
+
   logout() {
     this.token = null;
     localStorage.removeItem('jwt');

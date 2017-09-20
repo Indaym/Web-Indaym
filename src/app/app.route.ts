@@ -25,7 +25,10 @@ import { RateGameComponent }      from './components/rategame';
 import { ForumComponent }         from './components/forum';
 import { ContactComponent }       from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
-import { LoginComponent }         from './components/login';
+import {
+  LoginComponent,
+  RegisterComponent
+}                                 from './components/auth';
 
 export const routes: Routes = [
   { path: '',               redirectTo: '/home', pathMatch: 'full' },
@@ -33,7 +36,8 @@ export const routes: Routes = [
   { path: 'forum',          component: ForumComponent },
   { path: 'contact',        component: ContactComponent },
   { path: 'legalMentions',  component: LegalMentionsComponent },
-  { path: 'login',         component: LoginComponent },
+  { path: 'register',       component: RegisterComponent },
+  { path: 'login',          component: LoginComponent },
   { path: 'gameslist',      component: GamesListComponent,    canActivate: [ AuthGuard ] },
   { path: 'sceneslist',     component: ScenesListComponent,   canActivate: [ AuthGuard ] },
   { path: 'editor',         component: EditorComponent,       canActivate: [ AuthGuard ],
