@@ -59,13 +59,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.hasError = true;
     this.auth.login(this.username, this.password, this.email,
+      (res) => this.error = res.statusText,
       (res) => {
-        if (res.status !== 200) {
-          this.error = res.statusText;
-        } else {
-          localStorage.setItem('token', '');
-          this.router.navigate['/home'];
-        }
-      })
+        const data = JSON.parse(res);
+        localStorage.setItem('jwt', data.token);
+        this.router.navigate['/home'];
+    })
   }
 }

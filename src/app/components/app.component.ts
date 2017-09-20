@@ -1,4 +1,5 @@
 import { Component }  from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector  : 'ia-app',
@@ -9,4 +10,14 @@ import { Component }  from '@angular/core';
   providers : [],
 })
 export class AppComponent {
+  constructor(private router: Router) {}
+  
+  forceLogin() {
+    localStorage.setItem('jwt', 'foo');
+  }
+
+  forceLogout() {
+    localStorage.removeItem('jwt');
+    this.router.navigate['/login'];
+  }
 }
