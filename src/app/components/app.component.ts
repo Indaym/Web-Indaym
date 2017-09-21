@@ -1,4 +1,5 @@
 import { Component }  from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector  : 'ia-app',
@@ -9,10 +10,19 @@ import { Component }  from '@angular/core';
   providers : [],
 })
 export class AppComponent {
-  constructor() {
+  constructor(private router: Router) {
     // Marre des warn de threejs souvent inutiles
     console.warn = () => {};
     // Image in localStorage seems to slow browser
     // localStorage.clear();
+  }
+  
+  forceLogin() {
+    localStorage.setItem('jwt', 'foo');
+  }
+
+  forceLogout() {
+    localStorage.removeItem('jwt');
+    this.router.navigate['/login'];
   }
 }

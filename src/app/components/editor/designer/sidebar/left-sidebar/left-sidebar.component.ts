@@ -30,8 +30,10 @@ export class LeftSidebarComponent implements OnInit {
     boards: {
       'board3x3': 'Add Board 3x3',
       'board1x9': 'Add Board 1x9',
+      'board10x10': 'Add Board 10x10',
       'case': 'Case',
       'grid': 'Grid',
+      'grid10x10': 'Grid 10x10',
     },
     pawns: {
       'pawnWhite': 'Add White Pawn',

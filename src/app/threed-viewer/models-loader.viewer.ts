@@ -13,6 +13,9 @@ import {
   TextureService
 } from '../../services/';
 
+import { RulesServices }  from '../../services/rules.service';
+
+
 export class ModelsLoader {
   private types = {
     'board': BoardModelViewer,
@@ -20,8 +23,11 @@ export class ModelsLoader {
     'case': CaseModelViewer,
     'grid': GridModelViewer,
   };
+  private rulesService: RulesServices;
 
-  constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {}
+  constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {
+    this.rulesService = new RulesServices();  
+  }
 
   /**
    * Load models on 3D view
@@ -60,6 +66,19 @@ export class ModelsLoader {
         });
       } else {
         addin();
+
+      if (model.object.rules != undefined) {
+
+        model.rules = {};
+
+        model.object.rules.forEach(
+          (rule) => {
+            const ruleDef = this.rulesService.getRules(rule.id);
+            const ruleInstance = new ruleDef(this.scene, model, rule.conf);
+
+            model.rules[ruleInstance.id] = ruleInstance;
+          }
+        );
       }
     }
   }

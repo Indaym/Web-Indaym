@@ -37,6 +37,7 @@ export class CaseModelViewer extends ModelViewer {
    */
   public dropPosition(obj) {
     let pos = super.dropPosition(obj);
+    pos.y -= this.mesh.scale.y / 2;
     return pos;
   }
 
@@ -50,6 +51,8 @@ export class CaseModelViewer extends ModelViewer {
       this.material = new MeshBasicMaterial({color: this._color, side: DoubleSide, transparent: true, opacity: 0.9});
     let mesh = this.generateMesh();
     mesh.rotation.x = 90  * (Math.PI / 180);
+    if (this.editMode === true)
+      this.material.opacity = 0.5;
     onLoad(mesh);
   }
 }

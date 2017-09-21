@@ -8,6 +8,8 @@ import {
   RouterModule,
 }                                 from '@angular/router';
 
+import { AuthGuard }              from '../guards';
+
 import { HomeComponent }          from './components/home';
 import {
   EditorComponent,
@@ -23,13 +25,22 @@ import { RateGameComponent }      from './components/rategame';
 import { ForumComponent }         from './components/forum';
 import { ContactComponent }       from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
+import {
+  LoginComponent,
+  RegisterComponent
+}                                 from './components/auth';
 
 export const routes: Routes = [
   { path: '',               redirectTo: '/home', pathMatch: 'full' },
   { path: 'home',           component: HomeComponent },
-  { path: 'gameslist',      component: GamesListComponent },
-  { path: 'sceneslist',     component: ScenesListComponent },
-  { path: 'editor',         component: EditorComponent,
+  { path: 'forum',          component: ForumComponent },
+  { path: 'contact',        component: ContactComponent },
+  { path: 'legalMentions',  component: LegalMentionsComponent },
+  { path: 'register',       component: RegisterComponent },
+  { path: 'login',          component: LoginComponent },
+  { path: 'gameslist',      component: GamesListComponent,    canActivate: [ AuthGuard ] },
+  { path: 'sceneslist',     component: ScenesListComponent,   canActivate: [ AuthGuard ] },
+  { path: 'editor',         component: EditorComponent,       canActivate: [ AuthGuard ],
     children: [
       { path: '',           redirectTo: 'designer' },
       { path: 'designer',   component: DesignerComponent },
@@ -37,12 +48,9 @@ export const routes: Routes = [
       { path: 'preview',    component: PreviewComponent },
     ],
   },
-  { path: 'play',           component: PlayComponent },
-  { path: 'store',          component: StoreComponent },
-  { path: 'rategame',       component: RateGameComponent },
-  { path: 'forum',          component: ForumComponent },
-  { path: 'contact',        component: ContactComponent },
-  { path: 'legalMentions',  component: LegalMentionsComponent },
+  { path: 'play',           component: PlayComponent,       canActivate: [ AuthGuard ] },
+  { path: 'rategame',       component: RateGameComponent,   canActivate: [ AuthGuard ] },
+  { path: 'store',          component: StoreComponent,      canActivate: [ AuthGuard ] },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

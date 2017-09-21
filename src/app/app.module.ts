@@ -25,14 +25,23 @@ import {
   APP_COMPONENTS,
 }                           from './components';
 
+import { AuthGuard }        from '../guards';
 import { HtmlService }      from '../services/html.service';
+
+import {
+  DragulaModule, 
+  DragulaService 
+}                           from 'ng2-dragula/ng2-dragula';
 
 @NgModule({
   declarations: [
     APP_COMPONENTS,
   ],
   bootstrap : [ AppComponent ],
-  providers : [ HtmlService ],
+  providers : [
+    HtmlService,
+    AuthGuard,
+  ],
   imports   : [
     MaterialModule.forRoot(),
     BrowserModule,
@@ -47,6 +56,7 @@ import { HtmlService }      from '../services/html.service';
     DndModule.forRoot(),
     FileUploadModule,
     ModalModule,
+    DragulaModule,
   ],
 })
 export class AppModule {

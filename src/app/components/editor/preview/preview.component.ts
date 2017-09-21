@@ -57,4 +57,63 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {}
+
+/**
+ * Auto recreate Dames game
+ */
+  private regenerateAll() {
+    // Add board
+    this.gameController.addObject({
+      name: 'board10x10',
+      object: {
+        type: 'board',
+        draggable: false,
+        droppable: true,
+        dimension: [90,2,90],
+        texturesPaths: ['side.png','side.png','board10.png','side.png','side.png','side.png'],
+        position: [0,0,0],
+      },
+    }, true, 'Both');
+
+    // Add Grid
+    this.gameController.addObject({
+      name: 'grid',
+      object: {
+        type: 'grid',
+        draggable: false,
+        droppable: false,
+        position: [0,1.01,0],
+        caseX: 10,
+        caseY: 10,
+        caseWidth: 8,
+        caseHeight: 8,
+        gap: 0.2,
+      },
+    }, true, 'Both');
+    const obj = {
+      name: 'pawn',
+      object: {
+        type: 'pawn',
+        draggable: true,
+        droppable: false,
+        dimension: [3.5, 1.5, 3.5],
+        position: [0, 1.75, 0],
+        texturesPaths: ['black.png'],
+        rules: [
+          {id: 'MoveDiag', conf: { movement: 1 }},
+        ],
+      },
+    };
+    for (let z = 0; z < 10; z++) {
+      for (let x = 0; x < 10; x++) {
+        if (z > 5)
+          obj.object.texturesPaths = ['white.png'];
+        if (x % 2 + z % 2 === 1 && z !== 4 && z !== 5) {
+          obj.object.position[0] = x * 8.2 + 4.1 - 41;
+          obj.object.position[2] = z * 8.2 + 4.1 - 41;
+          this.gameController.addObject(obj, true, 'Both');
+        }
+      }
+    }
+  }
 }

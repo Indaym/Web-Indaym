@@ -57,7 +57,7 @@ module.exports = {
           helpers.root('node_modules/ng2-modal'),
           helpers.root('node_modules/jquery'),
           helpers.root('node_modules/ts-md5'),
-          helpers.root('node_modules/ng2-dnd')
+          helpers.root('node_modules/ng2-dnd'),
         ]
       }
     ],

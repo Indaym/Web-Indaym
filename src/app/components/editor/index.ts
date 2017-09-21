@@ -8,6 +8,8 @@ import { ScenesListComponent }  from '../sceneslist/sceneslist.component';
 import { EditorComponent }      from './editor.component';
 import { BlueprintsComponent }  from './blueprints';
 import { DESIGNER_COMPONENTS }  from './designer';
+
+import { BLUEPRINT_COMPONENTS } from './blueprints';
 import { PreviewComponent }     from './preview';
 
 export { BlueprintsComponent }  from './blueprints';
@@ -24,4 +26,5 @@ export const EDITOR_COMPONENTS = [
   BlueprintsComponent,
   PreviewComponent,
   DESIGNER_COMPONENTS,
+  BLUEPRINT_COMPONENTS,
 ];

@@ -13,9 +13,11 @@ export class PawnModelViewer extends ModelViewer {
   private _texturesPaths = [
     'white.png',
   ];
+  private _oldPosition: Array<number>;
 
   constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
     super(conf, textureService, editorMode);
+    this._oldPosition = [-1, -1];
   }
 
   /**
@@ -32,6 +34,14 @@ export class PawnModelViewer extends ModelViewer {
    */
   set texturesPaths(value: Array<string>) {
     this._texturesPaths = value;
+  }
+
+  get oldPosition(): Array<number> {
+    return this._oldPosition;
+  }
+
+  set oldPosition(value: Array<number>) {
+    this._oldPosition = value;
   }
 
   /**

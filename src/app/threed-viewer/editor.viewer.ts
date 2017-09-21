@@ -185,6 +185,7 @@ export class EditorViewer extends SceneViewer {
     if (intersected !== undefined && intersected.length > 0) {
       const obj = intersected[0].object as any;
       if (obj.LinkModel !== undefined && obj.LinkModel !== this._hovered) {
+        // TODO: add call rule here ?
         this._hovered = obj.LinkModel.threeDModel;
         this._hovered.hover(true);
       }
