@@ -52,7 +52,8 @@ export class ModelViewer {
    */
   get position(): Vector3 {
     const pos = new Vector3();
-    pos.setFromMatrixPosition(this.mesh.matrixWorld);
+    if (this.mesh !== undefined)
+      pos.setFromMatrixPosition(this.mesh.matrixWorld);
     return pos;
   }
 
@@ -102,7 +103,8 @@ export class ModelViewer {
    */
   set rotation(value: Euler) {
     this._rotation.copy(value);
-    this.mesh.rotation.copy(this._rotation);
+    if (this.mesh !== undefined)
+      this.mesh.rotation.copy(this._rotation);
   }
 
   /**

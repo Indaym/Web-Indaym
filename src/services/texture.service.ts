@@ -90,6 +90,8 @@ export class TextureService extends DefaultService {
       return;
     }
     this.getOneTexture(uuid, (datas) => {
+      if (datas === undefined || datas.image === undefined || datas.image.data === undefined)
+        return;
       const blob = new Blob([new Uint8Array(datas.image.data)], {type: datas.format });
       const res = {
         name: datas.name,
