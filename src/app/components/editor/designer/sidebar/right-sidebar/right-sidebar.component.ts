@@ -126,7 +126,8 @@ export class RightSidebarComponent implements OnInit  {
    */
   public previewTexture() {
     this.textureService.getLocalTexture(this.imgSelected, (texture) => {
-      this.imgPreview = texture;
+      if (texture !== undefined)
+        this.imgPreview = texture;
     });
   }
 

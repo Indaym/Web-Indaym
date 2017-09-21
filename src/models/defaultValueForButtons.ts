@@ -3,41 +3,14 @@
  */
 
 export const buttonsDefault = {
-  'board3x3': {
+  'board': {
     name: 'board3x3',
     object: {
       type: 'board',
       draggable: false,
       droppable: true,
       dimension: [32.6, 2.0, 32.6],
-    },
-  },
-  'board1x9': {
-    name: 'board1x9',
-    object: {
-      type: 'board',
-      draggable: false,
-      droppable: true,
-      dimension: [77.8, 2.0, 12.2],
-      texturesPaths: [
-        'side.png', 'side.png',
-        'pion_table.png', 'side.png',
-        'side.png', 'side.png',
-      ],
-    },
-  },
-  'board10x10': {
-    name: 'board10x10',
-    object: {
-      type: 'board',
-      draggable: false,
-      droppable: true,
-      dimension: [90, 2, 90],
-      texturesPaths: [
-        'side.png', 'side.png',
-        'board10.png', 'side.png',
-        'side.png', 'side.png',
-      ],
+      textureName: 'side.png',
     },
   },
   'pawnWhite': {
@@ -47,6 +20,7 @@ export const buttonsDefault = {
       draggable: true,
       droppable: false,
       dimension: [3.5, 1.5, 3.5],
+      textureName: 'white.png',
     },
   },
   'pawnBlack': {
@@ -56,7 +30,7 @@ export const buttonsDefault = {
       draggable: true,
       droppable: false,
       dimension: [3.5, 1.5, 3.5],
-      texturesPaths: ['black.png'],
+      textureName: 'black.png',
     },
   },
   'case': {
@@ -81,20 +55,6 @@ export const buttonsDefault = {
       caseWidth: 8.2,
       caseHeight: 8.2,
       gap: 0.1,
-    },
-  },
-  'grid10x10': {
-    name: 'grid',
-    object: {
-      type: 'grid',
-      draggable: false,
-      droppable: false,
-      position: [0, 1.01, 0],
-      caseX: 10,
-      caseY: 10,
-      caseWidth: 8,
-      caseHeight: 8,
-      gap: 0.2,
     },
   },
 };

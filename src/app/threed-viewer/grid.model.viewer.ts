@@ -99,10 +99,14 @@ export class GridModelViewer extends CaseModelViewer {
     };
 
     this.textureService.getLocalTexture(config.textureEven, (texture) => {
+      if (texture === undefined)
+        return;
       new TextureLoader().load(texture, (t) => {
         textureEven = new MeshBasicMaterial({ map: t, side: DoubleSide, transparent: true, opacity: 0.8 });
         if (config.alternate === true) {
           this.textureService.getLocalTexture(config.textureOdd, (text) => {
+            if (text === undefined)
+              return;
             new TextureLoader().load(text, (tt) => {
               textureOdd = new MeshBasicMaterial({ map: tt, side: DoubleSide, transparent: true, opacity: 0.8 });
               next();

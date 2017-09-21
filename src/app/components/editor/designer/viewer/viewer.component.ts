@@ -57,6 +57,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.eventDispatcher.addEventListener('updateTexture', (e: any) => {
       if (this.scene.selected !== undefined) {
         this.textureService.getLocalTexture(e.texture, (texture) => {
+          if (texture === undefined)
+            return;
           const selected = this.scene.selected as any;
           selected.LinkModel.threeDModel.texture = texture;
           selected.LinkModel.textureRef = e.texture;
@@ -74,7 +76,11 @@ export class ViewerComponent implements OnInit, OnDestroy {
     const objs = this.gameController.getObjects();
 
     objs.forEach((elem) => {
-      if (['position', 'rotation', 'dimension'].every((v, i) => this.equals(elem.threeDModel[v].toArray(), elem.object[v])))
+      if (['position', 'rotation', 'dimension'].every((v, i) => {
+        if (elem.object[v] === undefined)
+          return false;
+        return this.equals(elem.threeDModel[v].toArray(), elem.object[v]);
+      }))
         return;
       elem.object.position = [];
       elem.threeDModel.position.toArray(elem.object.position);

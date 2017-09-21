@@ -53,13 +53,15 @@ export class GridPopupComponent {
 
   private onChangePreviewEven() {
     this.textureService.getLocalTexture(this.textureEven, (texture) => {
-      this.previewEven = texture;
+      if (texture !== undefined)
+        this.previewEven = texture;
     });
   }
 
   private onChangePreviewOdd() {
     this.textureService.getLocalTexture(this.textureOdd, (texture) => {
-      this.previewOdd = texture;
+      if (texture !== undefined)
+        this.previewOdd = texture;
     });
   }
 

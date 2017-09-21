@@ -58,14 +58,26 @@ export class ModelsLoader {
             this.scene.render();
         });
       };
-      if (model.textureRef != undefined) {
-        this.textureService.getLocalTexture(model.textureRef, (texture) => {
-          if (texture)
-            model.threeDModel.texture = texture;
+      const next = () => {
+        if (model.textureRef !== undefined && model.textureRef !== null) {
+          this.textureService.getLocalTexture(model.textureRef, (texture) => {
+            if (texture !== undefined)
+              model.threeDModel.texture = texture;
+            addin();
+          });
+        } else {
           addin();
+        }
+      };
+
+      if ((model.textureRef === undefined || model.textureRef === null) && model.object.textureName !== undefined) {
+        this.textureService.getUuid(undefined, model.object.textureName, (uuid) => {
+          model.textureRef = uuid;
+          next();
         });
-      } else {
-        addin();
+      }
+      else
+        next();
 
       if (model.object.rules != undefined) {
 
