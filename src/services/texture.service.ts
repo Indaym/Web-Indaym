@@ -86,6 +86,9 @@ export class TextureService extends DefaultService {
    * Transform buffer into a blob
    */
   public getBlob(uuid, success, error = (err) => {}) {
+    if (uuid === undefined || uuid === null) {
+      return;
+    }
     this.getOneTexture(uuid, (datas) => {
       const blob = new Blob([new Uint8Array(datas.image.data)], {type: datas.format });
       const res = {

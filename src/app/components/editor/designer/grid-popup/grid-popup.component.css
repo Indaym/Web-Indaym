@@ -13,3 +13,7 @@ input[type=checkbox]
   height:auto;
   padding: 0;
 }
+
+p.warn {
+  color: #F15050;
+}

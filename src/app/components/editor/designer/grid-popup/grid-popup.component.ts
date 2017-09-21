@@ -29,6 +29,7 @@ export class GridPopupComponent {
 
   private previewEven = '';
   private previewOdd = '';
+  private missing = false;
 
   constructor(private textureService: TextureService, private gridCreationService: GridCreationService) {
     this.gridCreationService.gridPopup = (cb) => {
@@ -74,17 +75,25 @@ export class GridPopupComponent {
   }
 
   private onSubmit() {
-    this.currentCB({
-      width: this.width,
-      height: this.height,
-      horizontal: this.horizontal,
-      vertical: this.vertical,
-      color: this.color,
-      alternate: this.alternate,
-      textureEven: this.textureEven,
-      textureOdd: this.textureOdd,
-    });
-    this.resetDatas();
-    this.modal.close();
+    if (this.textureEven.length <= 0 || (this.alternate === true && this.textureOdd.length <= 0)) {
+      this.missing = true;
+      setTimeout(() => {
+        this.missing = false;
+      }, 5000);
+    } else {
+      this.currentCB({
+        width: this.width,
+        height: this.height,
+        horizontal: this.horizontal,
+        vertical: this.vertical,
+        color: this.color,
+        alternate: this.alternate,
+        textureEven: this.textureEven,
+        textureOdd: this.textureOdd,
+      });
+      this.resetDatas();
+      this.modal.close();
+    }
+
   }
 }

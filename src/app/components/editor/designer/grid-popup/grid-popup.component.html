@@ -1,10 +1,13 @@
 <modal #myModal title="Select option of grid" cancelButtonLabel="cancel" submitButtonLabel="create" [closeOnEscape]="true"
   [closeOnOutsideClick]="true" (onOpen)="onOpen()" (onClose)="onClose()" (onSubmit)="onSubmit()">
   <modal-content>
+    <p *ngIf="missing" class="warn temp">
+      <span class="glyphicon glyphicon-warning-sign"></span> Missing parameters
+    </p>
     <div class="form-group">
       <div class="form-inline">
-          <h5>Number of cases :</h5>
-          <div class="form-group">
+        <h5>Number of cases :</h5>
+        <div class="form-group">
           <label for="horizontal">Horizontal :</label>
           <input id="horizontal" type="number" step="1" min="1" max="20" [(ngModel)]="horizontal" class="form-control" />
         </div>
@@ -26,8 +29,8 @@
           <input id="height" type="number" min="1" max="20" [(ngModel)]="height" class="form-control" />
         </div>
       </div>
-      <hr/>      
-  
+      <hr/>
+
       <div class="form-group">
         <label for="color">Color of highlight for selection :</label>
         <input id="color" type="color" [(ngModel)]="color" />
@@ -54,11 +57,11 @@
         <div class="row">
           <div class="form-group col-xs-6">
             <label for="previewE">Even case texture :</label>
-            <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom"/>
+            <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom" />
           </div>
           <div class="col-xs-6 form-group" *ngIf="alternate">
             <label for="previewO">Odd case texture :</label>
-            <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom"/>
+            <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom" />
           </div>
         </div>
       </div>
