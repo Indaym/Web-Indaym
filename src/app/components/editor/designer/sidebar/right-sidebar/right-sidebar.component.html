@@ -4,15 +4,38 @@
 <span>Mode : {{end.mode}}</span>
 
 <form>
-  Search:
-  <input type="search" name="Search a property">
-</form>
-
-<form>
-  Position :<br/>
+  <h6>Position :</h6>
   <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]" (ngModelChange)="updateValues('position')"/><br/>
-  Rotation :<br/>
+  <h6>Rotation :</h6>
   <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="0.5" [(ngModel)]="objectSelected.rotation[v]" (ngModelChange)="updateValues('rotation')"/><br/>
-  Dimension :<br/>
+  <h6>Dimension :</h6>
   <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]" (ngModelChange)="updateValues('dimension')"/><br/>
 </form>
+
+<hr>
+<h6>Select an existing texture :</h6>
+<select id="sel" [(ngModel)]="imgSelected" (ngModelChange)="previewTexture()">
+  <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
+</select>
+
+<h4><span class="glyphicon glyphicon-minus"></span> OR <span class="glyphicon glyphicon-minus"></span></h4>
+<h6>Upload a texture :</h6>
+<p *ngIf="warnMessage.length > 0" class="warn temp">
+  <span class="glyphicon glyphicon-warning-sign"></span>  {{ warnMessage }}
+</p>
+<p *ngIf="uploaded == true" class="up temp">
+    <span class="glyphicon glyphicon-ok"></span> Uploaded
+</p>
+
+<input #selectedFile type="file" ng2FileSelect [uploader]="uploader" name="single" accept="image/*"/>  
+<button type="button" class="btn btn-success btn-xs center" (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
+  <span class="glyphicon glyphicon-upload"></span> Upload
+</button>
+<br/>
+<button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()" >
+  <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
+</button>
+
+<hr>
+<p>Preview :</p>
+<img *ngIf="imgPreview.length > 0" [src]="imgPreview" width="250"/>

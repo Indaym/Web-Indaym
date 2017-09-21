@@ -11,6 +11,7 @@ import {
   SceneService,
   GameService,
   GameControllerService,
+  TextureService,
 }                         from '../../../services';
 
 @Component({
@@ -19,7 +20,7 @@ import {
   styles    : [
     require('./editor.component.css'),
   ],
-  providers : [ GameService, SceneService, ObjectService, GameControllerService ],
+  providers : [ GameService, SceneService, ObjectService, GameControllerService, TextureService ],
 })
 export class EditorComponent implements OnDestroy, OnInit {
   private subscription: Subscription;
@@ -30,7 +31,8 @@ export class EditorComponent implements OnDestroy, OnInit {
     private route: ActivatedRoute,
     private gameService: GameService,
     private sceneService: SceneService,
-    private objectService: ObjectService
+    private objectService: ObjectService,
+    private textureService: TextureService
     ) {
     this.gameController = gameControllerService.gameController;
     //this.gameController.fillObjectsController();

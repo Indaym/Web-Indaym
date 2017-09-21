@@ -10,7 +10,12 @@ import { Router } from '@angular/router';
   providers : [],
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // Marre des warn de threejs souvent inutiles
+    console.warn = () => {};
+    // Image in localStorage seems to slow browser
+    // localStorage.clear();
+  }
   
   forceLogin() {
     localStorage.setItem('jwt', 'foo');

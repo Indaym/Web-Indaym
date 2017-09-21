@@ -3061,6 +3061,14 @@ ng2-dnd:
     rxjs "5.0.0-beta.12"
     zone.js "^0.6.23"
 
+ng2-file-upload@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ng2-file-upload/-/ng2-file-upload-1.2.1.tgz#5563c5dfd6f43fbfbe815c206e343464a0a6a197"
+
+ng2-modal@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/ng2-modal/-/ng2-modal-0.0.25.tgz#61755f6da76017b1b0e42f38eeca3e92bd484206"
+
 ng2-dragula@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-1.5.0.tgz#12a221d7a34fc629cc74dc98efb26448290eb6e5"

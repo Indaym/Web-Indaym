@@ -16,6 +16,7 @@ node_modules/
 typings
 
 ## file
+testNotes.ts
 
 src/**/*.js*
 !*.json

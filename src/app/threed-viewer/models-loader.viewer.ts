@@ -9,7 +9,12 @@ import {
   GridModelViewer,
 } from '.';
 
+import {
+  TextureService
+} from '../../services/';
+
 import { RulesServices }  from '../../services/rules.service';
+
 
 export class ModelsLoader {
   private types = {
@@ -20,8 +25,8 @@ export class ModelsLoader {
   };
   private rulesService: RulesServices;
 
-  constructor(private scene, private editorMode: Boolean = false) {
-    this.rulesService = new RulesServices();
+  constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {
+    this.rulesService = new RulesServices();  
   }
 
   /**
@@ -30,26 +35,37 @@ export class ModelsLoader {
    */
   public loadModels(models) {
     models.forEach((element) => {
-      this.loadOneModel(element);
+      this.loadOneModel(element, false);
     });
+    this.scene.render();
   }
 
   /**
    * Load one model on 3D view
    * @param model : model to load
    */
-  public loadOneModel(model) {
+  public loadOneModel(model, render = true) {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
-      model.threeDModel = new modelViewer(model.object, this.editorMode);
-      if (model.object.texturesPaths != undefined)
-        model.threeDModel.texturesPaths = model.object.texturesPaths;
-      model.threeDModel.init((mesh) => {
-        mesh.LinkModel = model;
-        this.scene.addInScene(mesh);
-        this.scene.render();
-      });
+      model.threeDModel = new modelViewer(model.object, this.textureService, this.editorMode);
+
+      const addin = () => {
+        model.threeDModel.init((mesh) => {
+          mesh.LinkModel = model;
+          this.scene.addInScene(mesh);
+          if (render)
+            this.scene.render();
+        });
+      };
+      if (model.textureRef != undefined) {
+        this.textureService.getLocalTexture(model.textureRef, (texture) => {
+          if (texture)
+            model.threeDModel.texture = texture;
+          addin();
+        });
+      } else {
+        addin();
 
       if (model.object.rules != undefined) {
 

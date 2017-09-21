@@ -4,12 +4,11 @@
 
 import {
   CubeGeometry,
-  MeshBasicMaterial,
-  MultiMaterial,
 }                             from 'three';
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
+import { TextureService }     from '../../services';
 
 export class BoardModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
@@ -19,8 +18,8 @@ export class BoardModelViewer extends ModelViewer {
     'side.png', 'side.png',
   ];
 
-  constructor(conf, editorMode: Boolean = false) {
-    super(conf, editorMode);
+  constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
+    super(conf, textureService, editorMode);
   }
 
   /**
@@ -44,10 +43,12 @@ export class BoardModelViewer extends ModelViewer {
    * @param onLoad : Callback when loaded
    */
   public init(onLoad) {
-    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
+//    this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CubeGeometry(1, 1, 1, 1, 1, 1);
+    const mesh = this.generateMesh();
+    onLoad(mesh);
 
-    const materials = new Array(6);
+/*     const materials = new Array(6);
 
     this._textureLoader.load(this._texturesPaths, (textures) => {
       this.material = new MultiMaterial(materials);
@@ -59,5 +60,6 @@ export class BoardModelViewer extends ModelViewer {
       if (index > -1)
         materials[index] = new MeshBasicMaterial({ map: texture });
     });
+ */
   }
 }

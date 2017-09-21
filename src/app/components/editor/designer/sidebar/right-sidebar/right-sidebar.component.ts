@@ -6,8 +6,16 @@ import {
   Component,
   Input,
   OnInit,
-}                   from '@angular/core';
-import { Vector3 }  from 'three';
+  ViewChild,
+}                         from '@angular/core';
+import {
+  Vector3,
+  Euler,
+}                         from 'three';
+import { FileUploader }   from 'ng2-file-upload';
+
+import { TextureService } from '../../../../../../services';
+import { serverConfig }   from '../../../../../../../config/server.conf';
 
 @Component({
   selector  : 'ia-right-sidebar',
@@ -21,15 +29,56 @@ import { Vector3 }  from 'three';
 export class RightSidebarComponent implements OnInit  {
   @Input() public end;
   @Input() public eventDispatcher;
+  private urlImg;
+  private warnMessage = '';
+  private uploaded = false;
+  private textures = [];
+  private imgSelected;
+  private imgPreview = '';
 
+  public uploader: FileUploader = new FileUploader({url: serverConfig.serverURL + 'textures/' });
   private minimumScale = new Vector3();
   private objectSelected = {
     position: new Vector3(),
     dimension: new Vector3(),
-    rotation: new Vector3(),
+    rotation: new Euler(),
   };
+  @ViewChild('selectedFile') private selectedFile;
 
-  constructor() {}
+  constructor(private textureService: TextureService) {
+    this.textureService.getTextures((results) => {
+      this.textures = results;
+    });
+
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+
+    this.uploader.onErrorItem = (item, response, status, headers) => {
+      this.warnMessage = response;
+      setTimeout(() => {
+        this.warnMessage = '';
+      }, 5000);
+    };
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      this.uploaded = true;
+      setTimeout(() => {
+        this.uploaded = false;
+      }, 5000);
+
+      this.uploader.clearQueue();
+      this.selectedFile.nativeElement.value = '';
+
+      this.refreshList();
+
+      const res = JSON.parse(response);
+
+      this.textureService.getBlob(res.uuid, (datas) => {
+        localStorage.setItem(datas.uuid, datas.img);
+        this.imgSelected = res.uuid;
+        this.previewTexture();
+      });
+    };
+  }
 
   public ngOnInit() {
     this.eventDispatcher.addEventListener('setMinimumScale', (e) => {
@@ -52,6 +101,39 @@ export class RightSidebarComponent implements OnInit  {
     let obj = { type : 'updateObjectView' };
     obj[type] = this.objectSelected[type];
     this.eventDispatcher.dispatchEvent(obj);
+  }
+
+  /**
+   * Upload image to server
+   */
+  public upload() {
+    if (this.uploader.queue.length > 0)
+      this.uploader.queue[0].upload();
+  }
+
+  /**
+   * Apply texture to selected object
+   */
+  public applyTexture() {
+    this.eventDispatcher.dispatchEvent({
+      type: 'updateTexture',
+      texture: this.imgSelected
+    });
+  };
+
+  /**
+   * When selected item change, automatic set preview item
+   */
+  public previewTexture() {
+    this.textureService.getLocalTexture(this.imgSelected, (texture) => {
+      this.imgPreview = texture;
+    });
+  }
+
+  public refreshList() {
+    this.textureService.getTextures((results) => {
+      this.textures = results;
+    });
   }
 
   private toggleMode() {
