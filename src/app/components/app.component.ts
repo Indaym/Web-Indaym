@@ -13,6 +13,6 @@ export class AppComponent {
     // Marre des warn de threejs souvent inutiles
     console.warn = () => {};
     // Image in localStorage seems to slow browser
-    localStorage.clear();
+    // localStorage.clear();
   }
 }

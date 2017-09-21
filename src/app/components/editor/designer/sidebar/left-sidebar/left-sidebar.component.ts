@@ -54,23 +54,17 @@ export class LeftSidebarComponent implements OnInit {
   }
 
   public addObject(name: string) {
-    if (name !== undefined) {
+    if (name !== undefined && buttonsDefault[name] !== undefined) {
+      const model = Object.assign({}, buttonsDefault[name]);
+      const cb = (datas) => {
+        if (name === 'grid')
+          this.gridCreationService.assignToGridModel(model, datas);
+        this.gameController.addObject(model, true, 'Both');
+      };
       if (name === 'grid')
-        this.gridCreationService.open((datas) => {
-          let model = buttonsDefault['grid'];
-          model.object.caseX = datas.horizontal;
-          model.object.caseY = datas.vertical;
-          model.object.caseWidth = datas.width;
-          model.object.caseHeight = datas.height;
-          model.object['color'] = datas.color;
-          model.object['alternate'] = datas.alternate;
-          model.object['textureEven'] = datas.textureEven;
-          if (datas.alternate)
-            model.object['textureOdd'] = datas.textureOdd;
-          this.gameController.addObject(model, true, 'Both');
-        });
+        this.gridCreationService.open(cb);
       else
-        this.gameController.addObject(buttonsDefault[name], true, 'Both');
+        cb({});
     }
   }
 

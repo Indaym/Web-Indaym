@@ -6,6 +6,7 @@ import {
   Component,
   Input,
   OnInit,
+  ViewChild,
 }                         from '@angular/core';
 import {
   Vector3,
@@ -42,6 +43,7 @@ export class RightSidebarComponent implements OnInit  {
     dimension: new Vector3(),
     rotation: new Euler(),
   };
+  @ViewChild('selectedFile') private selectedFile;
 
   constructor(private textureService: TextureService) {
     this.textureService.getTextures((results) => {
@@ -62,6 +64,9 @@ export class RightSidebarComponent implements OnInit  {
       setTimeout(() => {
         this.uploaded = false;
       }, 5000);
+
+      this.uploader.clearQueue();
+      this.selectedFile.nativeElement.value = '';
 
       this.refreshList();
 

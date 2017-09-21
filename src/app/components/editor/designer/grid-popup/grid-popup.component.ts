@@ -27,6 +27,9 @@ export class GridPopupComponent {
   private textures = [];
   @ViewChild('myModal') private modal;
 
+  private previewEven = '';
+  private previewOdd = '';
+
   constructor(private textureService: TextureService, private gridCreationService: GridCreationService) {
     this.gridCreationService.gridPopup = (cb) => {
       this.currentCB = cb;
@@ -42,8 +45,22 @@ export class GridPopupComponent {
     this.color = '#ffffff';
     this.textureEven = '';
     this.textureOdd = '';
+    this.previewEven = '';
+    this.previewOdd = '';
     this.alternate = false;
     this.currentCB = undefined;
+  }
+
+  private onChangePreviewEven() {
+    this.textureService.getLocalTexture(this.textureEven, (texture) => {
+      this.previewEven = texture;
+    });
+  }
+
+  private onChangePreviewOdd() {
+    this.textureService.getLocalTexture(this.textureOdd, (texture) => {
+      this.previewOdd = texture;
+    });
   }
 
   private onOpen() {

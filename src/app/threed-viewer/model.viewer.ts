@@ -10,7 +10,10 @@ import {
   MeshBasicMaterial,
   TextureLoader,
   Euler,
-} from 'three';
+  DoubleSide,
+}                         from 'three';
+
+import { TextureService } from '../../services';
 
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);
@@ -30,7 +33,7 @@ export class ModelViewer {
    *   material: THREE.Material
    * }
    */
-  constructor(conf: any = {}, editorMode: Boolean = false) {
+  constructor(conf: any = {}, protected textureService: TextureService, editorMode: Boolean = false) {
     if (conf.position instanceof Array)
       this._position.copy(new Vector3().fromArray(conf.position));
     if (conf.dimension instanceof Array)
@@ -122,10 +125,10 @@ export class ModelViewer {
    * Set texture by url
    */
   set texture(texture) {
-    this._material = new MeshBasicMaterial( { map: new TextureLoader().load(texture) } )
+    this._material = new MeshBasicMaterial({ map: new TextureLoader().load(texture), side: DoubleSide, transparent: true, opacity: 1 });
     this._material.needsUpdate = true;
     if (this.mesh != undefined)
-      this.mesh.material = this.material;
+      this.mesh.material = this._material;
   }
 
   /**
@@ -187,7 +190,7 @@ export class ModelViewer {
     if (this._geometry == undefined)
       return null;
     if (this._material === undefined)
-      this._material = new MeshBasicMaterial({color: 0xffffff});
+      this._material = new MeshBasicMaterial({ color: 0xffffff, side: DoubleSide, transparent: true, opacity: 1 });
     this._mesh = new Mesh(this._geometry, this._material);
     this._mesh.position.copy(this._position);
     this._mesh.scale.copy(this._dimension);

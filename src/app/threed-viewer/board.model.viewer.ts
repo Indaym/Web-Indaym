@@ -4,12 +4,11 @@
 
 import {
   CubeGeometry,
-  MeshBasicMaterial,
-  MultiMaterial,
 }                             from 'three';
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
+import { TextureService }     from '../../services';
 
 export class BoardModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
@@ -19,8 +18,8 @@ export class BoardModelViewer extends ModelViewer {
     'side.png', 'side.png',
   ];
 
-  constructor(conf, editorMode: Boolean = false) {
-    super(conf, editorMode);
+  constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
+    super(conf, textureService, editorMode);
   }
 
   /**

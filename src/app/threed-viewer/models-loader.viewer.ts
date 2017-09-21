@@ -42,19 +42,25 @@ export class ModelsLoader {
     let modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
-      model.threeDModel = new modelViewer(model.object, this.editorMode);
+      model.threeDModel = new modelViewer(model.object, this.textureService, this.editorMode);
 
-      this.textureService.getLocalTexture(model.textureRef, (texture) => {
-        if (texture)
-          model.threeDModel.texture = texture;
-
+      const addin = () => {
         model.threeDModel.init((mesh) => {
           mesh.LinkModel = model;
           this.scene.addInScene(mesh);
           if (render)
             this.scene.render();
         });
-      });
+      };
+      if (model.textureRef != undefined) {
+        this.textureService.getLocalTexture(model.textureRef, (texture) => {
+          if (texture)
+            model.threeDModel.texture = texture;
+          addin();
+        });
+      } else {
+        addin();
+      }
     }
   }
 

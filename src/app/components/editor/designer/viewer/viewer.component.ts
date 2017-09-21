@@ -100,19 +100,21 @@ export class ViewerComponent implements OnInit, OnDestroy {
   public addObject(args: any) {
     if (args.mouseEvent != undefined) {
       this.scene.setIntersection(args.mouseEvent);
-      let coord = this.scene.getIntersection();
-      if (args.dragData != undefined) {
-        let obj = buttonsDefault[args.dragData];
-        if (args.dragData === 'grid')
-          this.gridCreationService.open((datas) => { console.log(datas); });
-        let old = obj.object.position;
-        obj.object.position = coord.toArray();
-        this.gameController.addObject(obj, true, 'Both', (objq) => {
-          if (old === undefined)
-            delete obj.object['position'];
-          else
-            obj.object.position = old;
-        });
+      const coord = this.scene.getIntersection();
+      const name = args.dragData;
+
+      if (name != undefined && buttonsDefault[name] !== undefined) {
+        const model = Object.assign({}, buttonsDefault[name]);
+        const cb = (datas) => {
+          model.object.position = coord.toArray();
+          if (name === 'grid')
+            this.gridCreationService.assignToGridModel(model, datas);
+          this.gameController.addObject(model, true, 'Both');
+        };
+        if (name === 'grid')
+          this.gridCreationService.open(cb);
+        else
+          cb({});
       }
     }
   }

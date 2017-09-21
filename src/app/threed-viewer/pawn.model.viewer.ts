@@ -2,13 +2,11 @@
  * Created by nicolas on 15/10/16.
  */
 
-import {
-  CylinderGeometry,
-  MeshBasicMaterial,
-}                             from 'three';
+import { CylinderGeometry }   from 'three';
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
+import { TextureService }     from '../../services';
 
 export class PawnModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;
@@ -16,8 +14,8 @@ export class PawnModelViewer extends ModelViewer {
     'white.png',
   ];
 
-  constructor(conf, editorMode: Boolean = false) {
-    super(conf, editorMode);
+  constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
+    super(conf, textureService, editorMode);
   }
 
   /**
