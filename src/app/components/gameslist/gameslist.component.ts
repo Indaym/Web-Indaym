@@ -6,9 +6,9 @@ import { GameService }  from '../../../services/game.service';
 
 @Component({
   selector  : 'ia-gameslist',
-  template  : require('./gameslist.component.html'),
-  styles    : [
-    require('./gameslist.component.css'),
+  templateUrl   : './gameslist.component.html',
+  styleUrls    : [
+    './gameslist.component.css',
   ],
   providers : [ HtmlService, GameService ],
 })

@@ -1,10 +1,10 @@
-import { Component }  from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector  : 'ia-contact',
-  template  : require('./contact.component.html'),
+  templateUrl   : './contact.component.html',
   styleUrls : [
-    require('./contact.component.css'),
+    './contact.component.css',
   ],
   providers : [],
 })

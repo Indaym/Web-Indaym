@@ -2,10 +2,10 @@ import { Component }  from '@angular/core';
 
 @Component({
   selector  : 'ia-forum-discussion',
-  template  : require('./discussion.component.html'),
-  styles    : [
-    require('./discussion.component.css'),
-    require('../forum.component.css'),
+  templateUrl  : './discussion.component.html',
+  styleUrls    : [
+    './discussion.component.css',
+    '../forum.component.css',
   ],
 })
 export class DiscussionComponent {

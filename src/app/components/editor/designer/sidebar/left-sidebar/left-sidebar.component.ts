@@ -18,10 +18,10 @@ import { buttonsDefault } from '../../../../../../models';
 @Component({
   selector  : 'ia-left-sidebar',
   providers : [ HtmlService ],
-  template  : require('./left-sidebar.component.html'),
-  styles    : [
-    require('./left-sidebar.component.css'),
-    require('../sidebars.css'),
+  templateUrl   : './left-sidebar.component.html',
+  styleUrls    : [
+    './left-sidebar.component.css',
+    '../sidebars.css',
   ],
 })
 export class LeftSidebarComponent implements OnInit {

@@ -1,9 +1,13 @@
 import {
-  BaseRules,
+  RULE_TYPE,
+  BaseRules
+} from '../baseRules';
+
+import {
   SceneViewer,
   ModelViewer,
-  RULE_TYPE,
-}                 from '../';
+} from '../../threed-viewer';
+
 
 export class MoveDiag extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {

@@ -2,7 +2,7 @@
  * Created by nicolas on 5/5/17.
  */
 
-import { CaseModelViewer }  from '.';
+import { CaseModelViewer }  from './case.model.viewer';
 import { TextureService }   from '../../services';
 
 import {

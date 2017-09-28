@@ -1,10 +1,12 @@
 /**
  * Created by Caro on 08/01/2017.
  */
-import { Injectable }     from '@angular/core';
-import { Http }           from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 import { DefaultService } from './default.service';
+
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TextureService extends DefaultService {

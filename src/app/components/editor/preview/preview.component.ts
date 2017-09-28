@@ -13,7 +13,7 @@ import {
   GameControllerService,
   TextureService,
 }                           from '../../../../services/';
-import { RulesInterface }   from '.';
+import { RulesInterface }   from './rulesInterface';
 import {
   PlayerViewer,
   ModelsLoader,
@@ -21,9 +21,9 @@ import {
 
 @Component({
   selector  : 'ia-preview',
-  template  : require('./preview.component.html'),
-  styles    : [
-    require('./preview.component.css'),
+  templateUrl   : './preview.component.html',
+  styleUrls    : [
+    './preview.component.css',
   ],
   providers : [],
 })

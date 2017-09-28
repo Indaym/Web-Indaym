@@ -11,7 +11,7 @@ import {
   Vector3,
 }                         from 'three';
 
-import { SceneViewer }    from '.';
+import { SceneViewer }    from './scene.viewer';
 import { RulesInterface } from '../components/editor/preview/rulesInterface';
 
 export class PlayerViewer extends SceneViewer {

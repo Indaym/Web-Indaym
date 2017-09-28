@@ -17,9 +17,9 @@ import {
 
 @Component({
   selector  : 'ia-sceneslist',
-  template  : require('./sceneslist.component.html'),
-  styles    : [
-    require('./sceneslist.component.css'),
+  templateUrl   : './sceneslist.component.html',
+  styleUrls    : [
+    './sceneslist.component.css',
   ],
   providers : [ HtmlService, SceneService ],
 })

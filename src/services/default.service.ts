@@ -5,20 +5,30 @@
 import { serverConfig } from '../../config/server.conf';
 
 export class DefaultService {
+  protected server;
   protected setted = false;
   protected serverUrl;
   protected settedErrorMessage = 'URL not setted';
 
   constructor() {
     this.serverUrl = serverConfig.serverURL;
+    this.server = serverConfig.server;
+  }
+
+  // TODO: change serverUrl in the config by removing the / at the end
+  protected composeUrl(chunk: string): (string) => string {
+    return function(piece: string): string {
+      return `${chunk}/${piece}`;
+    };
   }
 
   public isSetted(message = false) {
     if (this.setted === true) {
       return true;
     } else {
-      if (message === true)
+      if (message === true) {
         console.error(this.settedErrorMessage);
+      }
       return false;
     }
   }

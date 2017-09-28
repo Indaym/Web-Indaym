@@ -2,9 +2,9 @@ import { Component }  from '@angular/core';
 
 @Component({
   selector  : 'ia-forum-bloc-lfg',
-  template  : require('./bloc-lfg.component.html'),
-  styles    : [
-    require('../../forum.component.css'),
+  templateUrl  : './bloc-lfg.component.html',
+  styleUrls    : [
+    '../../forum.component.css',
   ],
 })
 export class BlocLfgComponent {

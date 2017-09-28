@@ -2,9 +2,9 @@ import { Component }  from '@angular/core';
 
 @Component({
   selector  : 'ia-forum-bloc-avis',
-  template  : require('./bloc-avis.component.html'),
-  styles    : [
-    require('../../forum.component.css'),
+  templateUrl  : './bloc-avis.component.html',
+  styleUrls    : [
+    '../../forum.component.css',
   ],
 })
 export class BlocAvisComponent {

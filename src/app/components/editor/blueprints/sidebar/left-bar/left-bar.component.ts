@@ -14,18 +14,21 @@ import {
 
 import {
   BaseRules,
-  SceneViewer,
-  ModelViewer,
   RULE_TYPE,
 }                 from '../../../../../rules/';
+
+export {
+  SceneViewer,
+  ModelViewer,
+}                           from '../../../../../threed-viewer';
 
 @Component({
   selector  : 'ia-left-bar',
   providers : [HtmlService],
-  template  : require('./left-bar.component.html'),
-  styles    : [
-    require('./left-bar.component.css'),
-    require('../../../designer/sidebar/sidebars.css')
+  templateUrl   : './left-bar.component.html',
+  styleUrls    : [
+    './left-bar.component.css',
+    '../../../designer/sidebar/sidebars.css'
   ]
 })
 export class LeftBarComponent implements OnInit{

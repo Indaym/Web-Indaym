@@ -7,9 +7,9 @@ import { Comment }        from '../../../models/comment';
 
 @Component({
     selector  : 'ia-rategame',
-    template  : require('./rategame.component.html'),
-    styles    : [
-        require('./rategame.component.css'),
+    templateUrl   : './rategame.component.html',
+    styleUrls    : [
+        './rategame.component.css',
     ],
     providers : [ GameService ],
 })

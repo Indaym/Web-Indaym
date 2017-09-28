@@ -23,9 +23,9 @@ import { buttonsDefault } from '../../../../../models/';
 
 @Component({
   selector  : 'ia-viewer',
-  template  : require('./viewer.component.html'),
-  styles    : [
-    require('./viewer.component.css'),
+  templateUrl   : './viewer.component.html',
+  styleUrls    : [
+    './viewer.component.css',
   ],
   providers : [],
 })

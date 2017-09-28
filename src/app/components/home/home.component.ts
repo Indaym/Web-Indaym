@@ -1,10 +1,10 @@
-import { Component }  from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector  : 'ia-home',
-  template  : require('./home.component.html'),
-  styles    : [
-    require('./home.component.css'),
+  templateUrl  : './home.component.html',
+  styleUrls    : [
+    './home.component.css',
   ],
   providers : [],
 })

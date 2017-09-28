@@ -18,7 +18,7 @@ import { AuthService } from '../../../services';
         <input type="text" id="name" required [(ngModel)]="username" name="name" #name="ngModel" >
       </div>
       <div [hidden]="name.valid || name.pristine" >Username is required</div>
-    
+
       <div>
         <label for="Email" >email</label>
         <input type="email" id="Email" required [(ngModel)]="email" name="Email" #Email="ngModel" >
@@ -64,6 +64,6 @@ export class LoginComponent implements OnInit {
         const data = JSON.parse(res);
         localStorage.setItem('jwt', data.token);
         this.router.navigate['/home'];
-    })
+    });
   }
 }

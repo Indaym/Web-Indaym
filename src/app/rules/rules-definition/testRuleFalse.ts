@@ -1,13 +1,15 @@
 //
 // created by djavrell on Thu Jun 22 2017
 //
+import {
+  RULE_TYPE,
+  BaseRules
+} from '../baseRules';
 
 import {
-  BaseRules,
   SceneViewer,
   ModelViewer,
-  RULE_TYPE,
-}                 from '../';
+} from '../../threed-viewer';
 
 export class TestRuleFalse extends BaseRules {
   constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {

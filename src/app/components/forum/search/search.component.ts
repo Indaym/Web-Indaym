@@ -2,9 +2,9 @@ import { Component }  from '@angular/core';
 
 @Component({
   selector  : 'ia-forum-search',
-  template  : require('./search.component.html'),
-  styles    : [
-    require('../forum.component.css'),
+  templateUrl  : './search.component.html',
+  styleUrls    : [
+    '../forum.component.css',
   ],
 })
 export class SearchComponent {
