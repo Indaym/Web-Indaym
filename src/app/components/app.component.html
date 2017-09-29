@@ -1,16 +1,24 @@
 <nav class="navbar navbar-default">
-	<h1>Indaym</h1><button (click)="forceLogin()" >Force Login</button><button (click)="forceLogout()" >Force Logout</button>
-
+	<span class="icons-indaym">
+			<img src="/favicon.ico"/>
+			<span>Indaym</span>
+	</span>
 	<ul class='nav navbar-nav'>
-	  <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-	  <li><a routerLink="/gameslist" routerLinkActive="active">Editor</a></li>
-	  <li><a routerLink="/play" routerLinkActive="active">Play</a></li>
-	  <li><a routerLink="/store" routerLinkActive="active">Store</a></li>
-	  <li><a routerLink="/forum" routerLinkActive="active">Forum</a></li>
-		<li><a [routerLink]="['/login']" >Login</a></li>
-		<li><a [routerLink]="['/register']" >Register</a></li>
+		<li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+		<li><a routerLink="/gameslist" routerLinkActive="active">Editor</a></li>
+		<li><a routerLink="/play" routerLinkActive="active">Play</a></li>
+		<li><a routerLink="/store" routerLinkActive="active">Store</a></li>
+		<li><a routerLink="/forum" routerLinkActive="active">Forum</a></li>
 	</ul>
-</nav>
+	<ul class='nav navbar-nav navbar-right'>
+		<li><a [routerLink]="['/login']">Login</a></li>
+		<li><a [routerLink]="['/register']">Register</a></li>
+	</ul>
+	<ul class='nav navbar-nav navbar-right'>
+		<li><a (click)="forceLogin()">Force Login</a></li>
+		<li><a (click)="forceLogout()">Force Logout</a></li>
+	</ul>
+	</nav>
 
 <div class="background-image" [ngStyle]="{'background-image' : 'url(../assets/img/bg/indaymlogo.png)'}">
 </div>
