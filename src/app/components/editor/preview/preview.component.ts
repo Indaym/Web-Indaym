@@ -69,9 +69,8 @@ export class PreviewComponent implements OnInit, OnDestroy {
         type: 'board',
         draggable: false,
         droppable: true,
-        dimension: [90,2,90],
-        texturesPaths: ['side.png','side.png','board10.png','side.png','side.png','side.png'],
-        position: [0,0,0],
+        dimension: [90, 2, 90],
+        position: [0, 0, 0],
       },
     }, true, 'Both');
 
@@ -82,7 +81,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
         type: 'grid',
         draggable: false,
         droppable: false,
-        position: [0,1.01,0],
+        position: [0, 1.01, 0],
         caseX: 10,
         caseY: 10,
         caseWidth: 8,

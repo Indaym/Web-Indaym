@@ -4,18 +4,19 @@
 
 import {
     Component,
-    Input, OnInit
-} from '@angular/core';
+    Input,
+    OnInit,
+}                           from '@angular/core';
 
 import {
     HtmlService,
     GameControllerService,
-} from "../../../../../services";
+}                           from '../../../../../services';
 
 import {
   BaseRules,
   RULE_TYPE,
-}                 from '../../../../../rules/';
+}                           from '../../../../../rules/';
 
 export {
   SceneViewer,
@@ -28,10 +29,10 @@ export {
   templateUrl   : './left-bar.component.html',
   styleUrls    : [
     './left-bar.component.css',
-    '../../../designer/sidebar/sidebars.css'
-  ]
+    '../../../designer/sidebar/sidebars.css',
+  ],
 })
-export class LeftBarComponent implements OnInit{
+export class LeftBarComponent implements OnInit {
   @Input() menu;
   @Input() eventDispatcher;
   @Input() selectRules;
@@ -39,36 +40,36 @@ export class LeftBarComponent implements OnInit{
 
   private gameController;
 
-  constructor(public html: HtmlService, private gameControllerService:GameControllerService) {
+  constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
   }
 
   ngOnInit() {}
 
   private toggleMode() {
-    this.menu.mode = (this.menu.mode == 'side') ? 'over' : 'side';
+    this.menu.mode = (this.menu.mode === 'side') ? 'over' : 'side';
   }
 
   private loadRules(objId) {
     this.selectRules(objId);
-    document.getElementById("previousContainer").innerHTML = "<div>Rules currently applied to this item: </div><div id=\"previousRules\"></div>";
-    document.getElementById("rulesContainer").innerText = "";
+    document.getElementById('previousContainer')
+      .innerHTML = '<div>Rules currently applied to this item: </div><div id="previousRules"></div>';
+    document.getElementById('rulesContainer').innerText = '';
     if (this.objs !== undefined && this.objs !== null) {
-      for (let obj of this.objs) // objets
+      for (const obj of this.objs) // objets
       {
-        if (obj.uuid === objId && obj.rules !== undefined && obj.rules !== null) // selected obj
-        {
-          let arr = Object.values(obj.rules);
+        if (obj.uuid === objId && obj.rules !== undefined && obj.rules !== null) { // selected obj
+          const arr = Object.values(obj.rules);
 
           console.log(obj.rules); // test
-          for (let r of arr)
+          for (const r of arr)
           {
             // rules already on the selected object:
             /* if (r.name != "rule")
             { */
 
               console.log(r.name);
-              document.getElementById("previousContainer").innerText += r.id + '\n';
+              document.getElementById('previousContainer').innerText += r.id + '\n';
             /* } */
           }
         }

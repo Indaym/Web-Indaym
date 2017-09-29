@@ -63,7 +63,7 @@ export class GameService extends DefaultService {
     .map((res) => res.json())
     .subscribe(success, error);
   }
-  
+
   public postDescription(description, id, success?, error?) {
     this.http.put(this.gamesUrl + id, {'description': JSON.stringify(description)})
         .map((res) => res.json())

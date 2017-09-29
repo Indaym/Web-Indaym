@@ -27,7 +27,7 @@ import { ContactComponent } from './components/contact';
 import { LegalMentionsComponent } from './components/legal-mentions';
 import {
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
 } from './components/auth';
 
 export const routes: Routes = [

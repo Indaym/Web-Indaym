@@ -8,7 +8,7 @@ import {
 }                       from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { comeFrom } from '../../components/play';
+import { comeFrom }     from '../../components/play';
 
 import {
   HtmlService,
@@ -21,7 +21,10 @@ import {
   styleUrls    : [
     './sceneslist.component.css',
   ],
-  providers : [ HtmlService, SceneService ],
+  providers : [
+    HtmlService,
+    SceneService,
+  ],
 })
 export class ScenesListComponent implements OnDestroy {
   public lsScenes = [];
@@ -31,7 +34,7 @@ export class ScenesListComponent implements OnDestroy {
 
   constructor(public html: HtmlService, private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
     this.subscription = route.queryParams.subscribe(
-        (queryParam: any) => this.getScenesList(queryParam)
+        (queryParam: any) => this.getScenesList(queryParam),
     );
   }
 
@@ -48,7 +51,7 @@ export class ScenesListComponent implements OnDestroy {
 
   public getScenesList(queryParam) {
     this.gameId = queryParam.gameId;
-    this.isNew = parseInt(queryParam.new);
+    this.isNew = parseInt(queryParam.new, 10);
 
     this.scenes.setGameId(this.gameId);
     this.scenes.getScenes((datas) => this.lsScenes.push(datas));
@@ -61,7 +64,7 @@ export class ScenesListComponent implements OnDestroy {
   }
 
   public addScene() {
-    let myText = prompt('Scene Name: ');
+    const myText = prompt('Scene Name: ');
     if (myText)
       this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
   }

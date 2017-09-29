@@ -98,7 +98,7 @@ export class RightSidebarComponent implements OnInit  {
   public updateValues(type) {
     if (Object.keys(this.objectSelected).indexOf(type) === -1)
       return;
-    let obj = { type : 'updateObjectView' };
+    const obj = { type : 'updateObjectView' };
     obj[type] = this.objectSelected[type];
     this.eventDispatcher.dispatchEvent(obj);
   }
@@ -117,9 +117,9 @@ export class RightSidebarComponent implements OnInit  {
   public applyTexture() {
     this.eventDispatcher.dispatchEvent({
       type: 'updateTexture',
-      texture: this.imgSelected
+      texture: this.imgSelected,
     });
-  };
+  }
 
   /**
    * When selected item change, automatic set preview item

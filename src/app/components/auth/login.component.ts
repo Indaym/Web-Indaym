@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
@@ -43,7 +43,7 @@ import { AuthService } from '../../services';
 export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   hasError = false;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       (res) => {
         const data = JSON.parse(res);
         localStorage.setItem('jwt', data.token);
-        this.router.navigate['/home'];
+        this.router.navigate(['/home']);
     });
   }
 }

@@ -1,13 +1,12 @@
 import {
   RULE_TYPE,
-  BaseRules
-} from '../baseRules';
+  BaseRules,
+}               from '../baseRules';
 
 import {
   SceneViewer,
   ModelViewer,
-} from '../../threed-viewer';
-
+}               from '../../threed-viewer';
 
 export class CaptureSet extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {
@@ -20,8 +19,8 @@ export class CaptureSet extends BaseRules {
   }
 
   public run(args?: any): boolean {
-    var White_Capture = 1;
-    var Black_Capture = 1;
+    const White_Capture = 1;
+    const Black_Capture = 1;
     if (this._refScene.capture[0] === -1 && this._refScene.capture[1] === -1) {
       this._refScene.capture[0] = White_Capture;
       this._refScene.capture[1] = Black_Capture;

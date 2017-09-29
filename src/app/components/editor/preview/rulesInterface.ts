@@ -32,10 +32,10 @@ export class RulesInterface {
 
   public emit(type, datas, success = (data) => {}, fail = (data) => {}) {
     this.dispatcher.dispatchEvent({
-      type: type,
-      datas: datas,
-      success: success,
-      fail: fail,
+      type,
+      datas,
+      success,
+      fail,
     });
   }
 }

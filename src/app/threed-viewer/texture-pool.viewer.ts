@@ -8,11 +8,11 @@ import {
 } from 'three';
 
 export class TexturePoolViewer {
-  private processing: boolean = false;
-  private queue: Array<String>;
+  private processing = false;
+  private queue: Array<string>;
   private dones: Array<Texture>;
-  private poolLength: number = 0;
-  private pushed: number = 0;
+  private poolLength = 0;
+  private pushed = 0;
   private path: string = undefined;
 
   constructor(path) {
@@ -33,7 +33,7 @@ export class TexturePoolViewer {
     this.poolLength = textures.length;
     this.queue = textures.slice();
     this.dones = new Array(this.poolLength);
-    for (let tex of this.queue) {
+    for (const tex of this.queue) {
       this.loadImage(tex, onLoad, onProgress);
     }
   }
@@ -46,7 +46,7 @@ export class TexturePoolViewer {
    */
   private loadImage(img, onLoad, onProgress?) {
     const textureLoader = new TextureLoader();
-    textureLoader.load((this.path != undefined) ? this.path + img : img, (texture) => {
+    textureLoader.load((this.path !== undefined) ? this.path + img : img, (texture) => {
       const index = this.queue.indexOf(img, 0);
       if (index > -1) {
         this.queue[index] = null;

@@ -1,6 +1,6 @@
-// 
-// created by djavrell on Fri Jun 02 2017 
-// 
+//
+// created by djavrell on Fri Jun 02 2017
+//
 
 import { OnInit }           from '@angular/core';
 import { EventDispatcher }  from 'three';

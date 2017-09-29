@@ -25,13 +25,13 @@ export class GamesListComponent {
   }
 
   public gameFunction() {
-    let myText = prompt('Game Name: ');
+    const myText = prompt('Game Name: ');
     if (myText) {
-      let myDescription = prompt('Game Description: ');
-        this.games.postGame(myText, (id) => {
-          this.games.postDescription(myDescription, id.uuid);
-          this.goToScenesPage(id.uuid, 1)
-        });
+      const myDescription = prompt('Game Description: ');
+      this.games.postGame(myText, (id) => {
+        this.games.postDescription(myDescription, id.uuid);
+        this.goToScenesPage(id.uuid, 1);
+      });
     }
   }
 

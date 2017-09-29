@@ -43,7 +43,11 @@ export class LeftSidebarComponent implements OnInit {
   private show;
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
-  constructor(public html: HtmlService, private gameControllerService: GameControllerService, private gridCreationService: GridCreationService) {
+  constructor(
+    public html: HtmlService,
+    private gameControllerService: GameControllerService,
+    private gridCreationService: GridCreationService,
+  ) {
     this.gameController = this.gameControllerService.gameController;
   }
 
@@ -69,10 +73,10 @@ export class LeftSidebarComponent implements OnInit {
 
   private setIcons() {
     let obj;
-    let stock = [];
+    const stock = [];
 
     this.objects = this.gameController.getObjects();
-    for (let elem of this.objects) {
+    for (const elem of this.objects) {
       obj = { name: elem.name };
       if (this.icons.indexOf(elem.name) >= 0)
         obj['icon'] = '/assets/icons/' + elem.name + '.png';
