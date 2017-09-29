@@ -8,7 +8,7 @@ import {
   RouterModule,
 } from '@angular/router';
 
-import { AuthGuard } from '../guards';
+import { AuthGuard } from './guards';
 
 import { HomeComponent } from './components/home';
 import {

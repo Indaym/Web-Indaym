@@ -13,7 +13,7 @@ import { comeFrom } from '../../components/play';
 import {
   HtmlService,
   SceneService,
-}                       from '../../../services';
+}                       from '../../services';
 
 @Component({
   selector  : 'ia-sceneslist',

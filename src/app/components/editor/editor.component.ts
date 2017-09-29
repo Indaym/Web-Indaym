@@ -12,7 +12,7 @@ import {
   GameService,
   GameControllerService,
   TextureService,
-} from '../../../services';
+} from '../../services';
 
 @Component({
   selector  : 'ia-editor',

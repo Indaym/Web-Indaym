@@ -6,7 +6,7 @@ import {
 import {
   TextureService,
   GridCreationService,
-} from '../../../../../services/';
+} from '../../../../services';
 
 @Component({
   selector: 'ia-grid-popup',

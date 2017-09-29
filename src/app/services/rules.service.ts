@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 import {
     RULES_DEF,
-} from '../app/rules';
+} from '../rules';
 
 /**
  * store all rules we have in the app

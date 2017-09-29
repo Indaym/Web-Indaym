@@ -10,7 +10,7 @@ import {
 import {
     HtmlService,
     GameControllerService,
-} from "../../../../../../services";
+} from "../../../../../services";
 
 import {
   BaseRules,

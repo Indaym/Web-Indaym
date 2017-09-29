@@ -18,8 +18,8 @@ import {
   APP_COMPONENTS,
 }                                   from './components';
 
-import { AuthGuard }                from '../guards';
-import { HtmlService }              from '../services/html.service';
+import { AuthGuard }                from './guards';
+import { HtmlService }              from './services/html.service';
 
 import {
   DragulaModule,

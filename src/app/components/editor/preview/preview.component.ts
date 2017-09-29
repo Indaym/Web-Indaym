@@ -12,7 +12,7 @@ import { EventDispatcher }  from 'three';
 import {
   GameControllerService,
   TextureService,
-}                           from '../../../../services/';
+}                           from '../../../services';
 import { RulesInterface }   from './rulesInterface';
 import {
   PlayerViewer,

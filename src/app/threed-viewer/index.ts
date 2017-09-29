@@ -13,3 +13,4 @@ export { GridModelViewer }    from './grid.model.viewer';
 export { TexturePoolViewer }  from './texture-pool.viewer';
 export { ModelsLoader }       from './models-loader.viewer';
 export { ThreeDModelViewer }  from './threeD.model.viewer';
+export { ArrowHelperViewer }  from './arrow-helper.viewer';

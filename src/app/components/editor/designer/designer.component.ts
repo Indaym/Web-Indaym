@@ -2,7 +2,7 @@ import { Component }            from '@angular/core';
 import { EventDispatcher }      from 'three';
 import { providers }        from 'ng2-dnd';
 
-import { GridCreationService }  from '../../../../services';
+import { GridCreationService }  from '../../../services';
 
 @Component({
   selector  : 'ia-designer',

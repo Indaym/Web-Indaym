@@ -14,7 +14,7 @@ import {
 }                         from 'three';
 import { FileUploader }   from 'ng2-file-upload';
 
-import { TextureService } from '../../../../../../services';
+import { TextureService } from '../../../../../services';
 import { serverConfig }   from '../../../../../../../config/server.conf';
 
 @Component({

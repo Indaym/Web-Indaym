@@ -8,7 +8,7 @@ import {
 
 import { ModelViewer }        from './model.viewer';
 import { TexturePoolViewer }  from './texture-pool.viewer';
-import { TextureService }     from '../../services';
+import { TextureService }     from '../services';
 
 export class BoardModelViewer extends ModelViewer {
   private _textureLoader: TexturePoolViewer;

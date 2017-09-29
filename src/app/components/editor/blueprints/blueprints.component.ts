@@ -5,7 +5,7 @@ import { dragula } from 'ng2-dragula/ng2-dragula';
 import {
   GameControllerService,
   ObjectService,
-} from '../../../../services';
+} from '../../../services';
 import { RULES_DEF } from '../../../rules/';
 
 var rulesList = [];

@@ -12,8 +12,8 @@ import {
   HtmlService,
   GameControllerService,
   GridCreationService,
-}                         from '../../../../../../services';
-import { buttonsDefault } from '../../../../../../models';
+}                         from '../../../../../services';
+import { buttonsDefault } from '../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',

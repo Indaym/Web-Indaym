@@ -2,8 +2,8 @@ import { Component }      from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription }   from 'rxjs/Rx';
 import { NgForm }         from '@angular/forms';
-import { GameService }    from '../../../services/game.service';
-import { Comment }        from '../../../models/comment';
+import { GameService }    from '../../services/game.service';
+import { Comment }        from '../../models/comment';
 
 @Component({
     selector  : 'ia-rategame',

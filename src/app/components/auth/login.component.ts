@@ -5,7 +5,7 @@ import {
 import { Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
 
-import { AuthService } from '../../../services';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'ia-login',

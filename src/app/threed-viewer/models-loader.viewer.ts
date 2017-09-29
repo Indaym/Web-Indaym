@@ -10,9 +10,9 @@ import { GridModelViewer } from './grid.model.viewer';
 
 import {
   TextureService
-} from '../../services/';
+} from '../services';
 
-import { RulesServices }  from '../../services/rules.service';
+import { RulesServices }  from '../services/rules.service';
 
 
 export class ModelsLoader {

@@ -3,7 +3,7 @@
  */
 
 import { CaseModelViewer }  from './case.model.viewer';
-import { TextureService }   from '../../services';
+import { TextureService }   from '../services';
 
 import {
   MeshBasicMaterial,
