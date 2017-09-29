@@ -34,7 +34,7 @@ background-color:#00cccc;
   float: right;
 }
 
-md-sidenav-layout {
+md-sidenav-container {
   /*position: absolute;*/
   top: 0;
   left: 0;
@@ -97,8 +97,4 @@ md-sidenav {
   left: 25%;
   top: 38%;
   font-size: 100%;
-}
-
-md-sidenav-container {
-  min-height: 500px;
 }
