@@ -57,5 +57,10 @@ p.up {
 }
 
 h4 {
+  font-weight: bold;
   text-align: center;
+}
+
+.radio-margin {
+  margin-left: 10px;
 }

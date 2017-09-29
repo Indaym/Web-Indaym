@@ -29,20 +29,26 @@ import { serverConfig }   from '../../../../../../../config/server.conf';
 export class RightSidebarComponent implements OnInit  {
   @Input() public end;
   @Input() public eventDispatcher;
+  public uploader: FileUploader = new FileUploader({url: serverConfig.serverURL + 'textures/' });
+
   private urlImg;
   private warnMessage = '';
   private uploaded = false;
   private textures = [];
   private imgSelected;
   private imgPreview = '';
-
-  public uploader: FileUploader = new FileUploader({url: serverConfig.serverURL + 'textures/' });
   private minimumScale = new Vector3();
   private objectSelected = {
     position: new Vector3(),
     dimension: new Vector3(),
     rotation: new Euler(),
   };
+  private controllerTypes = [
+    'translate',
+    'scale',
+    'rotate'
+  ];
+  private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
   constructor(private textureService: TextureService) {
@@ -119,7 +125,7 @@ export class RightSidebarComponent implements OnInit  {
       type: 'updateTexture',
       texture: this.imgSelected
     });
-  };
+  }
 
   /**
    * When selected item change, automatic set preview item
@@ -134,6 +140,25 @@ export class RightSidebarComponent implements OnInit  {
   public refreshList() {
     this.textureService.getTextures((results) => {
       this.textures = results;
+    });
+  }
+
+  public changeModeController() {
+    this.eventDispatcher.dispatchEvent({
+      type: 'updateController',
+      modeController: this.modeController
+    });
+  }
+
+  public deleteSelected() {
+    this.eventDispatcher.dispatchEvent({
+      type: 'deleteSelected'
+    });
+  }
+
+  public savePositions() {
+    this.eventDispatcher.dispatchEvent({
+      type: 'savePositions'
     });
   }
 

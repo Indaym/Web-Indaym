@@ -7,6 +7,7 @@ import {
   OnInit,
   OnDestroy,
   Input,
+  HostListener,
 }                         from '@angular/core';
 
 import {
@@ -45,6 +46,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.gameController = gameControllerService.gameController;
   }
 
+  @HostListener('document:keypress', ['$event'])
+  public handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Delete')
+      this.deleteObject();
+  }
+
   public ngOnInit(): void {
     const dom = document.getElementById('editorContainer');
     this.scene = new EditorViewer({
@@ -71,6 +78,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
+    this.eventDispatcher.addEventListener('savePositions', (e: any) => this.savePositions());
 
   /*
     const arrow = new ArrowHelperViewer({

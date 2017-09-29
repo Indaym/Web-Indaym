@@ -1,13 +1,1 @@
-<div class="buttons">
-  <label *ngFor="let val of scene.controllerTypes" >
-    <input type="radio" [value]="val" name="kind" [(ngModel)]="scene.modeController">
-    {{val}}
-  </label>
-  <button (click)="deleteObject()">Delete Object</button>
-</div>
-
-<div class="save">
-  <button (click)="savePositions()">Save</button>
-</div>
-
 <div dnd-droppable [dropZones]="['editor']" (onDropSuccess)="addObject($event)" id="editorContainer"></div>

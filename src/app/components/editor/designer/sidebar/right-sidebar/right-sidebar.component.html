@@ -1,41 +1,63 @@
 <span md-button (click)="end.close()" class="close-button glyphicon glyphicon-remove"></span>
 
-<button md-button (click)="toggleMode()">Toggle</button>
-<span>Mode : {{end.mode}}</span>
+<!-- <button md-button (click)="toggleMode()">Toggle</button> -->
+<!-- <span>Mode : {{end.mode}}</span> -->
+<ia-tabs>
 
-<form>
-  <h6>Position :</h6>
-  <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]" (ngModelChange)="updateValues('position')"/><br/>
-  <h6>Rotation :</h6>
-  <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="0.5" [(ngModel)]="objectSelected.rotation[v]" (ngModelChange)="updateValues('rotation')"/><br/>
-  <h6>Dimension :</h6>
-  <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]" (ngModelChange)="updateValues('dimension')"/><br/>
-</form>
+  <ia-tab tabTitle="Object Configuration">
+    <h4>Selector Mode</h4>
+    <md-radio-group [(ngModel)]="modeController" (ngModelChange)="changeModeController()">
+      <md-radio-button class="radio-margin" *ngFor="let type of controllerTypes" [value]="type">
+        {{type}}
+      </md-radio-button>
+    </md-radio-group>
 
-<hr>
-<h6>Select an existing texture :</h6>
-<select id="sel" [(ngModel)]="imgSelected" (ngModelChange)="previewTexture()">
-  <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
-</select>
+    <button (click)="deleteSelected()">Delete Selected Object</button>
+    <button (click)="savePositions()">Save Positions</button>
+    
+    
+    <hr/>
+    <h4>Object Configuration</h4>
+    <form>
+      <h5>Position :</h5>
+      <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
+        (ngModelChange)="updateValues('position')" /><br/>
+      <h5>Rotation :</h5>
+      <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="0.5" [(ngModel)]="objectSelected.rotation[v]"
+        (ngModelChange)="updateValues('rotation')" /><br/>
+      <h5>Dimension :</h5>
+      <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
+        (ngModelChange)="updateValues('dimension')" /><br/>
+    </form>
+  </ia-tab>
 
-<h4><span class="glyphicon glyphicon-minus"></span> OR <span class="glyphicon glyphicon-minus"></span></h4>
-<h6>Upload a texture :</h6>
-<p *ngIf="warnMessage.length > 0" class="warn temp">
-  <span class="glyphicon glyphicon-warning-sign"></span>  {{ warnMessage }}
-</p>
-<p *ngIf="uploaded == true" class="up temp">
-    <span class="glyphicon glyphicon-ok"></span> Uploaded
-</p>
+  <ia-tab tabTitle="Texture Configuration">
+    <h4>Select an existing texture :</h4>
+    <select id="sel" [(ngModel)]="imgSelected" (ngModelChange)="previewTexture()">
+      <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
+    </select>
 
-<input #selectedFile type="file" ng2FileSelect [uploader]="uploader" name="single" accept="image/*"/>  
-<button type="button" class="btn btn-success btn-xs center" (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
-  <span class="glyphicon glyphicon-upload"></span> Upload
-</button>
-<br/>
-<button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()" >
-  <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
-</button>
+    <h4><span class="glyphicon glyphicon-minus"></span> OR <span class="glyphicon glyphicon-minus"></span></h4>
+    <h4>Upload a texture :</h4>
+    <p *ngIf="warnMessage.length > 0" class="warn temp">
+      <span class="glyphicon glyphicon-warning-sign"></span> {{ warnMessage }}
+    </p>
+    <p *ngIf="uploaded == true" class="up temp">
+      <span class="glyphicon glyphicon-ok"></span> Uploaded
+    </p>
 
-<hr>
-<p>Preview :</p>
-<img *ngIf="imgPreview.length > 0" [src]="imgPreview" width="250"/>
+    <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" name="single" accept="image/*" />
+    <button type="button" class="btn btn-success btn-xs center" (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
+      <span class="glyphicon glyphicon-upload"></span> Upload
+    </button>
+    <br/>
+    <button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()">
+      <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
+    </button>
+
+    <hr>
+    <p>Preview :</p>
+    <img *ngIf="imgPreview.length > 0" [src]="imgPreview" width="250" />
+  </ia-tab>
+
+</ia-tabs>
