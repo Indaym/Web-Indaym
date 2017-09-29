@@ -9,9 +9,3 @@ export {
 export { RuleManager }  from './rulesManager';
 
 export { RULES_DEF }    from './rules-definition';
-
-// WTF
-// export {
-//   SceneViewer,
-//   ModelViewer,
-// }                           from '../threed-viewer';
