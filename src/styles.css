@@ -6,3 +6,7 @@
 /*
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
 */
+
+.no-background {
+  background-color: transparent;
+}

@@ -98,3 +98,7 @@ md-sidenav {
   top: 38%;
   font-size: 100%;
 }
+
+md-sidenav-container {
+  min-height: 500px;
+}
