@@ -2,18 +2,17 @@
  * Created by nicolas on 14/04/17.
  */
 
-import {
-  BoardModelViewer,
-  PawnModelViewer,
-  CaseModelViewer,
-  GridModelViewer,
-} from '.';
+
+import { BoardModelViewer } from './board.model.viewer';
+import { PawnModelViewer } from './pawn.model.viewer';
+import { CaseModelViewer } from './case.model.viewer';
+import { GridModelViewer } from './grid.model.viewer';
 
 import {
   TextureService
-} from '../../services/';
+} from '../services';
 
-import { RulesServices }  from '../../services/rules.service';
+import { RulesServices }  from '../services/rules.service';
 
 
 export class ModelsLoader {
@@ -26,7 +25,7 @@ export class ModelsLoader {
   private rulesService: RulesServices;
 
   constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {
-    this.rulesService = new RulesServices();  
+    this.rulesService = new RulesServices();
   }
 
   /**

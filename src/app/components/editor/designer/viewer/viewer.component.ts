@@ -10,22 +10,27 @@ import {
 }                         from '@angular/core';
 
 import {
+  MeshBasicMaterial
+} from 'three';
+
+import {
   EditorViewer,
   ModelsLoader,
+  ArrowHelperViewer
 }                         from '../../../../threed-viewer';
 import {
   GameControllerService,
   ObjectService,
   TextureService,
   GridCreationService,
- }                        from '../../../../../services/';
-import { buttonsDefault } from '../../../../../models/';
+ }                        from '../../../../services';
+import { buttonsDefault } from '../../../../models';
 
 @Component({
   selector  : 'ia-viewer',
-  template  : require('./viewer.component.html'),
-  styles    : [
-    require('./viewer.component.css'),
+  templateUrl   : './viewer.component.html',
+  styleUrls    : [
+    './viewer.component.css',
   ],
   providers : [],
 })
@@ -66,6 +71,17 @@ export class ViewerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+  /*
+    const arrow = new ArrowHelperViewer({
+      rotation: [-90 * (Math.PI / 180), 0, 0],
+      material: new MeshBasicMaterial({ color: 0xaa0000 })
+    }, this.textureService, true);
+    arrow.init((mesh) => {
+      this.scene.addInScene(mesh);
+      this.scene.render();
+    });
+ */
   }
 
   public ngOnDestroy() {

@@ -11,12 +11,11 @@ import {
   DirectionalLight,
 } from 'three';
 
-import {
-  SceneViewer,
-  ThreeDModelViewer,
-} from '.';
+import { SceneViewer } from './scene.viewer';
+import { ThreeDModelViewer } from './threeD.model.viewer';
 
-const TransformControls = require('threejs-transformcontrols');
+// const TransformControls = require('threejs-transformcontrols');
+import * as TransformControls from 'threejs-transformcontrols';
 
 export class EditorViewer extends SceneViewer {
   private _selected: Object3D;

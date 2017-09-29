@@ -1,12 +1,12 @@
-import { Component }        from '@angular/core';
-import { EventDispatcher }  from 'three';
-import { dragula }          from 'ng2-dragula/ng2-dragula';
+import { Component } from '@angular/core';
+import { EventDispatcher } from 'three';
+import { dragula } from 'ng2-dragula/ng2-dragula';
 
 import {
   GameControllerService,
   ObjectService,
-}                           from '../../../../services';
-import { RULES_DEF }        from '../../../rules/';
+} from '../../../services';
+import { RULES_DEF } from '../../../rules/';
 
 var rulesList = [];
 var currRule = null;
@@ -15,9 +15,9 @@ var movement = 1;
 
 @Component({
   selector  : 'ia-blueprints',
-  template  : require('./blueprints.component.html'),
-  styles    : [
-    require('./blueprints.component.css')
+  templateUrl   : './blueprints.component.html',
+  styleUrls    : [
+    './blueprints.component.css'
   ],
   providers : []
 })

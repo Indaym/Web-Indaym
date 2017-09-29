@@ -4,11 +4,11 @@
     </ul>
 </nav><br/>
 
-<md-sidenav-layout>
+<md-sidenav-container class="no-background">
     <md-sidenav #menu mode="side">
         <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher" [selectRules]="selectRules" [objs]="gameController.getObjects()"></ia-left-bar>
     </md-sidenav>
-</md-sidenav-layout>
+</md-sidenav-container>
 
 
 <div id="previousContainer">

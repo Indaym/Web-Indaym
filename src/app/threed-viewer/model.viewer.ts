@@ -13,7 +13,7 @@ import {
   DoubleSide,
 }                         from 'three';
 
-import { TextureService } from '../../services';
+import { TextureService } from '../services';
 
 export class ModelViewer {
   private _dimension: Vector3 = new Vector3(1, 1, 1);

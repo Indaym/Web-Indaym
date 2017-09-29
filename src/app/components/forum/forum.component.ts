@@ -1,10 +1,10 @@
-import { Component }  from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector  : 'ia-forum',
-  template  : require('./forum.component.html'),
-  styles    : [
-    require('./forum.component.css'),
+  templateUrl  : './forum.component.html',
+  styleUrls    : [
+    './forum.component.css',
   ],
   providers : [],
 })

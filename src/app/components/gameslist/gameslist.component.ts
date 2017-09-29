@@ -1,14 +1,14 @@
 import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
-import { HtmlService }  from '../../../services/html.service';
-import { GameService }  from '../../../services/game.service';
+import { HtmlService }  from '../../services/html.service';
+import { GameService }  from '../../services/game.service';
 
 @Component({
   selector  : 'ia-gameslist',
-  template  : require('./gameslist.component.html'),
-  styles    : [
-    require('./gameslist.component.css'),
+  templateUrl   : './gameslist.component.html',
+  styleUrls    : [
+    './gameslist.component.css',
   ],
   providers : [ HtmlService, GameService ],
 })

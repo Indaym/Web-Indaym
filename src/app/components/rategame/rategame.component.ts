@@ -2,14 +2,14 @@ import { Component }      from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription }   from 'rxjs/Rx';
 import { NgForm }         from '@angular/forms';
-import { GameService }    from '../../../services/game.service';
-import { Comment }        from '../../../models/comment';
+import { GameService }    from '../../services/game.service';
+import { Comment }        from '../../models/comment';
 
 @Component({
     selector  : 'ia-rategame',
-    template  : require('./rategame.component.html'),
-    styles    : [
-        require('./rategame.component.css'),
+    templateUrl   : './rategame.component.html',
+    styleUrls    : [
+        './rategame.component.css',
     ],
     providers : [ GameService ],
 })

@@ -13,13 +13,13 @@ import { comeFrom } from '../../components/play';
 import {
   HtmlService,
   SceneService,
-}                       from '../../../services';
+}                       from '../../services';
 
 @Component({
   selector  : 'ia-sceneslist',
-  template  : require('./sceneslist.component.html'),
-  styles    : [
-    require('./sceneslist.component.css'),
+  templateUrl   : './sceneslist.component.html',
+  styleUrls    : [
+    './sceneslist.component.css',
   ],
   providers : [ HtmlService, SceneService ],
 })

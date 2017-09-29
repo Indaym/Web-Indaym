@@ -1,16 +1,16 @@
 import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
-import { HtmlService }  from '../../../services/html.service';
-import { GameService }  from '../../../services/game.service';
+import { HtmlService }  from '../../services/html.service';
+import { GameService }  from '../../services/game.service';
 
 export var comeFrom = "";
 
 @Component({
   selector  : 'ia-play',
-  template  : require('./play.component.html'),
-  styles    : [
-    require('./play.component.css'),
+  templateUrl   : './play.component.html',
+  styleUrls    : [
+    './play.component.css',
   ],
   providers : [ GameService, GameService ],
 })

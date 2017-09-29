@@ -1,16 +1,16 @@
 import { Component }            from '@angular/core';
 import { EventDispatcher }      from 'three';
-import { DND_PROVIDERS }        from 'ng2-dnd';
+import { providers }        from 'ng2-dnd';
 
-import { GridCreationService }  from '../../../../services';
+import { GridCreationService }  from '../../../services';
 
 @Component({
   selector  : 'ia-designer',
-  template  : require('./designer.component.html'),
-  styles    : [
-    require('./designer.component.css'),
+  templateUrl   : './designer.component.html',
+  styleUrls    : [
+    './designer.component.css',
   ],
-  providers : [ DND_PROVIDERS, GridCreationService ],
+  providers : [ providers, GridCreationService ],
 })
 export class DesignerComponent {
   private dispatcher: EventDispatcher;

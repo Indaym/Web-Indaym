@@ -1,11 +1,11 @@
-import { Component }  from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector  : 'ia-app',
-  template  : require('./app.component.html'),
-  styles    : [
-    require('./app.component.css'),
+  templateUrl  : './app.component.html',
+  styleUrls    : [
+    './app.component.css',
   ],
   providers : [],
 })
@@ -16,9 +16,9 @@ export class AppComponent {
     // Image in localStorage seems to slow browser
     // localStorage.clear();
   }
-  
+
   forceLogin() {
-    localStorage.setItem('jwt', 'foo');
+    localStorage.setItem('jwt', JSON.stringify('foo'));
   }
 
   forceLogout() {

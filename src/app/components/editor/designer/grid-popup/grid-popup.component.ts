@@ -6,12 +6,12 @@ import {
 import {
   TextureService,
   GridCreationService,
-} from '../../../../../services/';
+} from '../../../../services';
 
 @Component({
   selector: 'ia-grid-popup',
-  template: require('./grid-popup.component.html'),
-  styles: [require('./grid-popup.component.css')],
+  templateUrl : './grid-popup.component.html',
+  styleUrls: ['./grid-popup.component.css'],
   providers: [],
 })
 export class GridPopupComponent {

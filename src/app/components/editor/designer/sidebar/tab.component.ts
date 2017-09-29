@@ -1,9 +1,9 @@
 import {
   Component,
   Input,
-}                         from '@angular/core';
+} from '@angular/core';
 
-import { TabsComponent }  from './tabs.component';
+import { TabsComponent } from './tabs.component';
 
 @Component({
   selector  : 'ia-tab',

@@ -2,9 +2,9 @@ import {
   Component,
   OnDestroy,
   OnInit,
-}                         from '@angular/core';
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription }   from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import {
   ObjectService,
@@ -12,13 +12,13 @@ import {
   GameService,
   GameControllerService,
   TextureService,
-}                         from '../../../services';
+} from '../../services';
 
 @Component({
   selector  : 'ia-editor',
-  template  : require('./editor.component.html'),
-  styles    : [
-    require('./editor.component.css'),
+  templateUrl   : './editor.component.html',
+  styleUrls    : [
+    './editor.component.css',
   ],
   providers : [ GameService, SceneService, ObjectService, GameControllerService, TextureService ],
 })
@@ -35,20 +35,22 @@ export class EditorComponent implements OnDestroy, OnInit {
     private textureService: TextureService
     ) {
     this.gameController = gameControllerService.gameController;
-    //this.gameController.fillObjectsController();
+    // this.gameController.fillObjectsController();
   }
 
   public ngOnInit() {
     this.subscription = this.route.queryParams.subscribe(
       (queryParam: any) => {
-        if (queryParam.gameId !== undefined && queryParam.sceneId !== undefined)
+        if (queryParam.gameId !== undefined && queryParam.sceneId !== undefined) {
           this.initObjectsList(queryParam.gameId, queryParam.sceneId);
+        }
       }
     );
     this.gameController.subscribe('addObjectToService', (obj) => {
-      let pushObject = Object.keys(obj.datas).reduce((result, key) => {
-        if (key !== 'threeDModel' && key !== 'LinkModel')
+      const pushObject = Object.keys(obj.datas).reduce((result, key) => {
+        if (key !== 'threeDModel' && key !== 'LinkModel') {
           result[key] = obj.datas[key];
+      }
         return result;
       }, {});
       this.objectService.postSceneObject(pushObject, (id) => {

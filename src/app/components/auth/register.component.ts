@@ -5,7 +5,7 @@ import {
 import { Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
 
-import { AuthService } from '../../../services';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'ia-register',
@@ -18,7 +18,7 @@ import { AuthService } from '../../../services';
         <input type="text" id="name" required [(ngModel)]="username" name="name" #name="ngModel" >
       </div>
       <div [hidden]="name.valid || name.pristine" >Username is required</div>
-    
+
       <div>
         <label for="Email" >email</label>
         <input type="email" id="Email" required [(ngModel)]="email" name="Email" #Email="ngModel" >
@@ -30,7 +30,7 @@ import { AuthService } from '../../../services';
           <input type="password" id="Password" required [(ngModel)]="password" name="Password" #Password="ngModel" >
       </div>
       <div [hidden]="Password.valid || Password.pristine" >Password is required</div>
-    
+
       <div>
           <label for="Password_confirmation" >Password</label>
           <input type="password" id="Password_confirmation" required [(ngModel)]="confirmation_password" name="Password_confirmation" #Password_confirmation="ngModel" >

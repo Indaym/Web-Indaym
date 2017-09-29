@@ -14,15 +14,15 @@ import {
 }                         from 'three';
 import { FileUploader }   from 'ng2-file-upload';
 
-import { TextureService } from '../../../../../../services';
+import { TextureService } from '../../../../../services';
 import { serverConfig }   from '../../../../../../../config/server.conf';
 
 @Component({
   selector  : 'ia-right-sidebar',
-  template  : require('./right-sidebar.component.html'),
-  styles    : [
-    require('./right-sidebar.component.css'),
-    require('../sidebars.css'),
+  templateUrl   : './right-sidebar.component.html',
+  styleUrls    : [
+    './right-sidebar.component.css',
+    '../sidebars.css',
   ],
   providers : [],
 })

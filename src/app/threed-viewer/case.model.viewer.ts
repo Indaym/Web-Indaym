@@ -9,7 +9,7 @@ import {
 }                         from 'three';
 
 import { ModelViewer }    from './model.viewer';
-import { TextureService}  from '../../services';
+import { TextureService}  from '../services';
 
 export class CaseModelViewer extends ModelViewer {
   private _color;

@@ -13,7 +13,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
-const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
+// const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 
@@ -70,8 +70,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new ForkCheckerPlugin(),
-    new OccurenceOrderPlugin(true),
+    // new ForkCheckerPlugin(),
+    // new OccurenceOrderPlugin(true),
     new CommonsChunkPlugin({
       name: ['polyfills', 'vendor'].reverse()
     }),

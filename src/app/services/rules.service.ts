@@ -3,11 +3,12 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http }       from '@angular/http';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 import {
     RULES_DEF,
-}                       from '../app/rules';
+} from '../rules';
 
 /**
  * store all rules we have in the app
@@ -49,19 +50,19 @@ export class ObjectService {
   public getAllRules(callback) {
     this.http.get(this.ruleUrl)
       .map((res) => res.json())
-     .subscribe(callback);
+      .subscribe(callback);
   }
 
   public getObjectRules(callback) {
     this.http.get(this.initUrl)
-     .map((res) => res.json())
+      .map((res) => res.json())
       .subscribe(callback);
   }
 
   public postRuleToObject(obj) {
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectUrl, obj)
-     .map((res) => res.json())
-     .subscribe((data) => console.log(data));
+      .map((res) => res.json())
+      .subscribe((data) => console.log(data));
   }
 }

@@ -1,4 +1,4 @@
-import { Component }    from '@angular/core';
+import { Component } from '@angular/core';
 
 import { TabComponent } from './tab.component';
 
@@ -14,8 +14,8 @@ import { TabComponent } from './tab.component';
     </nav>
     <ng-content></ng-content>
   `,
-  styles    : [
-    require('./tabs.css'),
+  styleUrls    : [
+    './tabs.css',
   ],
   providers : [],
 })

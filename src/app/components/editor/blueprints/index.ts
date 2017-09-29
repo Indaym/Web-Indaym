@@ -3,9 +3,9 @@
  */
 
 import { BAR_COMPONENTS }       from './sidebar';
-import { BlueprintsComponent }  from './blueprints.component.ts';
+import { BlueprintsComponent }  from './blueprints.component';
 
-export { BlueprintsComponent }  from './blueprints.component.ts';
+export { BlueprintsComponent }  from './blueprints.component';
 
 export const BLUEPRINT_COMPONENTS = [
     BlueprintsComponent,

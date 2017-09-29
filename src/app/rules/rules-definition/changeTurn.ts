@@ -1,11 +1,12 @@
-
+import {
+  RULE_TYPE,
+  BaseRules
+} from '../baseRules';
 
 import {
-  BaseRules,
   SceneViewer,
   ModelViewer,
-  RULE_TYPE,
-}                 from '../';
+} from '../../threed-viewer';
 
 export class ChangeTurn extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {

@@ -13,10 +13,12 @@ import {
   EventDispatcher,
   Color,
   Mesh,
-}                     from 'three';
-import { BaseRules }  from '../rules';
+} from 'three';
+import { BaseRules } from '../rules';
 
-const OrbitControls = require('three-orbit-controls')(require('three'));
+import * as OControls from 'three-orbit-controls';
+import * as three from 'three';
+const OrbitControls = OControls(three);
 
 export class SceneViewer {
   protected _scene: Scene;
@@ -29,9 +31,9 @@ export class SceneViewer {
   protected _mouse: Vector2 = new Vector2(0, 0);
 
   protected _rules = {};
-  protected _player : number;
-  protected _grid : Array<Array<Mesh>>;
-  protected _capture : Array<number>;
+  protected _player: number;
+  protected _grid: Array<Array<Mesh>>;
+  protected _capture: Array<number>;
 
   /**
    * @param conf : JSON object
@@ -62,8 +64,8 @@ export class SceneViewer {
 
     // Initialisation Orbital Control
     this._controls = new OrbitControls(this._camera, this._renderer.domElement);
-    this._controls.constraint.enableDamping = true;
-    this._controls.constraint.dampingFactor = 1;
+    this._controls.enableDamping = true;
+    this._controls.dampingFactor = 1;
 
     // Creation of Raycaster
     this._raycaster = new Raycaster();

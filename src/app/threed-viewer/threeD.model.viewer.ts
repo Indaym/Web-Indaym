@@ -1,4 +1,5 @@
-const OBJLoader2 = require('threejsaddons');
+// const OBJLoader2 = require('threejsaddons');
+import { OBJLoader2 } from 'threejsaddons';
 
 export class ThreeDModelViewer {
   private objloader;
