@@ -5,7 +5,7 @@
 import { AppComponent }           from './app.component';
 import { ContactComponent }       from './contact';
 import { GamesListComponent }     from './gameslist';
-import { ScenesListComponent }     from './sceneslist';
+import { ScenesListComponent }    from './sceneslist';
 import { EDITOR_COMPONENTS }      from './editor';
 import { FORUM_COMPONENTS }       from './forum';
 import { HOME_COMPONENTS }        from './home';
@@ -19,6 +19,7 @@ import {
 }                                 from './auth';
 
 export { AppComponent }           from './app.component';
+export { SnackBarComponent }      from './editor';
 
 export const APP_COMPONENTS = [
   AppComponent,

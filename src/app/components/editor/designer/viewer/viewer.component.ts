@@ -8,8 +8,10 @@ import {
   OnDestroy,
   Input,
   HostListener,
-}                         from '@angular/core';
+}                             from '@angular/core';
+import { MdSnackBar }         from '@angular/material';
 
+// temporaire
 import {
   MeshBasicMaterial
 } from 'three';
@@ -18,14 +20,15 @@ import {
   EditorViewer,
   ModelsLoader,
   ArrowHelperViewer
-}                         from '../../../../threed-viewer';
+}                             from '../../../../threed-viewer';
 import {
   GameControllerService,
   ObjectService,
   TextureService,
   GridCreationService,
- }                        from '../../../../services';
-import { buttonsDefault } from '../../../../models';
+ }                            from '../../../../services';
+import { buttonsDefault }     from '../../../../models';
+import { SnackBarComponent }  from './snackBar';
 
 @Component({
   selector  : 'ia-viewer',
@@ -42,7 +45,13 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private gameController;
 
-  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService, private textureService: TextureService, private gridCreationService: GridCreationService) {
+  constructor(
+    private gameControllerService: GameControllerService,
+    private gridCreationService: GridCreationService,
+    private objectService: ObjectService,
+    private textureService: TextureService,
+    private mdSnackBar: MdSnackBar
+  ) {
     this.gameController = gameControllerService.gameController;
   }
 
@@ -120,22 +129,31 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   public deleteObject() {
     const selected = <any>this.scene.selected;
+
     if (selected !== undefined && selected.LinkModel !== undefined) {
+      const popup = {
+        data: {...selected.LinkModel, success: true },
+        duration: 3000
+      };
+
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();
         this.gameController.deleteObject(selected.LinkModel.uuid);
-
+        this.mdSnackBar.openFromComponent(SnackBarComponent, popup);
+      }, () => {
+        popup.data.success = false;
+        this.mdSnackBar.openFromComponent(SnackBarComponent, popup);
       });
     }
   }
 
   public addObject(args: any) {
-    if (args.mouseEvent != undefined) {
+    if (args.mouseEvent !== undefined) {
       this.scene.setIntersection(args.mouseEvent);
       const coord = this.scene.getIntersection();
       const name = args.dragData;
 
-      if (name != undefined && buttonsDefault[name] !== undefined) {
+      if (name !== undefined && buttonsDefault[name] !== undefined) {
         const model = Object.assign({}, buttonsDefault[name]);
         const cb = (datas) => {
           model.object.position = coord.toArray();

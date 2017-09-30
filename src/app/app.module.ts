@@ -15,6 +15,7 @@ import { routing }                  from './app.route';
 
 import {
   AppComponent,
+  SnackBarComponent,
   APP_COMPONENTS,
 }                                   from './components';
 
@@ -33,6 +34,9 @@ import { MaterialModule }           from '../materialModule';
     APP_COMPONENTS,
   ],
   bootstrap : [ AppComponent ],
+  entryComponents: [
+    SnackBarComponent
+  ],
   providers : [
     HtmlService,
     AuthGuard,

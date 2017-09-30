@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 
 import {
   MdSidenavModule,
-  MdRadioModule
+  MdRadioModule,
+  MdSnackBarModule,
 } from '@angular/material';
 
 const MODULE_LIST = [
   MdSidenavModule,
-  MdRadioModule
+  MdRadioModule,
+  MdSnackBarModule
 ];
 
 @NgModule({
