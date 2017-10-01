@@ -26,9 +26,10 @@ import {
   ObjectService,
   TextureService,
   GridCreationService,
+  SnackBarService,
  }                            from '../../../../services';
 import { buttonsDefault }     from '../../../../models';
-import { SnackBarComponent }  from './snackBar';
+import { SnackBarType }       from '../../../snackBar';
 
 @Component({
   selector  : 'ia-viewer',
@@ -50,7 +51,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     private gridCreationService: GridCreationService,
     private objectService: ObjectService,
     private textureService: TextureService,
-    private mdSnackBar: MdSnackBar
+    private snackBarService: SnackBarService
   ) {
     this.gameController = gameControllerService.gameController;
   }
@@ -131,18 +132,16 @@ export class ViewerComponent implements OnInit, OnDestroy {
     const selected = <any>this.scene.selected;
 
     if (selected !== undefined && selected.LinkModel !== undefined) {
-      const popup = {
-        data: {...selected.LinkModel, success: true },
-        duration: 3000
+      const config = {
+        data: {...selected.LinkModel, snackType: SnackBarType.SUCCESS }
       };
 
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();
         this.gameController.deleteObject(selected.LinkModel.uuid);
-        this.mdSnackBar.openFromComponent(SnackBarComponent, popup);
+        this.snackBarService.open(`Object <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong> has been deleted`, config);
       }, () => {
-        popup.data.success = false;
-        this.mdSnackBar.openFromComponent(SnackBarComponent, popup);
+        this.snackBarService.open(`Can't delete <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong>`, config, SnackBarType.ERROR);
       });
     }
   }

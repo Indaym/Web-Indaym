@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component }        from '@angular/core';
+import { Router }           from '@angular/router';
+
+import { SnackBarService }  from '../services';
 
 @Component({
   selector  : 'ia-app',
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls    : [
     './app.component.css',
   ],
-  providers : [],
+  providers : [SnackBarService],
 })
 export class AppComponent {
   constructor(private router: Router) {
@@ -23,6 +25,6 @@ export class AppComponent {
 
   forceLogout() {
     localStorage.removeItem('jwt');
-    this.router.navigate['/login'];
+    this.router.navigate(['/login']);
   }
 }

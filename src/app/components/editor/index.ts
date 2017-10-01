@@ -17,10 +17,7 @@ export { PreviewComponent }     from './preview';
 export { EditorComponent }      from './editor.component';
 export { GamesListComponent }   from '../gameslist/gameslist.component';
 export { ScenesListComponent }  from '../sceneslist/sceneslist.component';
-export {
-  DesignerComponent,
-  SnackBarComponent
-}                               from './designer';
+export { DesignerComponent }    from './designer';
 
 export const EDITOR_COMPONENTS = [
   GamesListComponent,

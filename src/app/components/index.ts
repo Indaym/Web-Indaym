@@ -17,9 +17,10 @@ import {
   LoginComponent,
   RegisterComponent
 }                                 from './auth';
+import { SnackBarComponent }      from './snackBar';
 
 export { AppComponent }           from './app.component';
-export { SnackBarComponent }      from './editor';
+export { SnackBarComponent }      from './snackBar';
 
 export const APP_COMPONENTS = [
   AppComponent,
@@ -35,4 +36,5 @@ export const APP_COMPONENTS = [
   RateGameComponent,
   LoginComponent,
   RegisterComponent,
+  SnackBarComponent,
 ];

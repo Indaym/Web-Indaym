@@ -1,0 +1,9 @@
+button {
+  margin-left: 10px;
+  color:white;
+}
+
+button:active, button:focus {
+  outline: 0;
+  border: none;
+}
