@@ -1,3 +1,17 @@
+:host {
+  position: relative;
+  top: -50px;
+  background: none;
+  pointer-events: none;
+  display: block;
+}
+
+nav {
+  max-height: 0px;
+  overflow: visible;
+  background: none;
+}
+
 h1 {
   text-align: center;
   font: italic bold 21px Georgia, serif;
@@ -15,8 +29,6 @@ ul {
   margin: auto;
   padding: 0;
   overflow: hidden;
-  background-color: #00cccc;
-
 }
 
 li a {
@@ -26,23 +38,28 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #00cccc;
+li {
+  background-color: #444;
+  pointer-events: all;
+  border-color: #e7e7e7
 }
 
-.active {
-  background-color:#00cccc;
+li a:hover:not(.active), .active {
+  color:black;
+  background-color: #555
 }
 
-#grey {
-  background-color: #555;
+.left, .left:hover, .left:active {
+  border-radius: 0 0 5px 0;
 }
 
-#goRight {
+.right, .right:hover, .right:active {
+  border-radius: 0 0 0 5px;
   float: right;
 }
 
 md-sidenav-container {
+  pointer-events: all;
   /*position: absolute;*/
   margin-top:-20px;
   top: 0;

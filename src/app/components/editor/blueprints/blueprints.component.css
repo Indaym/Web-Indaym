@@ -1,40 +1,51 @@
+:host {
+  position: relative;
+  top: -50px;
+  background: none;
+  pointer-events: none;
+  display: block;
+}
+
 h2 {
   text-align: center;
 }
 
 ul {
 	width: 100%;
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
-    background-color: #00cccc;
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
 }
 
 li a {
-    display: block;
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-li a:hover:not(.active) {
-    background-color: #00cccc;
+.left, .left:hover {
+  border-radius: 0 0 5px 0;
 }
 
-.active {
-background-color:#00cccc;
+li {
+  background-color: #444;
+  pointer-events: all;
+  border-color: #e7e7e7
 }
 
-#grey {
+li a:hover:not(.active), .active {
+  color: black;
   background-color: #555;
 }
 
-#goRight {
-  float: right;
+.back-event {
+  pointer-events: all;  
 }
 
 md-sidenav-container {
+  pointer-events: all;  
   /*position: absolute;*/
   top: 0;
   left: 0;
@@ -74,8 +85,8 @@ md-sidenav {
 }
 
 #rulesContainer {
-    min-height:150px;
-    min-width: 90%;
+  min-height:150px;
+  min-width: 90%;
 }
 
 #save {
