@@ -20,9 +20,7 @@ import { SnackBarType } from './enum.snack-bar';
 export class SnackBarComponent {
   SnackBarType = SnackBarType;
 
-  constructor(public snackBarRef: MatSnackBarRef<SnackBarComponent>, @Inject(MD_SNACK_BAR_DATA) public data: any) {
-    console.log(data);
-  }
+  constructor(public snackBarRef: MatSnackBarRef<SnackBarComponent>, @Inject(MD_SNACK_BAR_DATA) public data: any) {}
 
   public close() {
     this.snackBarRef.closeWithAction();

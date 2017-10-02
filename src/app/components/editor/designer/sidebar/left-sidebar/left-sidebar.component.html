@@ -1,4 +1,6 @@
-<span md-button (click)="start.close()" class="close-button glyphicon glyphicon-remove"></span>
+<div id="closeButton" class="close-button">
+    <span md-button (click)="start.close()" class="glyphicon glyphicon-remove"></span>    
+</div>
 
 <!-- <button md-button (click)="toggleMode()">Toggle</button>
 
@@ -68,9 +70,12 @@
   </ia-tab>
 
   <ia-tab tabTitle="Objects List">
-    <div *ngFor="let item of setIcons()">
-      <img *ngIf="item.icon" src={{item.icon}}>
-      {{item.name}}
-    </div>
+    <ul id="itemsList">
+      <li class="none-style" *ngFor="let item of itemsIcons" (click)="selectObject(item.uuid)">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <img *ngIf="item.icon" src="{{item.icon}}">
+        <span>{{item.name}}</span>
+      </li>      
+    </ul>
   </ia-tab>
 </ia-tabs>

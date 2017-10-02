@@ -41,6 +41,7 @@ li a {
 li {
   background-color: #444;
   pointer-events: all;
+  cursor: pointer;
   border-color: #e7e7e7
 }
 

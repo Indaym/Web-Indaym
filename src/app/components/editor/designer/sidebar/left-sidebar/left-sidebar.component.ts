@@ -26,6 +26,7 @@ import { buttonsDefault } from '../../../../../models';
 })
 export class LeftSidebarComponent implements OnInit {
   @Input() public start;
+  @Input() public eventDispatcher;
   public items = {
     boards: {
       'board': 'Add Board',
@@ -40,16 +41,21 @@ export class LeftSidebarComponent implements OnInit {
 
   private gameController;
   private objects;
-  private show;
+  private itemsIcons = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
-  constructor(public html: HtmlService, private gameControllerService: GameControllerService, private gridCreationService: GridCreationService) {
+  constructor(
+    public html: HtmlService,
+    private gameControllerService: GameControllerService,
+    private gridCreationService: GridCreationService
+  ) {
     this.gameController = this.gameControllerService.gameController;
   }
 
   public ngOnInit() {
     this.objects = this.gameController.getObjects();
-    this.show = this.setIcons();
+    this.gameController.subscribe('addObject', () => this.setIcons());
+    this.gameController.subscribe('addGroupObjects', () => this.setIcons());
   }
 
   public addObject(name: string) {
@@ -67,18 +73,28 @@ export class LeftSidebarComponent implements OnInit {
     }
   }
 
+  private selectObject(objectId) {
+    const object = this.gameController.getObjects().find((value) => {
+      return value.uuid === objectId;
+    });
+    this.eventDispatcher.dispatchEvent({
+      type: 'selectObject',
+      object: object.threeDModel.mesh
+    });
+  }
+
   private setIcons() {
     let obj;
-    let stock = [];
 
+    this.itemsIcons.splice(0, this.itemsIcons.length);
     this.objects = this.gameController.getObjects();
-    for (let elem of this.objects) {
-      obj = { name: elem.name };
+    for (const elem of this.objects) {
+      obj = { name: elem.name, uuid: elem.uuid };
       if (this.icons.indexOf(elem.name) >= 0)
         obj['icon'] = '/assets/icons/' + elem.name + '.png';
-      stock.push(obj);
+      this.itemsIcons.push(obj);
     }
-    return stock;
+    return this.itemsIcons;
   }
 
   private toggleMode() {

@@ -89,6 +89,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.eventDispatcher.addEventListener('selectObject', (e: any) => this.scene.selectObject(e.object));
     this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
     this.eventDispatcher.addEventListener('savePositions', (e: any) => this.savePositions());
 
@@ -133,13 +134,13 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
     if (selected !== undefined && selected.LinkModel !== undefined) {
       const config = {
-        data: {...selected.LinkModel, snackType: SnackBarType.SUCCESS }
+        data: { ...selected.LinkModel }
       };
 
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();
         this.gameController.deleteObject(selected.LinkModel.uuid);
-        this.snackBarService.open(`Object <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong> has been deleted`, config);
+        this.snackBarService.open(`Object <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong> has been deleted`, config, SnackBarType.SUCCESS);
       }, () => {
         this.snackBarService.open(`Can't delete <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong>`, config, SnackBarType.ERROR);
       });
