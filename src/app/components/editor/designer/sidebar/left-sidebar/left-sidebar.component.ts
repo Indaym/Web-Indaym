@@ -56,6 +56,8 @@ export class LeftSidebarComponent implements OnInit {
     this.objects = this.gameController.getObjects();
     this.gameController.subscribe('addObject', () => this.setIcons());
     this.gameController.subscribe('addGroupObjects', () => this.setIcons());
+    this.gameController.subscribe('deleteObject', () => this.setIcons());
+    this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
   }
 
   public addObject(name: string) {
