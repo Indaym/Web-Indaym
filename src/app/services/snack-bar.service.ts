@@ -3,8 +3,8 @@ import { MdSnackBar } from '@angular/material';
 
 import {
   SnackBarComponent,
-  SnackBarType
-} from '../components/snackBar';
+  SnackBarType,
+}                     from '../components/snackBar';
 
 @Injectable()
 export class SnackBarService {

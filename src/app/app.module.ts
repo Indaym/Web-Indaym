@@ -34,9 +34,7 @@ import { MaterialModule }           from '../materialModule';
     APP_COMPONENTS,
   ],
   bootstrap : [ AppComponent ],
-  entryComponents: [
-    SnackBarComponent
-  ],
+  entryComponents: [ SnackBarComponent ],
   providers : [
     HtmlService,
     AuthGuard,

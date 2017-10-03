@@ -81,7 +81,7 @@ export class LeftSidebarComponent implements OnInit {
     });
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
-      object: object.threeDModel.mesh
+      object: object.threeDModel.mesh,
     });
   }
 
