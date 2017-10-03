@@ -56,14 +56,12 @@ export class LeftBarComponent implements OnInit {
       .innerHTML = '<div>Rules currently applied to this item: </div><div id="previousRules"></div>';
     document.getElementById('rulesContainer').innerText = '';
     if (this.objs !== undefined && this.objs !== null) {
-      for (const obj of this.objs) // objets
-      {
+      for (const obj of this.objs) { // Objects
         if (obj.uuid === objId && obj.rules !== undefined && obj.rules !== null) { // selected obj
           const arr = Object.values(obj.rules);
 
           console.log(obj.rules); // test
-          for (const r of arr)
-          {
+          for (const r of arr) {
             // rules already on the selected object:
             /* if (r.name != "rule")
             { */

@@ -114,7 +114,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public deleteObject() {
-    const selected = (this as any).scene.selected;
+    const selected = (this.scene.selected as any);
     if (selected !== undefined && selected.LinkModel !== undefined) {
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();

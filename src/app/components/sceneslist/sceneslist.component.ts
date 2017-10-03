@@ -34,7 +34,7 @@ export class ScenesListComponent implements OnDestroy {
 
   constructor(public html: HtmlService, private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
     this.subscription = route.queryParams.subscribe(
-        (queryParam: any) => this.getScenesList(queryParam),
+      (queryParam: any) => this.getScenesList(queryParam),
     );
   }
 

@@ -24,7 +24,6 @@ const movement = 1;
   ],
   providers: [],
 })
-
 export class BlueprintsComponent {
   private dispatcher: EventDispatcher;
   private gameController;

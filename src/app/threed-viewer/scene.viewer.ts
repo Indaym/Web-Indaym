@@ -49,7 +49,7 @@ export class SceneViewer {
     if (conf.height !== undefined)
       this.height = conf.height;
 
-      // Initialisation Scene
+    // Initialisation Scene
     this._scene = new Scene();
     this._scene.background = new Color( 0xcccccc );
 
