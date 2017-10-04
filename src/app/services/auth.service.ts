@@ -9,21 +9,43 @@ import { DefaultService } from './default.service';
 
 @Injectable()
 export class AuthService extends DefaultService {
+  private _isLogin: boolean;
   private token: string;
   private authUrl: (string) => string;
 
   constructor(private http: Http) {
     super();
     this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
-    this.token = JSON.parse(localStorage.getItem('jwt')) || undefined;
+    this.token = this.extractToken();
+  }
+
+  private extractToken() {
+    const token = JSON.parse(localStorage.getItem('jwt'));
+    if (typeof token !== 'string')
+      return undefined;
+    return token;
+  }
+
+  isLogin() {
+    return this._isLogin;
+  }
+
+  setLogin(token: string) {
+    localStorage.setItem('jwt', token);
+    this._isLogin = true;
+    this.token = this.extractToken();
   }
 
   login(username: string, password: string, email: string, success?, error?) {
     return this.http.post(this.authUrl('login'), { 'username': username, 'password': password, 'email': email })
-      // .mergeMap((res: Response) => res.json())
-      // .subscribe(success, error);
       .map((res: Response) => res.json())
       .subscribe(success, error);
+  }
+
+  logout() {
+    this._isLogin = false;
+    this.token = null;
+    localStorage.removeItem('jwt');
   }
 
   register(username: string, password: string, email: string, success?, error?) {
@@ -32,10 +54,5 @@ export class AuthService extends DefaultService {
     return this.http.post(this.authUrl('register'), body)
       .map((res: Response) => res.json())
       .subscribe(success, error);
-  }
-
-  logout() {
-    this.token = null;
-    localStorage.removeItem('jwt');
   }
 }

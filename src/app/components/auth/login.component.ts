@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   email: string;
-  error = 'plop';
+  error: string;
 
   loginSuccess = (data) => {
-    localStorage.setItem('jwt', JSON.stringify(data.token || {}));
+    this.auth.setLogin(JSON.stringify(data.token || {}));
     this.router.navigate(['/home']);
   }
 
