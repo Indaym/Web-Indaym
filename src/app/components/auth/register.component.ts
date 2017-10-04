@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
   ) {}
 
+  success = false;
   hasError = false;
   pwdIsOk = true;
   error = '';
@@ -26,6 +27,17 @@ export class RegisterComponent implements OnInit {
   password: string;
   confirmation_password: string;
   email: string;
+
+  registerSuccess = (data) => {
+    this.success = true;
+    setTimeout(() => this.router.navigate(['/login']), 2000);
+  }
+
+  registerFailure = (err) => {
+    const body = err.json();
+    this.error = body.code;
+    this.hasError = true;
+  }
 
   ngOnInit() {
     this.auth.logout();
@@ -37,15 +49,7 @@ export class RegisterComponent implements OnInit {
       this.pwdIsOk = false;
       return;
     }
-    this.auth.register(this.username, this.password, this.email,
-      (res) => {  // nok
-        const body = JSON.parse(res._body);
-        this.error = body.code;
-        this.hasError = true;
-      },
-      (res) => {  // ok
-        console.log(res);
-        this.router.navigate(['/login']);
-      });
+
+    this.auth.register(this.username, this.password, this.email, this.registerSuccess, this.registerFailure);
   }
 }

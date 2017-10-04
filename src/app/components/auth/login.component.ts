@@ -23,20 +23,24 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   email: string;
-  error = '';
+  error = 'plop';
+
+  loginSuccess = (data) => {
+    localStorage.setItem('jwt', JSON.stringify(data.token || {}));
+    this.router.navigate(['/home']);
+  }
+
+  loginFailure = (err) => {
+    const data = err.json();
+    this.error = data.code;
+    this.hasError = true;
+  }
 
   ngOnInit() {
     this.auth.logout();
   }
 
   login() {
-    this.hasError = true;
-    this.auth.login(this.username, this.password, this.email,
-      (res) => this.error = res.statusText,
-      (res) => {
-        const data = JSON.parse(res);
-        localStorage.setItem('jwt', data.token);
-        this.router.navigate(['/home']);
-    });
+    this.auth.login(this.username, this.password, this.email, this.loginSuccess, this.loginFailure);
   }
 }

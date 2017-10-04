@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 
 import { DefaultService } from './default.service';
 
@@ -17,17 +18,19 @@ export class AuthService extends DefaultService {
     this.token = JSON.parse(localStorage.getItem('jwt')) || undefined;
   }
 
-  login(username: string, password: string, email: string, error?, success?) {
+  login(username: string, password: string, email: string, success?, error?) {
     return this.http.post(this.authUrl('login'), { 'username': username, 'password': password, 'email': email })
-      .mergeMap((res) => res.json())
+      // .mergeMap((res: Response) => res.json())
+      // .subscribe(success, error);
+      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
-  register(username: string, password: string, email: string, error?, success?) {
+  register(username: string, password: string, email: string, success?, error?) {
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)
-      .mergeMap((res) => res.json())
+      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
