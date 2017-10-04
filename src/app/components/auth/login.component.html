@@ -1,44 +1,26 @@
-<!-- <div>
-  <form name="login" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate >
-    <div [ngClass]="{ 'has-error': f.submitted && !username.valid }" >
-      <label for="username">Username</label>
-      <input type="text" name="username" [(ngModel)]="username" #username="ngModel" required >
-      <div *ngIf="f.submitted && !username.valid">Username is required</div>
+<div *ngIf="!hasError">
+  <form #loginForm="ngForm" (ngSubmit)="login()" >
+    <div>
+      <label for="name" >Username</label>
+      <input type="text" id="name" required [(ngModel)]="username" name="name" #name="ngModel" >
     </div>
-    <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Password</label>
-      <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" >Password is required</div>
-  </div>
-  <div *ngIf="loading">
-    loading
-  </div>
-  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div [hidden]="name.valid || name.pristine" >Username is required</div>
+
+    <div>
+      <label for="Email" >email</label>
+      <input type="email" id="Email" required [(ngModel)]="email" name="Email" #Email="ngModel" >
+    </div>
+    <div [hidden]="Email.valid || Email.pristine" >Email is required</div>
+
+    <div>
+      <label for="Passwod" >Password</label>
+      <input type="password" id="Passwod" required [(ngModel)]="password" name="Passwod" #Passwod="ngModel" >
+    </div>
+    <div [hidden]="Passwod.valid || Passwod.pristine" >Password is required</div>
+
+    <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
   </form>
-</div> -->
-<div>
-  <form (ngSubmit)="login()" #loginForm="ngForm" >
-    <div class="form-group" >
-      <label for="username">Username</label>
-      <input [(ngModel)]="username" type="text" id="username" required>
-    </div>
-    <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
-      Name is required
-    </div>
-    <div class="form-group" >
-      <label for="Email">email</label>
-      <input [(ngModel)]="email" type="email" id="email" required>
-    </div>
-    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-      Email is required
-    </div>
-    <div class="form-group" >
-      <label for="password">Password</label>
-      <input [(ngModel)]="password" type="password" id="password" required>
-    </div>
-    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-      Password is required
-    </div>
-    <button type="submit" [disabled]="!loginForm.form.valid" >Login</button>
-  </form>
+</div>
+<div *ngIf="hasError" >
+  {{error}}
 </div>
