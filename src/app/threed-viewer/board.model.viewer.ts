@@ -18,7 +18,7 @@ export class BoardModelViewer extends ModelViewer {
     'side.png', 'side.png',
   ];
 
-  constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
+  constructor(conf, protected textureService: TextureService, editorMode = false) {
     super(conf, textureService, editorMode);
   }
 

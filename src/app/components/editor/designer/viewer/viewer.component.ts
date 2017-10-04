@@ -10,13 +10,13 @@ import {
 }                         from '@angular/core';
 
 import {
-  MeshBasicMaterial
+  MeshBasicMaterial,
 } from 'three';
 
 import {
   EditorViewer,
   ModelsLoader,
-  ArrowHelperViewer
+  ArrowHelperViewer,
 }                         from '../../../../threed-viewer';
 import {
   GameControllerService,
@@ -41,7 +41,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private gameController;
 
-  constructor(private gameControllerService: GameControllerService, private objectService: ObjectService, private textureService: TextureService, private gridCreationService: GridCreationService) {
+  constructor(
+    private gameControllerService: GameControllerService,
+    private objectService: ObjectService,
+    private textureService: TextureService,
+    private gridCreationService: GridCreationService,
+  ) {
     this.gameController = gameControllerService.gameController;
   }
 
@@ -109,7 +114,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public deleteObject() {
-    const selected = <any>this.scene.selected;
+    const selected = (this.scene.selected as any);
     if (selected !== undefined && selected.LinkModel !== undefined) {
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();
@@ -120,12 +125,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public addObject(args: any) {
-    if (args.mouseEvent != undefined) {
+    if (args.mouseEvent !== undefined) {
       this.scene.setIntersection(args.mouseEvent);
       const coord = this.scene.getIntersection();
       const name = args.dragData;
 
-      if (name != undefined && buttonsDefault[name] !== undefined) {
+      if (name !== undefined && buttonsDefault[name] !== undefined) {
         const model = Object.assign({}, buttonsDefault[name]);
         const cb = (datas) => {
           model.object.position = coord.toArray();

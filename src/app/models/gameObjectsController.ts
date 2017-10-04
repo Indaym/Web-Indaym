@@ -52,10 +52,10 @@ export class GameObjectsController {
    * @param type : Type of the event to emit
    * @param datas : Data to emit
    */
-  public emit(type, datas, success?: Function, error?: Function) {
+  public emit(type, datas, success?: (any) => void, error?: (any) => void) {
     const obj = {
-      type: type,
-      datas: datas,
+      type,
+      datas,
     };
     if (success)
       obj['success'] = success;
@@ -134,7 +134,7 @@ export class GameObjectsController {
    */
   public selectScene(sceneId) {
     if (this.scenes !== undefined) {
-      let scene = this.scenes.find((value) => {
+      const scene = this.scenes.find((value) => {
         return value.uuid === sceneId;
       });
       if (scene !== undefined) {
@@ -158,7 +158,7 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public addObject(obj, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
+  public addObject(obj, emit = true, typeEvent = 'ToView', success?: (any) => void, error?: (any) => void) {
     if (obj === undefined || obj === null)
       return;
     if (this.currentObjects === undefined || this.currentObjects === null)
@@ -185,7 +185,7 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public addGroupObjects(objs, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
+  public addGroupObjects(objs, emit = true, typeEvent = 'ToView', success?: (any) => void, error?: (any) => void) {
     this.currentObjects = [ ...this.currentObjects, ...objs];
     if (emit === true) {
       if (typeEvent === 'ToView' || typeEvent === 'Both')
@@ -209,13 +209,13 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public deleteObject(objectId, emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
+  public deleteObject(objectId, emit = true, typeEvent = 'ToView', success?: () => void, error?: () => void) {
     if (this.currentObjects !== undefined) {
-      let objIndex = this.currentObjects.findIndex((value) => {
+      const objIndex = this.currentObjects.findIndex((value) => {
         return value.uuid === objectId;
       });
       if (objIndex !== -1) {
-        let removed = this.currentObjects.splice(objIndex, 1);
+        const removed = this.currentObjects.splice(objIndex, 1);
         if (emit === true) {
           if (typeEvent === 'ToView' || typeEvent === 'Both')
             this.emit('deleteObject', removed[0], success, error);
@@ -231,9 +231,9 @@ export class GameObjectsController {
    * @param emit : Choose if it must throw an event
    * @param typeEvent : Select if Event must be for view, for service or both
    */
-  public deleteAllObjects(emit = true, typeEvent = 'ToView', success?: Function, error?: Function) {
+  public deleteAllObjects(emit = true, typeEvent = 'ToView', success?: () => void, error?: () => void) {
     if (this.currentObjects !== undefined) {
-      let objects = this.currentObjects;
+      const objects = this.currentObjects;
       this.currentObjects = [];
       if (emit === true) {
         if (typeEvent === 'ToView' || typeEvent === 'Both')

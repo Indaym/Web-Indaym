@@ -33,36 +33,36 @@ export class RulesServices {
   }
 }
 
-@Injectable()
-export class ObjectService {
-  private initUrl = 'http://localhost:3000/games';
-  private ruleUrl = 'http://localhost:3000/rules';
-  private objectUrl = '';
+// @Injectable()
+// export class ObjectService {
+//   private initUrl = 'http://localhost:3000/games';
+//   private ruleUrl = 'http://localhost:3000/rules';
+//   private objectUrl = '';
 
-  constructor(private http: Http) {
-    this.objectUrl = this.initUrl;
-  }
+//   constructor(private http: Http) {
+//     this.objectUrl = this.initUrl;
+//   }
 
-  public setIds(gameId, sceneId, objId) {
-    this.objectUrl = this.initUrl + '/' + gameId + '/scenes/' + sceneId + '/objects/' + objId;
-  }
+//   public setIds(gameId, sceneId, objId) {
+//     this.objectUrl = this.initUrl + '/' + gameId + '/scenes/' + sceneId + '/objects/' + objId;
+//   }
 
-  public getAllRules(callback) {
-    this.http.get(this.ruleUrl)
-      .map((res) => res.json())
-      .subscribe(callback);
-  }
+//   public getAllRules(callback) {
+//     this.http.get(this.ruleUrl)
+//       .map((res) => res.json())
+//       .subscribe(callback);
+//   }
 
-  public getObjectRules(callback) {
-    this.http.get(this.initUrl)
-      .map((res) => res.json())
-      .subscribe(callback);
-  }
+//   public getObjectRules(callback) {
+//     this.http.get(this.initUrl)
+//       .map((res) => res.json())
+//       .subscribe(callback);
+//   }
 
-  public postRuleToObject(obj) {
-    obj.object = JSON.stringify(obj.object);
-    this.http.post(this.objectUrl, obj)
-      .map((res) => res.json())
-      .subscribe((data) => console.log(data));
-  }
-}
+//   public postRuleToObject(obj) {
+//     obj.object = JSON.stringify(obj.object);
+//     this.http.post(this.objectUrl, obj)
+//       .map((res) => res.json())
+//       .subscribe((data) => console.log(data));
+//   }
+// }

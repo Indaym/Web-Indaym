@@ -12,7 +12,7 @@
  */
 import {
   RULE_TYPE,
-  BaseRules
+  BaseRules,
 } from '../baseRules';
 
 import {

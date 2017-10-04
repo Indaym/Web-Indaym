@@ -33,7 +33,7 @@ export class ModelViewer {
    *   material: THREE.Material
    * }
    */
-  constructor(conf: any = {}, protected textureService: TextureService, editorMode: Boolean = false) {
+  constructor(conf: any = {}, protected textureService: TextureService, editorMode = false) {
     if (conf.position instanceof Array)
       this._position.copy(new Vector3().fromArray(conf.position));
     if (conf.dimension instanceof Array)
@@ -72,7 +72,7 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   get dimension(): Vector3 {
-    if (this.mesh != undefined)
+    if (this.mesh !== undefined)
       this._dimension.copy(this.mesh.scale);
     return this._dimension;
   }
@@ -83,7 +83,7 @@ export class ModelViewer {
    */
   set dimension(value: Vector3) {
     this._dimension.copy(value);
-    if (this.mesh != undefined)
+    if (this.mesh !== undefined)
       this.mesh.scale.copy(this._dimension);
   }
 
@@ -92,7 +92,7 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   get rotation(): Euler {
-    if (this.mesh != undefined)
+    if (this.mesh !== undefined)
       this._rotation.copy(this.mesh.rotation);
     return this._rotation;
   }
@@ -129,7 +129,7 @@ export class ModelViewer {
   set texture(texture) {
     this._material = new MeshBasicMaterial({ map: new TextureLoader().load(texture), side: DoubleSide, transparent: true, opacity: 1 });
     this._material.needsUpdate = true;
-    if (this.mesh != undefined)
+    if (this.mesh !== undefined)
       this.mesh.material = this._material;
   }
 
@@ -176,7 +176,7 @@ export class ModelViewer {
    * @returns {Vector3}
    */
   public dropPosition(obj) {
-    let pos = new Vector3();
+    const pos = new Vector3();
     pos.setFromMatrixPosition(this.mesh.matrixWorld);
     pos.y += this.mesh.scale.y / 2;
     if (obj !== undefined)
@@ -189,7 +189,7 @@ export class ModelViewer {
    * @returns {any} : Mesh
    */
   public generateMesh() {
-    if (this._geometry == undefined)
+    if (this._geometry === undefined)
       return null;
     if (this._material === undefined)
       this._material = new MeshBasicMaterial({ color: 0xffffff, side: DoubleSide, transparent: true, opacity: 1 });

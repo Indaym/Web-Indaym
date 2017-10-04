@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MdSidenavModule
+  MdSidenavModule,
 } from '@angular/material';
 
 const MODULE_LIST = [
-  MdSidenavModule
+  MdSidenavModule,
 ];
 
 @NgModule({
   imports: [ MODULE_LIST ],
-  exports: [ MODULE_LIST ]
+  exports: [ MODULE_LIST ],
 })
 export class MaterialModule {}

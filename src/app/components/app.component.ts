@@ -23,6 +23,6 @@ export class AppComponent {
 
   forceLogout() {
     localStorage.removeItem('jwt');
-    this.router.navigate['/login'];
+    this.router.navigate(['/login']);
   }
 }

@@ -26,7 +26,7 @@ export class PlayerViewer extends SceneViewer {
     this._controls.enableKeys = false;
     this._intersectPlane = new Mesh(
       new PlaneBufferGeometry(500, 500, 8, 8),
-      new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false})
+      new MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0, depthWrite: false}),
     );
     this._scene.add(this._intersectPlane);
     if (rulesInterface)
@@ -63,8 +63,8 @@ export class PlayerViewer extends SceneViewer {
     this._selected = {
       object: obj,
     };
-    let outlineMaterial1 = new MeshBasicMaterial( { color: 0xff0000, side: BackSide } );
-    this._selected.glow = new Mesh(<Geometry>obj.geometry, outlineMaterial1);
+    const outlineMaterial1 = new MeshBasicMaterial( { color: 0xff0000, side: BackSide } );
+    this._selected.glow = new Mesh(obj.geometry as Geometry, outlineMaterial1);
     this._selected.glow.position.copy(obj.position);
     this._selected.glow.scale.copy(obj.scale);
     this._selected.glow.scale.addScalar(0.5);
@@ -100,7 +100,7 @@ export class PlayerViewer extends SceneViewer {
    * @returns {boolean}
    */
   public isDraggable(obj) {
-    let linkModel = (obj.object as any).LinkModel;
+    const linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
       return false;
     return (linkModel.object.draggable === true);
@@ -112,7 +112,7 @@ export class PlayerViewer extends SceneViewer {
    * @returns {boolean}
    */
   public isDroppable(obj) {
-    let linkModel = (obj.object as any).LinkModel;
+    const linkModel = (obj.object as any).LinkModel;
     if (linkModel === undefined)
       return false;
     return (linkModel.object.droppable === true);
@@ -129,7 +129,7 @@ export class PlayerViewer extends SceneViewer {
       if (ignoreSelect === true)
         if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
-      let linkModel = (val.object as any).LinkModel;
+      const linkModel = (val.object as any).LinkModel;
       return (linkModel !== undefined && (linkModel.object.draggable === true || linkModel.object.droppable === true));
     });
   }
@@ -145,7 +145,7 @@ export class PlayerViewer extends SceneViewer {
       if (ignoreSelect === true)
         if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
-      let linkModel = (val.object as any).LinkModel;
+      const linkModel = (val.object as any).LinkModel;
       return (linkModel !== undefined && linkModel.object.draggable === true);
     });
   }
@@ -161,7 +161,7 @@ export class PlayerViewer extends SceneViewer {
       if (ignoreSelect === true)
         if (this._selected !== undefined && (this._selected.object === val.object || this._selected.glow === val.object))
           return false;
-      let linkModel = (val.object as any).LinkModel;
+      const linkModel = (val.object as any).LinkModel;
       return (linkModel !== undefined && linkModel.object.droppable === true);
     });
   }
@@ -171,7 +171,10 @@ export class PlayerViewer extends SceneViewer {
    * @param drop : Droppable object
    */
   public moveToDroppable(drop) {
-    if (drop === undefined || drop.object === undefined || drop.object.LinkModel === undefined || drop.object.LinkModel.object.droppable === false)
+    if (drop === undefined
+        || drop.object === undefined
+        || drop.object.LinkModel === undefined
+        || drop.object.LinkModel.object.droppable === false)
       return;
     this._selected.object.position.copy(drop.object.LinkModel.threeDModel.dropPosition(this._selected.object));
     this._selected.glow.position.copy(this._selected.object.position);
@@ -185,17 +188,17 @@ export class PlayerViewer extends SceneViewer {
   public onMouseDown(event) {
     // TODO: add call rule here ?
     if (event.button === 0) {
-      let intersected = this.intersectObjects(event);
+      const intersected = this.intersectObjects(event);
 
       if (intersected.length > 0) {
         if (this.getFirstDraggable(intersected, false) !== undefined)
           this._controls.enableRotate = false;
         if (!this.hasSelection()) {
-          let obj = this.getFirstDraggable(intersected);
+          const obj = this.getFirstDraggable(intersected);
           if (obj !== undefined)
             this.selectObject(obj.object);
         } else {
-          let obj = this.getFirstDragOrDrop(intersected);
+          const obj = this.getFirstDragOrDrop(intersected);
           if (obj === undefined) {
             this.unselectObject();
           } else {
@@ -234,7 +237,7 @@ export class PlayerViewer extends SceneViewer {
    * @param event : MouseEvent
    */
   public onMouseMove(event) {
-    let drop = this.getFirstDroppable(this.intersectObjects(event));
+    const drop = this.getFirstDroppable(this.intersectObjects(event));
 
     if (drop !== undefined) {
       if (drop.object.LinkModel !== undefined && drop.object.LinkModel !== this._hovered) {
@@ -248,7 +251,7 @@ export class PlayerViewer extends SceneViewer {
         this._hovered.hover(false);
     }
     if (event.buttons === 1 && this.hasSelection()) {
-      let intersected = this.intersectObjects(event, [this._intersectPlane]);
+      const intersected = this.intersectObjects(event, [this._intersectPlane]);
       if (intersected.length > 0) {
         this._intersectPlane.position.copy(intersected[0].point);
         this._intersectPlane.lookAt(this._camera.position);
@@ -265,8 +268,8 @@ export class PlayerViewer extends SceneViewer {
   public onMouseUp(event) {
     // TODO: add call rule here ?
     if (event.button === 0 && this._selected !== undefined && this._selected.object !== undefined) {
-      let intersected = this.intersectObjects(event);
-      let drop = this.getFirstDroppable(intersected);
+      const intersected = this.intersectObjects(event);
+      const drop = this.getFirstDroppable(intersected);
       if (drop === undefined) {
         this._selected.object.position.copy(this._selected.oldPosition);
         this._selected.glow.position.copy(this._selected.oldPosition);
@@ -297,11 +300,11 @@ export class PlayerViewer extends SceneViewer {
   }
 
   private execAllRules(args?: any): boolean {
-    let linkModel = (this._selected.object as any).LinkModel;
+    const linkModel = (this._selected.object as any).LinkModel;
     if (linkModel === undefined || linkModel.rules ===  undefined)
       return true;
 
-    for (let rule in linkModel.rules) {
+    for (const rule in linkModel.rules) {
       if (linkModel.rules[rule].run(args) === false)
         return false;
     }

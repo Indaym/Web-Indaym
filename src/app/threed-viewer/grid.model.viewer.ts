@@ -15,7 +15,7 @@ export class GridModelViewer extends CaseModelViewer {
   private cases = [];
   private objs = [];
 
-  constructor(protected conf, protected textureService: TextureService, private editorMode: Boolean = false) {
+  constructor(protected conf, protected textureService: TextureService, private editorMode = false) {
     super(conf, textureService, editorMode);
   }
 
@@ -52,7 +52,7 @@ export class GridModelViewer extends CaseModelViewer {
   }
 
   private initialize(cb) {
-    let config = Object.assign({}, {
+    const config = Object.assign({}, {
       caseX: 3,
       caseY: 3,
       caseWidth: 5,
@@ -71,7 +71,7 @@ export class GridModelViewer extends CaseModelViewer {
       for (let x = 0; x < config.caseX; x++) {
         this.cases[x] = [];
         for (let y = 0; y < config.caseY; y++) {
-          let object = {
+          const object = {
             dimension: [config.caseWidth, config.caseHeight, 1],
             position: [
               topPos[0] + x * (config.caseWidth + config.gap) + config.gap + (config.caseWidth / 2),
@@ -88,7 +88,7 @@ export class GridModelViewer extends CaseModelViewer {
           this.cases[x][y].init((mesh) => {
             mesh.LinkModel = {
               threeDModel: this.cases[x][y],
-              object: object,
+              object,
             };
             mesh.rotation.x = 0;
             this.objs.push(mesh);

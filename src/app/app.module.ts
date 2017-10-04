@@ -23,7 +23,7 @@ import { HtmlService }              from './services/html.service';
 
 import {
   DragulaModule,
-  DragulaService
+  DragulaService,
 }                                   from 'ng2-dragula/ng2-dragula';
 
 import { MaterialModule }           from '../materialModule';
