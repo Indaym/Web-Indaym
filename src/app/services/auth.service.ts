@@ -37,16 +37,32 @@ export class AuthService extends DefaultService {
     this.token = this.extractToken();
   }
 
+  reset(): void {
+    this._isLogin = false;
+    this.token = null;
+    localStorage.removeItem('jwt');
+  }
+
   login(username: string, password: string, email: string, success?, error?) {
-    return this.http.post(this.authUrl('login'), { 'username': username, 'password': password, 'email': email })
+    const body = { 'username': username, 'password': password, 'email': email };
+    return this.http.post(this.authUrl('login'), body)
       .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
   logout() {
+    const body = { 'data': { 'jwt': this.token } };
+
+    // TODO: move into the promise
     this._isLogin = false;
     this.token = null;
     localStorage.removeItem('jwt');
+
+    return this.http.post(this.authUrl('logout'), body)
+      .subscribe(
+        (data) => console.log(`ok: ${data}`),
+        (err) => console.log(`nok ${err}`),
+      );
   }
 
   register(username: string, password: string, email: string, success?, error?) {

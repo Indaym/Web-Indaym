@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.logout();
+    this.auth.reset();
   }
 
   register() {
