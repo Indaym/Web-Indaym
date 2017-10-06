@@ -13,25 +13,21 @@ import { LegalMentionsComponent } from './legal-mentions';
 import { PlayComponent }          from './play';
 import { StoreComponent }         from './store';
 import { RateGameComponent }      from './rategame';
-import {
-  LoginComponent,
-  RegisterComponent,
-}                                 from './auth';
+import { AUTH_COMPONENTS }        from './auth';
 
 export { AppComponent }           from './app.component';
 
 export const APP_COMPONENTS = [
+  EDITOR_COMPONENTS,
+  FORUM_COMPONENTS,
+  HOME_COMPONENTS,
+  AUTH_COMPONENTS,
   AppComponent,
   ContactComponent,
   GamesListComponent,
   ScenesListComponent,
-  EDITOR_COMPONENTS,
-  FORUM_COMPONENTS,
-  HOME_COMPONENTS,
   LegalMentionsComponent,
   PlayComponent,
   StoreComponent,
   RateGameComponent,
-  LoginComponent,
-  RegisterComponent,
 ];

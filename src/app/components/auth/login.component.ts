@@ -1,15 +1,18 @@
 import {
   Component,
   OnInit,
-} from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, Headers, Response } from '@angular/http';
+}                       from '@angular/core';
+import { Router }       from '@angular/router';
+import {
+  Http,
+  Headers,
+  Response,
+}                       from '@angular/http';
 
-import { AuthService } from '../../services';
+import { AuthService }  from '../../services';
 
 @Component({
   selector: 'ia-login',
-  providers: [ AuthService ],
   templateUrl: './login.component.html',
   styleUrls: [],
 })
@@ -25,12 +28,12 @@ export class LoginComponent implements OnInit {
   email: string;
   error: string;
 
-  loginSuccess = (data) => {
+  private loginSuccess = (data) => {
     this.auth.setLogin(JSON.stringify(data.token || {}));
     this.router.navigate(['/home']);
   }
 
-  loginFailure = (err) => {
+  private loginFailure = (err) => {
     const data = err.json();
     this.error = data.code;
     this.hasError = true;

@@ -1,0 +1,7 @@
+<div *ngIf="!isLoged" >
+  <li><a [routerLink]="['/login']" >Login</a></li>
+  <li><a [routerLink]="['/register']" >Register</a></li>
+</div>
+<div *ngIf="isLoged" >
+  <li><button (click)="logout()" >Logout</button></li>
+</div>

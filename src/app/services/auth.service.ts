@@ -17,6 +17,7 @@ export class AuthService extends DefaultService {
     super();
     this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
     this.token = this.extractToken();
+    this._isLogin = this.token ? true : false;
   }
 
   private extractToken() {

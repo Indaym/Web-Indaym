@@ -20,6 +20,7 @@ import {
 
 import { AuthGuard }                from './guards';
 import { HtmlService }              from './services/html.service';
+import { AuthService }              from './services/auth.service';
 
 import {
   DragulaModule,
@@ -36,6 +37,7 @@ import { MaterialModule }           from '../materialModule';
   providers : [
     HtmlService,
     AuthGuard,
+    AuthService,
   ],
   imports   : [
     MaterialModule,
