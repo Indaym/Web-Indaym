@@ -7,9 +7,20 @@ import { BrowserModule }            from '@angular/platform-browser';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
 import { FormsModule }              from '@angular/forms';
 import { DndModule }                from 'ng2-dnd';
-import { HttpModule }               from '@angular/http';
+import {
+  HttpModule,
+  Http,
+  XHRBackend,
+  RequestOptions,
+}               from '@angular/http';
 import { FileUploadModule }         from 'ng2-file-upload';
 import { ModalModule }              from 'ng2-modal';
+import {
+  DragulaModule,
+  DragulaService,
+}                                   from 'ng2-dragula/ng2-dragula';
+
+import { MaterialModule }           from '../materialModule';
 
 import { routing }                  from './app.route';
 
@@ -21,13 +32,17 @@ import {
 import { AuthGuard }                from './guards';
 import { HtmlService }              from './services/html.service';
 import { AuthService }              from './services/auth.service';
+import { getHttpAuth }              from './interceptors';
 
-import {
-  DragulaModule,
-  DragulaService,
-}                                   from 'ng2-dragula/ng2-dragula';
-
-import { MaterialModule }           from '../materialModule';
+const interceptor = {
+  provide: Http,
+  useFactory: getHttpAuth,
+  deps: [
+    XHRBackend,
+    RequestOptions,
+    AuthService,
+  ],
+};
 
 @NgModule({
   declarations: [
@@ -38,6 +53,7 @@ import { MaterialModule }           from '../materialModule';
     HtmlService,
     AuthGuard,
     AuthService,
+    interceptor,
   ],
   imports   : [
     MaterialModule,
