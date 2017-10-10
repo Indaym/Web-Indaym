@@ -14,27 +14,6 @@ button {
   color: black;
 }
 
-.none-style {
-  list-style: none;
-}
-
-#itemsList li {
-  margin: 5px 0;
-}
-
-#itemsList li:hover .glyphicon {
-  display:inline;
-}
-
-#itemsList li .glyphicon {
-  display:none;
-}
-
-#itemsList li:hover {
-  cursor: pointer;
-  color: white;
-}
-
 #closeButton {
   position: absolute;
   right: 5px;

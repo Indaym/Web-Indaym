@@ -40,9 +40,6 @@ export class LeftSidebarComponent implements OnInit {
   };
 
   private gameController;
-  private objects;
-  private itemsIcons = [];
-  private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
   constructor(
     public html: HtmlService,
@@ -52,13 +49,7 @@ export class LeftSidebarComponent implements OnInit {
     this.gameController = this.gameControllerService.gameController;
   }
 
-  public ngOnInit() {
-    this.objects = this.gameController.getObjects();
-    this.gameController.subscribe('addObject', () => this.setIcons());
-    this.gameController.subscribe('addGroupObjects', () => this.setIcons());
-    this.gameController.subscribe('deleteObject', () => this.setIcons());
-    this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
-  }
+  public ngOnInit() {}
 
   public addObject(name: string) {
     if (name !== undefined && buttonsDefault[name] !== undefined) {
@@ -73,30 +64,6 @@ export class LeftSidebarComponent implements OnInit {
       else
         cb({});
     }
-  }
-
-  private selectObject(objectId) {
-    const object = this.gameController.getObjects().find((value) => {
-      return value.uuid === objectId;
-    });
-    this.eventDispatcher.dispatchEvent({
-      type: 'selectObject',
-      object: object.threeDModel.mesh,
-    });
-  }
-
-  private setIcons() {
-    let obj;
-
-    this.itemsIcons.splice(0, this.itemsIcons.length);
-    this.objects = this.gameController.getObjects();
-    for (const elem of this.objects) {
-      obj = { name: elem.name, uuid: elem.uuid };
-      if (this.icons.indexOf(elem.name) >= 0)
-        obj['icon'] = '/assets/icons/' + elem.name + '.png';
-      this.itemsIcons.push(obj);
-    }
-    return this.itemsIcons;
   }
 
   private toggleMode() {

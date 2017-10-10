@@ -70,12 +70,6 @@
   </ia-tab>
 
   <ia-tab tabTitle="Objects List">
-    <ul id="itemsList">
-      <li class="none-style" *ngFor="let item of itemsIcons" (click)="selectObject(item.uuid)">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <img *ngIf="item.icon" src="{{item.icon}}">
-        <span>{{item.name}}</span>
-      </li>      
-    </ul>
+    <ia-object-list [eventDispatcher]="eventDispatcher"></ia-object-list>
   </ia-tab>
 </ia-tabs>

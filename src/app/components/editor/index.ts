@@ -11,6 +11,7 @@ import { DESIGNER_COMPONENTS }  from './designer';
 
 import { BLUEPRINT_COMPONENTS } from './blueprints';
 import { PreviewComponent }     from './preview';
+import { ObjectListComponent }  from './object-list';
 
 export { BlueprintsComponent }  from './blueprints';
 export { PreviewComponent }     from './preview';
@@ -25,6 +26,7 @@ export const EDITOR_COMPONENTS = [
   EditorComponent,
   BlueprintsComponent,
   PreviewComponent,
+  ObjectListComponent,
   DESIGNER_COMPONENTS,
   BLUEPRINT_COMPONENTS,
 ];
