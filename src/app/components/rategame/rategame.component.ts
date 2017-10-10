@@ -22,7 +22,7 @@ export class RateGameComponent {
 
     constructor(private games: GameService, private route: ActivatedRoute) {
         this.subscription = route.queryParams.subscribe(
-            (queryParam: any) => this.initGame(queryParam)
+            (queryParam: any) => this.initGame(queryParam),
         );
     }
 
@@ -61,12 +61,12 @@ export class RateGameComponent {
       // sends Comment ( message + ratings ) to db
       this.newComment = new Comment(this.newComment.message, this.newComment.rating);
       console.log(this.newComment);
-      let jsonComment = JSON.stringify(this.newComment);
+      const jsonComment = JSON.stringify(this.newComment);
       console.log(jsonComment);
       this.games.postComment(this.evaluatedGame.comments + jsonComment, this.evaluatedGame.uuid,
           (data) => {
               console.log('success postComment');
-          },(data) => {
+          }, (data) => {
               console.log('error postComment');
           });
       this.updateGame(queryParam);

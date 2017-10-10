@@ -1,12 +1,12 @@
 import {
   RULE_TYPE,
-  BaseRules
-} from '../baseRules';
+  BaseRules,
+}               from '../baseRules';
 
 import {
   SceneViewer,
   ModelViewer,
-} from '../../threed-viewer';
+}               from '../../threed-viewer';
 
 export class ChangeColor extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {

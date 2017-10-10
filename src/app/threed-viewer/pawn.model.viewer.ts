@@ -15,7 +15,7 @@ export class PawnModelViewer extends ModelViewer {
   ];
   private _oldPosition: Array<number>;
 
-  constructor(conf, protected textureService: TextureService, editorMode: Boolean = false) {
+  constructor(conf, protected textureService: TextureService, editorMode = false) {
     super(conf, textureService, editorMode);
     this._oldPosition = [-1, -1];
   }
@@ -49,7 +49,7 @@ export class PawnModelViewer extends ModelViewer {
    * @param onLoad : Callback when loaded
    */
   public init(onLoad) {
-    //this._textureLoader = new TexturePoolViewer('/assets/img/three/');
+    // this._textureLoader = new TexturePoolViewer('/assets/img/three/');
     this.geometry = new CylinderGeometry(1, 1, 1, 40);
     const mesh = this.generateMesh();
     onLoad(mesh);

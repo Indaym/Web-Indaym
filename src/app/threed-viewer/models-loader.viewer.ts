@@ -2,18 +2,16 @@
  * Created by nicolas on 14/04/17.
  */
 
-
 import { BoardModelViewer } from './board.model.viewer';
-import { PawnModelViewer } from './pawn.model.viewer';
-import { CaseModelViewer } from './case.model.viewer';
-import { GridModelViewer } from './grid.model.viewer';
+import { PawnModelViewer }  from './pawn.model.viewer';
+import { CaseModelViewer }  from './case.model.viewer';
+import { GridModelViewer }  from './grid.model.viewer';
 
 import {
-  TextureService
-} from '../services';
+  TextureService,
+}                           from '../services';
 
-import { RulesServices }  from '../services/rules.service';
-
+import { RulesServices }    from '../services/rules.service';
 
 export class ModelsLoader {
   private types = {
@@ -24,7 +22,7 @@ export class ModelsLoader {
   };
   private rulesService: RulesServices;
 
-  constructor(private scene, private textureService: TextureService, private editorMode: Boolean = false) {
+  constructor(private scene, private textureService: TextureService, private editorMode = false) {
     this.rulesService = new RulesServices();
   }
 
@@ -44,7 +42,7 @@ export class ModelsLoader {
    * @param model : model to load
    */
   public loadOneModel(model, render = true) {
-    let modelViewer = this.types[model.object.type];
+    const modelViewer = this.types[model.object.type];
 
     if (modelViewer !== undefined) {
       model.threeDModel = new modelViewer(model.object, this.textureService, this.editorMode);
@@ -74,11 +72,10 @@ export class ModelsLoader {
           model.textureRef = uuid;
           next();
         });
-      }
-      else
+      } else
         next();
 
-      if (model.object.rules != undefined) {
+      if (model.object.rules !== undefined) {
 
         model.rules = {};
 
@@ -88,8 +85,7 @@ export class ModelsLoader {
             const ruleInstance = new ruleDef(this.scene, model, rule.conf);
 
             model.rules[ruleInstance.id] = ruleInstance;
-          }
-        );
+          });
       }
     }
   }

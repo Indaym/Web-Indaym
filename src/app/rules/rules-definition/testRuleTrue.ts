@@ -4,13 +4,13 @@
 
 import {
   RULE_TYPE,
-  BaseRules
-} from '../baseRules';
+  BaseRules,
+}                 from '../baseRules';
 
 import {
   SceneViewer,
   ModelViewer,
-} from '../../threed-viewer';
+}                 from '../../threed-viewer';
 
 export class TestRuleTrue extends BaseRules {
   constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {

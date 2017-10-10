@@ -19,7 +19,7 @@ export class AuthService extends DefaultService {
 
   login(username: string, password: string, email: string, error?, success?) {
     return this.http.post(this.authUrl('login'), { 'username': username, 'password': password, 'email': email })
-      .mergeMap(res => res.json())
+      .mergeMap((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -27,7 +27,7 @@ export class AuthService extends DefaultService {
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)
-      .mergeMap(res => res.json())
+      .mergeMap((res) => res.json())
       .subscribe(success, error);
   }
 

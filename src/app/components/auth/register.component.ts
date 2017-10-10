@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
@@ -33,7 +33,9 @@ import { AuthService } from '../../services';
 
       <div>
           <label for="Password_confirmation" >Password</label>
-          <input type="password" id="Password_confirmation" required [(ngModel)]="confirmation_password" name="Password_confirmation" #Password_confirmation="ngModel" >
+          <input type="password" id="Password_confirmation" required
+            [(ngModel)]="confirmation_password" name="Password_confirmation"
+            #Password_confirmation="ngModel" >
       </div>
       <div *ngIf="!pwdIsOk" >Passwords must be the same</div>
 
@@ -49,7 +51,7 @@ import { AuthService } from '../../services';
 export class RegisterComponent implements OnInit {
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   hasError = false;
@@ -78,7 +80,7 @@ export class RegisterComponent implements OnInit {
       },
       (res) => {  // ok
         console.log(res);
-        this.router.navigate['/login'];
+        this.router.navigate(['/login']);
       });
   }
 }

@@ -17,7 +17,7 @@ export abstract class BaseRules {
   protected _id: string;
   protected _ruleType: RULE_TYPE = RULE_TYPE.default;
   protected _description: string;
-  protected _name: string = 'rule';
+  protected _name = 'rule';
   protected _configuration: any;
   protected _refScene: any;
   protected _refObj: any;

@@ -70,15 +70,15 @@ export class SceneViewer {
     // Creation of Raycaster
     this._raycaster = new Raycaster();
 
-    window.addEventListener( 'resize', () => this.onWindowResize(), false );
+    window.addEventListener('resize', () => this.onWindowResize(), false );
 
     this._player = 0;
     this._capture = [-1, -1];
 
     this.grid = [];
-    for(var i: number = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
             this.grid[i] = [];
-            for(var j: number = 0; j< 10; j++) {
+            for (let j = 0; j < 10; j++) {
                 this.grid[i][j] = null;
             }
         }
@@ -201,7 +201,7 @@ export class SceneViewer {
    * Get Container of the 3D scene
    * @returns {string}
    */
-  get container(): String {
+  get container(): string {
     return this._domElement.id;
   }
 
@@ -209,7 +209,7 @@ export class SceneViewer {
    * Set Container of the 3D scene
    * @param value
    */
-  set container(value: String) {
+  set container(value: string) {
     this._domElement = document.getElementById(value.toString());
   }
 
@@ -224,7 +224,7 @@ export class SceneViewer {
   /**
    * get rules
    */
-  get rules(): Object {
+  get rules(): object {
     return this._rules;
   }
 
@@ -280,7 +280,7 @@ export class SceneViewer {
    * @returns {null}
    */
   public render() {
-    if (this._domElement == undefined)
+    if (this._domElement === undefined)
       return null;
     this._renderer.setSize(this.width, this.height);
     this._domElement.appendChild(this._renderer.domElement);
@@ -313,7 +313,7 @@ export class SceneViewer {
    * @returns {THREE.Vector3}
    */
   public getIntersection() {
-    let result = new Vector3(0, 0, 0);
+    const result = new Vector3(0, 0, 0);
     const a = this._raycaster.ray.origin;
     const b = new Vector3(a.x, a.y, a.z);
 

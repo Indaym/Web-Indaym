@@ -13,14 +13,14 @@ import { MdSnackBar }         from '@angular/material';
 
 // temporaire
 import {
-  MeshBasicMaterial
+  MeshBasicMaterial,
 } from 'three';
 
 import {
   EditorViewer,
   ModelsLoader,
-  ArrowHelperViewer
-}                             from '../../../../threed-viewer';
+  ArrowHelperViewer,
+}                         from '../../../../threed-viewer';
 import {
   GameControllerService,
   ObjectService,
@@ -51,7 +51,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     private gridCreationService: GridCreationService,
     private objectService: ObjectService,
     private textureService: TextureService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
   ) {
     this.gameController = gameControllerService.gameController;
   }
@@ -130,7 +130,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public deleteObject() {
-    const selected = <any>this.scene.selected;
+    const selected = (this.scene.selected as any);
 
     if (selected !== undefined && selected.LinkModel !== undefined) {
       const config = {

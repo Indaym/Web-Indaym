@@ -44,7 +44,7 @@ export class LeftSidebarComponent implements OnInit {
   constructor(
     public html: HtmlService,
     private gameControllerService: GameControllerService,
-    private gridCreationService: GridCreationService
+    private gridCreationService: GridCreationService,
   ) {
     this.gameController = this.gameControllerService.gameController;
   }

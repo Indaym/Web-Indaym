@@ -65,7 +65,7 @@ export class EditorViewer extends SceneViewer {
           if (e.rotation !== undefined)
             this.selected.rotation.copy(e.rotation);
           if (e.dimension !== undefined) {
-            for (let i of ['x', 'y', 'z']) {
+            for (const i of ['x', 'y', 'z']) {
               this.selected.scale[i] = (e.dimension[i] < this._controller.minScale[i]) ? this._controller.minScale[i] : e.dimension[i];
             }
           }
@@ -137,7 +137,7 @@ export class EditorViewer extends SceneViewer {
    * @param obj : Object to select
    */
   public unselectObject(obj: Object3D) {
-    const objSel = [obj, this._controller.object, this._selected].find((elem) => { return elem !== undefined; });
+    const objSel = [obj, this._controller.object, this._selected].find((elem) => elem !== undefined);
     this._controller.detach(objSel);
     this._scene.remove(this._controller);
     this._selected = undefined;
@@ -147,7 +147,7 @@ export class EditorViewer extends SceneViewer {
    * Delete selected object
    */
   public deleteSelected() {
-    const objSel = [this._selected, this._controller.object].find((elem) => { return elem !== undefined; });
+    const objSel = [this._selected, this._controller.object].find((elem) => elem !== undefined);
     if (objSel !== undefined) {
       this.unselectObject(objSel);
       this._scene.remove(objSel);

@@ -15,7 +15,7 @@ import { StoreComponent }         from './store';
 import { RateGameComponent }      from './rategame';
 import {
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
 }                                 from './auth';
 import { SnackBarComponent }      from './snackBar';
 

@@ -2,9 +2,9 @@ import {
   Component,
   OnDestroy,
   OnInit,
-} from '@angular/core';
+}                         from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription }   from 'rxjs';
 
 import {
   ObjectService,
@@ -12,7 +12,7 @@ import {
   GameService,
   GameControllerService,
   TextureService,
-} from '../../services';
+}                         from '../../services';
 
 @Component({
   selector  : 'ia-editor',
@@ -32,7 +32,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     private gameService: GameService,
     private sceneService: SceneService,
     private objectService: ObjectService,
-    private textureService: TextureService
+    private textureService: TextureService,
     ) {
     this.gameController = gameControllerService.gameController;
     // this.gameController.fillObjectsController();
@@ -44,8 +44,7 @@ export class EditorComponent implements OnDestroy, OnInit {
         if (queryParam.gameId !== undefined && queryParam.sceneId !== undefined) {
           this.initObjectsList(queryParam.gameId, queryParam.sceneId);
         }
-      }
-    );
+      });
     this.gameController.subscribe('addObjectToService', (obj) => {
       const pushObject = Object.keys(obj.datas).reduce((result, key) => {
         if (key !== 'threeDModel' && key !== 'LinkModel') {

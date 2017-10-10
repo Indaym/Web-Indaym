@@ -1,12 +1,12 @@
 import {
   RULE_TYPE,
-  BaseRules
-} from '../baseRules';
+  BaseRules,
+}               from '../baseRules';
 
 import {
   SceneViewer,
   ModelViewer,
-} from '../../threed-viewer';
+}               from '../../threed-viewer';
 
 export class MoveForward extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {
@@ -19,19 +19,16 @@ export class MoveForward extends BaseRules {
   }
 
   public capture_rule(model: any): boolean {
-    if (model.LinkModel.name === "whitepawn")
-    {
+    if (model.LinkModel.name === 'whitepawn') {
       this._refScene.capture[0] -= 1;
       if (this._refScene.capture[0] === 0)
         /// HERE
-        console.log("Black WIN");
-    }
-    else if (model.LinkModel.name === "blackpawn")
-    {
+        console.log('Black WIN');
+    } else if (model.LinkModel.name === 'blackpawn') {
       this._refScene.capture[1] -= 1;
       if (this._refScene.capture[1] === 0)
         /// HERE
-        console.log("White WIN");
+        console.log('White WIN');
     }
     return true;
   }
@@ -40,11 +37,11 @@ export class MoveForward extends BaseRules {
     if (args === undefined || args.LinkModel.object.coord === undefined) {
       return false;
     }
-    let mouvement = this._configuration.movement;
-    let xOld = this._refObj.threeDModel._oldPosition[0];
-    let yOld = this._refObj.threeDModel._oldPosition[1];
-    let xNew = args.LinkModel.object.coord[0];
-    let yNew = args.LinkModel.object.coord[1];
+    const mouvement = this._configuration.movement;
+    const xOld = this._refObj.threeDModel._oldPosition[0];
+    const yOld = this._refObj.threeDModel._oldPosition[1];
+    const xNew = args.LinkModel.object.coord[0];
+    const yNew = args.LinkModel.object.coord[1];
     if (xOld === -1 && yOld === -1
       && this._refScene.grid[xNew][yNew] === null) {
       this._refObj.threeDModel._oldPosition[0] = xNew;
@@ -78,18 +75,15 @@ export class MoveForward extends BaseRules {
         this.capture_rule(this._refScene.grid[xOld + mouvement][yOld]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld + mouvement][yOld]);
         this._refScene.grid[xOld + mouvement][yOld] = null;
-      }
-      else if (xOld - mouvement - 1 === xNew && yOld === yNew) {
+      } else if (xOld - mouvement - 1 === xNew && yOld === yNew) {
         this.capture_rule(this._refScene.grid[xOld - mouvement][yOld]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld - mouvement][yOld]);
         this._refScene.grid[xOld - mouvement][yOld] = null;
-      }
-      else if (xOld === xNew && yOld + mouvement + 1 === yNew) {
+      } else if (xOld === xNew && yOld + mouvement + 1 === yNew) {
         this.capture_rule(this._refScene.grid[xOld][yOld + mouvement]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld + mouvement]);
         this._refScene.grid[xOld][yOld + mouvement] = null;
-      }
-      else if (xOld === xNew && yOld - mouvement - 1 === yNew) {
+      } else if (xOld === xNew && yOld - mouvement - 1 === yNew) {
         this.capture_rule(this._refScene.grid[xOld][yOld - mouvement]);
         this._refScene.deleteFromScene(this._refScene.grid[xOld][yOld - mouvement]);
         this._refScene.grid[xOld][yOld - mouvement] = null;

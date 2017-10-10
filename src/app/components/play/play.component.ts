@@ -4,7 +4,7 @@ import { Router }       from '@angular/router';
 import { HtmlService }  from '../../services/html.service';
 import { GameService }  from '../../services/game.service';
 
-export var comeFrom = "";
+export let comeFrom = '';
 
 @Component({
   selector  : 'ia-play',
@@ -27,7 +27,7 @@ export class PlayComponent {
 
   public goToScenesPage(id) {
 
-      comeFrom = "Play";
+      comeFrom = 'Play';
 
       this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: 0 } });
   }
