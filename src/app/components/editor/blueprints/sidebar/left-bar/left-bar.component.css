@@ -13,3 +13,10 @@ button {
 .container {
     min-height:150px;
 }
+
+#closeButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    float:right;
+}

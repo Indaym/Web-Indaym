@@ -7,8 +7,11 @@ import {
   OnInit,
   OnDestroy,
   Input,
-}                         from '@angular/core';
+  HostListener,
+}                             from '@angular/core';
+import { MdSnackBar }         from '@angular/material';
 
+// temporaire
 import {
   MeshBasicMaterial,
 } from 'three';
@@ -23,8 +26,10 @@ import {
   ObjectService,
   TextureService,
   GridCreationService,
- }                        from '../../../../services';
-import { buttonsDefault } from '../../../../models';
+  SnackBarService,
+ }                            from '../../../../services';
+import { buttonsDefault }     from '../../../../models';
+import { SnackBarType }       from '../../../snackBar';
 
 @Component({
   selector  : 'ia-viewer',
@@ -43,11 +48,18 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameControllerService: GameControllerService,
+    private gridCreationService: GridCreationService,
     private objectService: ObjectService,
     private textureService: TextureService,
-    private gridCreationService: GridCreationService,
+    private snackBarService: SnackBarService,
   ) {
     this.gameController = gameControllerService.gameController;
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  public handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Delete')
+      this.deleteObject();
   }
 
   public ngOnInit(): void {
@@ -76,6 +88,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.eventDispatcher.addEventListener('selectObject', (e: any) => this.scene.selectObject(e.object));
+    this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
+    this.eventDispatcher.addEventListener('savePositions', (e: any) => this.savePositions());
 
   /*
     const arrow = new ArrowHelperViewer({
@@ -115,11 +131,18 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   public deleteObject() {
     const selected = (this.scene.selected as any);
+
     if (selected !== undefined && selected.LinkModel !== undefined) {
+      const config = {
+        data: { ...selected.LinkModel }
+      };
+
       this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
         this.scene.deleteSelected();
         this.gameController.deleteObject(selected.LinkModel.uuid);
-
+        this.snackBarService.open(`Object <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong> has been deleted`, config, SnackBarType.SUCCESS);
+      }, () => {
+        this.snackBarService.open(`Can't delete <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong>`, config, SnackBarType.ERROR);
       });
     }
   }

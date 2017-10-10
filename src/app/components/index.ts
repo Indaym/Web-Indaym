@@ -5,7 +5,7 @@
 import { AppComponent }           from './app.component';
 import { ContactComponent }       from './contact';
 import { GamesListComponent }     from './gameslist';
-import { ScenesListComponent }     from './sceneslist';
+import { ScenesListComponent }    from './sceneslist';
 import { EDITOR_COMPONENTS }      from './editor';
 import { FORUM_COMPONENTS }       from './forum';
 import { HOME_COMPONENTS }        from './home';
@@ -17,8 +17,10 @@ import {
   LoginComponent,
   RegisterComponent,
 }                                 from './auth';
+import { SnackBarComponent }      from './snackBar';
 
 export { AppComponent }           from './app.component';
+export { SnackBarComponent }      from './snackBar';
 
 export const APP_COMPONENTS = [
   AppComponent,
@@ -34,4 +36,5 @@ export const APP_COMPONENTS = [
   RateGameComponent,
   LoginComponent,
   RegisterComponent,
+  SnackBarComponent,
 ];

@@ -1,3 +1,7 @@
+:host {
+  position:relative;
+  top: -1px;
+}
 h2 {
   text-align: center;
 }
