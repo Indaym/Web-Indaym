@@ -1,49 +1,36 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Injectable }     from '@angular/core';
+import {
+  Http,
+  Headers,
+  Response,
+}                         from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 
 import { DefaultService } from './default.service';
-import { User } from './UserConfig';
+import { CryptoService }  from '../../cryptoModule/services';
+import { UserService }    from './user.service';
+import { User }           from './UserConfig';
 
 @Injectable()
 export class AuthService extends DefaultService {
   private _isLogin: boolean;
-  private token: string;
-  private authUrl: (string) => string;
-  private _user: User;
+  private  authUrl: (string) => string;
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private crypto: CryptoService,
+    private user: UserService,
+  ) {
     super();
     this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
-    this.token = this.extractToken();
-    this._isLogin = this.token ? true : false;
-  }
-
-  private extractToken(): string {
-    const token = JSON.parse(localStorage.getItem('jwt'));
-    if (typeof token !== 'string')
-      return undefined;
-    return token;
-  }
-
-  set user(user: User) {
-    const userInfo = user || {};
-    this._user = { ...this._user, ...userInfo };
-  }
-
-  get user(): User {
-    return this._user;
-  }
-
-  getToken(): string {
-    return this.extractToken();
+    this._isLogin = this.user.token ? true : false;
   }
 
   setToken(token: string): void {
-    localStorage.setItem('jwt', token);
+    this.user.token = JSON.parse(token);
   }
 
   isLogin() {
@@ -51,20 +38,17 @@ export class AuthService extends DefaultService {
   }
 
   setLogin(token: string): void {
-    localStorage.setItem('jwt', token);
     this._isLogin = true;
-    this.token = this.extractToken();
+    this.setToken(token);
   }
 
   reset(): void {
     this._isLogin = false;
-    this.token = null;
-    localStorage.removeItem('jwt');
+    this.user.deleteToken();
   }
 
   login(username: string, password: string, email: string, success?, error?) {
-    const userInfo: User = { username, password, email };
-    this.user = userInfo;
+    this.user.user = { username, password, email };
 
     const body = { 'username': username, 'password': password, 'email': email };
     return this.http.post(this.authUrl('login'), body)
@@ -73,22 +57,20 @@ export class AuthService extends DefaultService {
   }
 
   logout() {
-    const body = { 'data': { 'jwt': this.token } };
-
-    return this.http.post(this.authUrl('logout'), body)
+    return this.http.post(this.authUrl('logout'), {}, {
+      headers: new Headers({'Authorization': 'JWT ' + this.user.token}),
+    })
       .subscribe(
         (data) => {
           this._isLogin = false;
-          this.token = null;
-          localStorage.removeItem('jwt');
+          this.user.deleteToken();
         },
         (err) => console.log(`nok ${err}`),
       );
   }
 
   register(username: string, password: string, email: string, success?, error?) {
-    const userInfo: User = { username, password, email };
-    this.user = userInfo;
+    this.user.user = { username, password, email };
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)

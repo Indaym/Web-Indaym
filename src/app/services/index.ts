@@ -11,3 +11,4 @@ export { TextureService }         from './texture.service';
 export { GridCreationService }    from './gridCreation.service';
 export { AuthService }            from './auth.service';
 export { RulesServices }          from './rules.service';
+export { UserService }            from './user.service';

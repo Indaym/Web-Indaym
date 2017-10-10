@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MdSidenavModule,
+  MatSidenavModule,
 } from '@angular/material';
 
 const MODULE_LIST = [
-  MdSidenavModule,
+  MatSidenavModule,
 ];
 
 @NgModule({

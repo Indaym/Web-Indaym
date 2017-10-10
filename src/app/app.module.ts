@@ -12,7 +12,7 @@ import {
   Http,
   XHRBackend,
   RequestOptions,
-}               from '@angular/http';
+}                                   from '@angular/http';
 import { FileUploadModule }         from 'ng2-file-upload';
 import { ModalModule }              from 'ng2-modal';
 import {
@@ -21,6 +21,7 @@ import {
 }                                   from 'ng2-dragula/ng2-dragula';
 
 import { MaterialModule }           from '../materialModule';
+import { CryptoModule }             from '../cryptoModule';
 
 import { routing }                  from './app.route';
 
@@ -30,19 +31,11 @@ import {
 }                                   from './components';
 
 import { AuthGuard }                from './guards';
+
 import { HtmlService }              from './services/html.service';
 import { AuthService }              from './services/auth.service';
-import { getHttpAuth }              from './interceptors';
-
-const interceptor = {
-  provide: Http,
-  useFactory: getHttpAuth,
-  deps: [
-    XHRBackend,
-    RequestOptions,
-    AuthService,
-  ],
-};
+import { UserService }              from './services/user.service';
+import { HttpAuthInterceptor }      from './interceptors';
 
 @NgModule({
   declarations: [
@@ -53,10 +46,12 @@ const interceptor = {
     HtmlService,
     AuthGuard,
     AuthService,
-    interceptor,
+    UserService,
+    { provide: Http, useClass: HttpAuthInterceptor },
   ],
   imports   : [
     MaterialModule,
+    CryptoModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
