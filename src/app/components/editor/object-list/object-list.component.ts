@@ -6,11 +6,10 @@ import {
 
 import { GameControllerService }  from '../../../services';
 
-
 @Component({
   selector: 'ia-object-list',
   templateUrl: './object-list.component.html',
-  styleUrls: ['./object-list.component.css']
+  styleUrls: ['./object-list.component.css'],
 })
 export class ObjectListComponent implements OnInit {
   @Input() public eventDispatcher;
@@ -21,6 +20,7 @@ export class ObjectListComponent implements OnInit {
 
   constructor(private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
+    this.setIcons();
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class ObjectListComponent implements OnInit {
     this.gameController.subscribe('addObject', () => this.setIcons());
     this.gameController.subscribe('addGroupObjects', () => this.setIcons());
     this.gameController.subscribe('deleteObject', () => this.setIcons());
-    this.gameController.subscribe('deleteGroupObjects', () => this.setIcons())
+    this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
   }
 
   private selectObject(objectId) {

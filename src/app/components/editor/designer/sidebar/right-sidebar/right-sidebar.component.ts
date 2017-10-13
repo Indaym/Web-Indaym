@@ -46,7 +46,7 @@ export class RightSidebarComponent implements OnInit  {
   private controllerTypes = [
     'translate',
     'scale',
-    'rotate'
+    'rotate',
   ];
   private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
@@ -146,19 +146,19 @@ export class RightSidebarComponent implements OnInit  {
   public changeModeController() {
     this.eventDispatcher.dispatchEvent({
       type: 'updateController',
-      modeController: this.modeController
+      modeController: this.modeController,
     });
   }
 
   public deleteSelected() {
     this.eventDispatcher.dispatchEvent({
-      type: 'deleteSelected'
+      type: 'deleteSelected',
     });
   }
 
   public savePositions() {
     this.eventDispatcher.dispatchEvent({
-      type: 'savePositions'
+      type: 'savePositions',
     });
   }
 

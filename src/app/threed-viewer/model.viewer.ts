@@ -23,7 +23,7 @@ export class ModelViewer {
   private _geometry: Geometry;
   private _material: Material;
 
-  /**
+  /*
    *
    * @param conf => type: json object
    * {

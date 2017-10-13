@@ -7,5 +7,5 @@ export enum SnackBarType {
   INFO,
   SUCCESS,
   ERROR,
-  WARNING
+  WARNING,
 }

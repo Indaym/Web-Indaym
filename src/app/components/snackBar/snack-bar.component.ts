@@ -1,10 +1,10 @@
 import {
   Component,
-  Inject
+  Inject,
 }                       from '@angular/core';
 import {
   MD_SNACK_BAR_DATA,
-  MatSnackBarRef
+  MatSnackBarRef,
 }                       from '@angular/material';
 
 import { SnackBarType } from './enum.snack-bar';
