@@ -25,7 +25,13 @@ export class AuthService extends DefaultService {
     private user: UserService,
   ) {
     super();
-    this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
+    // this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
+
+    const joining = this.joiner('/');
+    const apiUrl = joining(this.server);
+    const authUrl = apiUrl('auth');
+    this.authUrl = joining(authUrl);
+
     this._isLogin = this.user.token ? true : false;
   }
 
