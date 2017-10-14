@@ -16,6 +16,7 @@ import {
   PreviewComponent,
   DesignerComponent,
   BlueprintsComponent,
+  BlueprintComponent,
 } from './components/editor';
 import { GamesListComponent } from './components/gameslist';
 import { ScenesListComponent } from './components/sceneslist';
@@ -45,6 +46,7 @@ export const routes: Routes = [
       { path: '',           redirectTo: 'designer',           pathMatch: 'full' },
       { path: 'designer',   component: DesignerComponent },
       { path: 'blueprints', component: BlueprintsComponent },
+      { path: 'blueprint',  component: BlueprintComponent },
       { path: 'preview',    component: PreviewComponent },
     ],
   },

@@ -1,0 +1,25 @@
+<div class="row">
+  <h4>Object selected : <strong *ngIf="selectedObject">{{ selectedObject.name }}</strong></h4>
+</div>
+<div class="row">
+  <!-- List of objects -->
+  <div class="col-xs-3">
+    <ia-object-list [eventDispatcher]="dispatcher"></ia-object-list>
+  </div>
+  <!-- List of Rules available -->
+  <div class="col-xs-3">
+    <div class="list-group">
+      <a *ngFor="let rule of availableRules" class="list-group-item" (dblclick)="addRule(rule)">{{rule}}</a>
+    </div>
+  </div>
+  <!-- List of Rules already applied -->
+  <div class="col-xs-3">
+    <div class="list-group">
+      <a *ngFor="let rule of appliedRules" class="list-group-item" (dblclick)="removeRule(rule)">{{rule}}</a>
+    </div>    
+  </div>
+  <!-- Configuration of the object -->
+  <div class="col-xs-3">
+  
+  </div>  
+</div>
