@@ -30,6 +30,10 @@
   min-height: 500px;
 }
 
+:host ::ng-deep li:hover {
+  color: black !important;
+}
+
 
 /*
  * Reset dragula css / bootstrap are something else must force with !important the css

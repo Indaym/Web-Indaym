@@ -114,7 +114,7 @@ export class BlueprintComponent implements OnInit, OnDestroy {
     this.appliedRules = (this.selectedObject && this.selectedObject.rules) ? Object.keys(this.selectedObject.rules) : [];
 
     // Donne les règles restante non assigné à un objet
-    this.availableRules = [...this.staticRules].filter((value) => {
+    this.availableRules = this.staticRules.filter((value) => {
       if (!this.selectedObject || !this.selectedObject.rules)
         return true;
       return !this.selectedObject.rules[value];
@@ -159,10 +159,12 @@ export class BlueprintComponent implements OnInit, OnDestroy {
     for (const key in this.selectedObject.rules) {
       if (!this.selectedObject.rules[key])
         continue;
-      this.selectedObject.object.rules.push({
+      const obj = {
         id: this.selectedObject.rules[key].id,
         conf: this.selectedObject.rules[key].config,
-      });
+      };
+      obj.conf.color = obj.conf.color.replace('#', '0x');
+      this.selectedObject.object.rules.push(obj);
     }
   }
 
