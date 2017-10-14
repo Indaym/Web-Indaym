@@ -58,4 +58,8 @@ export abstract class BaseRules {
   get description(): string {
     return this._description;
   }
+
+  get config() {
+    return this._configuration;
+  }
 }

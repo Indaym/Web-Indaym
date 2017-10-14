@@ -8,18 +8,28 @@
   </div>
   <!-- List of Rules available -->
   <div class="col-xs-3">
-    <div class="list-group">
-      <a *ngFor="let rule of availableRules" class="list-group-item" (dblclick)="addRule(rule)">{{rule}}</a>
+    <div id="available-rules" class="list-group" [dragula]='"rulesBag"'>
+      <a *ngFor="let rule of availableRules" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
     </div>
   </div>
   <!-- List of Rules already applied -->
   <div class="col-xs-3">
-    <div class="list-group">
-      <a *ngFor="let rule of appliedRules" class="list-group-item" (dblclick)="removeRule(rule)">{{rule}}</a>
+    <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
+      <a *ngFor="let rule of appliedRules" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
     </div>    
   </div>
   <!-- Configuration of the object -->
   <div class="col-xs-3">
-  
+    <div *ngIf="selectedRule">
+      <div class="form-group">
+        <label for="color">Color :</label>
+        <input id="color" type="color" [(ngModel)]="selectedRule.config.color"/>
+      </div>
+      <div class="form-group">
+        <label for="move">Movement :</label>
+        <input id="move" type="number" [(ngModel)]="selectedRule.config.movement"/>
+      </div>
+      <button (click)="saveRules()">Save Configuration</button>
+    </div>  
   </div>  
 </div>

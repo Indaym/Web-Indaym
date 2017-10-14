@@ -8,3 +8,51 @@
   min-height: 50px;
 }
 */
+
+.badge {
+  float: right;
+}
+
+.badge:hover {
+  cursor: pointer;
+  filter: brightness(120%);
+}
+
+.badge:hover > .glyphicon-minus {
+  color: darkred;
+}
+
+.badge:hover > .glyphicon-plus {
+  color: darkgreen;
+}
+
+#available-rules, #applied-rules {
+  min-height: 500px;
+}
+
+
+/*
+ * Reset dragula css / bootstrap are something else must force with !important the css
+ */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
