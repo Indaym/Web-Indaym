@@ -3,7 +3,10 @@ import {
   OnDestroy,
   OnInit,
 }                         from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+}                         from '@angular/router';
 import { Subscription }   from 'rxjs';
 
 import {
@@ -33,18 +36,24 @@ export class EditorComponent implements OnDestroy, OnInit {
     private sceneService: SceneService,
     private objectService: ObjectService,
     private textureService: TextureService,
+    private router: Router,
     ) {
-    this.gameController = gameControllerService.gameController;
+      this.gameController = gameControllerService.gameController;
     // this.gameController.fillObjectsController();
   }
 
   public ngOnInit() {
-    this.subscription = this.route.queryParams.subscribe(
-      (queryParam: any) => {
-        if (queryParam.gameId !== undefined && queryParam.sceneId !== undefined) {
-          this.initObjectsList(queryParam.gameId, queryParam.sceneId);
-        }
-      });
+    this.subscription = this.route.queryParams.subscribe((q) => {
+      const gameID = localStorage.getItem('gameID');
+      const sceneID = localStorage.getItem('sceneID');
+
+      if (gameID === null || sceneID === null) {
+        this.router.navigate(['/gameslist'], { queryParams: { error: true }});
+      } else {
+        this.initObjectsList(gameID, sceneID);
+      }
+    });
+
     this.gameController.subscribe('addObjectToService', (obj) => {
       const pushObject = Object.keys(obj.datas).reduce((result, key) => {
         if (key !== 'threeDModel' && key !== 'LinkModel') {

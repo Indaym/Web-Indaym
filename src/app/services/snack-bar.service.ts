@@ -12,6 +12,7 @@ export class SnackBarService {
   constructor(private mdSnackBar: MdSnackBar) {}
 
   public open(message, config, snackType?) {
+    config.data = config.data || {};
     if (snackType !== undefined)
       config.data.snackType = snackType;
     config = { duration: 3000, ...config, data: { snackType: SnackBarType.NONE, ...config.data, message } };
