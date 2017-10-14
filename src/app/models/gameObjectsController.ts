@@ -48,6 +48,15 @@ export class GameObjectsController {
   }
 
   /**
+   * Unsubscribe to Events
+   * @param type : Type of the event
+   * @param callback : Callback used for subscribe
+   */
+  public unsubscribe(type: string, callback) {
+    this.eventDispatcher.removeEventListener(type, callback);
+  }
+
+  /**
    * Emit event
    * @param type : Type of the event to emit
    * @param datas : Data to emit
