@@ -10,18 +10,16 @@ import {
   GameControllerService,
   ObjectService,
 }                           from '../../../services/';
-import {
-  RULES_DEF,
-}                           from '../../../rules/';
+import { RULES_DEF }        from '../../../rules/';
 
 @Component({
-  selector: 'ia-blueprint',
-  templateUrl: './blueprint.component.html',
+  selector: 'ia-blueprints',
+  templateUrl: './blueprints.component.html',
   styleUrls: [
-    './blueprint.component.css',
+    './blueprints.component.css',
   ],
 })
-export class BlueprintComponent implements OnInit, OnDestroy {
+export class BlueprintsComponent implements OnInit, OnDestroy {
   private dispatcher: EventDispatcher;
   private gameController;
 
@@ -68,15 +66,35 @@ export class BlueprintComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Créé les instances de règles
+   * Utile quand on refresh la page et que l'on passe pas par le ModelLoader qui instancie les règles en temps normal
+   */
   public ngOnInit() {
+    const callback = () => {
+      for (const obj of this.gameController.getObjects()) {
+        if (!obj.object.rules)
+          continue;
+        obj.rules = [];
+        for (const rule of obj.object.rules) {
+          this.addRule(rule.id, obj, rule.conf, false, false);
+        }
+      }
+      this.gameController.unsubscribe('addGroupObjects', callback);
+    };
+    this.gameController.subscribe('addGroupObjects', callback);
   }
 
+  /**
+   * Sauvegarde la règle en cours d'édition lorsque l'on quitte la page blueprints
+   */
   public ngOnDestroy() {
     this.saveRules();
   }
 
   /**
    * Set l'objet sélectionné
+   * Annexe : délectionne la règle précédemment édité et met à jour la list de règle appliqué et applicable
    */
   public selectObject(value) {
     this.selectedObject = value;
@@ -108,9 +126,10 @@ export class BlueprintComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Update la liste des règles qui restent à appliquer
+   * Met à jour la liste des règles qui restent à appliquer et celles déjà appliqué
    */
   private updateListRules() {
+    // Donne les règles de l'objet sélectionné (règles déjà appliqués)
     this.appliedRules = (this.selectedObject && this.selectedObject.rules) ? Object.keys(this.selectedObject.rules) : [];
 
     // Donne les règles restante non assigné à un objet
@@ -121,27 +140,33 @@ export class BlueprintComponent implements OnInit, OnDestroy {
     });
   }
 
-  private addRule(ruleName) {
-    if (!RULES_DEF[ruleName] || !this.selectedObject)
+  /**
+   * Ajoute une règle à l'objet sélectionné
+   * @param ruleName Nom de la règle
+   */
+  private addRule(ruleName, obj = this.selectedObject, conf?, save = true, update = true) {
+    if (!ruleName || !RULES_DEF[ruleName] || !obj)
       return;
 
-    const conf = {
-      color: '0xffffff',
+    conf = conf || {
+      color: '#ffffff',
       movement: 1,
     };
-    const rule = new RULES_DEF[ruleName](null, this.selectedObject, conf);
+    const rule = new RULES_DEF[ruleName](null, obj, conf);
 
-    if (!this.selectedObject.rules)
-      this.selectedObject.rules = { [ruleName]: rule };
+    if (!obj.rules)
+      obj.rules = { [ruleName]: rule };
     else
-      this.selectedObject.rules[ruleName] = rule;
-    this.saveRules();
-    this.updateListRules();
+      obj.rules[ruleName] = rule;
+    if (save)
+      this.saveRules();
+    if (update)
+      this.updateListRules();
   }
 
   /**
    * Supprime une règles des instances et sauvegarde l'object en base de données
-   * @param ruleName
+   * @param ruleName Nom de la règle
    */
   private removeRule(ruleName) {
     if (!this.selectedObject || !this.selectedObject.rules || !this.selectedObject.rules[ruleName])
@@ -152,7 +177,7 @@ export class BlueprintComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Transforme les instances des règles dans l'objet qui pourra être envoyé à la base de données
+   * Transforme les instances des règles dans l'objet en données qui pourrnt être envoyé à la base de données
    */
   private serializeRules() {
     this.selectedObject.object.rules = [];
@@ -163,7 +188,6 @@ export class BlueprintComponent implements OnInit, OnDestroy {
         id: this.selectedObject.rules[key].id,
         conf: this.selectedObject.rules[key].config,
       };
-      obj.conf.color = obj.conf.color.replace('#', '0x');
       this.selectedObject.object.rules.push(obj);
     }
   }
@@ -176,5 +200,10 @@ export class BlueprintComponent implements OnInit, OnDestroy {
       return;
     this.serializeRules();
     this.objectService.updateObject({ object: this.selectedObject.object }, this.selectedObject.uuid);
+  }
+
+  private viewToHex(event) {
+    console.log(event);
+    this.selectedRule.config.color = event.replace('#', '0x');
   }
 }

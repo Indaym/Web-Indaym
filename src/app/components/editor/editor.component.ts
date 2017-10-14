@@ -43,16 +43,14 @@ export class EditorComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit() {
-    this.subscription = this.route.queryParams.subscribe((q) => {
-      const gameID = localStorage.getItem('gameID');
-      const sceneID = localStorage.getItem('sceneID');
+    const gameID = localStorage.getItem('gameID');
+    const sceneID = localStorage.getItem('sceneID');
 
-      if (gameID === null || sceneID === null) {
-        this.router.navigate(['/gameslist'], { queryParams: { error: true }});
-      } else {
-        this.initObjectsList(gameID, sceneID);
-      }
-    });
+    if (gameID === null || sceneID === null) {
+      this.router.navigate(['/gameslist'], { queryParams: { error: true }});
+    } else {
+      this.initObjectsList(gameID, sceneID);
+    }
 
     this.gameController.subscribe('addObjectToService', (obj) => {
       const pushObject = Object.keys(obj.datas).reduce((result, key) => {
@@ -71,7 +69,6 @@ export class EditorComponent implements OnDestroy, OnInit {
   }
 
   public ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   private initObjectsList(gameId, sceneId) {
