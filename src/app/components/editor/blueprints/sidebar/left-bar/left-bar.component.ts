@@ -9,7 +9,6 @@ import {
 }                           from '@angular/core';
 
 import {
-    HtmlService,
     GameControllerService,
 }                           from '../../../../../services';
 
@@ -25,7 +24,7 @@ export {
 
 @Component({
   selector  : 'ia-left-bar',
-  providers : [HtmlService],
+  providers : [],
   templateUrl   : './left-bar.component.html',
   styleUrls    : [
     './left-bar.component.css',
@@ -40,7 +39,7 @@ export class LeftBarComponent implements OnInit {
 
   private gameController;
 
-  constructor(public html: HtmlService, private gameControllerService: GameControllerService) {
+  constructor(private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
   }
 

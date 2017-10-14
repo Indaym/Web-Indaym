@@ -18,9 +18,9 @@ import {
   SnackBarComponent,
   APP_COMPONENTS,
 }                                   from './components';
+import { PIPES }                    from './pipes';
 
 import { AuthGuard }                from './guards';
-import { HtmlService }              from './services/html.service';
 
 import {
   DragulaModule,
@@ -32,11 +32,11 @@ import { MaterialModule }           from '../materialModule';
 @NgModule({
   declarations: [
     APP_COMPONENTS,
+    PIPES,
   ],
   bootstrap : [ AppComponent ],
   entryComponents: [ SnackBarComponent ],
   providers : [
-    HtmlService,
     AuthGuard,
   ],
   imports   : [

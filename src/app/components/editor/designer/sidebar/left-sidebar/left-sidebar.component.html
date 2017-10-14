@@ -27,7 +27,7 @@
           <button>Add</button>
         </form><br/>
         <div>
-          <button *ngFor="let item of html.keys(items.boards)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.boards[item]}}</button><br/>
+          <button *ngFor="let item of items.boards | keys" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.boards[item]}}</button><br/>
         </div>
       </ia-tab>
 
@@ -39,7 +39,7 @@
           <button>Add</button>
         </form><br/>
         <div>
-          <button *ngFor="let item of html.keys(items.pawns)" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.pawns[item]}}</button><br/>
+          <button *ngFor="let item of items.pawns | keys" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.pawns[item]}}</button><br/>
         </div>
       </ia-tab>
 
