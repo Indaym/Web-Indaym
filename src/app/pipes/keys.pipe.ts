@@ -9,7 +9,6 @@ import {
 export class KeysPipe implements PipeTransform {
 
   transform(dic: object): string[] {
-    console.log('pipe');
     return Object.keys(dic);
   }
 }
