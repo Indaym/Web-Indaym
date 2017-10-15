@@ -6,6 +6,10 @@
   margin: 5px 0;
 }
 
+#itemsList li.selected > .glyphicon {
+  display: inline;
+}
+
 #itemsList li:hover .glyphicon {
   display:inline;
 }

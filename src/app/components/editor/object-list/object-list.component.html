@@ -1,5 +1,5 @@
-<ul id="itemsList">
-  <li class="none-style" *ngFor="let item of itemsIcons" (click)="selectObject(item.uuid)">
+<ul #itemsList id="itemsList">
+  <li class="none-style" *ngFor="let item of itemsIcons" (click)="selectObject(item.uuid, $event)">
     <span class="glyphicon glyphicon-chevron-right"></span>
     <img *ngIf="item.icon" src="{{item.icon}}">
     <span>{{item.name}}</span>

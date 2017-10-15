@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   Input,
+  ViewChild,
 }                                 from '@angular/core';
 
 import { GameControllerService }  from '../../../services';
@@ -13,10 +14,15 @@ import { GameControllerService }  from '../../../services';
 })
 export class ObjectListComponent implements OnInit {
   @Input() public eventDispatcher;
+  @Input() public multiSelect;
   private gameController;
   private objects;
   private itemsIcons = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
+
+  private selectedElements = [];
+
+  @ViewChild('itemsList') private itemslist;
 
   constructor(private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
@@ -31,15 +37,27 @@ export class ObjectListComponent implements OnInit {
     this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
   }
 
-  private selectObject(objectId) {
+  private selectObject(objectId, event) {
     const object = this.gameController.getObjects().find((value) => {
       return value.uuid === objectId;
     });
+
+    if (event.shiftKey && this.multiSelect) {
+      this.selectedElements.push(object);
+    } else {
+      for (const child of this.itemslist.nativeElement.children) {
+        if (child.classList.contains('selected'))
+          child.classList.remove('selected');
+      }
+      this.selectedElements = [ object ];
+    }
+    event.path[1].classList.add('selected');
+
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
-      object,
+      objects: this.selectedElements,
     });
-  }
+}
 
   private setIcons() {
     let obj;
