@@ -14,7 +14,8 @@ import { GameControllerService }  from '../../../services';
 })
 export class ObjectListComponent implements OnInit {
   @Input() public eventDispatcher;
-  @Input() public multiSelect;
+  @Input() public set multiSelect(value) { this._multiSelect = true; }
+  private _multiSelect = false;
   private gameController;
   private objects;
   private itemsIcons = [];
@@ -42,7 +43,7 @@ export class ObjectListComponent implements OnInit {
       return value.uuid === objectId;
     });
 
-    if (event.shiftKey && this.multiSelect) {
+    if (event.shiftKey && this._multiSelect) {
       this.selectedElements.push(object);
     } else {
       for (const child of this.itemslist.nativeElement.children) {
