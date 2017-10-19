@@ -39,7 +39,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
 
     // Quand on clique sur l'objet il appelle la fonction ici pour le sélectionner
     this.dispatcher.addEventListener('selectObject', (e: any) => {
-      this.selectObject(e.object);
+      this.selectObject(e.objects);
     });
 
     // Récupère le nom de la classe pour faire une liste des règles disponibles
@@ -131,14 +131,14 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     // Donne les règles de l'objet sélectionné (règles déjà appliqués)
     this.appliedRules = [];
     if (this.selectedObjects && this.selectedObjects.length > 0 && this.selectedObjects[0].rules) {
-      for (const key in Object.keys(this.selectedObjects[0].rules)) {
-        if (this.selectedObjects.every((obj) => obj[key]))
+      for (const key of Object.keys(this.selectedObjects[0].rules)) {
+        if (this.selectedObjects.every((obj) => obj.rules && obj.rules[key]))
           this.appliedRules.push(key);
       }
     }
 
     // Donne les règles restante non assigné à un objet
-    this.availableRules = this.staticRules.filter((value) => !this.appliedRules[value] );
+    this.availableRules = this.staticRules.filter((value) => this.appliedRules.indexOf(value) === -1);
   }
 
   /**
@@ -200,7 +200,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
           id: obj.rules[key].id,
           conf: obj.rules[key].config,
         };
-        obj.object.rules.push(obj);
+        obj.object.rules.push(rule);
       }
     };
 
@@ -208,8 +208,15 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
       this.selectedObjects.forEach(serializeRule);
     } else {
       serializeRule(this.selectedObjects[0]);
+
       this.selectedObjects.slice(1).forEach((obj) => {
-        obj.object.rules = this.selectedObjects[0].object.rules;
+        // Fusionne les r_gles du premier objet avec les règles existantes
+        const firstRules = this.selectedObjects[0].object.rules;
+        const rules = [
+          ...firstRules.filter((item) => this.appliedRules.indexOf(item.id) !== -1),
+          ...obj.object.rules.filter((objectRule) => !firstRules.find((rule) => rule.id === objectRule.id)),
+        ];
+        obj.object.rules = rules;
       });
     }
   }
@@ -222,6 +229,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
       return;
     this.serializeRules(true);
     this.selectedObjects.forEach((obj) => {
+      this.addRule(this.selectedRule.id, [obj], this.selectedRule.config, false, false);
       this.objectService.updateObject({ object: obj.object }, obj.uuid);
     });
   }

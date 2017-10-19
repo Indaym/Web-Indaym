@@ -38,25 +38,31 @@ export class ObjectListComponent implements OnInit {
     this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
   }
 
+  private cleanViewSelected() {
+    for (const child of this.itemslist.nativeElement.children) {
+      if (child.classList.contains('selected'))
+        child.classList.remove('selected');
+    }
+  }
+
   private selectObject(objectId, event) {
     const object = this.gameController.getObjects().find((value) => {
       return value.uuid === objectId;
     });
+    const li = event.path.find((element) => element.tagName === 'LI');
+    const index = this.selectedElements.indexOf(object);
 
     if (event.shiftKey && this._multiSelect) {
-      this.selectedElements.push(object);
+      (index === -1) ? this.selectedElements.push(object) : this.selectedElements.splice(index, 1);
     } else {
-      for (const child of this.itemslist.nativeElement.children) {
-        if (child.classList.contains('selected'))
-          child.classList.remove('selected');
-      }
+      this.cleanViewSelected();
       this.selectedElements = [ object ];
     }
-    event.path[1].classList.add('selected');
+    (index === -1) ? li.classList.add('selected') : li.classList.remove('selected');
 
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
-      objects: this.selectedElements,
+      objects: [ ...this.selectedElements ],
     });
 }
 
