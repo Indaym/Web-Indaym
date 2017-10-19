@@ -17,7 +17,7 @@
     ],
     "curly": false,
     "eofline": true,
-    "forin": true,
+    "forin": false,
     "import-blacklist": [
       true
     ],
