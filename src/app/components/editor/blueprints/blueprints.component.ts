@@ -23,7 +23,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
   private dispatcher: EventDispatcher;
   private gameController;
 
-  private selectedObject;       // l'objet sélectionné
+  private selectedObjects;       // l'objet sélectionné
   private availableRules = [];  // les règles disponible qui ne sont pas déjà appliqué
   private staticRules = [];     // liste de toutes les règles existantes
   private appliedRules = [];    // règles appliqués à l'objet
@@ -43,7 +43,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     });
 
     // Récupère le nom de la classe pour faire une liste des règles disponibles
-    this.staticRules = [ ...Object.keys(RULES_DEF) ];
+    this.staticRules = Object.keys(RULES_DEF);
 
     /*
      * Détecte au drop si la liste où on veut mettre la règle est :
@@ -75,9 +75,8 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
       for (const obj of this.gameController.getObjects()) {
         if (!obj.object.rules)
           continue;
-        obj.rules = [];
         for (const rule of obj.object.rules) {
-          this.addRule(rule.id, obj, rule.conf, false, false);
+          this.addRule(rule.id, [ obj ], rule.conf, false, false);
         }
       }
       this.gameController.unsubscribe('addGroupObjects', callback);
@@ -97,7 +96,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    * Annexe : délectionne la règle précédemment édité et met à jour la list de règle appliqué et applicable
    */
   public selectObject(value) {
-    this.selectedObject = value;
+    this.selectedObjects = value;
     this.unselectRule();
     this.updateListRules();
   }
@@ -106,16 +105,16 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    * Déselectionne l'objet
    */
   public unselectObject() {
-    this.selectedObject = undefined;
+    this.selectedObjects = undefined;
   }
 
   /**
    * Sélectionne une règle
    */
   public selectRule(value) {
-    if (!this.selectedObject || !this.selectedObject.rules)
+    if (!this.selectedObjects || this.selectedObjects.length <= 0 || !this.selectedObjects[0].rules)
       return;
-    this.selectedRule = this.selectedObject.rules[value];
+    this.selectedRule = this.selectedObjects[0].rules[value];
   }
 
   /**
@@ -130,21 +129,23 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    */
   private updateListRules() {
     // Donne les règles de l'objet sélectionné (règles déjà appliqués)
-    this.appliedRules = (this.selectedObject && this.selectedObject.rules) ? Object.keys(this.selectedObject.rules) : [];
+    this.appliedRules = [];
+    if (this.selectedObjects && this.selectedObjects.length > 0 && this.selectedObjects[0].rules) {
+      for (const key in Object.keys(this.selectedObjects[0].rules)) {
+        if (this.selectedObjects.every((obj) => obj[key]))
+          this.appliedRules.push(key);
+      }
+    }
 
     // Donne les règles restante non assigné à un objet
-    this.availableRules = this.staticRules.filter((value) => {
-      if (!this.selectedObject || !this.selectedObject.rules)
-        return true;
-      return !this.selectedObject.rules[value];
-    });
+    this.availableRules = this.staticRules.filter((value) => !this.appliedRules[value] );
   }
 
   /**
    * Ajoute une règle à l'objet sélectionné
    * @param ruleName Nom de la règle
    */
-  private addRule(ruleName, obj = this.selectedObject, conf?, save = true, update = true) {
+  private addRule(ruleName, obj = this.selectedObjects, conf?, save = true, update = true) {
     if (!ruleName || !RULES_DEF[ruleName] || !obj)
       return;
 
@@ -154,10 +155,13 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     };
     const rule = new RULES_DEF[ruleName](null, obj, conf);
 
-    if (!obj.rules)
-      obj.rules = { [ruleName]: rule };
-    else
-      obj.rules[ruleName] = rule;
+    obj.forEach((element) => {
+      if (!element.rules)
+        element.rules = { [ruleName]: rule };
+      else
+        element.rules[ruleName] = rule;
+    });
+
     if (save)
       this.saveRules();
     if (update)
@@ -169,26 +173,44 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    * @param ruleName Nom de la règle
    */
   private removeRule(ruleName) {
-    if (!this.selectedObject || !this.selectedObject.rules || !this.selectedObject.rules[ruleName])
+    if (!this.selectedObjects || this.selectedObjects.length <= 0)
       return;
-    delete this.selectedObject.rules[ruleName];
+
+    this.selectedObjects.forEach((element) => {
+      if (element.rules && element.rules[ruleName])
+        delete element.rules[ruleName];
+    });
+
     this.saveRules();
     this.updateListRules();
   }
 
   /**
    * Transforme les instances des règles dans l'objet en données qui pourrnt être envoyé à la base de données
+   * Si fromFirst est True toute les rèlges qui seront envoyé en base de données seront égal au premier
+   * @param fromFirst
    */
-  private serializeRules() {
-    this.selectedObject.object.rules = [];
-    for (const key in this.selectedObject.rules) {
-      if (!this.selectedObject.rules[key])
-        continue;
-      const obj = {
-        id: this.selectedObject.rules[key].id,
-        conf: this.selectedObject.rules[key].config,
-      };
-      this.selectedObject.object.rules.push(obj);
+  private serializeRules(fromFirst = false) {
+    const serializeRule = (obj) => {
+      obj.object.rules = [];
+      for (const key in obj.rules) {
+        if (!obj.rules[key])
+          continue;
+        const rule = {
+          id: obj.rules[key].id,
+          conf: obj.rules[key].config,
+        };
+        obj.object.rules.push(obj);
+      }
+    };
+
+    if (!fromFirst) {
+      this.selectedObjects.forEach(serializeRule);
+    } else {
+      serializeRule(this.selectedObjects[0]);
+      this.selectedObjects.slice(1).forEach((obj) => {
+        obj.object.rules = this.selectedObjects[0].object.rules;
+      });
     }
   }
 
@@ -196,14 +218,15 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    * Sauvegarde la configuration des règles dans la base de données
    */
   private saveRules() {
-    if (!this.selectedObject || !this.selectedObject.rules)
+    if (!this.selectedObjects || this.selectedObjects.length <= 0)
       return;
-    this.serializeRules();
-    this.objectService.updateObject({ object: this.selectedObject.object }, this.selectedObject.uuid);
+    this.serializeRules(true);
+    this.selectedObjects.forEach((obj) => {
+      this.objectService.updateObject({ object: obj.object }, obj.uuid);
+    });
   }
 
   private viewToHex(event) {
-    console.log(event);
     this.selectedRule.config.color = event.replace('#', '0x');
   }
 }
