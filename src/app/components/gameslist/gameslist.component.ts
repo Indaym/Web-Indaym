@@ -1,8 +1,18 @@
-import { Component }    from '@angular/core';
-import { Router }       from '@angular/router';
+import {
+  Component,
+  OnInit,
+}                       from '@angular/core';
+import {
+  Router,
+  ActivatedRoute,
+}                       from '@angular/router';
 
-import { HtmlService }  from '../../services/html.service';
-import { GameService }  from '../../services/game.service';
+import {
+  GameService,
+  SnackBarService,
+}                       from '../../services';
+
+import { SnackBarType } from '../snackBar';
 
 @Component({
   selector  : 'ia-gameslist',
@@ -10,18 +20,31 @@ import { GameService }  from '../../services/game.service';
   styleUrls    : [
     './gameslist.component.css',
   ],
-  providers : [ HtmlService, GameService ],
+  providers : [ GameService ],
 })
 
-export class GamesListComponent {
+export class GamesListComponent implements OnInit {
   public lsGames = [];
 
-  constructor(public html: HtmlService, private games: GameService, private router: Router) {
+  constructor(
+    private games: GameService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBarService: SnackBarService,
+  ) {
     this.getGamesList();
   }
 
+  public ngOnInit() {
+    this.route.queryParams.subscribe((q) => {
+      if (q.error === 'true')
+        this.snackBarService.open('Informations about the game are missing', {}, SnackBarType.ERROR);
+    });
+  }
+
   public goToScenesPage(id, isNew = 0) {
-    this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: isNew } });
+    localStorage.setItem('gameID', id);
+    this.router.navigate(['/sceneslist'], { queryParams: { new: isNew } });
   }
 
   public gameFunction() {

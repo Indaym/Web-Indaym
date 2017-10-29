@@ -9,7 +9,6 @@ import { EditorComponent }      from './editor.component';
 import { BlueprintsComponent }  from './blueprints';
 import { DESIGNER_COMPONENTS }  from './designer';
 
-import { BLUEPRINT_COMPONENTS } from './blueprints';
 import { PreviewComponent }     from './preview';
 import { ObjectListComponent }  from './object-list';
 
@@ -28,5 +27,4 @@ export const EDITOR_COMPONENTS = [
   PreviewComponent,
   ObjectListComponent,
   DESIGNER_COMPONENTS,
-  BLUEPRINT_COMPONENTS,
 ];

@@ -9,7 +9,6 @@ import {
 }                         from '@angular/core';
 
 import {
-  HtmlService,
   GameControllerService,
   GridCreationService,
 }                         from '../../../../../services';
@@ -17,7 +16,7 @@ import { buttonsDefault } from '../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [ HtmlService ],
+  providers : [],
   templateUrl   : './left-sidebar.component.html',
   styleUrls    : [
     './left-sidebar.component.css',
@@ -42,7 +41,6 @@ export class LeftSidebarComponent implements OnInit {
   private gameController;
 
   constructor(
-    public html: HtmlService,
     private gameControllerService: GameControllerService,
     private gridCreationService: GridCreationService,
   ) {

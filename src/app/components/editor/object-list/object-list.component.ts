@@ -37,7 +37,7 @@ export class ObjectListComponent implements OnInit {
     });
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
-      object: object.threeDModel.mesh,
+      object,
     });
   }
 

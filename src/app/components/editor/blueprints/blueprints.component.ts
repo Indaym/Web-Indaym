@@ -1,20 +1,16 @@
-import { Component }        from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+}                           from '@angular/core';
+import { DragulaService }   from 'ng2-dragula';
 import { EventDispatcher }  from 'three';
-import { dragula }          from 'ng2-dragula/ng2-dragula';
 
 import {
   GameControllerService,
   ObjectService,
-}                           from '../../../services';
+}                           from '../../../services/';
 import { RULES_DEF }        from '../../../rules/';
-
-import { NewRule }          from './newRule';
-
-let rulesList = [];
-let currRule = null;
-let cnt = 0;
-const color = '0x0000FF';
-const movement = 1;
 
 @Component({
   selector: 'ia-blueprints',
@@ -22,230 +18,192 @@ const movement = 1;
   styleUrls: [
     './blueprints.component.css',
   ],
-  providers: [],
 })
-export class BlueprintsComponent {
+export class BlueprintsComponent implements OnInit, OnDestroy {
   private dispatcher: EventDispatcher;
   private gameController;
-  private objs;
-  private objInfo;
-  private rules;
-  private itemName;
-  // private newRules;
-  private color;
-  private movement;
-  public selectRules = (id) => { this.affRules(id); };
+
+  private selectedObject;       // l'objet sélectionné
+  private availableRules = [];  // les règles disponible qui ne sont pas déjà appliqué
+  private staticRules = [];     // liste de toutes les règles existantes
+  private appliedRules = [];    // règles appliqués à l'objet
+  private selectedRule;         // règle sélectionné pour la configuration
 
   constructor(
+    private dragulaService: DragulaService,
     private gameControllerService: GameControllerService,
     private objectService: ObjectService,
   ) {
-    this.dispatcher = new EventDispatcher();
     this.gameController = this.gameControllerService.gameController;
-    this.objs = this.gameController.getObjects();
-  }
+    this.dispatcher = new EventDispatcher();
 
-  private affRules(id) {
-
-    /*
-   for ()
-   {
-       var newRule = new NewRule();
-       rulesList.push(newRule);
-     }
-    */
-
-    this.objInfo = this.objs.find((lm, index, array) => {
-      if (lm.uuid === id)
-        return true;
-      else
-        return false;
+    // Quand on clique sur l'objet il appelle la fonction ici pour le sélectionner
+    this.dispatcher.addEventListener('selectObject', (e: any) => {
+      this.selectObject(e.object);
     });
 
-    // display object name:
-    this.itemName = this.objInfo.name;
+    // Récupère le nom de la classe pour faire une liste des règles disponibles
+    this.staticRules = [ ...Object.keys(RULES_DEF) ];
 
-    dragula([document.getElementById('rulesContainerSource'), document.getElementById('rulesContainer')])
-      .on('drop', function(el, target, source) {
-        let newRule;
-        let deleteRule = false;
-        el.className += ' ex-moved';
-
-        if (target.id === 'rulesContainerSource' && source.id === 'rulesContainer') {
-          deleteRule = true;
-          console.log('drag&drop droite vers gauche');
-          // console.log('deleteRule: ' + deleteRule);
-          // enlever doublons
-          const arr = document.getElementById('rulesContainerSource').innerText.split('\n');
-          cnt = 0;
-          const newArr = [];
-          for (const line of arr) {
-            if (line === el.id) {
-              if (cnt === 0) {
-                newArr.push('<div id="' + line + '">' + line + '</div>');
-              }
-              cnt += 1;
-            } else {
-              newArr.push('<div id="' + line + '">' + line + '</div>');
-            }
-          }
-          document.getElementById('rulesContainerSource').innerHTML = newArr.join('\n');
-
-          // patcher bug du save rule quand la regle a ete enlevee
-          for (let i = 0; i < rulesList.length; i++) {
-            if (rulesList[i].id === el.id) {
-              rulesList.splice(i, 1);
-              break;
-            }
-          }
-
-          el = '<div>' + el.innerText + '</div>';
-          if (document.getElementById('rulesContainer').childElementCount === 0) {
-            document.getElementById('right').innerHTML = '';
-          }
-        } else if (target.id === 'rulesContainer' && source.id === 'rulesContainerSource') {
-          console.log('drag&drop gauche vers droite');
-
-          let myBool = false;
-          const myArr = document.getElementById('rulesContainerSource').innerText.split('\n');
-          for (const myI of myArr) {
-            if (myI === el.innerText) {
-              myBool = true;
-            }
-          }
-
-          newRule = new NewRule();
-          newRule.id = el.innerText;
-          newRule.conf.color = color;
-          newRule.conf.movement = movement;
-          if (!document.getElementById('color'))
-            document.getElementById('right').innerHTML = `
-                <div>Color: <input type="color" id="color"  name="color"><br>Movement:
-                 <input id="movement" type="number" name="movement" value=1><br></div>
-              `;
-          if (rulesList.length !== 0) {
-            currRule.conf.color = ((document.getElementById('color') as HTMLInputElement)).value;
-            currRule.conf.color = currRule.conf.color.replace('#', '0x');
-            const value = parseInt(((document.getElementById('movement')) as HTMLInputElement).value, 10);
-            currRule.conf.movement = value || 1;
-          }
-
-          // remettre rule a gauche
-          if (myBool === false)
-            document.getElementById('rulesContainerSource').innerHTML += `<div id="${el.id}">${el.id}</div>`;
-
-          // enlever doublons
-          const arr = document.getElementById('rulesContainer').innerText.split('\n');
-          cnt = 0;
-          const newArr = [];
-          for (const line of arr) {
-            if (line === el.id) {
-              if (cnt === 0)
-                newArr.push(`<div id="${line}">${line}</div>`);
-              cnt += 1;
-            } else {
-              newArr.push(`<div id="${line}">${line}</div>`);
-            }
-          }
-          document.getElementById('rulesContainer').innerHTML = newArr.join('\n');
-          // } ?
-          // user can choose a color and a movement number:
-          // associate ngModel to both values. Set to attributes of object currently selected.
-          // Simply change currently selected object when a drop happens.
-          // Win. (Maybe have to copy values.)
-        }
-
-        if (deleteRule === true) {
-          // console.log("is tru!!");
-          for (let i = 0; i < rulesList.length; i++) {
-            // console.log("i: " + i);
-            // console.log(rulesList[i]);
-            if (rulesList[i].id === el.id) {
-
-              rulesList.splice(i, 1);
-              // console.log("yoloswagXXlol");
-            }
-          }
-        } else if (cnt <= 1) {
-          // console.log("is fal!!");
-          cnt = 0;
-          for (const rule of rulesList) {
-            if (newRule.id === rule.id) {
-              cnt += 1;
-            }
-          }
-          if (cnt === 0) {
-            rulesList.push(newRule);
-            currRule = newRule;
-          }
-        }
-      });
-
-    // console.log(this.objInfo);
-    // console.log(id);
-    // this.saveRules();
-  }
-
-  private saveRules() {
-    /* if (this.objInfo.object.rules === undefined) */
-    this.objInfo.object['rules'] = [];
-
-    if (currRule && document.getElementById('color')) {
-      currRule.conf.color = String(((document.getElementById('color')) as HTMLInputElement).value);
-      currRule.conf.color = currRule.conf.color.replace('#', '0x');
-      currRule.conf.movement = parseInt(((document.getElementById('movement')) as HTMLInputElement).value, 10);
-    }
-
-    // for each rule in this.rules:
-    for (const rule of rulesList) {
-      this.objInfo.object.rules.push(rule);
-      // console.log("rule before updating obj : " + JSON.stringify(this.objInfo.object.rules));
-
-      // update de l'objet qui add les rules
-      this.objectService.updateObject({ object: this.objInfo.object }, this.objInfo.uuid);
-
-      const index = this.objs.findIndex((element) => element.uuid === this.objInfo.uuid);
-      this.objs.splice(index, 1, this.objInfo);
-
-      const ruleDef = RULES_DEF[rule.id];
-      if (ruleDef !== undefined) {
-        const ruleInstance = new ruleDef(null, this.objInfo, rule.conf);
-
-        if (this.objInfo.rules === undefined) {
-          this.objInfo.rules = [];
-        }
-
-        this.objInfo.rules[ruleInstance.id] = ruleInstance;
+    /*
+     * Détecte au drop si la liste où on veut mettre la règle est :
+     *   - la liste de règle déjà appliqué à l'objet
+     * = ou =
+     *   - la liste de règles disponible.
+     * En fonction on créé ou supprime la règle
+     */
+    this.dragulaService.drop.subscribe((value) => {
+      switch (value[2].id) {
+        case 'applied-rules':
+          this.addRule(value[1].innerText);
+          break;
+        case 'available-rules':
+          this.removeRule(value[1].innerText);
+          break;
+        default:
+          this.updateListRules();
       }
-
-      this.reloadRules(this.objInfo.uuid);
-    }
-
-    rulesList = [];
-    // this.objectService.updateObject({object:this.objInfo.object}, this.objInfo.uuid);
+    });
   }
 
-  private reloadRules(objId) {
-    document.getElementById('rulesContainer').innerText = '';
-    if (this.objs === undefined)
+  /**
+   * Créé les instances de règles
+   * Utile quand on refresh la page et que l'on passe pas par le ModelLoader qui instancie les règles en temps normal
+   */
+  public ngOnInit() {
+    const callback = () => {
+      for (const obj of this.gameController.getObjects()) {
+        if (!obj.object.rules)
+          continue;
+        obj.rules = [];
+        for (const rule of obj.object.rules) {
+          this.addRule(rule.id, obj, rule.conf, false, false);
+        }
+      }
+      this.gameController.unsubscribe('addGroupObjects', callback);
+    };
+    this.gameController.subscribe('addGroupObjects', callback);
+  }
+
+  /**
+   * Sauvegarde la règle en cours d'édition lorsque l'on quitte la page blueprints
+   */
+  public ngOnDestroy() {
+    this.saveRules();
+  }
+
+  /**
+   * Set l'objet sélectionné
+   * Annexe : délectionne la règle précédemment édité et met à jour la list de règle appliqué et applicable
+   */
+  public selectObject(value) {
+    this.selectedObject = value;
+    this.unselectRule();
+    this.updateListRules();
+  }
+
+  /**
+   * Déselectionne l'objet
+   */
+  public unselectObject() {
+    this.selectedObject = undefined;
+  }
+
+  /**
+   * Sélectionne une règle
+   */
+  public selectRule(value) {
+    if (!this.selectedObject || !this.selectedObject.rules)
       return;
-    console.log(this.objs);
-    const obj = this.objs.find((element) => element.uuid === objId);
-    if (obj === undefined || obj.rules === undefined)
+    this.selectedRule = this.selectedObject.rules[value];
+  }
+
+  /**
+   * Déselectionne une règle
+   */
+  public unselectRule() {
+    this.selectedRule = undefined;
+  }
+
+  /**
+   * Met à jour la liste des règles qui restent à appliquer et celles déjà appliqué
+   */
+  private updateListRules() {
+    // Donne les règles de l'objet sélectionné (règles déjà appliqués)
+    this.appliedRules = (this.selectedObject && this.selectedObject.rules) ? Object.keys(this.selectedObject.rules) : [];
+
+    // Donne les règles restante non assigné à un objet
+    this.availableRules = this.staticRules.filter((value) => {
+      if (!this.selectedObject || !this.selectedObject.rules)
+        return true;
+      return !this.selectedObject.rules[value];
+    });
+  }
+
+  /**
+   * Ajoute une règle à l'objet sélectionné
+   * @param ruleName Nom de la règle
+   */
+  private addRule(ruleName, obj = this.selectedObject, conf?, save = true, update = true) {
+    if (!ruleName || !RULES_DEF[ruleName] || !obj)
       return;
-    const rules = Object.values(obj.rules);
 
-    document.getElementById('previousContainer')
-      .innerHTML = `<div>Rules currently applied to this item: </div><div id="previousRules"></div>`;
+    conf = conf || {
+      color: '#ffffff',
+      movement: 1,
+    };
+    const rule = new RULES_DEF[ruleName](null, obj, conf);
 
-    console.log(rulesList);
-    for (const r of rulesList) {
-      // console.log("regles d'avant (qui doivent partir) + actuelles: ");
-      // console.log(r);
-      // console.log(rulesList);
+    if (!obj.rules)
+      obj.rules = { [ruleName]: rule };
+    else
+      obj.rules[ruleName] = rule;
+    if (save)
+      this.saveRules();
+    if (update)
+      this.updateListRules();
+  }
 
-      if (true) // if rule n'y est pas {
-        document.getElementById('previousContainer').innerHTML += `<div>${r.id}</div>`;
+  /**
+   * Supprime une règles des instances et sauvegarde l'object en base de données
+   * @param ruleName Nom de la règle
+   */
+  private removeRule(ruleName) {
+    if (!this.selectedObject || !this.selectedObject.rules || !this.selectedObject.rules[ruleName])
+      return;
+    delete this.selectedObject.rules[ruleName];
+    this.saveRules();
+    this.updateListRules();
+  }
+
+  /**
+   * Transforme les instances des règles dans l'objet en données qui pourrnt être envoyé à la base de données
+   */
+  private serializeRules() {
+    this.selectedObject.object.rules = [];
+    for (const key in this.selectedObject.rules) {
+      if (!this.selectedObject.rules[key])
+        continue;
+      const obj = {
+        id: this.selectedObject.rules[key].id,
+        conf: this.selectedObject.rules[key].config,
+      };
+      this.selectedObject.object.rules.push(obj);
     }
+  }
+
+  /**
+   * Sauvegarde la configuration des règles dans la base de données
+   */
+  private saveRules() {
+    if (!this.selectedObject || !this.selectedObject.rules)
+      return;
+    this.serializeRules();
+    this.objectService.updateObject({ object: this.selectedObject.object }, this.selectedObject.uuid);
+  }
+
+  private viewToHex(event) {
+    console.log(event);
+    this.selectedRule.config.color = event.replace('#', '0x');
   }
 }

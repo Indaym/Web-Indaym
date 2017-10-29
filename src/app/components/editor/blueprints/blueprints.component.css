@@ -1,111 +1,62 @@
-:host {
-  position: relative;
-  top: -50px;
-  background: none;
-  pointer-events: none;
-  display: block;
-}
-
-h2 {
-  text-align: center;
-}
-
-ul {
-	width: 100%;
-  list-style-type: none;
-  margin: auto;
-  padding: 0;
-  overflow: hidden;
-}
-
-li a {
-  display: block;
-  color: white;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.left, .left:hover {
-  border-radius: 0 0 5px 0;
-}
-
-li {
-  background-color: #444;
-  pointer-events: all;
-  border-color: #e7e7e7
-}
-
-li a:hover:not(.active), .active {
-  color: black;
-  background-color: #555;
-}
-
-.back-event {
-  pointer-events: all;  
-}
-
-md-sidenav-container {
-  pointer-events: all;  
-  /*position: absolute;*/
-  top: 0;
-  left: 0;
-  min-height:500px;
-  height:100%;
-  width: 100%;
-}
-
-md-sidenav {
-  background: rgba(55,55,55,0.95);
+.row {
+  margin: 0;
   padding: 10px;
-  width:300px;
-  border-radius: 5px;
-  color:white;
+}
+/*
+.col-xs-3 {
+  border: 1px solid black;
+  min-height: 50px;
+}
+*/
+
+.badge {
+  float: right;
 }
 
-.navbar {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  border-bottom: 0px;
+.badge:hover {
+  cursor: pointer;
+  filter: brightness(120%);
 }
 
-#name {
-  position: fixed;
-  left: 47%;
-  top: 30%;
-  font-size: 250%;
+.badge:hover > .glyphicon-minus {
+  color: darkred;
 }
 
-#rules {
-  position: fixed;
-  left: 47%;
-  top: 45%;
-  width: 25%;
-  border: 3px solid cadetblue;
-  font-size: 300%;
+.badge:hover > .glyphicon-plus {
+  color: darkgreen;
 }
 
-#rulesContainer {
-  min-height:150px;
-  min-width: 90%;
+#available-rules, #applied-rules {
+  min-height: 500px;
 }
 
-#save {
-  position: fixed;
-  left: 50%;
-  top: 85%;
-  font-size: 100%;
+:host ::ng-deep li:hover {
+  color: black !important;
 }
 
-#right {
-  position: fixed;
-  left: 75%;
-  top: 45%;
-  font-size: 150%;
-}
 
-#previousContainer {
-  position:fixed;
-  left: 25%;
-  top: 38%;
-  font-size: 100%;
+/*
+ * Reset dragula css / bootstrap are something else must force with !important the css
+ */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
 }

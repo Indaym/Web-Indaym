@@ -1,34 +1,35 @@
-<nav class="navbar">
-  <ul class="nav navbar-nav">
-    <li class="left"><a md-button (click)="menu.toggle()">Toggle Left Panel</a></li>
-  </ul>
-</nav><br/>
-
-<md-sidenav-container class="no-background">
-  <md-sidenav #menu mode="side">
-    <ia-left-bar [menu]="menu" [eventDispatcher]="dispatcher" [selectRules]="selectRules" [objs]="gameController.getObjects()"></ia-left-bar>
-  </md-sidenav>
-</md-sidenav-container>
-
-<div class="back-event">
-  <div id="previousContainer">
-    <div>Rules currently applied to this item: </div>
-    <div id="previousRules"></div>
+<div class="row">
+  <h4>Object selected : <strong *ngIf="selectedObject">{{ selectedObject.name }}</strong></h4>
+</div>
+<div class="row">
+  <!-- List of objects -->
+  <div class="col-xs-3">
+    <ia-object-list [eventDispatcher]="dispatcher"></ia-object-list>
   </div>
-
-  <div id="name">
-    <div id="itemName">Item Name: {{itemName}}</div>
-    <div>Rules to apply to this item: {{color}}</div>
+  <!-- List of Rules available -->
+  <div class="col-xs-3">
+    <div id="available-rules" class="list-group" [dragula]='"rulesBag"'>
+      <a *ngFor="let rule of availableRules" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
+    </div>
   </div>
-
-  <div id="rules">
-    <div class='container' [dragula]='"first-bag"' id="rulesContainer"></div>
+  <!-- List of Rules already applied -->
+  <div class="col-xs-3">
+    <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
+      <a *ngFor="let rule of appliedRules" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
+    </div>    
   </div>
-
-  <div id="save">
-    <p>Warning: Saving will override previous rules and only keep the new ones</p>
-    <button (click)="saveRules()">Save</button>
-  </div>
-
-  <div id="right"></div>
+  <!-- Configuration of the object -->
+  <div class="col-xs-3">
+    <div *ngIf="selectedRule">
+      <div class="form-group">
+        <label for="color">Color :</label>
+        <input id="color" type="color" [ngModel]="selectedRule.config.color | toHexView" (ngModelChange)="viewToHex($event)"/>
+      </div>
+      <div class="form-group">
+        <label for="move">Movement :</label>
+        <input id="move" type="number" [(ngModel)]="selectedRule.config.movement"/>
+      </div>
+      <button (click)="saveRules()">Save Configuration</button>
+    </div>  
+  </div>  
 </div>
