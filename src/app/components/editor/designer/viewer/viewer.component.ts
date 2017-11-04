@@ -8,13 +8,13 @@ import {
   OnDestroy,
   Input,
   HostListener,
-}                             from '@angular/core';
-import { MdSnackBar }         from '@angular/material';
+  ViewChild,
+}                         from '@angular/core';
 
-// temporaire
 import {
   MeshBasicMaterial,
-} from 'three';
+  Group,
+}                         from 'three';
 
 import {
   EditorViewer,
@@ -27,9 +27,9 @@ import {
   TextureService,
   GridCreationService,
   SnackBarService,
- }                            from '../../../../services';
-import { buttonsDefault }     from '../../../../models';
-import { SnackBarType }       from '../../../snackBar';
+ }                        from '../../../../services';
+import { buttonsDefault } from '../../../../models';
+import { SnackBarType }   from '../../../snackBar';
 
 @Component({
   selector  : 'ia-viewer',
@@ -45,6 +45,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   private modelsLoader: ModelsLoader;
   private gameController;
+  @ViewChild('editorContainer') container;
 
   constructor(
     private gameControllerService: GameControllerService,
@@ -63,12 +64,11 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const dom = document.getElementById('editorContainer');
     this.scene = new EditorViewer({
       width: () => window.innerWidth,
-      height: () => window.innerHeight - dom.offsetTop - 5,
+      height: () => window.innerHeight - this.container.nativeElement.offsetTop - 5,
     });
-    this.scene.defaultLoad('editorContainer');
+    this.scene.defaultLoad(this.container.nativeElement);
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
     this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
     this.scene.eventDispatcher = this.eventDispatcher;
@@ -90,9 +90,13 @@ export class ViewerComponent implements OnInit, OnDestroy {
     });
 
     this.eventDispatcher.addEventListener('selectObject', (e: any) => {
-      if (e.objects.length > 0)
-        this.scene.selectObject(e.objects[0].threeDModel.mesh);
-      else
+      if (e.objects.length > 0) {
+        const objs = [];
+        e.objects.forEach((element) => {
+          objs.push(element.threeDModel.mesh);
+        });
+        this.scene.selectObjects(objs);
+      } else
         this.scene.unselectObject(undefined);
     });
     this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
@@ -135,29 +139,36 @@ export class ViewerComponent implements OnInit, OnDestroy {
   }
 
   public deleteObject() {
-    const selected = (this.scene.selected as any);
+    if (!this.scene.selected)
+      return;
+//      selected.LinkModel !== undefined
 
-    if (selected !== undefined && selected.LinkModel !== undefined) {
+    const deleteObj = (obj: any) => {
       const config = {
-        data: { ...selected.LinkModel },
+        data: { ...obj.LinkModel },
       };
-
-      this.objectService.deleteObject(selected.LinkModel.uuid, (ret) => {
-        this.scene.deleteSelected();
-        this.gameController.deleteObject(selected.LinkModel.uuid);
+      this.objectService.deleteObject(obj.LinkModel.uuid, (ret) => {
+        // this.gameController.deleteObject(obj.LinkModel.uuid, true, 'ToService');
         this.snackBarService.open(
-          `Object <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong> has been deleted`,
+          `Object <strong>${obj.LinkModel.name}</strong> of type <strong>${obj.LinkModel.object.type}</strong> has been deleted`,
           config,
           SnackBarType.SUCCESS,
         );
       }, () => {
         this.snackBarService.open(
-          `Can't delete <strong>${selected.LinkModel.name}</strong> of type <strong>${selected.LinkModel.object.type}</strong>`,
+          `Can't delete <strong>${obj.LinkModel.name}</strong> of type <strong>${obj.LinkModel.object.type}</strong>`,
           config,
           SnackBarType.ERROR,
         );
       });
-    }
+    };
+
+    if (this.scene.selected instanceof Group)
+      this.scene.selected.children.forEach(deleteObj);
+    else
+      deleteObj(this.scene.selected);
+
+    this.scene.deleteSelected();
   }
 
   public addObject(args: any) {

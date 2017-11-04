@@ -9,6 +9,9 @@ import {
   GridHelper,
   AxisHelper,
   DirectionalLight,
+  Group,
+  Box3,
+  Matrix4,
 } from 'three';
 
 import { SceneViewer } from './scene.viewer';
@@ -116,6 +119,7 @@ export class EditorViewer extends SceneViewer {
    */
   public selectObject(obj: Object3D) {
     if (obj !== undefined) {
+      this.unselectObject(undefined);
       this._selected = obj;
       this._controller.attach(obj);
       this._scene.add(this._controller);
@@ -132,6 +136,29 @@ export class EditorViewer extends SceneViewer {
     }
   }
 
+  public selectObjects(objs) {
+    if (objs) {
+      this.unselectObject(undefined);
+
+      const grp = new Group();
+
+      // Define center of all selected objects
+      const center = new Vector3();
+      objs.forEach((child) => center.add(child.position));
+      center.divideScalar(objs.length);
+      grp.position.add(center);
+
+      // Add all objects to group and change relative position
+      objs.forEach((el) => {
+        el.position.sub(center);
+        grp.add(el);
+      });
+
+      this._scene.add(grp);
+      this.selectObject(grp);
+    }
+  }
+
   /**
    * Unselect an Object
    * @param obj : Object to select
@@ -140,6 +167,17 @@ export class EditorViewer extends SceneViewer {
     const objSel = [obj, this._controller.object, this._selected].find((elem) => elem !== undefined);
     this._controller.detach(objSel);
     this._scene.remove(this._controller);
+
+    if (this._selected instanceof Group) {
+      while (this._selected.children.length > 0) {
+        // Remove child from group, set correct position and add to scene
+        const element = this._selected.children[0];
+        this._selected.remove(element);
+        element.position.add(this._selected.position);
+        this._scene.add(element);
+      }
+      this._scene.remove(this._selected);
+    }
     this._selected = undefined;
   }
 
@@ -148,6 +186,10 @@ export class EditorViewer extends SceneViewer {
    */
   public deleteSelected() {
     const objSel = [this._selected, this._controller.object].find((elem) => elem !== undefined);
+    if (this._selected instanceof Group) {
+      console.log(this._selected);
+//      objSel.push(...this._selected.children);
+    }
     if (objSel !== undefined) {
       this.unselectObject(objSel);
       this._scene.remove(objSel);
@@ -174,11 +216,24 @@ export class EditorViewer extends SceneViewer {
    */
   public onMouseDown(event) {
     this.setIntersection(event);
-    const intersected = this._raycaster.intersectObjects(this._scene.children.filter((elem) => {
-      return elem instanceof Mesh;
-    }));
+    const childs = this._scene.children.filter((elem) => elem instanceof Mesh);
+    this._scene.children.forEach((element) => {
+      if (element instanceof Group)
+        childs.push(...element.children);
+    });
+    const intersected = this._raycaster.intersectObjects(childs);
     if (intersected.length > 0)
-      this.selectObject(intersected[0].object);
+      if (event.shiftKey) {
+        const arr = (this._selected instanceof Group) ? [ ...this._selected.children ] : [ this._selected ];
+        const index = arr.findIndex((element) => element === intersected[0].object);
+        if (index !== -1)
+          arr.splice(index, 1);
+        else
+          arr.push(intersected[0].object);
+        this.selectObjects(arr);
+      } else {
+        this.selectObject(intersected[0].object);
+      }
   }
 
   public onMouseMove(event) {

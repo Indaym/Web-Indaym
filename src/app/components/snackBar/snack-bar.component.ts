@@ -3,7 +3,7 @@ import {
   Inject,
 }                       from '@angular/core';
 import {
-  MD_SNACK_BAR_DATA,
+  MAT_SNACK_BAR_DATA,
   MatSnackBarRef,
 }                       from '@angular/material';
 
@@ -20,7 +20,7 @@ import { SnackBarType } from './enum.snack-bar';
 export class SnackBarComponent {
   SnackBarType = SnackBarType;
 
-  constructor(public snackBarRef: MatSnackBarRef<SnackBarComponent>, @Inject(MD_SNACK_BAR_DATA) public data: any) {}
+  constructor(public snackBarRef: MatSnackBarRef<SnackBarComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: any) {}
 
   public close() {
     this.snackBarRef.closeWithAction();
