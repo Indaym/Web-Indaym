@@ -23,7 +23,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
   private dispatcher: EventDispatcher;
   private gameController;
 
-  private selectedObjects;       // l'objet sélectionné
+  private selectedObjects;      // les objets sélectionnés
   private availableRules = [];  // les règles disponible qui ne sont pas déjà appliqué
   private staticRules = [];     // liste de toutes les règles existantes
   private appliedRules = [];    // règles appliqués à l'objet
@@ -229,7 +229,8 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
       return;
     this.serializeRules(true);
     this.selectedObjects.forEach((obj) => {
-      this.addRule(this.selectedRule.id, [obj], this.selectedRule.config, false, false);
+      if (this.selectedRule)
+        this.addRule(this.selectedRule.id, [obj], this.selectedRule.config, false, false);
       this.objectService.updateObject({ object: obj.object }, obj.uuid);
     });
   }
