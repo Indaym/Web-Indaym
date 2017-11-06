@@ -81,22 +81,24 @@ export class ViewerComponent implements OnInit, OnDestroy {
         this.textureService.getLocalTexture(e.texture, (texture) => {
           if (texture === undefined)
             return;
-          const selected = this.scene.selected as any;
-          selected.LinkModel.threeDModel.texture = texture;
-          selected.LinkModel.textureRef = e.texture;
-          this.objectService.updateObject({textureRef: e.texture}, selected.LinkModel.uuid);
+          const apply = (obj: any) => {
+            obj.LinkModel.threeDModel.texture = texture;
+            obj.LinkModel.textureRef = e.texture;
+            this.objectService.updateObject({textureRef: e.texture}, obj.LinkModel.uuid);
+          };
+
+          if (this.scene.selected instanceof Group)
+            this.scene.selected.children.forEach((element: any) => apply(element));
+          else
+            apply(this.scene.selected);
         });
       }
     });
 
     this.eventDispatcher.addEventListener('selectObject', (e: any) => {
-      if (e.objects.length > 0) {
-        const objs = [];
-        e.objects.forEach((element) => {
-          objs.push(element.threeDModel.mesh);
-        });
-        this.scene.selectObjects(objs);
-      } else
+      if (e.objects.length > 0)
+        this.scene.selectObjects(e.objects.map((element) => element.threeDModel.mesh));
+      else
         this.scene.unselectObject(undefined);
     });
     this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
@@ -141,14 +143,13 @@ export class ViewerComponent implements OnInit, OnDestroy {
   public deleteObject() {
     if (!this.scene.selected)
       return;
-//      selected.LinkModel !== undefined
 
     const deleteObj = (obj: any) => {
       const config = {
         data: { ...obj.LinkModel },
       };
       this.objectService.deleteObject(obj.LinkModel.uuid, (ret) => {
-        // this.gameController.deleteObject(obj.LinkModel.uuid, true, 'ToService');
+        this.gameController.deleteObject(obj.LinkModel.uuid, true, 'ToService');
         this.snackBarService.open(
           `Object <strong>${obj.LinkModel.name}</strong> of type <strong>${obj.LinkModel.object.type}</strong> has been deleted`,
           config,

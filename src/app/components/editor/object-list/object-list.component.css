@@ -3,7 +3,12 @@
 }
 
 #itemsList li {
-  margin: 5px 0;
+  margin: 5px 0 5px 15px;
+}
+
+#itemsList > p {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 #itemsList li.selected > .glyphicon {

@@ -186,13 +186,12 @@ export class EditorViewer extends SceneViewer {
    */
   public deleteSelected() {
     const objSel = [this._selected, this._controller.object].find((elem) => elem !== undefined);
-    if (this._selected instanceof Group) {
-      console.log(this._selected);
-//      objSel.push(...this._selected.children);
-    }
+
     if (objSel !== undefined) {
+      const childs = (objSel instanceof Group) ? [...objSel.children] : [];
       this.unselectObject(objSel);
       this._scene.remove(objSel);
+      childs.forEach((element) => this._scene.remove(element));
       this._eventDispatcher.dispatchEvent({
         type: 'updateObjectInputs',
         position: new Vector3(),

@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  ViewChild,
+  ViewChildren,
 }                                 from '@angular/core';
 
 import { GameControllerService }  from '../../../services';
@@ -19,11 +19,16 @@ export class ObjectListComponent implements OnInit {
   private gameController;
   private objects;
   private itemsIcons = [];
+  private categories = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
   private selectedElements = [];
+  @ViewChildren('itemsList') private itemslist;
 
-  @ViewChild('itemsList') private itemslist;
+  private updateSwitch = true;
+  private trackSwitch = (index, value) => {
+    return this.updateSwitch;
+  }
 
   constructor(private gameControllerService: GameControllerService) {
     this.gameController = this.gameControllerService.gameController;
@@ -34,15 +39,17 @@ export class ObjectListComponent implements OnInit {
     this.objects = this.gameController.getObjects();
     this.gameController.subscribe('addObject', () => this.setIcons());
     this.gameController.subscribe('addGroupObjects', () => this.setIcons());
-    this.gameController.subscribe('deleteObject', () => this.setIcons());
+    this.gameController.subscribes(['deleteObject', 'deleteObjectToService'], () => this.setIcons());
     this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
   }
 
   private cleanViewSelected() {
-    for (const child of this.itemslist.nativeElement.children) {
-      if (child.classList.contains('selected'))
-        child.classList.remove('selected');
-    }
+    this.itemslist.forEach((element) => {
+      for (const child of element.nativeElement.children) {
+        if (child.classList.contains('selected'))
+          child.classList.remove('selected');
+      }
+    });
   }
 
   private selectObject(objectId, event) {
@@ -51,24 +58,55 @@ export class ObjectListComponent implements OnInit {
     });
     const li = event.path.find((element) => element.tagName === 'LI');
     const index = this.selectedElements.indexOf(object);
-
-    if (index !== -1)
-      this.selectedElements.splice(index, 1);
+    let toRemove = false;
 
     if (event.shiftKey && this._multiSelect) {
       if (index === -1)
         this.selectedElements.push(object);
+      else {
+        this.selectedElements.splice(index, 1);
+        toRemove = true;
+      }
     } else {
       this.cleanViewSelected();
-      this.selectedElements = (index === -1) ? [ object ] : [];
+      this.selectedElements = (index !== -1 && this.selectedElements.length === 1) ? [] : [ object ];
+      if (this.selectedElements.length === 0)
+        toRemove = true;
     }
-    (index === -1) ? li.classList.add('selected') : li.classList.remove('selected');
+    (toRemove) ? li.classList.remove('selected') : li.classList.add('selected');
 
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
       objects: [ ...this.selectedElements ],
     });
-}
+  }
+
+  private selectTypeObjects(type, event) {
+    const  objects = this.gameController.getObjects().filter((element) => element.object.type === type);
+    const every = objects.every((element) => this.selectedElements.findIndex((el) => el === element) !== -1);
+    this.selectedElements = this.selectedElements.filter((element) => objects.findIndex((el) => el === element) === -1);
+    let toRemove = false;
+
+    if (event.shiftKey && this._multiSelect) {
+      if (!every)
+        this.selectedElements.push(...objects);
+      else
+        toRemove = true;
+    } else {
+      this.cleanViewSelected();
+      this.selectedElements = objects;
+    }
+
+    for (const item of event.srcElement.parentElement.children) {
+      if (item.tagName === 'LI')
+        (toRemove) ? item.classList.remove('selected') : item.classList.add('selected');
+    }
+    this.eventDispatcher.dispatchEvent({
+      type: 'selectObject',
+      objects: [ ...this.selectedElements ],
+    });
+
+  }
 
   private setIcons() {
     let obj;
@@ -76,11 +114,17 @@ export class ObjectListComponent implements OnInit {
     this.itemsIcons.splice(0, this.itemsIcons.length);
     this.objects = this.gameController.getObjects();
     for (const elem of this.objects) {
-      obj = { name: elem.name, uuid: elem.uuid };
+      obj = { name: elem.name, type: elem.object.type, uuid: elem.uuid };
       if (this.icons.indexOf(elem.name) >= 0)
         obj['icon'] = '/assets/icons/' + elem.name + '.png';
       this.itemsIcons.push(obj);
     }
+    this.categories.splice(0, this.categories.length);
+    for (const item of this.objects) {
+      if (this.categories.indexOf(item.object.type) === -1)
+        this.categories.push(item.object.type);
+    }
+    this.updateSwitch = !this.updateSwitch;
     return this.itemsIcons;
   }
 }
