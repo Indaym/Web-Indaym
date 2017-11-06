@@ -12,51 +12,57 @@ import 'rxjs/add/operator/map';
 import { DefaultService } from './default.service';
 import { CryptoService }  from '../../cryptoModule/services';
 import { UserService }    from './user.service';
+import { TokenService }   from './tokenStore.service';
 import { User }           from './UserConfig';
+
+type token = 'token' | 'refreshToken';
 
 @Injectable()
 export class AuthService extends DefaultService {
+  private _refreshUrl: string;
   private _isLogin: boolean;
   private  authUrl: (string) => string;
 
   constructor(
     private http: Http,
     private crypto: CryptoService,
+    private tokenService: TokenService,
     private user: UserService,
   ) {
     super();
-    // this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
 
     const joining = this.joiner('/');
     const apiUrl = joining(this.server);
     const authUrl = apiUrl('auth');
     this.authUrl = joining(authUrl);
 
-    this._isLogin = this.user.token ? true : false;
+    this._refreshUrl = this.composeUrl(this.composeUrl(this.server)('auth'))('refresh');
+
+    this._isLogin = this.tokenService.getToken('token') ? true : false;
   }
 
-  setToken(token: string): void {
-    this.user.token = JSON.parse(token);
+  get refreshUrl(): string {
+    return this._refreshUrl;
+  }
+
+  setlogin(login: boolean) {
+    this._isLogin = login;
   }
 
   isLogin() {
     return this._isLogin;
   }
 
-  setLogin(token: string): void {
-    this._isLogin = true;
-    this.setToken(token);
-  }
-
   reset(): void {
     this._isLogin = false;
-    this.user.deleteToken();
+    this.tokenService.deleteToken('token');
+    this.tokenService.deleteToken('refreshToken');
   }
 
   login(username: string, password: string, email: string, success?, error?) {
     this.user.user = { username, password, email };
 
-    const body = { 'username': username, 'password': password, 'email': email };
+    const body = { 'data': { 'username': username, 'password': password, 'email': email } };
     return this.http.post(this.authUrl('login'), body)
       .map((res: Response) => res.json())
       .subscribe(success, error);
@@ -64,12 +70,11 @@ export class AuthService extends DefaultService {
 
   logout() {
     return this.http.post(this.authUrl('logout'), {}, {
-      headers: new Headers({'Authorization': 'JWT ' + this.user.token}),
+      headers: new Headers({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
     })
       .subscribe(
         (data) => {
-          this._isLogin = false;
-          this.user.deleteToken();
+          this.reset();
         },
         (err) => console.log(`nok ${err}`),
       );

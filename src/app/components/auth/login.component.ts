@@ -9,7 +9,10 @@ import {
   Response,
 }                       from '@angular/http';
 
-import { AuthService }  from '../../services';
+import {
+  AuthService,
+  TokenService,
+}  from '../../services';
 
 @Component({
   selector: 'ia-login',
@@ -20,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private token: TokenService,
   ) {}
 
   hasError = false;
@@ -29,7 +33,10 @@ export class LoginComponent implements OnInit {
   error: string;
 
   private loginSuccess = (data) => {
-    this.auth.setLogin(JSON.stringify(data.token || {}));
+    this.token.addToken('token', data.token || {});
+    this.token.addToken('refreshToken', data.refreshToken || {});
+
+    this.auth.setlogin(true);
     this.router.navigate(['/home']);
   }
 
