@@ -89,6 +89,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    */
   public ngOnDestroy() {
     this.saveRules();
+    this.unselectObject();
   }
 
   /**
@@ -153,17 +154,15 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
       color: '#ffffff',
       movement: 1,
     };
-    const rule = new RULES_DEF[ruleName](null, obj, conf);
 
     obj.forEach((element) => {
       if (!element.rules)
-        element.rules = { [ruleName]: rule };
-      else
-        element.rules[ruleName] = rule;
+        element.rules = {};
+      element.rules[ruleName] = new RULES_DEF[ruleName](null, obj, { ...conf });
     });
 
     if (save)
-      this.saveRules();
+      this.saveRules(false, obj);
     if (update)
       this.updateListRules();
   }
@@ -190,7 +189,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
    * Si fromFirst est True toute les rèlges qui seront envoyé en base de données seront égal au premier
    * @param fromFirst
    */
-  private serializeRules(fromFirst = false) {
+  private serializeRules(fromFirst = false, objs = this.selectedObjects) {
     const serializeRule = (obj) => {
       obj.object.rules = [];
       for (const key in obj.rules) {
@@ -205,13 +204,13 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     };
 
     if (!fromFirst) {
-      this.selectedObjects.forEach(serializeRule);
+      objs.forEach(serializeRule);
     } else {
-      serializeRule(this.selectedObjects[0]);
+      serializeRule(objs[0]);
 
-      this.selectedObjects.slice(1).forEach((obj) => {
-        // Fusionne les r_gles du premier objet avec les règles existantes
-        const firstRules = this.selectedObjects[0].object.rules;
+      objs.slice(1).forEach((obj) => {
+        // Fusionne les règles du premier objet avec les règles existantes
+        const firstRules = objs[0].object.rules;
         const rules = [
           ...firstRules.filter((item) => this.appliedRules.indexOf(item.id) !== -1),
           ...obj.object.rules.filter((objectRule) => !firstRules.find((rule) => rule.id === objectRule.id)),
@@ -224,12 +223,12 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
   /**
    * Sauvegarde la configuration des règles dans la base de données
    */
-  private saveRules() {
-    if (!this.selectedObjects || this.selectedObjects.length <= 0)
+  private saveRules(fromFirst = false, objs = this.selectedObjects) {
+    if (!objs || objs.length <= 0)
       return;
-    this.serializeRules(true);
-    this.selectedObjects.forEach((obj) => {
-      if (this.selectedRule)
+    this.serializeRules(fromFirst, objs);
+    objs.forEach((obj) => {
+      if (this.selectedRule && fromFirst)
         this.addRule(this.selectedRule.id, [obj], this.selectedRule.config, false, false);
       this.objectService.updateObject({ object: obj.object }, obj.uuid);
     });

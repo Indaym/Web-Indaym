@@ -11,6 +11,7 @@ export const buttonsDefault = {
       droppable: true,
       dimension: [32.6, 2.0, 32.6],
       textureName: 'side.png',
+      rules: [],
     },
   },
   'pawnWhite': {
@@ -21,6 +22,7 @@ export const buttonsDefault = {
       droppable: false,
       dimension: [3.5, 1.5, 3.5],
       textureName: 'white.png',
+      rules: [],
     },
   },
   'pawnBlack': {
@@ -31,6 +33,7 @@ export const buttonsDefault = {
       droppable: false,
       dimension: [3.5, 1.5, 3.5],
       textureName: 'black.png',
+      rules: [],
     },
   },
   'case': {
@@ -41,6 +44,7 @@ export const buttonsDefault = {
       droppable: true,
       dimension: [10, 10, 1],
       position: [0, 0, 0],
+      rules: [],
     },
   },
   'grid': {
@@ -55,6 +59,7 @@ export const buttonsDefault = {
       caseWidth: 8.2,
       caseHeight: 8.2,
       gap: 0.1,
+      rules: [],
     },
   },
 };
