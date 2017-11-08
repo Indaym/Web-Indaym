@@ -6,7 +6,9 @@ import { AuthService }  from '../../services';
 @Component({
   selector: 'ia-auth-button',
   templateUrl: './authButtons.component.html',
-  styleUrls: [],
+  styleUrls: [
+    '../app.component.css',
+  ],
 })
 export class AuthButtonsComponent {
   constructor(
@@ -14,9 +16,9 @@ export class AuthButtonsComponent {
     private router: Router,
   ) {}
 
-  private _isLoged: boolean;
+  private _isLogged: boolean;
 
-  get isLoged() {
+  get isLogged() {
     return this.authService.isLogin();
   }
 

@@ -35,7 +35,6 @@ import { PIPES }                    from './pipes';
 import { AuthGuard }                from './guards';
 
 import { TokenService }             from './services/tokenStore.service';
-import { HtmlService }              from './services/html.service';
 import { AuthService }              from './services/auth.service';
 import { UserService }              from './services/user.service';
 import { HttpAuthInterceptor }      from './interceptors';

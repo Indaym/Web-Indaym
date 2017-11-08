@@ -1,7 +1,9 @@
-<div *ngIf="!isLoged" >
-  <li><a [routerLink]="['/login']" >Login</a></li>
-  <li><a [routerLink]="['/register']" >Register</a></li>
-</div>
-<div *ngIf="isLoged" >
-  <li><button (click)="logout()" >Logout</button></li>
+<div>
+  <div *ngIf="!isLogged; else notLogged" >
+    <li><a [routerLink]="['/login']" >Login</a></li>
+    <li><a [routerLink]="['/register']" >Register</a></li>
+  </div>
+  <ng-template #notLogged >
+    <li><a (click)="logout()" >Logout</a></li>
+  </ng-template>
 </div>
