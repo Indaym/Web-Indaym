@@ -27,8 +27,10 @@ import { routing }                  from './app.route';
 
 import {
   AppComponent,
+  SnackBarComponent,
   APP_COMPONENTS,
 }                                   from './components';
+import { PIPES }                    from './pipes';
 
 import { AuthGuard }                from './guards';
 
@@ -41,10 +43,11 @@ import { HttpAuthInterceptor }      from './interceptors';
 @NgModule({
   declarations: [
     APP_COMPONENTS,
+    PIPES,
   ],
   bootstrap : [ AppComponent ],
+  entryComponents: [ SnackBarComponent ],
   providers : [
-    HtmlService,
     AuthGuard,
     AuthService,
     UserService,

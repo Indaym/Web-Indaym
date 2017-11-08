@@ -10,10 +10,7 @@ import { Subscription } from 'rxjs/Rx';
 
 import { comeFrom }     from '../../components/play';
 
-import {
-  HtmlService,
-  SceneService,
-}                       from '../../services';
+import { SceneService } from '../../services';
 
 @Component({
   selector  : 'ia-sceneslist',
@@ -22,7 +19,6 @@ import {
     './sceneslist.component.css',
   ],
   providers : [
-    HtmlService,
     SceneService,
   ],
 })
@@ -32,7 +28,7 @@ export class ScenesListComponent implements OnDestroy {
   public isNew;
   public subscription: Subscription;
 
-  constructor(public html: HtmlService, private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
+  constructor(private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
     this.subscription = route.queryParams.subscribe(
       (queryParam: any) => this.getScenesList(queryParam),
     );
@@ -50,7 +46,7 @@ export class ScenesListComponent implements OnDestroy {
   }
 
   public getScenesList(queryParam) {
-    this.gameId = queryParam.gameId;
+    this.gameId = localStorage.getItem('gameID');
     this.isNew = parseInt(queryParam.new, 10);
 
     this.scenes.setGameId(this.gameId);
@@ -60,7 +56,8 @@ export class ScenesListComponent implements OnDestroy {
   }
 
   public goToScenePage(id) {
-    this.router.navigate(['/editor/designer'], { queryParams: { gameId: this.gameId, sceneId: id } });
+    localStorage.setItem('sceneID', id);
+    this.router.navigate(['/editor/designer']);
   }
 
   public addScene() {

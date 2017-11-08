@@ -36,6 +36,7 @@
     "@angular2-material/sidenav": "^2.0.0-alpha.8-2",
     "@angular2-material/tabs": "^2.0.0-alpha.8-2",
     "@angular2-material/toolbar": "^2.0.0-alpha.8-2",
+    "@types/three": "^0.84.26",
     "@types/crypto-js": "^3.1.36",
     "angular2-in-memory-web-api": "0.0.21",
     "bootstrap": "^3.3.6",

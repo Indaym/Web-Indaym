@@ -1,5 +1,8 @@
 <nav class="navbar navbar-default">
-	<h1>Indaym</h1>
+	<span class="icons-indaym">
+			<img src="/favicon.ico"/>
+			<span>Indaym</span>
+	</span>
 	<ul class='nav navbar-nav'>
 	  <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
 	  <li><a routerLink="/gameslist" routerLinkActive="active">Editor</a></li>
@@ -10,8 +13,7 @@
 	</ul>
 </nav>
 
-<div class="background-image" [ngStyle]="{'background-image' : 'url(../assets/img/bg/indaymlogo.png)'}">
-</div>
+<!-- <div class="background-image" [ngStyle]="{'background-image' : 'url(../assets/img/bg/indaymlogo.png)'}"></div> -->
 
 <router-outlet> </router-outlet>
 

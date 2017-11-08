@@ -9,7 +9,6 @@ import {
 }                         from '@angular/core';
 
 import {
-  HtmlService,
   GameControllerService,
   GridCreationService,
 }                         from '../../../../../services';
@@ -17,7 +16,7 @@ import { buttonsDefault } from '../../../../../models';
 
 @Component({
   selector  : 'ia-left-sidebar',
-  providers : [ HtmlService ],
+  providers : [],
   templateUrl   : './left-sidebar.component.html',
   styleUrls    : [
     './left-sidebar.component.css',
@@ -26,6 +25,7 @@ import { buttonsDefault } from '../../../../../models';
 })
 export class LeftSidebarComponent implements OnInit {
   @Input() public start;
+  @Input() public eventDispatcher;
   public items = {
     boards: {
       'board': 'Add Board',
@@ -39,22 +39,15 @@ export class LeftSidebarComponent implements OnInit {
   };
 
   private gameController;
-  private objects;
-  private show;
-  private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
 
   constructor(
-    public html: HtmlService,
     private gameControllerService: GameControllerService,
     private gridCreationService: GridCreationService,
   ) {
     this.gameController = this.gameControllerService.gameController;
   }
 
-  public ngOnInit() {
-    this.objects = this.gameController.getObjects();
-    this.show = this.setIcons();
-  }
+  public ngOnInit() {}
 
   public addObject(name: string) {
     if (name !== undefined && buttonsDefault[name] !== undefined) {
@@ -69,20 +62,6 @@ export class LeftSidebarComponent implements OnInit {
       else
         cb({});
     }
-  }
-
-  private setIcons() {
-    let obj;
-    const stock = [];
-
-    this.objects = this.gameController.getObjects();
-    for (const elem of this.objects) {
-      obj = { name: elem.name };
-      if (this.icons.indexOf(elem.name) >= 0)
-        obj['icon'] = '/assets/icons/' + elem.name + '.png';
-      stock.push(obj);
-    }
-    return stock;
   }
 
   private toggleMode() {

@@ -72,6 +72,10 @@ export class EditorViewer extends SceneViewer {
           this.updateController();
         }
       });
+
+      this._eventDispatcher.addEventListener('updateController', (e: any) => {
+        this.modeController = e.modeController;
+      });
     }
   }
 

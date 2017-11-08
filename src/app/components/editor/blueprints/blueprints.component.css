@@ -1,104 +1,62 @@
-h2 {
-  text-align: center;
+.row {
+  margin: 0;
+  padding: 10px;
 }
-
-ul {
-	width: 100%;
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
-    background-color: #00cccc;
+/*
+.col-xs-3 {
+  border: 1px solid black;
+  min-height: 50px;
 }
+*/
 
-li a {
-    display: block;
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #00cccc;
-}
-
-.active {
-background-color:#00cccc;
-}
-
-#grey {
-  background-color: #555;
-}
-
-#goRight {
+.badge {
   float: right;
 }
 
-md-sidenav-layout {
-  /*position: absolute;*/
-  top: 0;
-  left: 0;
-  min-height:500px;
-  height:100%;
-  width: 100%;
+.badge:hover {
+  cursor: pointer;
+  filter: brightness(120%);
 }
 
-md-sidenav {
-  background: rgba(55,55,55,0.95);
-  padding: 10px;
-  width:300px;
-  border-radius: 5px;
-  color:white;
+.badge:hover > .glyphicon-minus {
+  color: darkred;
 }
 
-.navbar {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  border-bottom: 0px;
+.badge:hover > .glyphicon-plus {
+  color: darkgreen;
 }
 
-#name {
-  position: fixed;
-  left: 47%;
-  top: 30%;
-  font-size: 250%;
-}
-
-#rules {
-  position: fixed;
-  left: 47%;
-  top: 45%;
-  width: 25%;
-  border: 3px solid cadetblue;
-  font-size: 300%;
-}
-
-#rulesContainer {
-    min-height:150px;
-    min-width: 90%;
-}
-
-#save {
-  position: fixed;
-  left: 50%;
-  top: 85%;
-  font-size: 100%;
-}
-
-#right {
-  position: fixed;
-  left: 75%;
-  top: 45%;
-  font-size: 150%;
-}
-
-#previousContainer {
-  position:fixed;
-  left: 25%;
-  top: 38%;
-  font-size: 100%;
-}
-
-md-sidenav-container {
+#available-rules, #applied-rules {
   min-height: 500px;
+}
+
+:host ::ng-deep li:hover {
+  color: black !important;
+}
+
+
+/*
+ * Reset dragula css / bootstrap are something else must force with !important the css
+ */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
 }

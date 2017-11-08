@@ -35,7 +35,7 @@ export class SceneViewer {
   protected _grid: Array<Array<Mesh>>;
   protected _capture: Array<number>;
 
-  /**
+  /*
    * @param conf : JSON object
    * {
    *  width: number

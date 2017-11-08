@@ -1,8 +1,24 @@
 .close-button {
-  font-family: 'Glyphicons Halflings';
-  min-width:0;
-  position: absolute;
-  right:0;
-  top:0;
-  color:white;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 5px;
+  z-index: 1;
 }
+.close-button span {
+  font-family: 'Glyphicons Halflings';
+  font-size: 20px;
+  text-align: center;
+  color:white;
+  top:0;
+  padding: 4px;  
+}
+
+.close-button span:hover {
+  color: #A70000;
+}
+
+.close-button:hover {
+  border-color: #A70000;
+}
+
