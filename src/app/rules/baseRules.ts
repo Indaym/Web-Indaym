@@ -21,6 +21,7 @@ export abstract class BaseRules {
   protected _configuration: any;
   protected _refScene: any;
   protected _refObj: any;
+  protected _priority: any;
 
   /**
    * RFELXION

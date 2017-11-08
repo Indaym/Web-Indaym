@@ -305,8 +305,15 @@ export class PlayerViewer extends SceneViewer {
       return true;
 
     for (const rule in linkModel.rules) {
-      if (linkModel.rules[rule].run(args) === false)
-        return false;
+      if (linkModel.rules[rule]._priority && linkModel.rules[rule]._priority === "HIGH")
+        if (linkModel.rules[rule].run(args) === false)
+          return false;
+    }
+
+    for (const rule in linkModel.rules) {
+      if (!linkModel.rules[rule]._priority && linkModel.rules[rule]._priority !== "HIGH")
+        if (linkModel.rules[rule].run(args) === false)
+          return false;
     }
 
     return true;
