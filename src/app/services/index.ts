@@ -11,3 +11,5 @@ export { GridCreationService }    from './gridCreation.service';
 export { AuthService }            from './auth.service';
 export { RulesServices }          from './rules.service';
 export { SnackBarService }        from './snack-bar.service';
+export { UserService }            from './user.service';
+export { TokenService }           from './tokenStore.service';

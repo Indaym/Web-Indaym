@@ -18,13 +18,4 @@ export class AppComponent {
     // Image in localStorage seems to slow browser
     // localStorage.clear();
   }
-
-  forceLogin() {
-    localStorage.setItem('jwt', JSON.stringify('foo'));
-  }
-
-  forceLogout() {
-    localStorage.removeItem('jwt');
-    this.router.navigate(['/login']);
-  }
 }

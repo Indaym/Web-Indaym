@@ -13,6 +13,7 @@ import { LegalMentionsComponent } from './legal-mentions';
 import { PlayComponent }          from './play';
 import { StoreComponent }         from './store';
 import { RateGameComponent }      from './rategame';
+import { AUTH_COMPONENTS }        from './auth';
 import {
   LoginComponent,
   RegisterComponent,
@@ -23,13 +24,14 @@ export { AppComponent }           from './app.component';
 export { SnackBarComponent }      from './snackBar';
 
 export const APP_COMPONENTS = [
+  EDITOR_COMPONENTS,
+  FORUM_COMPONENTS,
+  HOME_COMPONENTS,
+  AUTH_COMPONENTS,
   AppComponent,
   ContactComponent,
   GamesListComponent,
   ScenesListComponent,
-  EDITOR_COMPONENTS,
-  FORUM_COMPONENTS,
-  HOME_COMPONENTS,
   LegalMentionsComponent,
   PlayComponent,
   StoreComponent,

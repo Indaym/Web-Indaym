@@ -7,9 +7,21 @@ import { BrowserModule }            from '@angular/platform-browser';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
 import { FormsModule }              from '@angular/forms';
 import { DndModule }                from 'ng2-dnd';
-import { HttpModule }               from '@angular/http';
+import {
+  HttpModule,
+  Http,
+  XHRBackend,
+  RequestOptions,
+}                                   from '@angular/http';
 import { FileUploadModule }         from 'ng2-file-upload';
 import { ModalModule }              from 'ng2-modal';
+import {
+  DragulaModule,
+  DragulaService,
+}                                   from 'ng2-dragula/ng2-dragula';
+
+import { MaterialModule }           from '../materialModule';
+import { CryptoModule }             from '../cryptoModule';
 
 import { routing }                  from './app.route';
 
@@ -22,12 +34,10 @@ import { PIPES }                    from './pipes';
 
 import { AuthGuard }                from './guards';
 
-import {
-  DragulaModule,
-  DragulaService,
-}                                   from 'ng2-dragula/ng2-dragula';
-
-import { MaterialModule }           from '../materialModule';
+import { TokenService }             from './services/tokenStore.service';
+import { AuthService }              from './services/auth.service';
+import { UserService }              from './services/user.service';
+import { HttpAuthInterceptor }      from './interceptors';
 
 @NgModule({
   declarations: [
@@ -38,9 +48,14 @@ import { MaterialModule }           from '../materialModule';
   entryComponents: [ SnackBarComponent ],
   providers : [
     AuthGuard,
+    AuthService,
+    UserService,
+    TokenService,
+    { provide: Http, useClass: HttpAuthInterceptor },
   ],
   imports   : [
     MaterialModule,
+    CryptoModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,

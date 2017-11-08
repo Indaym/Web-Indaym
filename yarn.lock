@@ -244,6 +244,10 @@
   dependencies:
     "@angular-devkit/core" "0.0.20"
 
+"@types/crypto-js@^3.1.36":
+  version "3.1.37"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-3.1.37.tgz#ae05b21447d14f2db4bd0a2de950ef18fc78b478"
+
 "@types/jasmine@*":
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.2.tgz#6e6d4cb183cd55c7a1ad6270bced10fdd5367a3c"
@@ -1308,6 +1312,10 @@ crypto-browserify@^3.11.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
 
 css-color-names@0.0.4:
   version "0.0.4"
