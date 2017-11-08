@@ -19,6 +19,7 @@ export class TestRuleFalse extends BaseRules {
     this._name = 'Test Rule False';
     this._description = `This is a test False rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
+    this._priority = "HIGH";
 
   }
 
