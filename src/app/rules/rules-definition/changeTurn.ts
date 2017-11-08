@@ -16,6 +16,7 @@ export class ChangeTurn extends BaseRules {
     this._name = 'Change Turn rules';
     this._description = `In this rule you can set the number of player and the number of time they can play`;
     this._ruleType = RULE_TYPE.default;
+    this._priority = "HIGH";
   }
 
   public run(args?: any): boolean {
