@@ -15,6 +15,11 @@ export class DefaultService {
     this.server = serverConfig.server;
   }
 
+  protected joiner = (join: string): (string) => (string) => string =>
+                      (left: string): (string) => string =>
+                      (right: string): string =>
+                        `${left}${join}${right}`
+
   // TODO: change serverUrl in the config by removing the / at the end
   protected composeUrl(chunk: string): (string) => string {
     return function(piece: string): string {

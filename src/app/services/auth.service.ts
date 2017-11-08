@@ -1,38 +1,91 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Injectable }     from '@angular/core';
+import {
+  Http,
+  Headers,
+  Response,
+}                         from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 
 import { DefaultService } from './default.service';
+import { CryptoService }  from '../../cryptoModule/services';
+import { UserService }    from './user.service';
+import { TokenService }   from './tokenStore.service';
+import { User }           from './UserConfig';
+
+type token = 'token' | 'refreshToken';
 
 @Injectable()
 export class AuthService extends DefaultService {
-  private token: string;
-  private authUrl: (string) => string;
+  private _refreshUrl: string;
+  private _isLogin: boolean;
+  private  authUrl: (string) => string;
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private crypto: CryptoService,
+    private tokenService: TokenService,
+    private user: UserService,
+  ) {
     super();
-    this.authUrl = this.composeUrl(this.composeUrl(this.server)('auth'));
-    this.token = JSON.parse(localStorage.getItem('jwt')) || undefined;
+
+    const joining = this.joiner('/');
+    const apiUrl = joining(this.server);
+    const authUrl = apiUrl('auth');
+    this.authUrl = joining(authUrl);
+
+    this._refreshUrl = this.composeUrl(this.composeUrl(this.server)('auth'))('refresh');
+
+    this._isLogin = this.tokenService.getToken('token') ? true : false;
   }
 
-  login(username: string, password: string, email: string, error?, success?) {
-    return this.http.post(this.authUrl('login'), { 'username': username, 'password': password, 'email': email })
-      .mergeMap((res) => res.json())
-      .subscribe(success, error);
+  get refreshUrl(): string {
+    return this._refreshUrl;
   }
 
-  register(username: string, password: string, email: string, error?, success?) {
-    const body = {'data': { 'username': username, 'password': password, 'email': email }};
+  setlogin(login: boolean) {
+    this._isLogin = login;
+  }
 
-    return this.http.post(this.authUrl('register'), body)
-      .mergeMap((res) => res.json())
+  isLogin() {
+    return this._isLogin;
+  }
+
+  reset(): void {
+    this._isLogin = false;
+    this.tokenService.deleteToken('token');
+    this.tokenService.deleteToken('refreshToken');
+  }
+
+  login(username: string, password: string, email: string, success?, error?) {
+    this.user.user = { username, password, email };
+
+    const body = { 'data': { 'username': username, 'password': password, 'email': email } };
+    return this.http.post(this.authUrl('login'), body)
+      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
   logout() {
-    this.token = null;
-    localStorage.removeItem('jwt');
+    return this.http.post(this.authUrl('logout'), {}, {
+      headers: new Headers({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
+    })
+      .subscribe(
+        (data) => {
+          this.reset();
+        },
+        (err) => console.log(`nok ${err}`),
+      );
+  }
+
+  register(username: string, password: string, email: string, success?, error?) {
+    this.user.user = { username, password, email };
+    const body = {'data': { 'username': username, 'password': password, 'email': email }};
+
+    return this.http.post(this.authUrl('register'), body)
+      .map((res: Response) => res.json())
+      .subscribe(success, error);
   }
 }
