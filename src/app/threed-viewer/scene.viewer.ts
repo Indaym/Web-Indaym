@@ -51,7 +51,7 @@ export class SceneViewer {
 
     // Initialisation Scene
     this._scene = new Scene();
-    this._scene.background = new Color( 0xcccccc );
+    this._scene.background = new Color(0xcccccc);
 
     // Initialisation Camera
     this._camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 10000);
@@ -61,6 +61,7 @@ export class SceneViewer {
     this._renderer = new WebGLRenderer();
     this._renderer.setSize(this.width, this.height);
     this._renderer.setClearColor(0xdddddd);
+    this._renderer.sortObjects = false;
 
     // Initialisation Orbital Control
     this._controls = new OrbitControls(this._camera, this._renderer.domElement);
@@ -70,18 +71,18 @@ export class SceneViewer {
     // Creation of Raycaster
     this._raycaster = new Raycaster();
 
-    window.addEventListener('resize', () => this.onWindowResize(), false );
+    window.addEventListener('resize', () => this.onWindowResize(), false);
 
     this._player = 0;
     this._capture = [-1, -1];
 
     this.grid = [];
     for (let i = 0; i < 10; i++) {
-            this.grid[i] = [];
-            for (let j = 0; j < 10; j++) {
-                this.grid[i][j] = null;
-            }
-        }
+      this.grid[i] = [];
+      for (let j = 0; j < 10; j++) {
+        this.grid[i][j] = null;
+      }
+    }
   }
 
   /**
@@ -98,7 +99,7 @@ export class SceneViewer {
   /**
    * Init dispatcher Events
    */
-  public initDispatcherEvents() {}
+  public initDispatcherEvents() { }
 
   /**
    * Get event Dispatcher
@@ -209,8 +210,11 @@ export class SceneViewer {
    * Set Container of the 3D scene
    * @param value
    */
-  set container(value: string) {
-    this._domElement = document.getElementById(value.toString());
+  set container(value) {
+    if (typeof (value) === 'string')
+      this._domElement = document.getElementById(value.toString());
+    else
+      this._domElement = value;
   }
 
   /**
@@ -248,10 +252,10 @@ export class SceneViewer {
     return this._player;
   }
 
-  set player(value: number)
-   {
-     this._player = value;
-   }
+  set player(value: number) {
+    this._player = value;
+  }
+
   /**
    * add rule
    */
@@ -303,8 +307,8 @@ export class SceneViewer {
    * @param event : MouseEvent
    */
   public setIntersection(event) {
-    this._mouse.x = ( event.offsetX / this.width ) * 2 - 1;
-    this._mouse.y = -( event.offsetY / this.height ) * 2 + 1;
+    this._mouse.x = (event.offsetX / this.width) * 2 - 1;
+    this._mouse.y = -(event.offsetY / this.height) * 2 + 1;
     this._raycaster.setFromCamera(this._mouse, this._camera);
   }
 

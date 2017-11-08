@@ -1,8 +1,8 @@
 <div id="closeButton" class="close-button">
-    <span md-button (click)="start.close()" class="glyphicon glyphicon-remove"></span>
+    <span mat-button (click)="start.close()" class="glyphicon glyphicon-remove"></span>    
 </div>
 
-<!-- <button md-button (click)="toggleMode()">Toggle</button>
+<!-- <button mat-button (click)="toggleMode()">Toggle</button>
 
 <span>Mode : {{start.mode}}</span> -->
 
@@ -70,6 +70,6 @@
   </ia-tab>
 
   <ia-tab tabTitle="Objects List">
-    <ia-object-list [eventDispatcher]="eventDispatcher"></ia-object-list>
+    <ia-object-list [eventDispatcher]="eventDispatcher" multiSelect></ia-object-list>
   </ia-tab>
 </ia-tabs>

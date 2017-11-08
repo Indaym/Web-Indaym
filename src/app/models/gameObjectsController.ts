@@ -48,12 +48,34 @@ export class GameObjectsController {
   }
 
   /**
+   * Subscribe to a group of Events
+   * @param types : Group type of the event
+   * @param callback : Callback called when event throw
+   */
+  public subscribes(types: string[], callback) {
+    types.forEach((type) => {
+      this.eventDispatcher.addEventListener(type, callback);
+    });
+  }
+
+  /**
    * Unsubscribe to Events
    * @param type : Type of the event
    * @param callback : Callback used for subscribe
    */
   public unsubscribe(type: string, callback) {
     this.eventDispatcher.removeEventListener(type, callback);
+  }
+
+  /**
+   * Unsubscribe a group of  Events
+   * @param type : Type of the event
+   * @param callback : Callback used for subscribe
+   */
+  public unsubscribes(types: string[], callback) {
+    types.forEach((type) => {
+      this.eventDispatcher.removeEventListener(type, callback);
+    });
   }
 
   /**
@@ -231,6 +253,23 @@ export class GameObjectsController {
           if (typeEvent === 'ToService' || typeEvent === 'Both')
             this.emit('deleteObjectToService', removed[0], success, error);
         }
+      }
+    }
+  }
+
+  /**
+   * Delete a Group of objects
+   * @param emit : Choose if it must throw an event
+   * @param typeEvent : Select if Event must be for view, for service or both
+   */
+  public deleteGroupObjects(objects, emit = true, typeEvent = 'ToView', success?: () => void, error?: () => void) {
+    if (this.currentObjects !== undefined) {
+      this.currentObjects = this.currentObjects.filter((element) => !objects.find((el) => element === el));
+      if (emit === true) {
+        if (typeEvent === 'ToView' || typeEvent === 'Both')
+          this.emit('deleteGroupObjects', objects, success, error);
+        if (typeEvent === 'ToService' || typeEvent === 'Both')
+          this.emit('deleteGroupObjectsToService', objects, success, error);
       }
     }
   }

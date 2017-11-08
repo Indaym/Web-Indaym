@@ -59,7 +59,7 @@ li a:hover:not(.active), .active {
   float: right;
 }
 
-md-sidenav-container {
+mat-sidenav-container {
   pointer-events: all;
   /*position: absolute;*/
   margin-top:-20px;
@@ -70,17 +70,17 @@ md-sidenav-container {
   width: 100%;
 }
 
-md-sidenav {
+mat-sidenav {
   background: rgba(55,55,55,0.95);
   padding: 10px;
   width: 300px;
   color: white;
 }
-md-sidenav.right-sidenav {
+mat-sidenav.right-sidenav {
   border-radius: 5px 0 0 5px;
 }
 
-md-sidenav.left-sidenav {
+mat-sidenav.left-sidenav {
   border-radius: 0 5px 5px 0;  
 }
 
@@ -92,5 +92,11 @@ md-sidenav.left-sidenav {
 
 ::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
   display: none;
+}
+
+.content {
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 

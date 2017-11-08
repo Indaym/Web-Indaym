@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import {
   SnackBarComponent,
@@ -9,7 +9,7 @@ import {
 @Injectable()
 export class SnackBarService {
 
-  constructor(private mdSnackBar: MdSnackBar) {}
+  constructor(private mdSnackBar: MatSnackBar) {}
 
   public open(message, config, snackType?) {
     config.data = config.data || {};

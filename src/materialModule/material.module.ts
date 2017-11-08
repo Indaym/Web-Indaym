@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MdSidenavModule,
-  MdRadioModule,
-  MdSnackBarModule,
+  MatSidenavModule,
+  MatRadioModule,
+  MatSnackBarModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
-  MdSidenavModule,
-  MdRadioModule,
-  MdSnackBarModule,
+  MatSidenavModule,
+  MatRadioModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
