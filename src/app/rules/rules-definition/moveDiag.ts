@@ -2,6 +2,11 @@ import {
   RULE_TYPE,
   BaseRules,
 }               from '../baseRules';
+import {
+  SnackBarService,
+}               from '../../services';
+
+import { SnackBarType }   from '../../components/snackBar';
 
 import {
   SceneViewer,
@@ -9,13 +14,18 @@ import {
 }               from '../../threed-viewer';
 
 export class MoveDiag extends BaseRules {
-  constructor(scene: any, model: any, conf: any = {}) {
+  constructor(scene: any, model: any, conf: any = {},
+  private snackBarService: SnackBarService,) {
     super(scene, model, conf);
 
     this._id = 'MoveDiag';
     this._name = 'Move Diagonal';
-    this._description = `This is a rule to move in diagonal`;
-    this._ruleType = RULE_TYPE.default;
+    this._description = 'This is a rule to move in diagonal';
+    this._ruleType = RULE_TYPE.mouvement;
+  }
+
+  get name(): string {
+    return this._name;
   }
 
   public capture_rule(model: any): boolean {
@@ -23,12 +33,12 @@ export class MoveDiag extends BaseRules {
       this._refScene.capture[0] -= 1;
       if (this._refScene.capture[0] === 0)
         /// HERE
-        console.log('Black WIN');
+        alert('Black WIN');
     } else if (model.LinkModel.name === 'blackpawn') {
       this._refScene.capture[1] -= 1;
       if (this._refScene.capture[1] === 0)
         /// HERE
-        console.log('White WIN');
+        alert('White WIN');
     }
     return true;
   }

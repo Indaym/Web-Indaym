@@ -74,7 +74,7 @@ export class SceneViewer {
     window.addEventListener('resize', () => this.onWindowResize(), false);
 
     this._player = 0;
-    this._capture = [-1, -1];
+    this._capture = [3, 3];
 
     this.grid = [];
     for (let i = 0; i < 10; i++) {

@@ -43,6 +43,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     });
 
     // Récupère le nom de la classe pour faire une liste des règles disponibles
+    console.log(RULES_DEF.MoveDiag.prototype);
     this.staticRules = Object.keys(RULES_DEF);
 
     /*
@@ -140,6 +141,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
 
     // Donne les règles restante non assigné à un objet
     this.availableRules = this.staticRules.filter((value) => this.appliedRules.indexOf(value) === -1);
+    console.log(this.staticRules);
   }
 
   /**

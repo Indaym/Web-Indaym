@@ -20,6 +20,7 @@ export class TestRuleTrue extends BaseRules {
     this._name = 'Test Rule True';
     this._description = `This is a test True rule with ${this.id} id`;
     this._ruleType = RULE_TYPE.default;
+    this._priority = "HIGH";
   }
 
   public run(args?: any): boolean {

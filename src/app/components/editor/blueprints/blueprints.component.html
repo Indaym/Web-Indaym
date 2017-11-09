@@ -16,7 +16,7 @@
   <div class="col-xs-3">
     <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
       <a *ngFor="let rule of appliedRules" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
-    </div>    
+    </div>
   </div>
   <!-- Configuration of the object -->
   <div class="col-xs-3">
@@ -30,6 +30,6 @@
         <input id="move" type="number" [(ngModel)]="selectedRule.config.movement"/>
       </div>
       <button (click)="saveRules(true)">Save Configuration</button>
-    </div>  
-  </div>  
+    </div>
+  </div>
 </div>
