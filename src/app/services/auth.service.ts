@@ -5,9 +5,17 @@ import {
   Response,
 }                         from '@angular/http';
 
-import { Observable }     from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+}                         from '@angular/common/http';
+
+import { Observable }     from 'rxjs/observable';
+import {
+  mergeMap,
+  map,
+}                         from 'rxjs/operators';
 
 import { DefaultService } from './default.service';
 import { CryptoService }  from '../../cryptoModule/services';
@@ -24,8 +32,7 @@ export class AuthService extends DefaultService {
   private  authUrl: (string) => string;
 
   constructor(
-    private http: Http,
-    private crypto: CryptoService,
+    private http: HttpClient,
     private tokenService: TokenService,
     private user: UserService,
   ) {
@@ -64,13 +71,12 @@ export class AuthService extends DefaultService {
 
     const body = { 'data': { 'username': username, 'password': password, 'email': email } };
     return this.http.post(this.authUrl('login'), body)
-      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
   logout() {
     return this.http.post(this.authUrl('logout'), {}, {
-      headers: new Headers({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
+      headers: new HttpHeaders({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
     })
       .subscribe(
         (data) => {
@@ -85,7 +91,6 @@ export class AuthService extends DefaultService {
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)
-      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 }

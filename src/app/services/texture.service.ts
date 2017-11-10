@@ -1,18 +1,19 @@
 /**
  * Created by Caro on 08/01/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }      from '@angular/core';
+import { Http }            from '@angular/http';
+import { HttpClient }      from '@angular/common/http';
 
-import { DefaultService } from './default.service';
+import { DefaultService }  from './default.service';
 
-import 'rxjs/add/operator/map';
+import { map }             from 'rxjs/operators';
 
 @Injectable()
 export class TextureService extends DefaultService {
   private textureUrl = '';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
     this.textureUrl = this.serverUrl + 'textures/';
     this.setted = true;
@@ -23,7 +24,6 @@ export class TextureService extends DefaultService {
    */
   public getTextures(success = (datas) => {}, error = (err) => {}) {
     this.http.get(this.textureUrl)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -32,7 +32,6 @@ export class TextureService extends DefaultService {
    */
   public getOneTexture(id, success = (datas) => {}, error = (err) => {}) {
     this.http.get(this.textureUrl + id)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 

@@ -1,9 +1,8 @@
 import {
   Component,
   OnInit,
-} from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, Headers, Response } from '@angular/http';
+}                  from '@angular/core';
+import { Router }  from '@angular/router';
 
 import { AuthService } from '../../services';
 

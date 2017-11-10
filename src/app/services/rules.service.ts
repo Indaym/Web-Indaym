@@ -2,13 +2,12 @@
  * Created by Caro on 10/06/2017.
  */
 
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable }  from '@angular/core';
+import { map }         from 'rxjs/operators';
 
 import {
-    RULES_DEF,
-} from '../rules';
+  RULES_DEF,
+}                      from '../rules';
 
 /**
  * store all rules we have in the app

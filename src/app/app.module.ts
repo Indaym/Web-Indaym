@@ -13,6 +13,11 @@ import {
   XHRBackend,
   RequestOptions,
 }                                   from '@angular/http';
+
+import {
+  HttpClientModule,
+}                                   from '@angular/common/http';
+
 import { FileUploadModule }         from 'ng2-file-upload';
 import { ModalModule }              from 'ng2-modal';
 import {
@@ -51,7 +56,7 @@ import { HttpAuthInterceptor }      from './interceptors';
     AuthService,
     UserService,
     TokenService,
-    { provide: Http, useClass: HttpAuthInterceptor },
+    // { provide: Http, useClass: HttpAuthInterceptor },
   ],
   imports   : [
     MaterialModule,
@@ -59,6 +64,7 @@ import { HttpAuthInterceptor }      from './interceptors';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    HttpClientModule,
     routing,
     FormsModule,
     DndModule.forRoot(),
