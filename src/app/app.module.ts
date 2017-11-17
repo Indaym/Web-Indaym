@@ -16,6 +16,7 @@ import {
 
 import {
   HttpClientModule,
+  HTTP_INTERCEPTORS,
 }                                   from '@angular/common/http';
 
 import { FileUploadModule }         from 'ng2-file-upload';
@@ -42,7 +43,10 @@ import { AuthGuard }                from './guards';
 import { TokenService }             from './services/tokenStore.service';
 import { AuthService }              from './services/auth.service';
 import { UserService }              from './services/user.service';
-import { HttpAuthInterceptor }      from './interceptors';
+import {
+  HttpAuthInterceptor,
+  Http401Interceptor,
+}                                   from './interceptors';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,8 @@ import { HttpAuthInterceptor }      from './interceptors';
     AuthService,
     UserService,
     TokenService,
-    // { provide: Http, useClass: HttpAuthInterceptor },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: Http401Interceptor,  multi: true },
   ],
   imports   : [
     MaterialModule,

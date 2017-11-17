@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     this.token.addToken('token', data.token || {});
     this.token.addToken('refreshToken', data.refreshToken || {});
 
-    this.auth.setlogin(true);
     this.router.navigate(['/home']);
   }
 

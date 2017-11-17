@@ -38,9 +38,9 @@ export const routes: Routes = [
   { path: 'legalMentions',  component: LegalMentionsComponent },
   { path: 'register',       component: RegisterComponent },
   { path: 'login',          component: LoginComponent },
-  { path: 'gameslist',      component: GamesListComponent/* , canActivate: [ AuthGuard ] */ },
-  { path: 'sceneslist',     component: ScenesListComponent/* , canActivate: [ AuthGuard ] */ },
-  { path: 'editor',         component: EditorComponent/* , canActivate: [ AuthGuard ] */,
+  { path: 'gameslist',      component: GamesListComponent , canActivate: [ AuthGuard ]  },
+  { path: 'sceneslist',     component: ScenesListComponent , canActivate: [ AuthGuard ]  },
+  { path: 'editor',         component: EditorComponent , canActivate: [ AuthGuard ] ,
     children: [
       { path: '',           redirectTo: 'designer',           pathMatch: 'full' },
       { path: 'designer',   component: DesignerComponent },
@@ -48,9 +48,9 @@ export const routes: Routes = [
       { path: 'preview',    component: PreviewComponent },
     ],
   },
-  { path: 'play',           component: PlayComponent/* , canActivate: [ AuthGuard ] */ },
-  { path: 'rategame',       component: RateGameComponent/* , canActivate: [ AuthGuard ] */ },
-  { path: 'store',          component: StoreComponent/* , canActivate: [ AuthGuard ] */ },
+  { path: 'play',           component: PlayComponent , canActivate: [ AuthGuard ]  },
+  { path: 'rategame',       component: RateGameComponent , canActivate: [ AuthGuard ]  },
+  { path: 'store',          component: StoreComponent , canActivate: [ AuthGuard ]  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
