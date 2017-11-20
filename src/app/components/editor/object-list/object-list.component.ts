@@ -3,9 +3,14 @@ import {
   OnInit,
   Input,
   ViewChildren,
+  ViewChild,
 }                                 from '@angular/core';
 
 import { GameControllerService }  from '../../../services';
+import {
+  OrderType,
+  glyphs,
+}              from '../../../pipes/order-by/order-type.enum';
 
 @Component({
   selector: 'ia-object-list',
@@ -21,9 +26,12 @@ export class ObjectListComponent implements OnInit {
   private itemsIcons = [];
   private categories = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
+  private filter = '';
+  private order = OrderType.DEFAULT;
 
   private selectedElements = [];
   @ViewChildren('itemsList') private itemslist;
+  @ViewChild('glyph') private glyph;
 
   private updateSwitch = true;
   private trackSwitch = (index, value) => {
@@ -126,5 +134,16 @@ export class ObjectListComponent implements OnInit {
     }
     this.updateSwitch = !this.updateSwitch;
     return this.itemsIcons;
+  }
+
+  private switchOrder() {
+    this.order = (this.order === 2) ? OrderType.DEFAULT : this.order + 1;
+    this.glyph.nativeElement.className = glyphs[this.order];
+  }
+
+  private updateSelected() {
+    for (const element of this.selectedElements) {
+      console.log(element);
+    }
   }
 }
