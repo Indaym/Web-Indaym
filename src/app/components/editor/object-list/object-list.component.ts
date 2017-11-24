@@ -10,7 +10,7 @@ import { GameControllerService }  from '../../../services';
 import {
   OrderType,
   glyphs,
-}              from '../../../pipes/order-by/order-type.enum';
+}                                 from '../../../pipes/order-by/order-type.enum';
 
 @Component({
   selector: 'ia-object-list',
@@ -137,7 +137,7 @@ export class ObjectListComponent implements OnInit {
   }
 
   private switchOrder() {
-    this.order = (this.order === 2) ? OrderType.DEFAULT : this.order + 1;
+    this.order = (this.order === OrderType.DESC) ? OrderType.DEFAULT : this.order + 1;
     this.glyph.nativeElement.className = glyphs[this.order];
   }
 

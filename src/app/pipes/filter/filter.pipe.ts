@@ -24,14 +24,13 @@ export class FilterPipe implements PipeTransform {
     const keys = Object.keys(filter);
 
     return items.filter((item) => {
-      const bol = keys.every((key) => {
+      return keys.every((key) => {
         if (item.hasOwnProperty(key)) {
           return (fullMatch.findIndex((fm) => fm === key) > -1) ?
             item[key] === filter[key] :
             item[key].includes(filter[key]);
         }
       });
-      return bol;
     });
   }
 }

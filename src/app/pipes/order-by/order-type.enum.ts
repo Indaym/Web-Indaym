@@ -4,7 +4,8 @@ export enum OrderType {
   DESC,
 }
 
-export const glyphs = [];
-glyphs[OrderType.DEFAULT] = 'glyphicon glyphicon-sort';
-glyphs[OrderType.ASC] = 'glyphicon glyphicon-sort-by-alphabet';
-glyphs[OrderType.DESC] = 'glyphicon glyphicon-sort-by-alphabet-alt';
+export const glyphs = {
+  [OrderType.DEFAULT]: 'glyphicon glyphicon-sort',
+  [OrderType.ASC]: 'glyphicon glyphicon-sort-by-alphabet',
+  [OrderType.DESC]: 'glyphicon glyphicon-sort-by-alphabet-alt',
+};
