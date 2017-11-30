@@ -66,22 +66,11 @@ export class ObjectListComponent implements OnInit {
     });
     const li = event.path.find((element) => element.tagName === 'LI');
     const index = this.selectedElements.indexOf(object);
-    let toRemove = false;
 
-    if (event.shiftKey && this._multiSelect) {
-      if (index === -1)
-        this.selectedElements.push(object);
-      else {
-        this.selectedElements.splice(index, 1);
-        toRemove = true;
-      }
-    } else {
-      this.cleanViewSelected();
+    if (event.shiftKey && this._multiSelect)
+      (index === -1) ? this.selectedElements.push(object) : this.selectedElements.splice(index, 1);
+    else
       this.selectedElements = (index !== -1 && this.selectedElements.length === 1) ? [] : [ object ];
-      if (this.selectedElements.length === 0)
-        toRemove = true;
-    }
-    (toRemove) ? li.classList.remove('selected') : li.classList.add('selected');
 
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
@@ -93,22 +82,13 @@ export class ObjectListComponent implements OnInit {
     const  objects = this.gameController.getObjects().filter((element) => element.object.type === type);
     const every = objects.every((element) => this.selectedElements.findIndex((el) => el === element) !== -1);
     this.selectedElements = this.selectedElements.filter((element) => objects.findIndex((el) => el === element) === -1);
-    let toRemove = false;
 
     if (event.shiftKey && this._multiSelect) {
       if (!every)
-        this.selectedElements.push(...objects);
-      else
-        toRemove = true;
-    } else {
-      this.cleanViewSelected();
+      this.selectedElements.push(...objects);
+    } else
       this.selectedElements = objects;
-    }
 
-    for (const item of event.srcElement.parentElement.children) {
-      if (item.tagName === 'LI')
-        (toRemove) ? item.classList.remove('selected') : item.classList.add('selected');
-    }
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
       objects: [ ...this.selectedElements ],
@@ -141,9 +121,8 @@ export class ObjectListComponent implements OnInit {
     this.glyph.nativeElement.className = glyphs[this.order];
   }
 
-  private updateSelected() {
-    for (const element of this.selectedElements) {
-      console.log(element);
-    }
+  private isSelected(item) {
+    console.log('spam');
+    return this.selectedElements.findIndex((e) => e.uuid === item.uuid) > -1;
   }
 }
