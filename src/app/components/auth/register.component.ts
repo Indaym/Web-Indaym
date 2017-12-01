@@ -11,7 +11,9 @@ import { AuthService } from '../../services';
   selector: 'ia-register',
   providers: [ AuthService ],
   templateUrl: './register.component.html',
-  styleUrls: [],
+  styleUrls: [
+    './login.component.css',
+  ],
 })
 export class RegisterComponent implements OnInit {
   constructor(
