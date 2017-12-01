@@ -52,13 +52,16 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
      *   - la liste de règles disponible.
      * En fonction on créé ou supprime la règle
      */
-    this.dragulaService.drop.subscribe((value) => {
+    this.dragulaService.drop.subscribe((value, d, a) => {
+      if (value[0] !== 'rulesBag')
+        return;
+
       switch (value[2].id) {
         case 'applied-rules':
-          this.addRule(value[1].innerText);
+          this.addRule(value[1].dataset.rulename);
           break;
         case 'available-rules':
-          this.removeRule(value[1].innerText);
+          this.removeRule(value[1].dataset.rulename);
           break;
         default:
           this.updateListRules();
