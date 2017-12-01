@@ -122,7 +122,6 @@ export class ObjectListComponent implements OnInit {
   }
 
   private isSelected(item) {
-    console.log('spam');
     return this.selectedElements.findIndex((e) => e.uuid === item.uuid) > -1;
   }
 }
