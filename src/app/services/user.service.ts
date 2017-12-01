@@ -27,4 +27,9 @@ export class UserService {
     }
     return this._user;
   }
+
+  deleteUser(): void {
+    localStorage.removeItem('user');
+    this._user = null;
+  }
 }

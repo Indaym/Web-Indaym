@@ -3,11 +3,6 @@ import {
   OnInit,
 }                       from '@angular/core';
 import { Router }       from '@angular/router';
-import {
-  Http,
-  Headers,
-  Response,
-}                       from '@angular/http';
 
 import {
   AuthService,
@@ -38,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.token.addToken('token', data.token || {});
     this.token.addToken('refreshToken', data.refreshToken || {});
 
-    this.auth.setlogin(true);
     this.router.navigate(['/home']);
   }
 

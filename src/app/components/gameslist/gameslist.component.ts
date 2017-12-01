@@ -59,6 +59,6 @@ export class GamesListComponent implements OnInit {
   }
 
   public getGamesList() {
-    this.games.getGames((datas) => this.lsGames.push(datas) );
+    this.games.getGames((datas) => this.lsGames = datas);
   }
 }

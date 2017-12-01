@@ -5,9 +5,17 @@ import {
   Response,
 }                         from '@angular/http';
 
-import { Observable }     from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+}                         from '@angular/common/http';
+
+import { Observable }     from 'rxjs/observable';
+import {
+  mergeMap,
+  map,
+}                         from 'rxjs/operators';
 
 import { DefaultService } from './default.service';
 import { CryptoService }  from '../../cryptoModule/services';
@@ -20,12 +28,10 @@ type token = 'token' | 'refreshToken';
 @Injectable()
 export class AuthService extends DefaultService {
   private _refreshUrl: string;
-  private _isLogin: boolean;
   private  authUrl: (string) => string;
 
   constructor(
-    private http: Http,
-    private crypto: CryptoService,
+    private http: HttpClient,
     private tokenService: TokenService,
     private user: UserService,
   ) {
@@ -37,24 +43,17 @@ export class AuthService extends DefaultService {
     this.authUrl = joining(authUrl);
 
     this._refreshUrl = this.composeUrl(this.composeUrl(this.server)('auth'))('refresh');
-
-    this._isLogin = this.tokenService.getToken('token') ? true : false;
   }
 
   get refreshUrl(): string {
     return this._refreshUrl;
   }
 
-  setlogin(login: boolean) {
-    this._isLogin = login;
-  }
-
   isLogin() {
-    return this._isLogin;
+    return this.tokenService.getToken('token') ? true : false;
   }
 
   reset(): void {
-    this._isLogin = false;
     this.tokenService.deleteToken('token');
     this.tokenService.deleteToken('refreshToken');
   }
@@ -64,13 +63,12 @@ export class AuthService extends DefaultService {
 
     const body = { 'data': { 'username': username, 'password': password, 'email': email } };
     return this.http.post(this.authUrl('login'), body)
-      .map((res: Response) => res.json())
       .subscribe(success, error);
   }
 
   logout() {
     return this.http.post(this.authUrl('logout'), {}, {
-      headers: new Headers({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
+      headers: new HttpHeaders({'Authorization': 'JWT ' + this.tokenService.getToken('token') }),
     })
       .subscribe(
         (data) => {
@@ -85,7 +83,14 @@ export class AuthService extends DefaultService {
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)
-      .map((res: Response) => res.json())
+      .subscribe(success, error);
+  }
+
+  refresh(success, error) {
+    const headers = {
+      headers: new HttpHeaders().set('Authorization', this.tokenService.getToken('refreshToken')),
+    };
+    return this.http.get(this._refreshUrl, headers)
       .subscribe(success, error);
   }
 }

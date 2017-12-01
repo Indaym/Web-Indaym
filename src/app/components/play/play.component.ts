@@ -21,7 +21,7 @@ export class PlayComponent {
   }
 
   public getGamesList() {
-    this.games.getGames((datas) => this.lsGames.push(datas));
+    this.games.getGames((datas) => this.lsGames = datas);
   }
 
   public goToScenesPage(id) {

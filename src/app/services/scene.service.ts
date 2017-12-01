@@ -1,19 +1,21 @@
 /**
  * Created by Caro on 05/04/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }      from '@angular/core';
+import { Http }            from '@angular/http';
+import { HttpClient }      from '@angular/common/http';
 
-import { DefaultService } from './default.service';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { DefaultService }  from './default.service';
+import {
+  map,
+  mergeMap,
+}                          from 'rxjs/operators';
 
 @Injectable()
 export class SceneService  extends DefaultService {
   private scenesUrl = '';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
     this.settedErrorMessage = 'URL for *Scenes* not setted';
   }
@@ -28,7 +30,6 @@ export class SceneService  extends DefaultService {
       return;
     }
     this.http.get(this.scenesUrl)
-      .mergeMap((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -37,7 +38,6 @@ export class SceneService  extends DefaultService {
       return;
     }
     this.http.get(this.scenesUrl + id)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -46,7 +46,6 @@ export class SceneService  extends DefaultService {
       return;
     }
     this.http.post(this.scenesUrl, {'name': name})
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -55,7 +54,6 @@ export class SceneService  extends DefaultService {
       return;
     }
     this.http.put(this.scenesUrl + id, obj)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 

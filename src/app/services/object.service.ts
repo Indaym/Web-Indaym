@@ -4,15 +4,16 @@
 
 import { Injectable }     from '@angular/core';
 import { Http }           from '@angular/http';
+import { HttpClient }     from '@angular/common/http';
 
 import { DefaultService } from './default.service';
-import 'rxjs/add/operator/map';
+import { map }            from 'rxjs/operators';
 
 @Injectable()
 export class ObjectService extends DefaultService {
   private objectsUrl = '';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
     this.settedErrorMessage = 'URL for *Objects* not setted';
   }
@@ -26,7 +27,6 @@ export class ObjectService extends DefaultService {
     if (!this.isSetted(true))
       return;
     this.http.get(this.objectsUrl)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -34,8 +34,7 @@ export class ObjectService extends DefaultService {
     if (!this.isSetted(true))
       return;
     this.http.get(this.objectsUrl + id)
-      .map((res) => res.json())
-      .subscribe(success, error);
+    .subscribe(success, error);
   }
 
   public postSceneObject(obj, success = (id) => {}, error = (err) => {}) {
@@ -43,7 +42,6 @@ export class ObjectService extends DefaultService {
       return;
     obj.object = JSON.stringify(obj.object);
     this.http.post(this.objectsUrl, obj)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -52,7 +50,6 @@ export class ObjectService extends DefaultService {
       return;
     obj.object = JSON.stringify(obj.object);
     this.http.put(this.objectsUrl + id, obj)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 

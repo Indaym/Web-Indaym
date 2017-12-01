@@ -1,18 +1,21 @@
 /**
  * Created by Caro on 02/03/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }     from '@angular/core';
+import { Http }           from '@angular/http';
+import { HttpClient }     from '@angular/common/http';
 
 import { DefaultService } from './default.service';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
+import {
+  mergeMap,
+  map,
+}                         from 'rxjs/operators';
 
 @Injectable()
 export class GameService extends DefaultService {
   private gamesUrl;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
     this.gamesUrl = this.serverUrl + 'games/';
     this.setted = true;
@@ -21,25 +24,21 @@ export class GameService extends DefaultService {
 
   public getGames(success?, error?) {
     this.http.get(this.gamesUrl)
-      .mergeMap((res) => res.json())
       .subscribe(success, error);
   }
 
   public getOneGame(id, success?, error?) {
     this.http.get(this.gamesUrl + id)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
   public postGame(name, success?, error?) {
     this.http.post(this.gamesUrl, {'name': name})
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
   public updateGame(obj, id, success?, error?) {
     this.http.put(this.gamesUrl + id, obj)
-      .map((res) => res.json())
       .subscribe(success, error);
   }
 
@@ -52,22 +51,18 @@ export class GameService extends DefaultService {
     console.log('updateRating');
     console.log(averageRate);
     this.http.put(this.gamesUrl + id, {'rate': averageRate})
-    .map((res) => res.json())
-    .subscribe(success, error);
+      .subscribe(success, error);
   }
 
   public postComment(comment, id, success?, error?) {
     console.log('postComment');
     console.log(comment);
     this.http.put(this.gamesUrl + id, {'comments': comment})
-    .map((res) => res.json())
-    .subscribe(success, error);
+      .subscribe(success, error);
   }
 
   public postDescription(description, id, success?, error?) {
     this.http.put(this.gamesUrl + id, {'description': JSON.stringify(description)})
-        .map((res) => res.json())
-        .subscribe(success, error);
+      .subscribe(success, error);
   }
-
 }
