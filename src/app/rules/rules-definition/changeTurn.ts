@@ -1,12 +1,12 @@
 import {
   RULE_TYPE,
   BaseRules,
-}               from '../baseRules';
+} from '../baseRules';
 
 import {
   SceneViewer,
   ModelViewer,
-}               from '../../threed-viewer';
+} from '../../threed-viewer';
 
 export class ChangeTurn extends BaseRules {
   constructor(scene: any, model: any, conf: any = {}) {
@@ -22,13 +22,9 @@ export class ChangeTurn extends BaseRules {
   public run(args?: any): boolean {
     if (this._refObj.threeDModel.oldPosition[0] === -1 && this._refObj.threeDModel.oldPosition[1] === -1)
       return true;
-    if ((this._refScene.player === 0 || this._refScene.player === 1) && this._refObj.name === 'whitepawn')
-      this._refScene.player += 1;
-    else if ((this._refScene.player === 2 || this._refScene.player === 3) && this._refObj.name === 'blackpawn') {
-      this._refScene.player += 1;
-      if (this._refScene.player === 4)
-        this._refScene.player = 0;
-    } else {
+    if ((this._refScene.player === 0 || this._refScene.player === 2) && this._refObj.name === 'whitepawn') {}
+    else if ((this._refScene.player === 1) && this._refObj.name === 'blackpawn') {}
+    else {
       return false;
     }
     return true;
