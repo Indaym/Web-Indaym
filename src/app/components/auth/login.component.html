@@ -1,23 +1,14 @@
-  <form  id="form-login" #loginForm="ngForm" (ngSubmit)="login()" >
-    <div>
-      <label for="name" >Username</label><br/>
-      <input type="text" id="name" required [(ngModel)]="username" name="name" #name="ngModel" >
-    </div>
-    <div [hidden]="name.valid || name.pristine" >Username is required</div>
-    <br/>
-    <div>
-      <label for="Email" >Email</label><br/>
-      <input type="email" id="Email" required [(ngModel)]="email" name="Email" #Email="ngModel" >
-    </div>
-    <div [hidden]="Email.valid || Email.pristine" >Email is required</div>
-    <br/>
-    <div>
-      <label for="Passwod" >Password</label><br/>
-      <input type="password" id="Passwod" required [(ngModel)]="password" name="Passwod" #Passwod="ngModel" >
-    </div>
-    <div [hidden]="Passwod.valid || Passwod.pristine" >Password is required</div>
-    <br/>
-    <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
-  </form>
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <mat-form-field>
+      <input matInput type="email" formControlName="email" placeholder="Email" required>
+      <mat-error *ngIf="loginForm.hasError('email')" >Nope</mat-error>
+  </mat-form-field>
+  <br/>
 
-  <div id="error" *ngIf="hasError" >{{error}}</div>
+  <mat-form-field>
+      <input matInput type="password" formControlName="password" placeholder="Password" required>
+  </mat-form-field>
+  <br/>
+
+  <button mat-raised-button type="submit">Submit</button>
+</form>
