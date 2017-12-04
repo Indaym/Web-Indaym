@@ -9,6 +9,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpResponse,
+  HttpErrorResponse,
 }                         from '@angular/common/http';
 
 import { Observable }     from 'rxjs/observable';
@@ -58,10 +59,10 @@ export class AuthService extends DefaultService {
     this.tokenService.deleteToken('refreshToken');
   }
 
-  login(username: string, password: string, email: string, success?, error?) {
-    this.user.user = { username, password, email };
+  login(password: string, email: string, success?, error?) {
+    this.user.user = { password, email };
 
-    const body = { 'data': { 'username': username, 'password': password, 'email': email } };
+    const body = { 'data': { 'password': password, 'email': email } };
     return this.http.post(this.authUrl('login'), body)
       .subscribe(success, error);
   }
