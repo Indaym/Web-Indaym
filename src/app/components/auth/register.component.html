@@ -1,3 +1,46 @@
+<form  [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+  <mat-form-field>
+    <input  matInput type="text"
+            formControlName="username" [errorStateMatcher]="matcher"
+            placeholder="Username" required>
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field>
+    <input  matInput type="email"
+            formControlName="email" [errorStateMatcher]="matcher"
+            placeholder="Email" required>
+  </mat-form-field>
+  <br/>
+
+  <div formGroupName="passwords" >
+    <mat-form-field>
+      <input  matInput type="password"
+              formControlName="password" [errorStateMatcher]="matcher"
+              placeholder="Password" required>
+    </mat-form-field>
+    <br/>
+
+    <mat-form-field>
+      <input  matInput type="password"
+              formControlName="confirm_password" [errorStateMatcher]="matcher"
+              placeholder="Confirm password" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="registerForm.get('passwords').hasError('nomatch')" >Password must match</mat-error>
+  </div>
+  <br/>
+
+  <!--
+    TODO: add a custom validotor for the whole form.
+    disable the button while the form is not valide
+   -->
+  <mat-error *ngIf="hasError" >{{error}}</mat-error>
+  <button mat-raised-button type="submit"
+          [disabled]="registerForm.get('passwords').hasError('nomatch')"
+  >Submit</button>
+</form>
+<!--
 <div *ngIf="!success; else successBlock" >
   <div>
     <form id="form-login" #loginForm="ngForm" (ngSubmit)="register()" >
@@ -44,3 +87,4 @@
 <ng-template #successBlock >
   you will be redirect on the login page
 </ng-template>
+-->
