@@ -1,14 +1,18 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
   <mat-form-field>
-      <input matInput type="email" formControlName="email" placeholder="Email" required>
-      <mat-error *ngIf="loginForm.hasError('email')" >Nope</mat-error>
-  </mat-form-field>
+      <input  matInput type="email"
+              formControlName="email" [errorStateMatcher]="matcher"
+              placeholder="Email" required>
+       </mat-form-field>
   <br/>
 
   <mat-form-field>
-      <input matInput type="password" formControlName="password" placeholder="Password" required>
+      <input  matInput type="password"
+              formControlName="password"  [errorStateMatcher]="matcher"
+              placeholder="Password" required>
   </mat-form-field>
   <br/>
 
+  <mat-error *ngIf="hasError" > {{error}} </mat-error>
   <button mat-raised-button type="submit">Submit</button>
 </form>

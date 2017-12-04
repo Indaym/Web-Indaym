@@ -16,6 +16,7 @@ import {
   FormGroup,
   FormBuilder,
 }                       from '@angular/forms';
+import { ErrorMatcher } from './ErrorMatcher';
 
 @Component({
   selector: 'ia-login',
@@ -40,6 +41,8 @@ export class LoginComponent implements OnInit {
   email: string;
   error: string;
 
+  matcher: ErrorMatcher = new ErrorMatcher();
+
   private loginSuccess = (data) => {
     this.token.addToken('token', data.token || {});
     this.token.addToken('refreshToken', data.refreshToken || {});
@@ -48,9 +51,10 @@ export class LoginComponent implements OnInit {
   }
 
   private loginFailure = (err) => {
-    const data = err.json();
-    this.error = data.code;
+    this.error = err.error.code;
     this.hasError = true;
+    this.loginForm.setErrors({ 'error': 'nope'});
+    console.log(this.loginForm);
   }
 
   ngOnInit() {
@@ -59,10 +63,9 @@ export class LoginComponent implements OnInit {
       'password': [this.password, [ Validators.required ]],
       'email': [this.email, [ Validators.required, Validators.email ]],
     });
-    console.log(this.loginForm);
   }
 
   login() {
-    this.auth.login(this.loginForm.get('login').value , this.password, this.email, this.loginSuccess, this.loginFailure);
+    this.auth.login(this.loginForm.get('password').value, this.loginForm.get('email').value, this.loginSuccess, this.loginFailure);
   }
 }
