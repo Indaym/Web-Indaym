@@ -40,6 +40,11 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     // Quand on clique sur l'objet il appelle la fonction ici pour le sélectionner
     this.dispatcher.addEventListener('selectObject', (e: any) => {
       this.selectObject(e.objects);
+
+      document.getElementById("available-rules-title").style.visibility = "visible";
+      document.getElementById("applied-rules-title").style.visibility = "visible";
+      document.getElementById("available-rules").style.visibility = "visible";
+      document.getElementById("applied-rules").style.visibility = "visible";
     });
 
     // Récupère le nom de la classe pour faire une liste des règles disponibles
@@ -116,6 +121,7 @@ export class BlueprintsComponent implements OnInit, OnDestroy {
     if (!this.selectedObjects || this.selectedObjects.length <= 0 || !this.selectedObjects[0].rules)
       return;
     this.selectedRule = this.selectedObjects[0].rules[value];
+    document.getElementById("properties-title").style.visibility = "visible";
   }
 
   /**

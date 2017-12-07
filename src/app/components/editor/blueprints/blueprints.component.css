@@ -30,6 +30,34 @@
   min-height: 500px;
 }
 
+#available-rules {
+  border-left: 3px solid #00CCCC;
+  padding-left: 25px;
+  visibility: hidden;
+}
+
+#applied-rules {
+  border-right: 3px solid #00CCCC;
+  padding-right: 25px;
+  visibility: hidden;
+}
+
+#available-rules-title, #applied-rules-title {
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 150%;
+  visibility: hidden;
+}
+
+#properties-title {
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 140%;
+  visibility: hidden;
+}
+
 :host ::ng-deep li:hover {
   color: black !important;
 }
