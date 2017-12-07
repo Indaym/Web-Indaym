@@ -11,7 +11,7 @@
     <div *ngIf="selectedObjects && selectedObjects.length > 0">
       <div id="available-rules-title" class="blueprint-title">Available Rules</div>
       <div id="available-rules" class="list-group" [dragula]='"rulesBag"'>
-        <a *ngFor="let rule of availableRules" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
+        <a *ngFor="let rule of availableRules" [attr.data-rulename]="rule" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div *ngIf="selectedObjects && selectedObjects.length > 0">
       <div id="applied-rules-title" class="blueprint-title">Rules to be applied</div>
       <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
-        <a *ngFor="let rule of appliedRules" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
+        <a *ngFor="let rule of appliedRules" [attr.data-rulename]="rule" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
       </div>    
     </div>
   </div>
