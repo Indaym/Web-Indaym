@@ -37,7 +37,7 @@
       <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
     </form>
   </div>
-  <div *ngIf="hasError" >
+  <div id="error" *ngIf="hasError" >
     {{error}}
   </div>
 </div>

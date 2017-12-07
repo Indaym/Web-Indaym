@@ -1,5 +1,5 @@
 <div class="row">
-  <h4>Object selected : <strong *ngIf="selectedObjects">{{ selectedObjects | joinArrayKey }}</strong></h4>
+  <h4>Selected Object: <strong *ngIf="selectedObjects">{{ selectedObjects | joinArrayKey }}</strong></h4>
 </div>
 <div class="row">
   <!-- List of objects -->
@@ -8,28 +8,35 @@
   </div>
   <!-- List of Rules available -->
   <div class="col-xs-3">
-    <div id="available-rules" class="list-group" [dragula]='"rulesBag"'>
-      <a *ngFor="let rule of availableRules" [attr.data-rulename]="rule" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
+    <div *ngIf="selectedObjects && selectedObjects.length > 0">
+      <div id="available-rules-title" class="blueprint-title">Available Rules</div>
+      <div id="available-rules" class="list-group" [dragula]='"rulesBag"'>
+        <a *ngFor="let rule of availableRules" [attr.data-rulename]="rule" class="list-group-item">{{rule}}<span class="badge" (click)="addRule(rule)"><span class="glyphicon glyphicon-plus"></span></span></a>
+      </div>
     </div>
   </div>
   <!-- List of Rules already applied -->
   <div class="col-xs-3">
-    <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
-      <a *ngFor="let rule of appliedRules" [attr.data-rulename]="rule" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
-    </div>    
+    <div *ngIf="selectedObjects && selectedObjects.length > 0">
+      <div id="applied-rules-title" class="blueprint-title">Rules to be applied</div>
+      <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
+        <a *ngFor="let rule of appliedRules" [attr.data-rulename]="rule" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
+      </div>    
+    </div>
   </div>
   <!-- Configuration of the object -->
   <div class="col-xs-3">
     <div *ngIf="selectedRule">
+      <div id="properties-title" class="blueprint-title">Properties</div>
       <div class="form-group">
-        <label for="color">Color :</label>
+        <label for="color">Color:</label>
         <input id="color" type="color" [ngModel]="selectedRule.config.color | toHexView" (ngModelChange)="viewToHex($event)"/>
       </div>
       <div class="form-group">
-        <label for="move">Movement :</label>
+        <label for="move">Movement:</label>
         <input id="move" type="number" [(ngModel)]="selectedRule.config.movement"/>
       </div>
       <button (click)="saveRules(true)">Save Configuration</button>
-    </div>  
-  </div>  
+    </div>
+  </div>
 </div>

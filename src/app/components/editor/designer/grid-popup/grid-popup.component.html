@@ -6,37 +6,37 @@
     </p>
     <div class="form-group">
       <div class="form-inline">
-        <h5>Number of cases :</h5>
+        <h5>Number of cells:</h5>
         <div class="form-group">
-          <label for="horizontal">Horizontal :</label>
+          <label for="horizontal">Horizontal:</label>
           <input id="horizontal" type="number" step="1" min="1" max="20" [(ngModel)]="horizontal" class="form-control" />
         </div>
         <div class="form-group">
-          <label for="vertical">Vertical :</label>
+          <label for="vertical">Vertical:</label>
           <input id="vertical" type="number" step="1" min="1" max="20" [(ngModel)]="vertical" class="form-control" />
         </div>
       </div>
       <hr/>
 
       <div class="form-inline">
-        <h5>Dimensions of cases :</h5>
+        <h5>Cells dimensions:</h5>
         <div class="form-group">
-          <label for="width">Width :</label>
+          <label for="width">Width:</label>
           <input id="width" type="number" min="1" max="20" [(ngModel)]="width" class="form-control" />
         </div>
         <div class="form-group">
-          <label for="height">Height :</label>
+          <label for="height">Height:</label>
           <input id="height" type="number" min="1" max="20" [(ngModel)]="height" class="form-control" />
         </div>
       </div>
       <hr/>
 
       <div class="form-group">
-        <label for="color">Color of highlight for selection :</label>
+        <label for="color">Color of highlight for selection:</label>
         <input id="color" type="color" [(ngModel)]="color" />
       </div>
       <div class="form-group">
-        <label for="alternate">Alternate texture :</label>
+        <label for="alternate">Alternate texture:</label>
         <input id="alternate" type="checkbox" [(ngModel)]="alternate" class="form-check" />
       </div>
       <div class="form-group">
@@ -53,14 +53,14 @@
       </div>
 
       <div>
-        <h5>Preview :</h5>
+        <h5>Preview:</h5>
         <div class="row">
           <div class="form-group col-xs-6">
-            <label for="previewE">Even case texture :</label>
+            <label for="previewE">Even cell texture:</label>
             <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom" />
           </div>
           <div class="col-xs-6 form-group" *ngIf="alternate">
-            <label for="previewO">Odd case texture :</label>
+            <label for="previewO">Odd cell texture:</label>
             <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom" />
           </div>
         </div>

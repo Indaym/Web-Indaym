@@ -1,8 +1,8 @@
 <span [ngSwitch]="data.snackType">
-  <strong *ngSwitchCase="SnackBarType.SUCCESS" class="text-success">Success : </strong>
-  <strong *ngSwitchCase="SnackBarType.ERROR" class="text-danger">Error : </strong>
-  <strong *ngSwitchCase="SnackBarType.INFO" class="text-info">Info : </strong>
-  <strong *ngSwitchCase="SnackBarType.WARNING" class="text-warning">Warning : </strong>
+  <strong *ngSwitchCase="SnackBarType.SUCCESS" class="text-success">Success: </strong>
+  <strong *ngSwitchCase="SnackBarType.ERROR" class="text-danger">Error: </strong>
+  <strong *ngSwitchCase="SnackBarType.INFO" class="text-info">Info: </strong>
+  <strong *ngSwitchCase="SnackBarType.WARNING" class="text-warning">Warning: </strong>
 </span>
 
 <span [innerHTML]="data.message"></span>

@@ -30,6 +30,30 @@
   min-height: 500px;
 }
 
+#available-rules {
+  border-left: 3px solid #00CCCC;
+  padding-left: 25px;
+}
+
+#applied-rules {
+  border-right: 3px solid #00CCCC;
+  padding-right: 25px;
+}
+
+#available-rules-title, #applied-rules-title {
+  font-size: 150%;
+}
+
+#properties-title {
+  font-size: 140%;
+}
+
+.blueprint-title {
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 :host ::ng-deep li:hover {
   color: black !important;
 }
