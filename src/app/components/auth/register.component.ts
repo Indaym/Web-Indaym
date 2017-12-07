@@ -1,30 +1,32 @@
 import {
   Component,
   OnInit,
-}                  from '@angular/core';
-import { Router }  from '@angular/router';
-
-import { AuthService } from '../../services';
-
+}                         from '@angular/core';
+import { Router }         from '@angular/router';
 import {
   FormControl,
   Validators,
   FormGroup,
   FormBuilder,
-  ValidatorFn,
-  AbstractControl,
-}                       from '@angular/forms';
-import { ErrorMatcher } from './ErrorMatcher';
+}                         from '@angular/forms';
+
+import { AuthService }    from '../../services';
+
+import { AuthValidator }  from './AuthValidators';
+import { ErrorMatcher }   from './ErrorMatcher';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'ia-register',
   providers: [ AuthService ],
   templateUrl: './register.component.html',
   styleUrls: [
-    // './login.component.css',
+    './auth.css',
   ],
 })
 export class RegisterComponent implements OnInit {
+  private authValidator: AuthValidator = new AuthValidator();
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -32,36 +34,36 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   registerForm: FormGroup;
-  matcher: ErrorMatcher = new ErrorMatcher();
 
-  success = false;
-  hasError = false;
-  pwdIsOk = true;
-  error = '';
   username: string;
   password: string;
   confirmation_password: string;
   email: string;
 
+  matcher: ErrorMatcher = new ErrorMatcher();
+
+  submitted = false;
+  success = false;
+  hasError = false;
+  pwdIsOk = true;
+  errors: Array<string>;
+  error: string;
+
   registerSuccess = (data) => {
+    this.submitted = false;
     this.success = true;
-    setTimeout(() => this.router.navigate(['/login']), 2000);
+    setTimeout(() => this.router.navigate(['/login']), 5000);
   }
 
   registerFailure = (err) => {
-    const body = err.json();
-    this.error = body.code;
+    if (typeof err.error === 'string') this.error = err.error;
+    if (typeof err.error === 'object') this.errors = err.error.message;
     this.hasError = true;
-  }
-
-  checkPassword(control: AbstractControl): { [key: string]: any } {
-    const p1 = control.get('password').value;
-    const p2 = control.get('confirm_password').value;
-    if (p1 === p2) return null;
-    return { nomatch: true };
+    this.submitted = false;
   }
 
   ngOnInit() {
+    this.submitted = false;
     this.auth.reset();
     this.registerForm = this.fb.group({
       'username': [ this.username, Validators.required ],
@@ -69,18 +71,18 @@ export class RegisterComponent implements OnInit {
       'passwords': this.fb.group({
         'password': [ this.password, Validators.required ],
         'confirm_password': [ this.confirmation_password, Validators.required ],
-      }, { validator: this.checkPassword }),
+      }, { validator: this.authValidator.checkPassword }),
     });
   }
 
   register() {
-    console.log(this.registerForm);
-    this.hasError = false;
-    if (this.password !== this.confirmation_password) {
-      this.pwdIsOk = false;
-      return;
-    }
-
-    this.auth.register(this.username, this.password, this.email, this.registerSuccess, this.registerFailure);
+    this.submitted = true;
+    this.auth.register(
+      this.registerForm.get('username').value,
+      this.registerForm.get('passwords').get('password').value,
+      this.registerForm.get('email').value,
+      this.registerSuccess,
+      this.registerFailure,
+    );
   }
 }

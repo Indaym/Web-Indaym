@@ -8,6 +8,7 @@ import { Router }       from '@angular/router';
 import {
   AuthService,
   TokenService,
+  UserService,
 }                       from '../../services';
 
 import {
@@ -22,15 +23,16 @@ import { ErrorMatcher } from './ErrorMatcher';
   selector: 'ia-login',
   templateUrl: './login.component.html',
   styleUrls: [
-    // './login.component.css',
+    './auth.css',
   ],
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private auth: AuthService,
     private router: Router,
-    private token: TokenService,
     private fb: FormBuilder,
+    private auth: AuthService,
+    private token: TokenService,
+    private user: UserService,
   ) {}
 
   loginForm: FormGroup;
@@ -47,25 +49,31 @@ export class LoginComponent implements OnInit {
     this.token.addToken('token', data.token || {});
     this.token.addToken('refreshToken', data.refreshToken || {});
 
+    this.user.user = data.user;
+
     this.router.navigate(['/home']);
   }
 
   private loginFailure = (err) => {
-    this.error = err.error.code;
+    this.error = err.error.message;
     this.hasError = true;
     this.loginForm.setErrors({ 'error': 'nope'});
-    console.log(this.loginForm);
   }
 
   ngOnInit() {
     this.auth.reset();
     this.loginForm = this.fb.group({
-      'password': [this.password, [ Validators.required ]],
+      'password': [this.password, Validators.required ],
       'email': [this.email, [ Validators.required, Validators.email ]],
     });
   }
 
   login() {
-    this.auth.login(this.loginForm.get('password').value, this.loginForm.get('email').value, this.loginSuccess, this.loginFailure);
+    this.auth.login(
+      this.loginForm.get('password').value,
+      this.loginForm.get('email').value,
+      this.loginSuccess,
+      this.loginFailure,
+    );
   }
 }
