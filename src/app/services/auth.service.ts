@@ -12,7 +12,7 @@ import {
   HttpErrorResponse,
 }                         from '@angular/common/http';
 
-import { Observable }     from 'rxjs/observable';
+import { Observable }     from 'rxjs/Observable';
 import {
   mergeMap,
   map,
