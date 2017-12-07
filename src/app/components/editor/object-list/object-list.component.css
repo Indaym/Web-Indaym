@@ -36,3 +36,11 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+input, button {
+  color:black;
+}
+
+#filter {
+  text-align: center;
+}

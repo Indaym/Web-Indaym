@@ -3,9 +3,14 @@ import {
   OnInit,
   Input,
   ViewChildren,
+  ViewChild,
 }                                 from '@angular/core';
 
 import { GameControllerService }  from '../../../services';
+import {
+  OrderType,
+  glyphs,
+}                                 from '../../../pipes/order-by/order-type.enum';
 
 @Component({
   selector: 'ia-object-list',
@@ -21,9 +26,12 @@ export class ObjectListComponent implements OnInit {
   private itemsIcons = [];
   private categories = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
+  private filter = '';
+  private order = OrderType.DEFAULT;
 
   private selectedElements = [];
   @ViewChildren('itemsList') private itemslist;
+  @ViewChild('glyph') private glyph;
 
   private updateSwitch = true;
   private trackSwitch = (index, value) => {
@@ -58,22 +66,11 @@ export class ObjectListComponent implements OnInit {
     });
     const li = event.path.find((element) => element.tagName === 'LI');
     const index = this.selectedElements.indexOf(object);
-    let toRemove = false;
 
-    if (event.shiftKey && this._multiSelect) {
-      if (index === -1)
-        this.selectedElements.push(object);
-      else {
-        this.selectedElements.splice(index, 1);
-        toRemove = true;
-      }
-    } else {
-      this.cleanViewSelected();
+    if (event.shiftKey && this._multiSelect)
+      (index === -1) ? this.selectedElements.push(object) : this.selectedElements.splice(index, 1);
+    else
       this.selectedElements = (index !== -1 && this.selectedElements.length === 1) ? [] : [ object ];
-      if (this.selectedElements.length === 0)
-        toRemove = true;
-    }
-    (toRemove) ? li.classList.remove('selected') : li.classList.add('selected');
 
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
@@ -85,22 +82,13 @@ export class ObjectListComponent implements OnInit {
     const  objects = this.gameController.getObjects().filter((element) => element.object.type === type);
     const every = objects.every((element) => this.selectedElements.findIndex((el) => el === element) !== -1);
     this.selectedElements = this.selectedElements.filter((element) => objects.findIndex((el) => el === element) === -1);
-    let toRemove = false;
 
     if (event.shiftKey && this._multiSelect) {
       if (!every)
-        this.selectedElements.push(...objects);
-      else
-        toRemove = true;
-    } else {
-      this.cleanViewSelected();
+      this.selectedElements.push(...objects);
+    } else
       this.selectedElements = objects;
-    }
 
-    for (const item of event.srcElement.parentElement.children) {
-      if (item.tagName === 'LI')
-        (toRemove) ? item.classList.remove('selected') : item.classList.add('selected');
-    }
     this.eventDispatcher.dispatchEvent({
       type: 'selectObject',
       objects: [ ...this.selectedElements ],
@@ -126,5 +114,14 @@ export class ObjectListComponent implements OnInit {
     }
     this.updateSwitch = !this.updateSwitch;
     return this.itemsIcons;
+  }
+
+  private switchOrder() {
+    this.order = (this.order === OrderType.DESC) ? OrderType.DEFAULT : this.order + 1;
+    this.glyph.nativeElement.className = glyphs[this.order];
+  }
+
+  private isSelected(item) {
+    return this.selectedElements.findIndex((e) => e.uuid === item.uuid) > -1;
   }
 }
