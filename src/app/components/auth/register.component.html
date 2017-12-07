@@ -37,65 +37,11 @@
   </div>
   <br/>
 
-<<<<<<< HEAD
-  <!--
-    TODO: add a custom validotor for the whole form.
-    disable the button while the form is not valide
-   -->
-  <mat-error *ngIf="hasError" >{{error}}</mat-error>
-  <button mat-raised-button type="submit"
-          [disabled]="registerForm.get('passwords').hasError('nomatch')"
-  >Submit</button>
-</form>
-<!--
-<div *ngIf="!success; else successBlock" >
-  <div>
-    <form id="form-login" #loginForm="ngForm" (ngSubmit)="register()" >
-
-      <div>
-        <label for="name" >Username</label>
-        <br/>
-        <input type="text" id="name" required [(ngModel)]="username" name="name" #name="ngModel" >
-      </div>
-      <div [hidden]="name.valid || name.pristine" >Username is required</div>
-      <br/>
-
-      <div>
-        <label for="Email" >Email</label>
-        <br/>
-        <input type="email" id="Email" required [(ngModel)]="email" name="Email" #Email="ngModel" >
-      </div>
-      <div [hidden]="Email.valid || Email.pristine" >Email is required</div>
-      <br/>
-
-      <div>
-          <label for="Password" >Password</label>
-          <br/>
-          <input type="password" id="Password" required [(ngModel)]="password" name="Password" #Password="ngModel" >
-      </div>
-      <div [hidden]="Password.valid || Password.pristine" >Password is required</div><br/>
-
-      <div>
-          <label for="Password_confirmation" >Password</label>
-          <br/>
-          <input type="password" id="Password_confirmation" required
-            [(ngModel)]="confirmation_password" name="Password_confirmation"
-            #Password_confirmation="ngModel" >
-      </div>
-      <div *ngIf="!pwdIsOk" >Passwords must be the same</div>
-      <br/>
-      <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
-    </form>
-  </div>
-  <div id="error" *ngIf="hasError" >
-    {{error}}
-=======
   <div *ngIf="hasError" >
       <div *ngIf="errors" >
         <mat-error *ngFor="let error of errors" >{{error}}</mat-error>
       </div>
       <mat-error *ngIf="error" >{{error}}</mat-error>
->>>>>>> UI done (much better for error handeling)
   </div>
     <button mat-raised-button type="submit"
       [disabled]="registerForm.invalid"
