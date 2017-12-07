@@ -4,13 +4,13 @@
 </ul>
 
 <br/><br/>
-<div id="toCenter2">
-    <p id="myGames">My Games:</p><br/>
-    <div id="toCenter3">
-        <div *ngFor="let item of lsGames">
-            <button class="mat-raised-button" (click)="goToScenesPage(item.uuid)" mat-raised-button>{{item.name}}</button>
-        </div>
-    </div>
-</div>
 
+<div id="toCenter2">
+  <p id="myGames">My Games:</p><br/>
+  <mat-grid-list cols="2" rowHeight="fit" id="toCenter3">
+    <mat-grid-tile *ngFor="let item of lsGames">
+      <button class="mat-raised-button" (click)="goToScenesPage(item.uuid)" mat-raised-button>{{item.name}}</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
 <router-outlet></router-outlet>
