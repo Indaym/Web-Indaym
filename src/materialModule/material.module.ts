@@ -4,12 +4,24 @@ import {
   MatSidenavModule,
   MatRadioModule,
   MatSnackBarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatCardModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
   MatSidenavModule,
   MatRadioModule,
   MatSnackBarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatCardModule,
 ];
 
 @NgModule({

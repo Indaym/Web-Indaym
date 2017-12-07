@@ -39,7 +39,7 @@ export class Http401Interceptor implements HttpInterceptor {
     this.token.deleteToken('token');
     this.token.deleteToken('refreshToken');
     this.user.deleteUser();
-    return Observable.of(res);
+    return Observable.throw(res);
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

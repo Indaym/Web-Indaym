@@ -5,7 +5,10 @@
 import { NgModule }                 from '@angular/core';
 import { BrowserModule }            from '@angular/platform-browser';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
-import { FormsModule }              from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+}                                   from '@angular/forms';
 import { DndModule }                from 'ng2-dnd';
 import {
   HttpModule,
@@ -72,6 +75,7 @@ import {
     HttpClientModule,
     routing,
     FormsModule,
+    ReactiveFormsModule,
     DndModule.forRoot(),
     FileUploadModule,
     ModalModule,
