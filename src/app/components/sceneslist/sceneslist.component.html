@@ -8,7 +8,7 @@
     <p id="myScenes">My Scenes:</p><br/>
     <div id="toCenter3">
         <div *ngFor="let item of lsScenes">
-            <button (click)="goToScenePage(item.uuid)">{{item.name}}</button>
+            <button class="mat-raised-button" (click)="goToScenePage(item.uuid)" mat-raised-button>{{item.name}}</button>
         </div>
     </div>
 </div>
