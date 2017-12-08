@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
   registerSuccess = (data) => {
     this.submitted = false;
     this.success = true;
-    setTimeout(() => this.router.navigate(['/login']), 5000);
+    setTimeout(() => this.router.navigate(['/login']), 2000);
   }
 
   registerFailure = (err) => {
