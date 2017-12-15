@@ -7,7 +7,6 @@ import { ContactComponent }       from './contact';
 import { GamesListComponent }     from './gameslist';
 import { ScenesListComponent }    from './sceneslist';
 import { EDITOR_COMPONENTS }      from './editor';
-import { FORUM_COMPONENTS }       from './forum';
 import { HOME_COMPONENTS }        from './home';
 import { LegalMentionsComponent } from './legal-mentions';
 import { PlayComponent }          from './play';
@@ -25,7 +24,6 @@ export { SnackBarComponent }      from './snackBar';
 
 export const APP_COMPONENTS = [
   EDITOR_COMPONENTS,
-  FORUM_COMPONENTS,
   HOME_COMPONENTS,
   AUTH_COMPONENTS,
   AppComponent,
