@@ -7,7 +7,7 @@ import { GameService }  from '../../services/game.service';
   selector  : 'ia-store',
   templateUrl   : './store.component.html',
   styleUrls    : [
-    './store.component.css',
+    './store.component.scss',
   ],
   providers : [ GameService ],
 })

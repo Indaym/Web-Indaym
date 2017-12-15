@@ -10,6 +10,7 @@ import {
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatCardModule,
+  MatExpansionModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
@@ -22,6 +23,7 @@ const MODULE_LIST = [
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatCardModule,
+  MatExpansionModule,
 ];
 
 @NgModule({

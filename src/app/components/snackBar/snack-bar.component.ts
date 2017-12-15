@@ -13,7 +13,7 @@ import { SnackBarType } from './enum.snack-bar';
   selector    : 'ia-snack-bar',
   templateUrl : './snack-bar.component.html',
   styleUrls   : [
-    './snack-bar.component.css',
+    './snack-bar.component.scss',
   ],
   providers : [],
 })

@@ -18,7 +18,7 @@ import { SnackBarType } from '../snackBar';
   selector  : 'ia-gameslist',
   templateUrl   : './gameslist.component.html',
   styleUrls    : [
-    './gameslist.component.css',
+    './gameslist.component.scss',
   ],
   providers : [ GameService ],
 })

@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 h2 {
   text-align: center;
 }
@@ -8,12 +10,12 @@ ul {
     margin: auto;
     padding: 0;
     overflow: hidden;
-    background-color: #00cccc;
+    background-color: $light-cyan;
 }
 
 li a {
     display: block;
-    color: white;
+    color: $white;
     padding: 14px 16px;
     text-decoration: none;
 }
@@ -43,7 +45,7 @@ li a:hover {
   text-transform: uppercase;
 }
 
-#myScenes {
+#myGames {
   font-size: 36px;
   font-weight: bold;
 }
@@ -68,7 +70,7 @@ button {
   font-size: 25px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  min-width: 12%;
+  min-width: 15%;
 }
 
 button:hover {

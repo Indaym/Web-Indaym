@@ -21,7 +21,7 @@ import { setTimeout } from 'timers';
   providers: [ AuthService ],
   templateUrl: './register.component.html',
   styleUrls: [
-    './auth.css',
+    './auth.scss',
   ],
 })
 export class RegisterComponent implements OnInit {

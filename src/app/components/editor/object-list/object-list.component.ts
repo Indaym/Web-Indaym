@@ -15,7 +15,7 @@ import {
 @Component({
   selector: 'ia-object-list',
   templateUrl: './object-list.component.html',
-  styleUrls: ['./object-list.component.css'],
+  styleUrls: ['./object-list.component.scss'],
 })
 export class ObjectListComponent implements OnInit {
   @Input() public eventDispatcher;

@@ -7,7 +7,7 @@ import { SnackBarService }  from '../services';
   selector  : 'ia-app',
   templateUrl  : './app.component.html',
   styleUrls    : [
-    './app.component.css',
+    './app.component.scss',
   ],
   providers : [SnackBarService],
 })

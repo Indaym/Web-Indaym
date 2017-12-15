@@ -15,7 +15,7 @@ import { TabComponent } from './tab.component';
     <ng-content></ng-content>
   `,
   styleUrls    : [
-    './tabs.css',
+    './tabs.scss',
   ],
   providers : [],
 })

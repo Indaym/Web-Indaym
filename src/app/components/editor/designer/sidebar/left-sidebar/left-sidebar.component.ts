@@ -19,8 +19,8 @@ import { buttonsDefault } from '../../../../../models';
   providers : [],
   templateUrl   : './left-sidebar.component.html',
   styleUrls    : [
-    './left-sidebar.component.css',
-    '../sidebars.css',
+    './left-sidebar.component.scss',
+    '../sidebars.scss',
   ],
 })
 export class LeftSidebarComponent implements OnInit {

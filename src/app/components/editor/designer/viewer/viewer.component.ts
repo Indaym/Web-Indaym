@@ -35,7 +35,7 @@ import { SnackBarType }   from '../../../snackBar';
   selector  : 'ia-viewer',
   templateUrl   : './viewer.component.html',
   styleUrls    : [
-    './viewer.component.css',
+    './viewer.component.scss',
   ],
   providers : [],
 })

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector  : 'ia-contact',
   templateUrl   : './contact.component.html',
   styleUrls : [
-    './contact.component.css',
+    './contact.component.scss',
   ],
   providers : [],
 })
