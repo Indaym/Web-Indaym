@@ -4,7 +4,7 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-bloc-disc',
   templateUrl  : './bloc-disc.component.html',
   styleUrls    : [
-    '../../forum.component.css',
+    '../../forum.component.scss',
   ],
 })
 export class BlocDiscComponent {

@@ -21,7 +21,7 @@ import {
   selector  : 'ia-editor',
   templateUrl   : './editor.component.html',
   styleUrls    : [
-    './editor.component.css',
+    './editor.component.scss',
   ],
   providers : [ GameService, SceneService, ObjectService, GameControllerService, TextureService ],
 })

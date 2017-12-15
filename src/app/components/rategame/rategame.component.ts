@@ -9,7 +9,7 @@ import { Comment }        from '../../models/comment';
     selector  : 'ia-rategame',
     templateUrl   : './rategame.component.html',
     styleUrls    : [
-        './rategame.component.css',
+        './rategame.component.scss',
     ],
     providers : [ GameService ],
 })

@@ -4,7 +4,7 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-bloc-idea',
   templateUrl  : './bloc-idea.component.html',
   styleUrls    : [
-    '../../forum.component.css',
+    '../../forum.component.scss',
   ],
 })
 export class BlocIdeaComponent {

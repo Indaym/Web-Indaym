@@ -23,7 +23,7 @@ import { ErrorMatcher } from './ErrorMatcher';
   selector: 'ia-login',
   templateUrl: './login.component.html',
   styleUrls: [
-    './auth.css',
+    './auth.scss',
   ],
 })
 export class LoginComponent implements OnInit {

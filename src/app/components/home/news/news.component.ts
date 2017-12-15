@@ -4,7 +4,7 @@ import { Component }  from '@angular/core';
   selector  : 'ia-news',
   templateUrl   : './news.component.html',
   styleUrls    : [
-    './news.component.css',
+    './news.component.scss',
   ],
   providers : [],
 })

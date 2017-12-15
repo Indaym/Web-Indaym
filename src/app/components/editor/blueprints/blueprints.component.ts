@@ -16,7 +16,7 @@ import { RULES_DEF }        from '../../../rules/';
   selector: 'ia-blueprints',
   templateUrl: './blueprints.component.html',
   styleUrls: [
-    './blueprints.component.css',
+    './blueprints.component.scss',
   ],
 })
 export class BlueprintsComponent implements OnInit, OnDestroy {

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector  : 'ia-forum',
   templateUrl  : './forum.component.html',
   styleUrls    : [
-    './forum.component.css',
+    './forum.component.scss',
   ],
   providers : [],
 })

@@ -23,7 +23,7 @@ import {
   selector  : 'ia-preview',
   templateUrl   : './preview.component.html',
   styleUrls    : [
-    './preview.component.css',
+    './preview.component.scss',
   ],
   providers : [],
 })

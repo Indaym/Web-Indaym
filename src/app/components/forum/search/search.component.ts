@@ -4,7 +4,7 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-search',
   templateUrl  : './search.component.html',
   styleUrls    : [
-    '../forum.component.css',
+    '../forum.component.scss',
   ],
 })
 export class SearchComponent {

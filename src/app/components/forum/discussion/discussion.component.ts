@@ -4,8 +4,8 @@ import { Component }  from '@angular/core';
   selector  : 'ia-forum-discussion',
   templateUrl  : './discussion.component.html',
   styleUrls    : [
-    './discussion.component.css',
-    '../forum.component.css',
+    './discussion.component.scss',
+    '../forum.component.scss',
   ],
 })
 export class DiscussionComponent {
