@@ -10,6 +10,8 @@ import {
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatCardModule,
+  MatGridListModule,
+  MatIconModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
@@ -22,6 +24,8 @@ const MODULE_LIST = [
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatCardModule,
+  MatGridListModule,
+  MatIconModule,
 ];
 
 @NgModule({

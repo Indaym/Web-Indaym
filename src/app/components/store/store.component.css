@@ -1,46 +1,30 @@
-h2 {
+.flex-container {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  list-style: none;
+
+  display: flex;
+
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  align-content: flex-start;
+}
+
+.flex-item {
+  padding: 5px;
+  margin-top: 10px;
+
+  width: 400px;
+  height: 550px;
+
   text-align: center;
 }
 
-#toCenter2 {
-  margin-left: 46%;
+h1 {
+  margin-bottom: 50px;
+
+  text-align: center;
   text-transform: uppercase;
-  font-size: 30px;
-}
-
-#doMargin {
-  margin-left: 5%;
-}
-
-#toCapitalize {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 20px;
-  float: left;
-}
-
-#eachGame  {
-  width: 20%;
-  float: left;
-  margin-right: 5%;
-}
-
-#description {
-  float: left;
-}
-
-#note {
-  font-size: 15px;
-  font-weight: bold;
-  float: right;
-}
-
-#myGames {
-  font-size: 36px;
-  font-weight: bold;
-}
-
-#logos {
-    width:100%;
-    height: auto;
 }

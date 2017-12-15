@@ -38,6 +38,7 @@ import {
   AppComponent,
   SnackBarComponent,
   APP_COMPONENTS,
+  WIDGETS,
 }                                   from './components';
 import { PIPES }                    from './pipes';
 
@@ -55,6 +56,7 @@ import {
   declarations: [
     APP_COMPONENTS,
     PIPES,
+    WIDGETS,
   ],
   bootstrap : [ AppComponent ],
   entryComponents: [ SnackBarComponent ],

@@ -23,7 +23,11 @@ export class GameService extends DefaultService {
   }
 
   public getGames(success?, error?) {
-    this.http.get(this.gamesUrl)
+    this.http.get(this.gamesUrl, {
+      params: {
+        'orderBy': 'name',
+      },
+    })
       .subscribe(success, error);
   }
 

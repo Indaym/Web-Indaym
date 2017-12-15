@@ -1,19 +1,9 @@
-<br/><br/>
-<div id="toCenter2">
-    <p id="myGames">Store</p>
-</div>
+<h1 class="center" >Store</h1>
 
-<br/><br/>
-
-<div id="doMargin">
-    <div *ngFor="let item of lsGames">
-        <div id="eachGame" (click)="goToRateGame(item.uuid)">
-          <img id="logos" src="assets/images/jeu1.png"/>
-          <div id="toCapitalize" (click)="goToScenesPage(item.uuid)">{{item.name}}</div>
-          <div id="note">Rating: {{item.rate}}</div>
-          <div id="description">Description: {{item.description}}</div>
-        </div>
-    </div>
-</div>
+<ul class="flex-container" >
+  <li class="flex-item" *ngFor="let game of games" >
+      <ia-game-card [canEdit]="false" [game]="game" ></ia-game-card>
+  </li>
+</ul>
 
 <router-outlet></router-outlet>

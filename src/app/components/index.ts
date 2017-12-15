@@ -23,6 +23,8 @@ import { SnackBarComponent }      from './snackBar';
 export { AppComponent }           from './app.component';
 export { SnackBarComponent }      from './snackBar';
 
+export { WIDGETS }                from './widgets';
+
 export const APP_COMPONENTS = [
   EDITOR_COMPONENTS,
   FORUM_COMPONENTS,

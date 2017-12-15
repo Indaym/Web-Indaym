@@ -12,14 +12,14 @@ import { GameService }  from '../../services/game.service';
   providers : [ GameService ],
 })
 export class StoreComponent {
-  public lsGames = [];
+  public games = [];
 
-  constructor(private games: GameService, private router: Router) {
+  constructor(private gamesService: GameService, private router: Router) {
     this.getGamesList();
   }
 
   public getGamesList() {
-    this.games.getGames((datas) => this.lsGames = datas);
+    this.gamesService.getGames((datas) => this.games = datas);
   }
 
   public goToRateGame(id, isNew) {
