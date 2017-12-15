@@ -1,8 +1,10 @@
+@import 'src/assets/css/colors';
+
 button {
-  background-color: #00cccc;
+  background-color: $light-cyan;
   border-radius: 4px;
-  color: white;
-  padding: 10px 15px;
+  color: $white;
+  padding: 0 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -11,14 +13,14 @@ button {
 }
 
 input {
-  color:black;
+  color:$black;
 }
 
 select, option, option:hover,
 option:focus,
 option:active,
 option:checked  {
-  color: black;
+  color: $black;
 }
 
 .center {
@@ -45,11 +47,11 @@ option:checked  {
 }
 
 p.warn {
-  color: #F15050;
+  color: $warn-red;
 }
 
 p.up {
-  color: #56A342
+  color: $up-green
 }
 
 #sel {

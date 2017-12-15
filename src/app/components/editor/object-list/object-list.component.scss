@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 .none-style {
   list-style: none;
 }
@@ -25,7 +27,7 @@
 
 #itemsList li:hover {
   cursor: pointer;
-  color: white;
+  color: $white;
 }
 
 #itemsList {
@@ -38,7 +40,7 @@
 }
 
 input, button {
-  color:black;
+  color: $black;
 }
 
 #filter {

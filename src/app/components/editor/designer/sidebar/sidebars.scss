@@ -1,7 +1,9 @@
+@import 'src/assets/css/colors';
+
 .close-button {
   width: 30px;
   height: 30px;
-  border: 1px solid white;
+  border: 1px solid $white;
   border-radius: 5px;
   z-index: 1;
 }
@@ -9,16 +11,34 @@
   font-family: 'Glyphicons Halflings';
   font-size: 20px;
   text-align: center;
-  color:white;
+  color:$white;
   top:0;
   padding: 4px;  
 }
 
 .close-button span:hover {
-  color: #A70000;
+  color: $dark-red;
 }
 
 .close-button:hover {
-  border-color: #A70000;
+  border-color: $dark-red;
+}
+
+mat-expansion-panel {
+  background: none;
+  color: $white;
+}
+
+mat-expansion-panel-header {
+  background: rgba($light-grey, 0.5) !important;
+}
+
+mat-panel-title {
+  color: $white;
+  font-weight: bold;
+}
+
+.mat-expansion-panel-spacing {
+  margin :0;
 }
 

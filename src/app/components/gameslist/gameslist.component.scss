@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 h2 {
   text-align: center;
 }
@@ -8,12 +10,12 @@ ul {
     margin: auto;
     padding: 0;
     overflow: hidden;
-    background-color: #00cccc;
+    background-color: $light-cyan;
 }
 
 li a {
     display: block;
-    color: white;
+    color: $white;
     padding: 14px 16px;
     text-decoration: none;
 }

@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 :host {
   position: relative;
   top: -50px;
@@ -33,21 +35,21 @@ ul {
 
 li a {
   display: block;
-  color: white;
+  color: $white;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li {
-  background-color: #444;
+  background-color: $dark-grey;
   pointer-events: all;
   cursor: pointer;
-  border-color: #e7e7e7
+  border-color: $light-grey
 }
 
 li a:hover:not(.active), .active {
-  color:black;
-  background-color: #555
+  color: $black;
+  background-color: $dark-grey-light
 }
 
 .left, .left:hover, .left:active {
@@ -71,12 +73,13 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  background: rgba(55,55,55,0.95);
+  background: $dark-grey-alpha;
   padding: 10px;
   width: 300px;
-  color: white;
+  color: $white;
 }
 mat-sidenav.right-sidenav {
+  padding: 40px 0 0 0;
   border-radius: 5px 0 0 5px;
 }
 

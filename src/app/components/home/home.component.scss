@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 h2 {
     text-align: center;
 }
@@ -30,5 +32,5 @@ h2 {
 
 .link {
     margin: 30px;
-    color: #0e828e;
+    color: $dark-cyan;
 }
