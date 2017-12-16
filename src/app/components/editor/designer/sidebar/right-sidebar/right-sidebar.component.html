@@ -28,8 +28,12 @@
         <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
           (ngModelChange)="updateValues('position')" /><br/>
         <h5>Rotation:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="0.5" [(ngModel)]="objectSelected.rotation[v]"
-          (ngModelChange)="updateValues('rotation')" /><br/>
+        <mat-radio-group [(ngModel)]="convert" name="converter">
+          <mat-radio-button value="deg">Degree</mat-radio-button>
+          <mat-radio-button value="rad">Radian</mat-radio-button>
+        </mat-radio-group>
+        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
+          (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
         <h5>Dimension:</h5>
         <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
           (ngModelChange)="updateValues('dimension')" /><br/>

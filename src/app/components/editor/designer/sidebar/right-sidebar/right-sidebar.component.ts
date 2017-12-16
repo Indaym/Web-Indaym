@@ -11,6 +11,7 @@ import {
 import {
   Vector3,
   Euler,
+  Math,
 }                         from 'three';
 import { FileUploader }   from 'ng2-file-upload';
 
@@ -54,6 +55,7 @@ export class RightSidebarComponent implements OnInit  {
     'scale',
     'rotate',
   ];
+  private convert = 'deg';
   private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
@@ -107,6 +109,11 @@ export class RightSidebarComponent implements OnInit  {
       if (e.dimension !== undefined)
         this.objectSelected.dimension = e.dimension;
     });
+  }
+
+  public conv(value) {
+    if (this.convert === 'deg')
+      return value * Math.DEG2RAD;
   }
 
   public updateValues(type) {
