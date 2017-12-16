@@ -123,6 +123,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   public savePositions() {
     const objs = this.gameController.getObjects();
 
+    const selObjs = this.scene.unselectObject(undefined);
     objs.forEach((elem) => {
       if (['position', 'rotation', 'dimension'].every((v, i) => {
         if (elem.object[v] === undefined)
@@ -138,6 +139,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
       elem.threeDModel.rotation.toArray(elem.object.rotation);
       this.objectService.updateObject({ object: elem.object }, elem.uuid);
     });
+    this.scene.selectObjects(selObjs);
   }
 
   public deleteObject() {
@@ -179,7 +181,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       const name = args.dragData;
 
       if (name !== undefined && buttonsDefault[name] !== undefined) {
-        const model = Object.assign({}, buttonsDefault[name]);
+        const model = { ...buttonsDefault[name] };
+        model.object = { ...model.object };
         const cb = (datas) => {
           model.object.position = coord.toArray();
           if (name === 'grid')

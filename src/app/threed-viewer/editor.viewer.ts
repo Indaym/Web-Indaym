@@ -12,6 +12,7 @@ import {
   Group,
   Box3,
   Matrix4,
+  SceneUtils,
 } from 'three';
 
 import { SceneViewer } from './scene.viewer';
@@ -168,17 +169,19 @@ export class EditorViewer extends SceneViewer {
     this._controller.detach(objSel);
     this._scene.remove(this._controller);
 
+    const ret = [];
     if (this._selected instanceof Group) {
+      ret.push(...this._selected.children);
       while (this._selected.children.length > 0) {
         // Remove child from group, set correct position and add to scene
-        const element = this._selected.children[0];
-        this._selected.remove(element);
-        element.position.add(this._selected.position);
-        this._scene.add(element);
+        SceneUtils.detach(this._selected.children[0], this._selected, this._scene);
       }
       this._scene.remove(this._selected);
+    } else if (this._selected) {
+      ret.push(this._selected);
     }
     this._selected = undefined;
+    return ret;
   }
 
   /**

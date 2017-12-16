@@ -65,8 +65,7 @@ export class PlayerViewer extends SceneViewer {
     };
     const outlineMaterial1 = new MeshBasicMaterial( { color: 0xff0000, side: BackSide } );
     this._selected.glow = new Mesh(obj.geometry as Geometry, outlineMaterial1);
-    this._selected.glow.position.copy(obj.position);
-    this._selected.glow.scale.copy(obj.scale);
+    this._selected.glow.applyMatrix(this._selected.object.matrixWorld);
     this._selected.glow.scale.addScalar(0.5);
     this._selected.oldPosition = obj.position.clone();
     this._scene.add(this._selected.glow);
