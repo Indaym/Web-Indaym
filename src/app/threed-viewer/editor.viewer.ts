@@ -142,7 +142,7 @@ export class EditorViewer extends SceneViewer {
   }
 
   public selectObjects(objs) {
-    if (objs) {
+    if (objs && objs.length > 0) {
       this.unselectObject(undefined);
 
       const grp = new Group();
