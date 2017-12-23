@@ -1,8 +1,8 @@
 <div id="filter">
-  <input type="text" [(ngModel)]="filter">
   <button (click)="switchOrder()">
     <span #glyph class="glyphicon glyphicon-sort"></span>
   </button>
+  <input type="text" [(ngModel)]="filter">
 </div>
 <ul #itemsList id="itemsList" *ngFor="let typ of categories; trackBy: trackSwitch">
   <p (click)="selectTypeObjects(typ, $event)">{{typ | titlecase}}</p>

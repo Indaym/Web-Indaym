@@ -66,7 +66,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.scene = new EditorViewer({
       width: () => window.innerWidth,
-      height: () => window.innerHeight - this.container.nativeElement.offsetTop - 5,
+      height: () => window.innerHeight - this.container.nativeElement.offsetTop - 100,
     });
     this.scene.defaultLoad(this.container.nativeElement);
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);

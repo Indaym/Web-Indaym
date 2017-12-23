@@ -67,9 +67,12 @@ h4 {
   margin-left: 10px;
 }
 
-#closeButton {
-  position: absolute;
-  left: 5px;
-  top: 5px;
+.close-button {
   float:left;
+  left: -40px;
+  border-radius: 5px  0 0 5px;
+}
+
+:host {
+  height: 100%;
 }

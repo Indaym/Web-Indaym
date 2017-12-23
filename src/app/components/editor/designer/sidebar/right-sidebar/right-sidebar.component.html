@@ -1,10 +1,11 @@
-<div id="closeButton" class="close-button">
-    <span mat-button (click)="end.close()" class="glyphicon glyphicon-remove"></span>
+<div class="close-button" mat-button (click)="end.toggle()">
+    <span class="glyphicon" [ngClass]="{'glyphicon-menu-left': !end.opened, 'glyphicon-menu-right': end.opened}"></span>
 </div>
 
+<div class="contain">
   <mat-accordion>
     <mat-expansion-panel expanded="true">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header #objectHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, objectHead)">
         <mat-panel-title>
           Object Configuration
         </mat-panel-title>
@@ -37,11 +38,24 @@
         <h5>Dimension:</h5>
         <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
           (ngModelChange)="updateValues('dimension')" /><br/>
+
+        <div *ngIf="selected">
+          <label>Name :</label>
+          <p >{{ selected.name }}</p>
+          <span class="glyphicon glyphicon-edit"></span>
+        </div>
+        <div *ngIf="selected">
+          <label>Rules applied</label>
+          <ul>
+            <li *ngFor="let rule of selected.rules | keys">{{selected.rules[rule]._name}}</li>
+          </ul>
+        </div>
       </form>
+
     </mat-expansion-panel>
 
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header #textureHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, textureHead)">
         <mat-panel-title>
           Texture Configuration
         </mat-panel-title>
@@ -77,3 +91,4 @@
     </mat-expansion-panel>
 
   </mat-accordion>
+</div>

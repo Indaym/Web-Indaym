@@ -2,10 +2,10 @@
   margin-left: 10px;
 }
 
-mat-sidenav-container {
-  margin-top: -20px;
-}
-
 #editorContainer {
   overflow: hidden;
+}
+
+:host {
+  line-height: 0;
 }

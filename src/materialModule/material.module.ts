@@ -11,6 +11,7 @@ import {
   MatProgressBarModule,
   MatCardModule,
   MatExpansionModule,
+  MatListModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
@@ -24,6 +25,7 @@ const MODULE_LIST = [
   MatProgressBarModule,
   MatCardModule,
   MatExpansionModule,
+  MatListModule,
 ];
 
 @NgModule({

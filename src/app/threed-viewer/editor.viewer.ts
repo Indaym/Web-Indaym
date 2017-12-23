@@ -125,10 +125,14 @@ export class EditorViewer extends SceneViewer {
       this._controller.attach(obj);
       this._scene.add(this._controller);
       this._eventDispatcher.dispatchEvent({
-        type : 'updateObjectInputs',
-        position : this._selected.position,
-        dimension : this._selected.scale,
-        rotation : this._selected.rotation,
+        type: 'updateObjectInputs',
+        position: this._selected.position,
+        dimension: this._selected.scale,
+        rotation: this._selected.rotation,
+      });
+      this._eventDispatcher.dispatchEvent({
+        type: 'selectViewObject',
+        object: this._selected,
       });
       this._eventDispatcher.dispatchEvent({
         type : 'setMinimumScale',
@@ -181,6 +185,10 @@ export class EditorViewer extends SceneViewer {
       ret.push(this._selected);
     }
     this._selected = undefined;
+    this._eventDispatcher.dispatchEvent({
+      type: 'selectViewObject',
+      object: this._selected,
+    });
     return ret;
   }
 
