@@ -3,6 +3,12 @@ mat-card {
   height: 550px;
 }
 
+mat-card-actions {
+  position: absolute;
+
+  width: 97%;
+}
+
 p {
   height: 80px;
 
@@ -14,4 +20,12 @@ p {
 img {
   width: 100%;
   height: 300px;
+}
+
+.push-right {
+  float: right;
+}
+
+.push-left {
+  float: left;
 }

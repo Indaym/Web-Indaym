@@ -4,7 +4,7 @@
 
 import { AppComponent }           from './app.component';
 import { ContactComponent }       from './contact';
-import { GamesListComponent }     from './gameslist';
+import { EditorListComponent }    from './editorList';
 import { ScenesListComponent }    from './sceneslist';
 import { EDITOR_COMPONENTS }      from './editor';
 import { FORUM_COMPONENTS }       from './forum';
@@ -32,7 +32,7 @@ export const APP_COMPONENTS = [
   AUTH_COMPONENTS,
   AppComponent,
   ContactComponent,
-  GamesListComponent,
+  EditorListComponent,
   ScenesListComponent,
   LegalMentionsComponent,
   PlayComponent,

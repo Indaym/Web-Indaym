@@ -22,10 +22,11 @@ export class GameService extends DefaultService {
     this.settedErrorMessage = 'URL for *Games* not setted';
   }
 
-  public getGames(success?, error?) {
+  public getGames(opt = {}, success?, error?) {
     this.http.get(this.gamesUrl, {
       params: {
-        'orderBy': 'name',
+        ...{ 'orderBy': 'name', 'limit': '10', 'offset': '1' },
+        ...opt,
       },
     })
       .subscribe(success, error);

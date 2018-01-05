@@ -1,9 +1,8 @@
 <h1 class="center" >Store</h1>
 
-<ul class="flex-container" >
-  <li class="flex-item" *ngFor="let game of games" >
-      <ia-game-card [canEdit]="false" [game]="game" ></ia-game-card>
-  </li>
-</ul>
+<ia-game-list
+  [games]="games"
+  [add]="true"
+></ia-game-list>
 
 <router-outlet></router-outlet>

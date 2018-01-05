@@ -12,4 +12,5 @@ export class GameCardComponent {
   @Input() game: any;
 
   @Input() canEdit = false;
+  @Input() canDelete = false;
 }

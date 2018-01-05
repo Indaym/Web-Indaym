@@ -1,0 +1,16 @@
+<h1 mat-dialog-title >Create a new Game</h1>
+<div mat-dialog-content >
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.gameName" placeholder="Game name" >
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="data.gameDescription" placeholder="Game description" ></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.sceneName" placeholder="Scene name" >
+  </mat-form-field>
+</div>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()" >Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" >Create</button>
+</mat-dialog-actions>

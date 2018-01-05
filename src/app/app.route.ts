@@ -17,7 +17,7 @@ import {
   DesignerComponent,
   BlueprintsComponent,
 }                                 from './components/editor';
-import { GamesListComponent }     from './components/gameslist';
+import { EditorListComponent }    from './components/editorList';
 import { ScenesListComponent }    from './components/sceneslist';
 import { PlayComponent }          from './components/play';
 import { StoreComponent }         from './components/store';
@@ -38,7 +38,7 @@ export const routes: Routes = [
   { path: 'legalMentions',  component: LegalMentionsComponent },
   { path: 'register',       component: RegisterComponent },
   { path: 'login',          component: LoginComponent },
-  { path: 'gameslist',      component: GamesListComponent , canActivate: [ AuthGuard ]  },
+  { path: 'gameslist',      component: EditorListComponent , canActivate: [ AuthGuard ]  },
   { path: 'sceneslist',     component: ScenesListComponent , canActivate: [ AuthGuard ]  },
   { path: 'editor',         component: EditorComponent , canActivate: [ AuthGuard ] ,
     children: [

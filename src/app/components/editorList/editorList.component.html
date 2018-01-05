@@ -1,0 +1,11 @@
+<ul>
+    <li id="toCenter1"><a id="buttonGame" (click)="gameFunction()" class="active">Create a New Game</a></li>
+</ul>
+
+<ia-game-list
+  [games]="lsGames"
+  [edit]="true"
+  [delete]="true"
+></ia-game-list>
+
+<router-outlet></router-outlet>

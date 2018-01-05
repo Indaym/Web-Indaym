@@ -11,7 +11,7 @@ export let comeFrom = '';
   styleUrls    : [
     './play.component.css',
   ],
-  providers : [ GameService, GameService ],
+  providers : [ GameService ],
 })
 export class PlayComponent {
   public lsGames = [];
@@ -21,7 +21,10 @@ export class PlayComponent {
   }
 
   public getGamesList() {
-    this.games.getGames((datas) => this.lsGames = datas);
+    this.games.getGames(
+      {'limit': '10', 'offset': '1'},
+      (datas) => this.lsGames = datas,
+    );
   }
 
   public goToScenesPage(id) {

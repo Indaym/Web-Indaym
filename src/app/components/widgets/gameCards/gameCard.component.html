@@ -10,8 +10,9 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button >Like</button>
-    <button mat-button >ADD</button>
-    <button *ngIf="canEdit" mat-button >B3</button>
+    <button mat-raised-button class="push-left" >Like</button>
+    <button mat-raised-button class="push-left" >ADD</button>
+    <button *ngIf="canEdit" mat-raised-button class="push-right" color="warn" >Edit</button>
+    <button *ngIf="canDelete" mat-raised-button class="push-right" color="warn" >Delete</button>
   </mat-card-actions>
 </mat-card>

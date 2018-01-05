@@ -1,0 +1,14 @@
+<ul class="flex-container" >
+  <li class="flex-item" *ngFor="let game of games" >
+      <ia-game-card
+        [game]="game"
+        [canEdit]="ownerCanEdit(game)"
+        [canDelete]="ownerCanDelete(game)"
+      ></ia-game-card>
+  </li>
+</ul>
+
+<mat-paginator
+  [pageSize]="10"
+  >
+</mat-paginator>

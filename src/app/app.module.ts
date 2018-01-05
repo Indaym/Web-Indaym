@@ -40,6 +40,7 @@ import {
   APP_COMPONENTS,
   WIDGETS,
 }                                   from './components';
+import { CreateGameDialogComponent } from './components/widgets/createGameDialog/createGameDialog.component';
 import { PIPES }                    from './pipes';
 
 import { AuthGuard }                from './guards';
@@ -59,7 +60,10 @@ import {
     WIDGETS,
   ],
   bootstrap : [ AppComponent ],
-  entryComponents: [ SnackBarComponent ],
+  entryComponents: [
+    SnackBarComponent,
+    CreateGameDialogComponent,
+  ],
   providers : [
     AuthGuard,
     AuthService,

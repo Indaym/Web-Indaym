@@ -19,7 +19,10 @@ export class StoreComponent {
   }
 
   public getGamesList() {
-    this.gamesService.getGames((datas) => this.games = datas);
+    this.gamesService.getGames(
+      {'limit': '10', 'offset': '1'},
+      (datas) => this.games = datas,
+    );
   }
 
   public goToRateGame(id, isNew) {
