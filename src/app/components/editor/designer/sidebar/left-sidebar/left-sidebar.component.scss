@@ -1,7 +1,9 @@
+@import 'src/assets/css/colors';
+
 button {
-  background-color: #00cccc;
+  background-color: $light-cyan;
   border-radius: 4px;
-  color: white;
+  color: $white;
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
@@ -11,7 +13,7 @@ button {
 }
 
 #toBlack {
-  color: black;
+  color: $black;
 }
 
 #closeButton {

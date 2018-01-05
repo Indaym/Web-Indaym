@@ -1,3 +1,5 @@
+@import 'src/assets/css/colors';
+
 .row {
   margin: 0;
   padding: 10px;
@@ -19,11 +21,11 @@
 }
 
 .badge:hover > .glyphicon-minus {
-  color: darkred;
+  color: $warn-red;
 }
 
 .badge:hover > .glyphicon-plus {
-  color: darkgreen;
+  color: $up-green;
 }
 
 #available-rules, #applied-rules {
@@ -31,12 +33,12 @@
 }
 
 #available-rules {
-  border-left: 3px solid #00CCCC;
+  border-left: 3px solid $light-cyan;
   padding-left: 25px;
 }
 
 #applied-rules {
-  border-right: 3px solid #00CCCC;
+  border-right: 3px solid $light-cyan;
   padding-right: 25px;
 }
 
@@ -55,7 +57,7 @@
 }
 
 :host ::ng-deep li:hover {
-  color: black !important;
+  color: $black !important;
 }
 
 

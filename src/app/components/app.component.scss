@@ -1,23 +1,15 @@
+@import 'src/assets/css/colors';
+
 h1:nth-child(1) {
-  background-color: #444;
-  color: white;
+  background-color: $dark-grey;
+  color: $white;
   font: bold;
   font-family: "Segoe UI",Arial,sans-serif;
   text-transform: uppercase;
 }
 
 .navbar {
-  background-color: #444;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height:100px;
-  background:#ccc;
-  text-align: center;
+  background-color: $dark-grey;
 }
 
 body {
@@ -39,19 +31,19 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: $white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover:not(.active) {
-  background-color: #00cccc;
+  background-color: $light-cyan;
 }
 
 li a.active, li a.active:hover {
-  color: white;
-  background-color:#00cccc;
+  color: $white;
+  background-color: $light-cyan;
 }
 
 /* add background image on all site */
@@ -102,7 +94,7 @@ nav {
 .icons-indaym > span {
   font-size: 20px;
   vertical-align: middle;
-  color:white;
+  color: $white;
   margin-left:10px;
 }
 

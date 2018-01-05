@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'ia-grid-popup',
   templateUrl : './grid-popup.component.html',
-  styleUrls: ['./grid-popup.component.css'],
+  styleUrls: ['./grid-popup.component.scss'],
   providers: [],
 })
 export class GridPopupComponent {

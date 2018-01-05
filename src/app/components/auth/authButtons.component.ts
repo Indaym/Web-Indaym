@@ -7,7 +7,7 @@ import { AuthService }  from '../../services';
   selector: 'ia-auth-button',
   templateUrl: './authButtons.component.html',
   styleUrls: [
-    '../app.component.css',
+    '../app.component.scss',
   ],
 })
 export class AuthButtonsComponent {

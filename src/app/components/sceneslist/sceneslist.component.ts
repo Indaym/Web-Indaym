@@ -16,7 +16,7 @@ import { SceneService } from '../../services';
   selector  : 'ia-sceneslist',
   templateUrl   : './sceneslist.component.html',
   styleUrls    : [
-    './sceneslist.component.css',
+    './sceneslist.component.scss',
   ],
   providers : [
     SceneService,

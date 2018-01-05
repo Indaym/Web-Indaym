@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector  : 'ia-home',
   templateUrl  : './home.component.html',
   styleUrls    : [
-    './home.component.css',
+    './home.component.scss',
   ],
   providers : [],
 })

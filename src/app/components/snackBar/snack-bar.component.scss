@@ -1,6 +1,8 @@
+@import 'src/assets/css/colors';
+
 button {
   margin-left: 10px;
-  color:white;
+  color: $white;
 }
 
 button:active, button:focus {

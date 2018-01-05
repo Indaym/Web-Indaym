@@ -14,22 +14,28 @@ import {
 }                         from 'three';
 import { FileUploader }   from 'ng2-file-upload';
 
-import { TextureService } from '../../../../../services';
+import {
+  TextureService,
+  TokenService,
+}                         from '../../../../../services';
 import { serverConfig }   from '../../../../../../../config/server.conf';
 
 @Component({
   selector  : 'ia-right-sidebar',
   templateUrl   : './right-sidebar.component.html',
   styleUrls    : [
-    './right-sidebar.component.css',
-    '../sidebars.css',
+    './right-sidebar.component.scss',
+    '../sidebars.scss',
   ],
   providers : [],
 })
 export class RightSidebarComponent implements OnInit  {
   @Input() public end;
   @Input() public eventDispatcher;
-  public uploader: FileUploader = new FileUploader({url: serverConfig.serverURL + 'textures/' });
+  public uploader: FileUploader = new FileUploader({
+    url: serverConfig.serverURL + 'textures/',
+    authToken: '',
+  });
 
   private urlImg;
   private warnMessage = '';
@@ -51,10 +57,12 @@ export class RightSidebarComponent implements OnInit  {
   private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
-  constructor(private textureService: TextureService) {
+  constructor(private textureService: TextureService, private tokenService: TokenService) {
     this.textureService.getTextures((results) => {
       this.textures = results;
     });
+
+    this.uploader.authToken = `JWT ${ this.tokenService.getToken('token') }`;
 
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
 

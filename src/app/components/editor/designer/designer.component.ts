@@ -8,7 +8,7 @@ import { GridCreationService }  from '../../../services';
   selector  : 'ia-designer',
   templateUrl   : './designer.component.html',
   styleUrls    : [
-    './designer.component.css',
+    './designer.component.scss',
   ],
   providers : [ providers, GridCreationService ],
 })

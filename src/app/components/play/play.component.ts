@@ -9,7 +9,7 @@ export let comeFrom = '';
   selector  : 'ia-play',
   templateUrl   : './play.component.html',
   styleUrls    : [
-    './play.component.css',
+    './play.component.scss',
   ],
   providers : [ GameService ],
 })
