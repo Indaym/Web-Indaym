@@ -25,7 +25,7 @@ import {
   selector  : 'ia-gameslist',
   templateUrl   : './editorList.component.html',
   styleUrls    : [
-    './editorList.component.css',
+    './editorList.component.scss',
   ],
   providers : [ GameService ],
 })

@@ -12,7 +12,7 @@ import {
   selector: 'ia-game-list',
   templateUrl: './gameList.component.html',
   styleUrls: [
-    './gameList.component.css',
+    './gameList.component.scss',
   ],
   providers: [
     GameService,

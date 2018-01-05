@@ -11,7 +11,7 @@ import {
   selector: 'ia-create-game',
   templateUrl: './createGameDialog.component.html',
   styleUrls: [
-    './createGameDialog.component.css',
+    './createGameDialog.component.scss',
   ],
 })
 export class CreateGameDialogComponent {

@@ -6,7 +6,7 @@ import {
 @Component({
   selector: 'ia-game-card',
   templateUrl: './gameCard.component.html',
-  styleUrls: [ './gameCard.component.css' ],
+  styleUrls: [ './gameCard.component.scss' ],
 })
 export class GameCardComponent {
   @Input() game: any;
