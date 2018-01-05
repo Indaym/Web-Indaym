@@ -41,14 +41,27 @@
 
         <div *ngIf="selected">
           <label>Name :</label>
-          <p >{{ selected.name }}</p>
-          <span class="glyphicon glyphicon-edit"></span>
+          <div *ngIf="editMode == false; else editSelectedName">
+            <span>{{ selected.name }}</span>
+            <span title="Edit Name" (click)="editName()" class="glyphicon glyphicon-edit"></span>
+          </div>
+          <ng-template #editSelectedName>
+            <div>
+                <input type="string" name="edit_selected" [(ngModel)]="selected.name"/>
+                <span class="but"><span title="Save Name" (click)="saveName()" class="glyphicon glyphicon-ok"></span></span>
+                <span class="but"><span title="Undo Saving Name" (click)="undoSaveName()" class="glyphicon glyphicon-remove"></span></span>
+    
+            </div>
+          </ng-template>
         </div>
         <div *ngIf="selected">
           <label>Rules applied</label>
-          <ul>
+          <ul *ngIf="(selected.rules | keys).length  > 0; else noRules">
             <li *ngFor="let rule of selected.rules | keys">{{selected.rules[rule]._name}}</li>
           </ul>
+          <ng-template #noRules>
+            <p>No rule applied on this object</p>
+          </ng-template>
         </div>
       </form>
 

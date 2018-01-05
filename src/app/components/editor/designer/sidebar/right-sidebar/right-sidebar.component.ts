@@ -60,6 +60,8 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
   ];
   private convert = 'deg';
   private selected = undefined;
+  private oldNameSelected = undefined;
+  private editMode = false;
   private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
@@ -123,6 +125,8 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
         this.selected = undefined;
       }
     });
+
+    this.end.onClose.subscribe(() => this.undoSaveName());
   }
 
   public conv(value) {
@@ -189,6 +193,29 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
     this.eventDispatcher.dispatchEvent({
       type: 'savePositions',
     });
+  }
+
+  private editName() {
+    if (this.selected) {
+      this.oldNameSelected = this.selected.name;
+      this.editMode = true;
+    }
+  }
+
+  private saveName() {
+    if (this.selected) {
+      console.log('Save in DB');
+      this.editMode = false;
+      this.oldNameSelected = undefined;
+    }
+  }
+
+  private undoSaveName() {
+    if (this.selected) {
+      this.selected.name = this.oldNameSelected;
+      this.oldNameSelected = undefined;
+      this.editMode = false;
+    }
   }
 
   private toggleMode() {
