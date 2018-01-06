@@ -20,6 +20,7 @@ import { FileUploader }         from 'ng2-file-upload';
 import {
   TextureService,
   TokenService,
+  ObjectService,
 }                               from '../../../../../services';
 import { serverConfig }         from '../../../../../../../config/server.conf';
 import { OverridePanelClosing } from '../overridePanelClosing';
@@ -65,7 +66,7 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
   private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
-  constructor(private textureService: TextureService, private tokenService: TokenService) {
+  constructor(private textureService: TextureService, private tokenService: TokenService, private objectService: ObjectService) {
     super();
     this.textureService.getTextures((results) => {
       this.textures = results;
@@ -204,7 +205,7 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
 
   private saveName() {
     if (this.selected) {
-      console.log('Save in DB');
+      this.objectService.updateObject({name: this.selected.name}, this.selected.uuid);
       this.editMode = false;
       this.oldNameSelected = undefined;
     }

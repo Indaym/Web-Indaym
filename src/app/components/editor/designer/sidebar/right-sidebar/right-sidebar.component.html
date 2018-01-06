@@ -19,38 +19,55 @@
       </mat-radio-group>
   
       <button mat-button (click)="deleteSelected()">Delete Selected Object</button>
-      <button mat-button (click)="savePositions()">Save Positions</button>
-  
-  
+      <button mat-button (click)="savePositions()">Save Positions</button>  
+
+
       <hr/>
       <h4>Object Configuration</h4>
       <form>
         <h5>Position:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
-          (ngModelChange)="updateValues('position')" /><br/>
+        <ia-expand-input type="position">
+          <ng-template let-v>
+            <label for="position{{v}}">{{v}}</label>
+            <input type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
+            (ngModelChange)="updateValues('position')" /><br/>
+          </ng-template>
+        </ia-expand-input>
+
         <h5>Rotation:</h5>
         <mat-radio-group [(ngModel)]="convert" name="converter">
           <mat-radio-button value="deg">Degree</mat-radio-button>
           <mat-radio-button value="rad">Radian</mat-radio-button>
         </mat-radio-group>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
-          (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
+        <ia-expand-input type="rotation">
+          <ng-template let-v>
+            <label for="rotation{{v}}">{{v}}</label>
+            <input type="number" id="rotation{{v}}" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
+            (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
+          </ng-template>
+        </ia-expand-input>
+
         <h5>Dimension:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
-          (ngModelChange)="updateValues('dimension')" /><br/>
+        <ia-expand-input type="dimension">
+          <ng-template let-v>
+            <label for="dimension{{v}}">{{v}}</label>
+            <input type="number" id="dimension{{v}}" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
+            (ngModelChange)="updateValues('dimension')" />
+          </ng-template>
+        </ia-expand-input>
+        <br/>
 
         <div *ngIf="selected">
           <label>Name :</label>
-          <div *ngIf="editMode == false; else editSelectedName">
+          <div *ngIf="editMode == false; else editSelectedName" class="sizedel" id="noBorder">
             <span>{{ selected.name }}</span>
-            <span title="Edit Name" (click)="editName()" class="glyphicon glyphicon-edit"></span>
+            <span class="but" title="Edit Name" (click)="editName()"><span class="glyphicon glyphicon-edit"></span></span>
           </div>
           <ng-template #editSelectedName>
-            <div>
-                <input type="string" name="edit_selected" [(ngModel)]="selected.name"/>
-                <span class="but"><span title="Save Name" (click)="saveName()" class="glyphicon glyphicon-ok"></span></span>
-                <span class="but"><span title="Undo Saving Name" (click)="undoSaveName()" class="glyphicon glyphicon-remove"></span></span>
-    
+            <div class="sizedel">
+              <input type="string" name="edit_selected" [(ngModel)]="selected.name"/>
+              <span class="but" title="Save Name" (click)="saveName()"><span class="glyphicon glyphicon-ok"></span></span>
+              <span class="but" title="Undo Saving Name" (click)="undoSaveName()"><span class="glyphicon glyphicon-remove"></span></span>
             </div>
           </ng-template>
         </div>

@@ -1,0 +1,9 @@
+<div class="checkaccord">
+ <label for="check{{type}}"><span class="glyphicon" [ngClass]="{'glyphicon-chevron-right': checked == false, 'glyphicon-chevron-down': checked == true}"></span></label>
+ <input name="check{{type}}" id="check{{type}}" type="checkbox" [(ngModel)]="checked">
+</div>
+<div class="inpu" [ngClass]="{'horiflex': checked == false, 'vertiflex': checked == true}">
+  <div *ngFor="let v of ['x', 'y', 'z']">
+    <ng-container *ngTemplateOutlet="template; context: {$implicit: v}"></ng-container>
+  </div>
+</div>

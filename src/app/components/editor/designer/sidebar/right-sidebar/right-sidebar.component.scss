@@ -74,8 +74,44 @@ h4 {
 }
 
 .but {
-//  background: blue;
-//  padding: 5px;
+  background: $gray;
+  padding: 4px;
+  line-height: normal;
+  float: right;
+  &:hover{
+    .glyphicon-ok {
+      color: $up-green;
+    }
+    .glyphicon-remove:hover {
+      color: $warn-red;
+    }
+  }
+}
+
+
+#noBorder {
+  border-width: 0 0 1px 0;
+  span:first-child {
+    flex: auto;
+    padding: 2px;
+  }
+}
+
+.sizedel {
+  border: 1px $gray solid;
+  font-size: 0;
+  height: 27px;
+  display: flex;
+
+  & > input {
+    height: 25px;
+    flex:auto;
+    line-height: 0;
+  }
+
+  & > * {
+    font-size: 14px;
+  }
 }
 
 :host {
