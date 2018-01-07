@@ -57,9 +57,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.gameController = gameControllerService.gameController;
   }
 
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Delete')
+    if (event.key === 'Backspace' && this.scene.selected)
       this.deleteObject();
   }
 
