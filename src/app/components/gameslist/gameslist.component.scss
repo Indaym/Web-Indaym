@@ -25,10 +25,10 @@ li a:hover {
 }
 
 #toCenter1 {
-  margin-left: 39%;
-  margin-right: 37%;
+  //margin-left: 39%;
+  //margin-right: 37%;
   text-transform: uppercase;
-  font-size: 36px;
+  font-size: 31px;
 }
 
 #toCenter2 {
@@ -37,8 +37,9 @@ li a:hover {
   font-size: 30px;
 }
 
-#toCenter3 {
-  margin-left: 2%;
+.toCenter3 {
+  display: table;
+    margin: 0 auto;
 }
 
 #toCapitalize {
