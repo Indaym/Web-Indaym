@@ -44,8 +44,9 @@ export class Http401Interceptor implements HttpInterceptor {
     this.token.deleteToken('token');
     this.token.deleteToken('refreshToken');
     this.user.deleteUser();
-    Observable.throw(res);
+    const obs = Observable.throw(res);
     this.router.navigate(['/login']);
+    return obs;
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
