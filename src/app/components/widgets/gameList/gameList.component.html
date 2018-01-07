@@ -2,8 +2,14 @@
   <li class="flex-item" *ngFor="let game of games" >
       <ia-game-card
         [game]="game"
-        [canEdit]="ownerCanEdit(game)"
-        [canDelete]="ownerCanDelete(game)"
+        [edit]="ownerCanEdit(game)"
+        [delete]="ownerCanDelete(game)"
+        [add]="add"
+        [like]="like"
+        [publish]="ownerCanTogglePublish(game)"
+
+        (deleteGame)="deleteGame($event)"
+        (togglePublishGame)="togglePublishGame($event)"
       ></ia-game-card>
   </li>
 </ul>

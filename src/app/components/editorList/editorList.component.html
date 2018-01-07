@@ -6,6 +6,10 @@
   [games]="lsGames"
   [edit]="true"
   [delete]="true"
+  [add]="false"
+  [like]="false"
+  [publish]="true"
+  (shouldUpdate)="update()"
 ></ia-game-list>
 
 <router-outlet></router-outlet>

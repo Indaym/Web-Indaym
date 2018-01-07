@@ -13,6 +13,7 @@ import {
 import {
   GameService,
   SnackBarService,
+  SceneService,
 }                       from '../../services';
 
 import { SnackBarType } from '../snackBar';
@@ -27,7 +28,10 @@ import {
   styleUrls    : [
     './editorList.component.scss',
   ],
-  providers : [ GameService ],
+  providers : [
+    GameService,
+    SceneService,
+  ],
 })
 
 export class EditorListComponent implements OnInit {
@@ -39,6 +43,7 @@ export class EditorListComponent implements OnInit {
 
   constructor(
     private games: GameService,
+    private scene: SceneService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBarService: SnackBarService,
@@ -72,15 +77,18 @@ export class EditorListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
+      this.games.postGame(result.gameName, (gameId) => {
+        localStorage.setItem('gameID', gameId.uuid);
+
+        this.games.postDescription(result.gameDescription, gameId.uuid);
+        this.scene.setGameId(gameId.uuid);
+        this.scene.postScene(result.sceneName, (sceneId) => {
+          localStorage.setItem('sceneID', sceneId.uuid);
+
+          this.router.navigate(['/editor/designer']);
+        });
+      });
     });
-    // const myText = prompt('Game Name: ');
-    // if (myText) {
-    //   const myDescription = prompt('Game Description: ');
-    //   this.games.postGame(myText, (id) => {
-    //     this.games.postDescription(myDescription, id.uuid);
-    //     this.goToScenesPage(id.uuid, 1);
-    //   });
-    // }
   }
 
   public getGamesList() {
@@ -88,5 +96,9 @@ export class EditorListComponent implements OnInit {
       {'limit': '10', 'offset': '1'},
       (datas) => this.lsGames = datas,
     );
+  }
+
+  public update() {
+    this.getGamesList();
   }
 }
