@@ -106,11 +106,11 @@
       </p>
   
       <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" name="single" accept="image/*" />
-      <button type="button" class="btn btn-success btn-xs center" (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
+      <br/>
+      <button mat-button (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
         <span class="glyphicon glyphicon-upload"></span> Upload
       </button>
-      <br/>
-      <button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()">
+      <button mat-button (click)="applyTexture()">
         <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
       </button>
   
