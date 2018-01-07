@@ -4,6 +4,10 @@ import {
 }                          from '@angular/core';
 
 import {
+  Router,
+}                       from '@angular/router';
+
+import {
   HttpClient,
   HttpHeaders,
   HttpResponse,
@@ -33,13 +37,15 @@ export class Http401Interceptor implements HttpInterceptor {
     private token: TokenService,
     private user: UserService,
     private injector: Injector,
+    private router: Router,
   ) {}
 
   private handleError = (res) => {
     this.token.deleteToken('token');
     this.token.deleteToken('refreshToken');
     this.user.deleteUser();
-    return Observable.throw(res);
+    Observable.throw(res);
+    this.router.navigate(['/login']);
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -62,7 +68,7 @@ export class Http401Interceptor implements HttpInterceptor {
               });
               return next.handle(newRequest);
             },
-            (error) => this.handleError(res),
+            (error) => this.handleError(error),
           );
         }
         return Observable.of(res);
