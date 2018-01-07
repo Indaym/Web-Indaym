@@ -1,70 +1,61 @@
-<modal #myModal title="Select option of grid" cancelButtonLabel="cancel" submitButtonLabel="create" [closeOnEscape]="true"
-  [closeOnOutsideClick]="true" (onOpen)="onOpen()" (onClose)="onClose()" (onSubmit)="onSubmit()">
-  <modal-content>
-    <p *ngIf="missing" class="warn temp">
-      <span class="glyphicon glyphicon-warning-sign"></span> Missing parameters
-    </p>
-    <div class="form-group">
-      <div class="form-inline">
-        <h5>Number of cells:</h5>
-        <div class="form-group">
-          <label for="horizontal">Horizontal:</label>
-          <input id="horizontal" type="number" step="1" min="1" max="20" [(ngModel)]="horizontal" class="form-control" />
-        </div>
-        <div class="form-group">
-          <label for="vertical">Vertical:</label>
-          <input id="vertical" type="number" step="1" min="1" max="20" [(ngModel)]="vertical" class="form-control" />
-        </div>
-      </div>
-      <hr/>
+<h1 mat-dialog-title>Create a new Grid</h1>
+<hr>
+<div mat-dialog-content>
 
-      <div class="form-inline">
-        <h5>Cells dimensions:</h5>
-        <div class="form-group">
-          <label for="width">Width:</label>
-          <input id="width" type="number" min="1" max="20" [(ngModel)]="width" class="form-control" />
-        </div>
-        <div class="form-group">
-          <label for="height">Height:</label>
-          <input id="height" type="number" min="1" max="20" [(ngModel)]="height" class="form-control" />
-        </div>
-      </div>
-      <hr/>
+  <h5>Number of cells:</h5>
+  <mat-form-field floatPlaceholder="always">
+    <input matInput id="horizontal" type="number" step="1" min="1" max="20" [(ngModel)]="data.horizontal" placeholder="Horizontal" required/>
+  </mat-form-field>
+  <mat-form-field floatPlaceholder="always">
+    <input matInput id="vertical" type="number" step="1" min="1" max="20" [(ngModel)]="data.vertical" placeholder="Vertical" required/>
+  </mat-form-field>
 
-      <div class="form-group">
-        <label for="color">Color of highlight for selection:</label>
-        <input id="color" type="color" [(ngModel)]="color" />
-      </div>
-      <div class="form-group">
-        <label for="alternate">Alternate texture:</label>
-        <input id="alternate" type="checkbox" [(ngModel)]="alternate" class="form-check" />
-      </div>
-      <div class="form-group">
-        <label for="textureEven"><span *ngIf="alternate">Even case</span><span *ngIf="!alternate"s>Case</span> texture</label>
-        <select id="textureEven" [(ngModel)]="textureEven" (ngModelChange)="onChangePreviewEven()" class="form-control">
-          <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
-        </select>
-      </div>
-      <div class="form-group" *ngIf="alternate">
-        <label for="textureOdd">Odd case texture</label>
-        <select id="textureOdd" [(ngModel)]="textureOdd" (ngModelChange)="onChangePreviewOdd()" class="form-control">
-          <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
-        </select>
-      </div>
+  <h5>Cells dimensions:</h5>
+  <mat-form-field floatPlaceholder="always">
+    <input matInput id="width" type="number" min="1" max="20" [(ngModel)]="data.width" placeholder="Width" required/>
+  </mat-form-field>
+  <mat-form-field floatPlaceholder="always">
+    <input matInput id="height" type="number" min="1" max="20" [(ngModel)]="data.height" placeholder="Height" required/>
+  </mat-form-field>
 
-      <div>
-        <h5>Preview:</h5>
-        <div class="row">
-          <div class="form-group col-xs-6">
-            <label for="previewE">Even cell texture:</label>
-            <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom" />
-          </div>
-          <div class="col-xs-6 form-group" *ngIf="alternate">
-            <label for="previewO">Odd cell texture:</label>
-            <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom" />
-          </div>
-        </div>
+  <div class="form-group">
+    <label for="color">Color of highlight for selection:</label>
+    <input id="color" type="color" value="#ffffff" (input)="data.color=$event.target.value"/>
+  </div>
+
+  <mat-checkbox [(ngModel)]="data.alternate">Alternate texture</mat-checkbox>
+
+  <br/>
+  <mat-form-field floatPlaceholder="always">
+    <mat-select [(ngModel)]="data.textureEven" (ngModelChange)="onChangePreviewEven()" [placeholder]="data.alternate ? 'Even case' : 'Case'">
+      <mat-option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field floatPlaceholder="always" *ngIf="data.alternate">
+    <mat-select [(ngModel)]="data.textureOdd" (ngModelChange)="onChangePreviewOdd()" placeholder="Odd case">
+      <mat-option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <h5>Preview:</h5>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="previewE">Even cell texture:</label>
+        <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom" />
+      </div>
+      <div class="col-xs-6 form-group" *ngIf="data.alternate">
+        <label for="previewO">Odd cell texture:</label>
+        <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom" />
       </div>
     </div>
-  </modal-content>
-</modal>
+  </div>
+
+</div>
+
+<hr>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()" >Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" >Create</button>
+</mat-dialog-actions>

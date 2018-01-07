@@ -17,7 +17,10 @@ export { PreviewComponent }     from './preview';
 export { EditorComponent }      from './editor.component';
 export { GamesListComponent }   from '../gameslist/gameslist.component';
 export { ScenesListComponent }  from '../sceneslist/sceneslist.component';
-export { DesignerComponent }    from './designer';
+export {
+  DesignerComponent,
+  GridPopupComponent,
+}                               from './designer';
 
 export const EDITOR_COMPONENTS = [
   GamesListComponent,

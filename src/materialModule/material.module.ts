@@ -12,6 +12,10 @@ import {
   MatCardModule,
   MatExpansionModule,
   MatListModule,
+  MatDialogModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatOptionModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
@@ -26,6 +30,10 @@ const MODULE_LIST = [
   MatCardModule,
   MatExpansionModule,
   MatListModule,
+  MatDialogModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatOptionModule,
 ];
 
 @NgModule({

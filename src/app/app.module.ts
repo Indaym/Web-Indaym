@@ -37,6 +37,7 @@ import { routing }                  from './app.route';
 import {
   AppComponent,
   SnackBarComponent,
+  GridPopupComponent,
   APP_COMPONENTS,
 }                                   from './components';
 import { PIPES }                    from './pipes';
@@ -57,7 +58,10 @@ import {
     PIPES,
   ],
   bootstrap : [ AppComponent ],
-  entryComponents: [ SnackBarComponent ],
+  entryComponents: [
+    SnackBarComponent,
+    GridPopupComponent,
+  ],
   providers : [
     AuthGuard,
     AuthService,
