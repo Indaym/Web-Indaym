@@ -22,11 +22,9 @@ export class ChangeTurn extends BaseRules {
   public run(args?: any): boolean {
     if (this._refObj.threeDModel.oldPosition[0] === -1 && this._refObj.threeDModel.oldPosition[1] === -1)
       return true;
-    if ((this._refScene.player === 0 || this._refScene.player === 2) && this._refObj.name === 'whitepawn') {}
-    else if ((this._refScene.player === 1) && this._refObj.name === 'blackpawn') {}
-    else {
+    if (([0, 2].includes(this._refScene.player) && ['blackpawn'].includes(this._refObj.name)) ||
+    ([1].includes(this._refScene.player) && ['whitepawn'].includes(this._refObj.name)))
       return false;
-    }
     return true;
   }
 }
