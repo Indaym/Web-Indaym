@@ -1,0 +1,29 @@
+language: node_js
+
+node_js:
+  - '6'
+
+notifications:
+  slack:
+    rooms:
+    - indaym:GAD0nh4Bli786nr5Inogl8WF#front-end-ci
+
+branches:
+  only:
+    - master
+    - develop
+    - /^feature\/*/
+    - /^hotfix/\/*/
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+script:
+  - yarn run lint
+  - yarn run test
+  - yarn run e2e
+
+after_script:
+  - yarn clean
