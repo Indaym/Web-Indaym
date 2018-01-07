@@ -96,9 +96,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
     });
 
     this.eventDispatcher.addEventListener('selectObject', (e: any) => {
-      if (e.objects.length > 0)
-        this.scene.selectObjects(e.objects.map((element) => element.threeDModel.mesh));
-      else
+      if (e.objects.length > 0) {
+        if (e.objects.length === 1)
+          this.scene.selectObject(e.objects[0].threeDModel.mesh);
+        else
+          this.scene.selectObjects(e.objects.map((element) => element.threeDModel.mesh));
+      } else
         this.scene.unselectObject(undefined);
     });
     this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
