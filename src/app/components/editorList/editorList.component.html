@@ -10,7 +10,9 @@
   [like]="false"
   [publish]="true"
   [redirectPath]="'/sceneslist'"
+
   (shouldUpdate)="update()"
+  (changePage)="changePage($event)"
 ></ia-game-list>
 
 <router-outlet></router-outlet>

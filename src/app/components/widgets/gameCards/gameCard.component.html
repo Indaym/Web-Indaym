@@ -15,5 +15,6 @@
     <button *ngIf="edit"    mat-raised-button class="push-right" (click)="onEdit()" >Edit</button>
     <button *ngIf="publish" mat-raised-button class="push-right" (click)="onPublish()" >{{ isPublished() }}</button>
     <button *ngIf="delete"  mat-raised-button class="push-right" color="warn" (click)="onDel()"  >Delete</button>
+    <button *ngIf="remove && !isOwner()"  mat-raised-button class="push-right" color="warn" (click)="onRemove()"  >Remove</button>
   </mat-card-actions>
 </mat-card>

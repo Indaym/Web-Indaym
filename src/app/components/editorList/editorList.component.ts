@@ -14,6 +14,7 @@ import {
   GameService,
   SnackBarService,
   SceneService,
+  UserService,
 }                       from '../../services';
 
 import { SnackBarType } from '../snackBar';
@@ -42,6 +43,7 @@ export class EditorListComponent implements OnInit {
   public sceneName: string;
 
   constructor(
+    private user: UserService,
     private games: GameService,
     private scene: SceneService,
     private router: Router,
@@ -93,12 +95,19 @@ export class EditorListComponent implements OnInit {
 
   public getGamesList() {
     this.games.getGames(
-      {'limit': '10', 'offset': '1'},
-      (datas) => this.lsGames = datas,
+      {'offset': '1'},
+      (datas) => this.lsGames = datas.filter((item) => item.owner === this.user.user.uuid),
     );
   }
 
   public update() {
     this.getGamesList();
+  }
+
+  public changePage(event: any) {
+    this.games.getGames(
+      { 'offset': `${event.pageIndex + 1}`},
+      (datas) => this.lsGames = datas.filter((item) => item.owner === this.user.user.uuid),
+    );
   }
 }

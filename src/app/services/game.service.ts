@@ -37,9 +37,24 @@ export class GameService extends DefaultService {
       .subscribe(success, error);
   }
 
+  public getNbGames(opt = {}, success?, error?) {
+    this.http.get(this.gamesUrl + 'count', opt)
+      .subscribe(success, error);
+  }
+
   public postGame(name, success?, error?) {
     this.http.post(this.gamesUrl, {'name': name})
       .subscribe(success, error);
+  }
+
+  public addGameToLibrary(gameId: string, success?, error?) {
+    this.http.post(this.gamesUrl + 'store', { 'gameId': gameId })
+      .subscribe(success, error);
+  }
+
+  public DeleteGameFromLibrary(gameId: string, success?, error?) {
+    // this.http.delete(this.gamesUrl + 'store', { 'gameId': gameId })
+    //   .subscribe(success, error);
   }
 
   public updateGame(obj, id, success?, error?) {

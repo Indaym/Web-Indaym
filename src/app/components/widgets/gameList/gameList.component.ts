@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnInit,
 }              from '@angular/core';
 import {
   Router,
@@ -27,7 +28,7 @@ import {
     GameService,
   ],
 })
-export class GameListComponent {
+export class GameListComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -36,6 +37,7 @@ export class GameListComponent {
     private snackBar: SnackBarService,
   ) {}
 
+  nbGames: number;
   /**
    * list of games to display
    */
@@ -74,13 +76,18 @@ export class GameListComponent {
   @Input() redirectPath: string;
 
   @Output() shouldUpdate = new EventEmitter();
+  @Output() changePage = new EventEmitter();
 
   findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
 
-  public getGamesList() {
-    this.gamesService.getGames(
-      {'limit': '10', 'offset': '1'},
-      (datas) => this.games = datas,
+  ngOnInit() {
+    this.countGames();
+  }
+
+  public countGames() {
+    this.gamesService.getNbGames(
+      {},
+      (datas) => this.nbGames = datas.nbGames,
     );
   }
 
@@ -119,6 +126,17 @@ export class GameListComponent {
     );
   }
 
+  removeGame(gameId: string): void {
+    const currentGame = this.findCurrentGame(gameId);
+
+    this.snackBar.open(
+      `Game ${currentGame.name} have to be remove`,
+      {},
+      SnackBarType.SUCCESS,
+    );
+    this.needUpdate();
+  }
+
   togglePublishGame(gameId: string): void {
     const currentGame = this.findCurrentGame(gameId);
 
@@ -148,5 +166,30 @@ export class GameListComponent {
   redirectTo(): void {
     if (this.redirectPath)
       this.router.navigate([this.redirectPath]);
+  }
+
+  addGame(gameId: string): void {
+    const currentGame = this.findCurrentGame(gameId);
+
+    this.gamesService.addGameToLibrary(gameId,
+      () => {
+        this.snackBar.open(
+          `Game ${currentGame.name} is now in your library`,
+          {},
+          SnackBarType.SUCCESS,
+        );
+        this.needUpdate();
+      },
+      () => this.snackBar.open(
+        `Can't add ${currentGame.name}`,
+        {},
+        SnackBarType.ERROR,
+      ),
+    );
+  }
+
+  handleEvent(event: any) {
+    console.log(event);
+    this.changePage.emit(event);
   }
 }

@@ -33,4 +33,8 @@ export class PlayComponent {
 
       this.router.navigate(['/sceneslist'], { queryParams: { gameId: id, new: 0 } });
   }
+
+  public update() {
+    this.getGamesList();
+  }
 }

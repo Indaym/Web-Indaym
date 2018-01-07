@@ -4,6 +4,7 @@
         [game]="game"
         [edit]="ownerCanEdit(game)"
         [delete]="ownerCanDelete(game)"
+        [remove]="remove"
         [add]="add"
         [like]="like"
         [publish]="ownerCanTogglePublish(game)"
@@ -11,11 +12,14 @@
         (deleteGame)="deleteGame($event)"
         (togglePublishGame)="togglePublishGame($event)"
         (shouldRedirect)="redirectTo()"
+        (addGame)="addGame($event)"
       ></ia-game-card>
   </li>
 </ul>
 
 <mat-paginator
   [pageSize]="10"
+  [length]="nbGames"
+  (page)="handleEvent($event)"
   >
 </mat-paginator>
