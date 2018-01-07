@@ -4,6 +4,9 @@ import {
   Output,
   EventEmitter,
 }              from '@angular/core';
+import {
+  Router,
+}              from '@angular/router';
 
 import {
   UserService,
@@ -27,6 +30,7 @@ import {
 export class GameListComponent {
 
   constructor(
+    private router: Router,
     private gamesService: GameService,
     private user: UserService,
     private snackBar: SnackBarService,
@@ -66,6 +70,8 @@ export class GameListComponent {
    * allow this owner to publish:unpublish one of his game
    */
   @Input() publish = false;
+
+  @Input() redirectPath: string;
 
   @Output() shouldUpdate = new EventEmitter();
 
@@ -137,5 +143,10 @@ export class GameListComponent {
 
   needUpdate(): void {
     this.shouldUpdate.emit();
+  }
+
+  redirectTo(): void {
+    if (this.redirectPath)
+      this.router.navigate([this.redirectPath]);
   }
 }

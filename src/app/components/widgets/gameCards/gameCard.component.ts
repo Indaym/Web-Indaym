@@ -24,6 +24,7 @@ export class GameCardComponent {
   @Output() addGame = new EventEmitter();
   @Output() toggleLikeGame = new EventEmitter();
   @Output() togglePublishGame = new EventEmitter();
+  @Output() shouldRedirect = new EventEmitter();
 
   onDel() {
     console.log('event');
@@ -31,23 +32,23 @@ export class GameCardComponent {
   }
 
   onAdd() {
-    console.log('event');
     this.addGame.emit(this.game.uuid);
   }
 
   onEdit() {
-    console.log('event');
     this.editGame.emit(this.game.uuid);
   }
 
   onLike() {
-    console.log('event');
     this.toggleLikeGame.emit(this.game.uuid);
   }
 
   onPublish() {
-    console.log('event');
     this.togglePublishGame.emit(this.game.uuid);
+  }
+
+  redirect() {
+    this.shouldRedirect.emit();
   }
 
   isPublished(): string {
