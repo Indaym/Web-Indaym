@@ -22,8 +22,8 @@ export class ChangeTurn extends BaseRules {
   public run(args?: any): boolean {
     if (this._refObj.threeDModel.oldPosition[0] === -1 && this._refObj.threeDModel.oldPosition[1] === -1)
       return true;
-    if (([0, 2].includes(this._refScene.player) && ['blackpawn'].includes(this._refObj.name)) ||
-    ([1].includes(this._refScene.player) && ['whitepawn'].includes(this._refObj.name)))
+    if (([0, 2].includes(this._refScene.player) && this._refObj.name !== 'whitepawn') ||
+    ([1].includes(this._refScene.player) && this._refObj.name !== 'blackpawn'))
       return false;
     return true;
   }
