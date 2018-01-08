@@ -21,7 +21,7 @@
       <div id="applied-rules-title" class="blueprint-title">Rules to be applied</div>
       <div id="applied-rules" class="list-group"  [dragula]='"rulesBag"'>
         <a *ngFor="let rule of appliedRules" [attr.data-rulename]="rule" class="list-group-item" (click)="selectRule(rule)">{{rule}}<span class="badge" (click)="removeRule(rule)"><span class="glyphicon glyphicon-minus"></span></span></a>
-      </div>    
+      </div>
     </div>
   </div>
   <!-- Configuration of the object -->
@@ -38,6 +38,10 @@
       <div *ngIf="selectedRule.id === 'CaseText'" class="form-group">
         <label for="caseText">Text to display :</label>
         <input id="caseText" type="text" [(ngModel)]="selectedRule.config.caseText"/>
+      </div>
+      <div *ngIf="selectedRule.id === 'DicePawn'" class="form-group">
+        <label for="move">How many face on your dice ? :</label>
+        <input id="move" type="number" [(ngModel)]="selectedRule.config.dice"/>
       </div>
       <button (click)="saveRules(true)">Save Configuration</button>
     </div>

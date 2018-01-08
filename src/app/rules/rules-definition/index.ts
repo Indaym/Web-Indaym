@@ -20,6 +20,8 @@ import { MoveDiag } from './moveDiag';
 import { ChangeTurn } from './changeTurn';
 import { CaptureSet } from './captureSet';
 import { CaseText } from './CaseText';
+import { TriggerCaseText } from './triggerCaseText';
+import { DicePawn } from './dicePawn';
 
 export const RULES_DEF = {
   TestRuleTrue,
@@ -30,4 +32,6 @@ export const RULES_DEF = {
   ChangeTurn,
   CaptureSet,
   CaseText,
+  TriggerCaseText,
+  DicePawn,
 };
