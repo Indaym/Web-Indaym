@@ -13,7 +13,9 @@ import {
   UserService,
   GameService,
   SnackBarService,
+  StoreService,
 }              from '../../../services';
+
 import {
   SnackBarType,
 }              from '@app/components/snackBar/enum.snack-bar';
@@ -26,6 +28,7 @@ import {
   ],
   providers: [
     GameService,
+    StoreService,
   ],
 })
 export class GameListComponent implements OnInit {
@@ -33,6 +36,7 @@ export class GameListComponent implements OnInit {
   constructor(
     private router: Router,
     private gamesService: GameService,
+    private storeService: StoreService,
     private user: UserService,
     private snackBar: SnackBarService,
   ) {}
@@ -73,6 +77,8 @@ export class GameListComponent implements OnInit {
    */
   @Input() publish = false;
 
+  @Input() provider = 'games';
+
   @Input() redirectPath: string;
 
   @Output() shouldUpdate = new EventEmitter();
@@ -85,7 +91,7 @@ export class GameListComponent implements OnInit {
   }
 
   public countGames() {
-    this.gamesService.getNbGames(
+    this[`${this.provider}Service`].getNbGames(
       {},
       (datas) => this.nbGames = datas.nbGames,
     );
