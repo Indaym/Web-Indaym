@@ -19,6 +19,7 @@ import { MoveForward } from './moveForward';
 import { MoveDiag } from './moveDiag';
 import { ChangeTurn } from './changeTurn';
 import { CaptureSet } from './captureSet';
+import { CaseText } from './CaseText';
 
 export const RULES_DEF = {
   TestRuleTrue,
@@ -28,4 +29,5 @@ export const RULES_DEF = {
   MoveDiag,
   ChangeTurn,
   CaptureSet,
+  CaseText,
 };

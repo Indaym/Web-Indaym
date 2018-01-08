@@ -12,20 +12,19 @@ import {
   ModelViewer,
 }                 from '../../threed-viewer';
 
-export class TestRuleTrue extends BaseRules {
+export class CaseText extends BaseRules {
   constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
     super(scene, model, conf);
 
-    this._id = 'TestRuleTrue';
-    this._name = 'Test Rule True';
-    this._description = `This is a test True rule with ${this.id} id`;
+    this._id = 'CaseText';
+    this._name = 'Case Text';
+    this._description = `Add a text to a Case`;
     this._ruleType = RULE_TYPE.default;
   }
 
   public run(args?: any): boolean {
-    console.log("Case", this._refScene._hovered.conf.rules[0]);
-    console.log('True');
+    console.log(this._refScene);
+    console.log('Case');
     return true;
-    //return (this._refScene._hovered.conf.rules[0]);
   }
 }
