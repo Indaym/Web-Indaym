@@ -1,3 +1,4 @@
+/*tslint:disable:max-classes-per-file*/
 import {
   Component,
   Input,
@@ -14,11 +15,16 @@ import {
   GameService,
   SnackBarService,
   StoreService,
+  PlayService,
 }              from '../../../services';
 
 import {
   SnackBarType,
 }              from '@app/components/snackBar/enum.snack-bar';
+
+class Pagination {
+
+}
 
 @Component({
   selector: 'ia-game-list',
@@ -29,6 +35,7 @@ import {
   providers: [
     GameService,
     StoreService,
+    PlayService,
   ],
 })
 export class GameListComponent implements OnInit {
@@ -37,6 +44,7 @@ export class GameListComponent implements OnInit {
     private router: Router,
     private gamesService: GameService,
     private storeService: StoreService,
+    private playService: PlayService,
     private user: UserService,
     private snackBar: SnackBarService,
   ) {}
@@ -87,7 +95,18 @@ export class GameListComponent implements OnInit {
   findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
 
   ngOnInit() {
+    this.getGames();
     this.countGames();
+  }
+
+  public getGames(opt = {}): void {
+    this[`${this.provider}Service`].getGames(
+      {
+        ...{'limit': '10', 'offset': '1'},
+        ...opt,
+      },
+      (data) => this.games = data,
+    );
   }
 
   public countGames() {
@@ -155,10 +174,14 @@ export class GameListComponent implements OnInit {
   }
 
   needUpdate(): void {
+    this.getGames();
+    this.countGames();
     this.shouldUpdate.emit();
   }
 
-  redirectTo(): void {
+  redirectTo(gameId: string): void {
+    localStorage.setItem('gameID', gameId);
+
     if (this.redirectPath)
       this.router.navigate([this.redirectPath]);
   }
@@ -204,7 +227,8 @@ export class GameListComponent implements OnInit {
   }
 
   handleEvent(event: any) {
-    console.log(event);
+    this.getGames({ 'offset': `${event.pageIndex + 1}`});
+    this.countGames();
     this.changePage.emit(event);
   }
 }

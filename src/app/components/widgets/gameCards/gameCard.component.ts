@@ -60,7 +60,7 @@ export class GameCardComponent {
   }
 
   redirect() {
-    this.shouldRedirect.emit();
+    this.shouldRedirect.emit(this.game.uuid);
   }
 
   isOwner() {

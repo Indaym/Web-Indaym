@@ -3,7 +3,6 @@
 </ul>
 
 <ia-game-list
-  [games]="lsGames"
   [edit]="true"
   [delete]="true"
   [add]="false"
@@ -12,7 +11,6 @@
   [redirectPath]="'/sceneslist'"
   [provider]="'games'"
 
-  (shouldUpdate)="update()"
   (changePage)="changePage($event)"
 ></ia-game-list>
 

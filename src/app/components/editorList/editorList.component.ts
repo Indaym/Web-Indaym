@@ -50,9 +50,7 @@ export class EditorListComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBarService: SnackBarService,
     private dialog: MatDialog,
-  ) {
-    this.getGamesList();
-  }
+  ) {}
 
   public ngOnInit() {
     this.route.queryParams.subscribe((q) => {
@@ -91,17 +89,6 @@ export class EditorListComponent implements OnInit {
         });
       });
     });
-  }
-
-  public getGamesList() {
-    this.games.getGames(
-      {'offset': '1'},
-      (datas) => this.lsGames = datas.filter((item) => item.owner === this.user.user.uuid),
-    );
-  }
-
-  public update() {
-    this.getGamesList();
   }
 
   public changePage(event: any) {

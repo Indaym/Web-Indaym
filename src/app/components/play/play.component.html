@@ -1,9 +1,8 @@
 <br/><br/>
 <ia-game-list
-  [games]="lsGames"
   [edit]="false"
   [remove]="true"
   [redirectPath]="'/sceneslist'"
-  (shouldUpdate)="update()"
+  [provider]="'play'"
 ></ia-game-list>
 <router-outlet></router-outlet>
