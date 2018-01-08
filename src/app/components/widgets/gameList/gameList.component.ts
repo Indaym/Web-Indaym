@@ -132,17 +132,6 @@ export class GameListComponent implements OnInit {
     );
   }
 
-  removeGame(gameId: string): void {
-    const currentGame = this.findCurrentGame(gameId);
-
-    this.snackBar.open(
-      `Game ${currentGame.name} have to be remove`,
-      {},
-      SnackBarType.SUCCESS,
-    );
-    this.needUpdate();
-  }
-
   togglePublishGame(gameId: string): void {
     const currentGame = this.findCurrentGame(gameId);
 
@@ -177,7 +166,7 @@ export class GameListComponent implements OnInit {
   addGame(gameId: string): void {
     const currentGame = this.findCurrentGame(gameId);
 
-    this.gamesService.addGameToLibrary(gameId,
+    this.storeService.addGameToLibrary(gameId,
       () => {
         this.snackBar.open(
           `Game ${currentGame.name} is now in your library`,
@@ -188,6 +177,26 @@ export class GameListComponent implements OnInit {
       },
       () => this.snackBar.open(
         `Can't add ${currentGame.name}`,
+        {},
+        SnackBarType.ERROR,
+      ),
+    );
+  }
+
+  removeGame(gameId: string): void {
+    const currentGame = this.findCurrentGame(gameId);
+
+    this.storeService.removeGameFromLibrary(gameId,
+      () => {
+        this.snackBar.open(
+          `Game ${currentGame.name} is not anymore in your library`,
+          {},
+          SnackBarType.SUCCESS,
+        );
+        this.needUpdate();
+      },
+      () => this.snackBar.open(
+        `Can't delete ${currentGame.name}`,
         {},
         SnackBarType.ERROR,
       ),

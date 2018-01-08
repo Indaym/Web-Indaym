@@ -21,7 +21,7 @@ export class PlayComponent {
   }
 
   public getGamesList() {
-    this.games.getGames(
+    this.games.getPublicGames(
       {'limit': '10', 'offset': '1'},
       (datas) => this.lsGames = datas,
     );

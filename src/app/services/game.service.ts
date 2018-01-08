@@ -32,6 +32,16 @@ export class GameService extends DefaultService {
       .subscribe(success, error);
   }
 
+  public getPublicGames(opt = {}, success?, error?) {
+    this.http.get(`${this.gamesUrl}play`, {
+      params: {
+        ...{ 'orderBy': 'name', 'limit': '10', 'offset': '1' },
+        ...opt,
+      },
+    })
+      .subscribe(success, error);
+  }
+
   public getOneGame(id, success?, error?) {
     this.http.get(this.gamesUrl + id)
       .subscribe(success, error);
