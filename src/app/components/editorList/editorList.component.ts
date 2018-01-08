@@ -90,11 +90,4 @@ export class EditorListComponent implements OnInit {
       });
     });
   }
-
-  public changePage(event: any) {
-    this.games.getGames(
-      { 'offset': `${event.pageIndex + 1}`},
-      (datas) => this.lsGames = datas.filter((item) => item.owner === this.user.user.uuid),
-    );
-  }
 }

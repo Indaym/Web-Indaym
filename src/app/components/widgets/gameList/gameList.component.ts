@@ -102,7 +102,7 @@ export class GameListComponent implements OnInit {
   public getGames(opt = {}): void {
     this[`${this.provider}Service`].getGames(
       {
-        ...{'limit': '10', 'offset': '1'},
+        ...{'limit': '10', 'offset': '0'},
         ...opt,
       },
       (data) => this.games = data,
@@ -227,7 +227,7 @@ export class GameListComponent implements OnInit {
   }
 
   handleEvent(event: any) {
-    this.getGames({ 'offset': `${event.pageIndex + 1}`});
+    this.getGames({ 'offset': `${event.pageIndex}`});
     this.countGames();
     this.changePage.emit(event);
   }
