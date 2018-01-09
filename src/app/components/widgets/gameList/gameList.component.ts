@@ -195,8 +195,6 @@ export class GameListComponent implements OnInit {
     const currentGame = this.findCurrentGame(gameId);
 
     const dialogRef = this.dialog.open(CreateGameDialogComponent, {
-      height: '300px',
-      width: '250px',
       data: {
         gameName: currentGame.name,
         gameDescription: currentGame.description,
