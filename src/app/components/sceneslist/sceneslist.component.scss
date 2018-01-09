@@ -10,7 +10,14 @@ ul {
     margin: auto;
     padding: 0;
     overflow: hidden;
-    background-color: $light-cyan;
+}
+
+li {
+  margin: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
 }
 
 li a {
@@ -50,7 +57,7 @@ li a:hover {
   font-weight: bold;
 }
 
-button {
+.button {
   margin-bottom: 1%;
   background: #bfbfbf;
   background-image: -webkit-linear-gradient(top, #bfbfbf, #404040);
@@ -73,7 +80,7 @@ button {
   min-width: 12%;
 }
 
-button:hover {
+.button:hover {
   background: #00cccc;
   background-image: -webkit-linear-gradient(top, #00cccc, #00cccc);
   background-image: -moz-linear-gradient(top, #00cccc, #00cccc);
@@ -81,4 +88,15 @@ button:hover {
   background-image: -o-linear-gradient(top, #00cccc, #00cccc);
   background-image: linear-gradient(to bottom, #00cccc, #00cccc);
   text-decoration: none;
+}
+
+
+.create > span{
+  font-size: 20px;
+  font-weight: bold;
+  margin: auto 10px;
+}
+
+.create {
+  display: flex;
 }

@@ -6,11 +6,16 @@ import {
   ActivatedRoute,
   Router,
 }                       from '@angular/router';
+import { MatDialog }    from '@angular/material';
 import { Subscription } from 'rxjs/Rx';
 
 import { comeFrom }     from '../../components/play';
 
 import { SceneService } from '../../services';
+
+import {
+  CreateSceneDialogComponent,
+}                       from '../widgets/createSceneDialog/createSceneDialog.component';
 
 @Component({
   selector  : 'ia-sceneslist',
@@ -28,8 +33,9 @@ export class ScenesListComponent implements OnDestroy {
   public isNew;
   public subscription: Subscription;
   private redirect;
+  private sceneName;
 
-  constructor(private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
+  constructor(private scenes: SceneService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
     route.data.subscribe((val) => this.redirect = val.redirect);
     this.subscription = route.queryParams.subscribe(
       (queryParam: any) => this.getScenesList(queryParam),
@@ -63,8 +69,18 @@ export class ScenesListComponent implements OnDestroy {
   }
 
   public addScene() {
-    const myText = prompt('Scene Name: ');
-    if (myText)
-      this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
+    const dialogRef = this.dialog.open(CreateSceneDialogComponent, {
+      data: {
+        sceneName: this.sceneName,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === undefined)
+        return;
+
+      if (result.sceneName !== undefined && result.sceneName.length > 0)
+        this.scenes.postScene(result.sceneName, (datas) => this.goToScenePage(datas.uuid));
+    });
   }
 }
