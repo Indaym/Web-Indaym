@@ -12,10 +12,10 @@
   </mat-card-content>
   <mat-card-actions>
     <button *ngIf="like"    mat-raised-button class="push-left" (click)="onLike()" >Like</button>
-    <button *ngIf="add && !isOwner()"     mat-raised-button class="push-left" (click)="onAdd()" >ADD</button>
+    <button *ngIf="add && !isOwner() && !game.added"     mat-raised-button class="push-left" (click)="onAdd()" >ADD</button>
     <button *ngIf="edit"    mat-raised-button class="push-right" (click)="onEdit()" >Edit data</button>
     <button *ngIf="publish" mat-raised-button class="push-right" (click)="onPublish()" >{{ isPublished() }}</button>
     <button *ngIf="delete"  mat-raised-button class="push-right" color="warn" (click)="onDel()"  >Delete</button>
-    <button *ngIf="remove && !isOwner()"  mat-raised-button class="push-right" color="warn" (click)="onRemove()"  >Remove</button>
+    <button *ngIf="remove && !isOwner() && game.added"  mat-raised-button class="push-right" color="warn" (click)="onRemove()"  >Remove</button>
   </mat-card-actions>
 </mat-card>
