@@ -204,13 +204,17 @@ export class GameListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) =>
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === undefined)
+        return;
+
       this.gamesService.updateGame(
         {'name': result.gameName, 'description': result.gameDescription },
         gameId,
         () => this.success(`${currentGame.name} successfully updated`),
         () => this.snackBar.openError(`Can't update ${currentGame.name}`),
-      ));
+      );
+    });
   }
 
   handleEvent(event: any) {

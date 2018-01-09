@@ -31,6 +31,6 @@ export class CreateGameDialogComponent {
   }
 
   buttonMsg() {
-    return this.data.isEdit ? 'Edit' : 'Creat';
+    return this.data.isEdit ? 'Edit' : 'Create';
   }
 }

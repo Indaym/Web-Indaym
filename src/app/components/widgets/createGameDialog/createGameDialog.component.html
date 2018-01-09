@@ -3,9 +3,11 @@
   <mat-form-field>
     <input matInput [(ngModel)]="data.gameName" placeholder="Game name" >
   </mat-form-field>
+  <br/>
   <mat-form-field>
     <textarea matInput [(ngModel)]="data.gameDescription" placeholder="Game description" ></textarea>
   </mat-form-field>
+  <br/>
   <mat-form-field *ngIf="canDisplay()" >
     <input matInput [(ngModel)]="data.sceneName" placeholder="Scene name" >
   </mat-form-field>

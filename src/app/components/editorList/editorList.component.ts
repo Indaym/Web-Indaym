@@ -66,8 +66,6 @@ export class EditorListComponent implements OnInit {
 
   public gameFunction() {
     const dialogRef = this.dialog.open(CreateGameDialogComponent, {
-      height: '500px',
-      width: '300px',
       data: {
         gameName: this.gameName,
         gameDescription: this.gameDescription,
@@ -76,6 +74,9 @@ export class EditorListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (result === undefined)
+        return;
+
       console.log(result);
       this.games.postGame(result.gameName, (gameId) => {
         localStorage.setItem('gameID', gameId.uuid);
