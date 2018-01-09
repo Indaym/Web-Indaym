@@ -4,22 +4,21 @@ mat-card {
 }
 
 mat-card-actions {
-  position: absolute;
+  height: 50px;
+}
 
-  width: 97%;
+.mat-card-image {
+  @media (max-width: 600px)  {
+    margin:0 -24px 16px -24px;
+  }
 }
 
 p {
   height: 80px;
-
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
-}
-
-img {
-  width: 100%;
-  height: 300px;
+  overflow: auto;
 }
 
 .push-right {

@@ -22,10 +22,22 @@ h2 {
   padding: 5px;
   margin-top: 10px;
 
-  width: 100px;
-  height: 100px;
-
   text-align: center;
+}
+
+ul {
+  width: 100%;
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+li a {
+  display: block;
+  color: $white;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 li {
@@ -38,4 +50,15 @@ li {
 
 mat-card-action {
   position: absolute;
+}
+
+
+.create > span{
+  font-size: 20px;
+  font-weight: bold;
+  margin: auto 10px;
+}
+
+.create {
+  display: flex;
 }

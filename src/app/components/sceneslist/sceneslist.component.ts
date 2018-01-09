@@ -37,8 +37,8 @@ export class ScenesListComponent implements OnDestroy {
   public gameId;
   public isNew;
   public subscription: Subscription;
-  public sceneName: string;
   private redirect;
+  private sceneName: string;
 
   constructor(
     private scenes: SceneService,
@@ -90,11 +90,13 @@ export class ScenesListComponent implements OnDestroy {
       if (result === undefined)
         return;
 
-      this.scenes.postScene(result.sceneName, (datas) => this.goToScenePage(datas.uuid));
+      if (result.sceneName !== undefined && result.sceneName.length > 0)
+        this.scenes.postScene(result.sceneName, (datas) => this.goToScenePage(datas.uuid));
       });
-    // const myText = prompt('Scene Name: ');
-    // if (myText)
-    //   this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
+    }
+
+  needUpdate() {
+    this.getScenesList();
   }
 
   public editScene(scene: any) {
@@ -126,9 +128,5 @@ export class ScenesListComponent implements OnDestroy {
 
   public canDisplay(): boolean {
     return this.router.url === '/sceneslist';
-  }
-
-  needUpdate() {
-    this.getScenesList();
   }
 }
