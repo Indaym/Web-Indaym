@@ -3,3 +3,4 @@
  */
 
 export { PlayComponent, comeFrom } from './play.component';
+export { PlayerComponent } from './player.component';

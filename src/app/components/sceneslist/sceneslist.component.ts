@@ -27,8 +27,10 @@ export class ScenesListComponent implements OnDestroy {
   public gameId;
   public isNew;
   public subscription: Subscription;
+  private redirect;
 
   constructor(private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
+    route.data.subscribe((val) => this.redirect = val.redirect);
     this.subscription = route.queryParams.subscribe(
       (queryParam: any) => this.getScenesList(queryParam),
     );
@@ -57,7 +59,7 @@ export class ScenesListComponent implements OnDestroy {
 
   public goToScenePage(id) {
     localStorage.setItem('sceneID', id);
-    this.router.navigate(['/editor/designer']);
+    this.router.navigate([this.redirect]);
   }
 
   public addScene() {

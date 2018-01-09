@@ -9,10 +9,13 @@ import { ScenesListComponent }    from './sceneslist';
 import { EDITOR_COMPONENTS }      from './editor';
 import { HOME_COMPONENTS }        from './home';
 import { LegalMentionsComponent } from './legal-mentions';
-import { PlayComponent }          from './play';
 import { StoreComponent }         from './store';
 import { RateGameComponent }      from './rategame';
 import { AUTH_COMPONENTS }        from './auth';
+import {
+  PlayComponent,
+  PlayerComponent,
+}                                 from './play';
 import {
   LoginComponent,
   RegisterComponent,
@@ -34,6 +37,7 @@ export const APP_COMPONENTS = [
   ScenesListComponent,
   LegalMentionsComponent,
   PlayComponent,
+  PlayerComponent,
   StoreComponent,
   RateGameComponent,
   LoginComponent,
