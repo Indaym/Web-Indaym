@@ -30,11 +30,11 @@ export class TriggerCaseText extends BaseRules {
 
   public run(args?: any): boolean {
     const config = {
-      duration: 10000,
+      duration: 6000,
       data: {},
     };
     this.snackBar.open(
-      '<strong class="text-info">Case say : </strong>' + this._refScene._hovered.conf.rules[0].conf.caseText,
+      '<h4><strong class="text-info">Case say : </strong>' + this._refScene._hovered.conf.rules[0].conf.caseText + '</h4>',
       config,
       SnackBarType.NONE,
     );
