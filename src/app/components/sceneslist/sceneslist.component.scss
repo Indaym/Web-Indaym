@@ -4,13 +4,37 @@ h2 {
   text-align: center;
 }
 
+.flex-container {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  list-style: none;
+
+  display: flex;
+
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  align-content: flex-start;
+}
+
+.flex-item {
+  padding: 5px;
+  margin-top: 10px;
+
+  width: 100px;
+  height: 100px;
+
+  text-align: center;
+}
+/*
 ul {
 	  width: 100%;
     list-style-type: none;
     margin: auto;
     padding: 0;
     overflow: hidden;
-    background-color: $light-cyan;
+    // background-color: $light-cyan;
 }
 
 li a {
@@ -82,3 +106,4 @@ button:hover {
   background-image: linear-gradient(to bottom, #00cccc, #00cccc);
   text-decoration: none;
 }
+*/
