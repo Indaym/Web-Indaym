@@ -108,7 +108,7 @@ export class ScenesListComponent implements OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === undefined)
+      if (result === undefined || result.sceneName !== undefined || result.sceneName.length === 0)
         return;
 
       this.scenes.updateScene(
