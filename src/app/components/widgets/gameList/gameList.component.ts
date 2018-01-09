@@ -1,4 +1,3 @@
-/*tslint:disable:max-classes-per-file*/
 import {
   Component,
   Input,
@@ -21,10 +20,6 @@ import {
 import {
   SnackBarType,
 }              from '@app/components/snackBar/enum.snack-bar';
-
-class Pagination {
-
-}
 
 @Component({
   selector: 'ia-game-list',
@@ -85,14 +80,14 @@ export class GameListComponent implements OnInit {
    */
   @Input() publish = false;
 
-  @Input() provider = 'games';
+  @Input() provider: 'games' | 'store' | 'play' = 'games';
 
   @Input() redirectPath: string;
 
   @Output() shouldUpdate = new EventEmitter();
   @Output() changePage = new EventEmitter();
 
-  findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
+  private findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
 
   ngOnInit() {
     this.getGames();
@@ -136,18 +131,10 @@ export class GameListComponent implements OnInit {
 
     this.gamesService.deleteGame(gameId,
       () => {
-        this.snackBar.open(
-          `Game ${currentGame.name} is deleted`,
-          {},
-          SnackBarType.SUCCESS,
-        );
+        this.snackBar.openSuccess(`Game ${currentGame.name} is deleted`);
         this.needUpdate();
       },
-      () => this.snackBar.open(
-        `Can't delete ${currentGame.name}`,
-        {},
-        SnackBarType.ERROR,
-      ),
+      () => this.snackBar.openError(`Can't delete ${currentGame.name}`),
     );
   }
 
@@ -158,18 +145,12 @@ export class GameListComponent implements OnInit {
       { published: !currentGame.published },
       gameId,
       () => {
-        this.snackBar.open(
+        this.snackBar.openSuccess(
           `Game ${currentGame.name} is now ${currentGame.published ? 'publish' : 'unpublish'}`,
-          {},
-          SnackBarType.SUCCESS,
         );
         this.needUpdate();
       },
-      () => this.snackBar.open(
-        `Can't update ${currentGame.name}`,
-        {},
-        SnackBarType.ERROR,
-      ),
+      () => this.snackBar.openError(`Can't update ${currentGame.name}`),
     );
   }
 
@@ -180,10 +161,10 @@ export class GameListComponent implements OnInit {
   }
 
   redirectTo(gameId: string): void {
-    localStorage.setItem('gameID', gameId);
-
-    if (this.redirectPath)
+    if (this.redirectPath) {
+      localStorage.setItem('gameID', gameId);
       this.router.navigate([this.redirectPath]);
+    }
   }
 
   addGame(gameId: string): void {
@@ -191,18 +172,10 @@ export class GameListComponent implements OnInit {
 
     this.storeService.addGameToLibrary(gameId,
       () => {
-        this.snackBar.open(
-          `Game ${currentGame.name} is now in your library`,
-          {},
-          SnackBarType.SUCCESS,
-        );
+        this.snackBar.openSuccess(`Game ${currentGame.name} is now in your library`);
         this.needUpdate();
       },
-      () => this.snackBar.open(
-        `Can't add ${currentGame.name}`,
-        {},
-        SnackBarType.ERROR,
-      ),
+      () => this.snackBar.openError(`Can't add ${currentGame.name}`),
     );
   }
 
@@ -211,18 +184,10 @@ export class GameListComponent implements OnInit {
 
     this.storeService.removeGameFromLibrary(gameId,
       () => {
-        this.snackBar.open(
-          `Game ${currentGame.name} is not anymore in your library`,
-          {},
-          SnackBarType.SUCCESS,
-        );
+        this.snackBar.openSuccess(`Game ${currentGame.name} is not anymore in your library`);
         this.needUpdate();
       },
-      () => this.snackBar.open(
-        `Can't delete ${currentGame.name}`,
-        {},
-        SnackBarType.ERROR,
-      ),
+      () => this.snackBar.openError(`Can't delete ${currentGame.name}`),
     );
   }
 
