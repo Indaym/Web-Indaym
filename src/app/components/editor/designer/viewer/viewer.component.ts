@@ -72,7 +72,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
     this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
     this.scene.eventDispatcher = this.eventDispatcher;
-    this.modelsLoader = new ModelsLoader(this.scene, this.textureService, this.snackBarService);
+    this.modelsLoader = new ModelsLoader(this.scene, this.textureService, this.snackBarService, true);
     this.modelsLoader.loadModels(this.gameController.getObjects());
     this.modelsLoader.initEvents(this.gameController);
 
