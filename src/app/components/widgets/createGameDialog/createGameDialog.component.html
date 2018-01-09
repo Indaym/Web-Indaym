@@ -6,11 +6,11 @@
   <mat-form-field>
     <textarea matInput [(ngModel)]="data.gameDescription" placeholder="Game description" ></textarea>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field *ngIf="canDisplay()" >
     <input matInput [(ngModel)]="data.sceneName" placeholder="Scene name" >
   </mat-form-field>
 </div>
 <mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="onNoClick()" >Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="data" >Create</button>
+  <button mat-raised-button [mat-dialog-close]="data" >{{buttonMsg()}}</button>
 </mat-dialog-actions>

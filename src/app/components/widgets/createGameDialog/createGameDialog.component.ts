@@ -18,9 +18,19 @@ export class CreateGameDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<CreateGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+  ) {
+    console.log(data);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  canDisplay(): boolean {
+    return !this.data.isEdit;
+  }
+
+  buttonMsg() {
+    return this.data.isEdit ? 'Edit' : 'Creat';
   }
 }

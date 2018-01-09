@@ -10,6 +10,10 @@ import {
 }              from '@angular/router';
 
 import {
+  MatDialog,
+}              from '@angular/material';
+
+import {
   UserService,
   GameService,
   SnackBarService,
@@ -20,6 +24,10 @@ import {
 import {
   SnackBarType,
 }              from '@app/components/snackBar/enum.snack-bar';
+
+import {
+  CreateGameDialogComponent,
+}              from '../createGameDialog/createGameDialog.component';
 
 @Component({
   selector: 'ia-game-list',
@@ -42,6 +50,7 @@ export class GameListComponent implements OnInit {
     private playService: PlayService,
     private user: UserService,
     private snackBar: SnackBarService,
+    private dialog: MatDialog,
   ) {}
 
   nbGames: number;
@@ -89,6 +98,11 @@ export class GameListComponent implements OnInit {
 
   private findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
 
+  private success = (msg: string) => {
+    this.snackBar.openSuccess(msg);
+    this.needUpdate();
+  }
+
   ngOnInit() {
     this.getGames();
     this.countGames();
@@ -130,10 +144,7 @@ export class GameListComponent implements OnInit {
     const currentGame = this.findCurrentGame(gameId);
 
     this.gamesService.deleteGame(gameId,
-      () => {
-        this.snackBar.openSuccess(`Game ${currentGame.name} is deleted`);
-        this.needUpdate();
-      },
+      () => this.success(`Game ${currentGame.name} is deleted`),
       () => this.snackBar.openError(`Can't delete ${currentGame.name}`),
     );
   }
@@ -144,12 +155,7 @@ export class GameListComponent implements OnInit {
     this.gamesService.updateGame(
       { published: !currentGame.published },
       gameId,
-      () => {
-        this.snackBar.openSuccess(
-          `Game ${currentGame.name} is now ${currentGame.published ? 'publish' : 'unpublish'}`,
-        );
-        this.needUpdate();
-      },
+      () => this.success(`Game ${currentGame.name} is now ${currentGame.published ? 'publish' : 'unpublish'}`),
       () => this.snackBar.openError(`Can't update ${currentGame.name}`),
     );
   }
@@ -171,10 +177,7 @@ export class GameListComponent implements OnInit {
     const currentGame = this.findCurrentGame(gameId);
 
     this.storeService.addGameToLibrary(gameId,
-      () => {
-        this.snackBar.openSuccess(`Game ${currentGame.name} is now in your library`);
-        this.needUpdate();
-      },
+      () => this.success(`Game ${currentGame.name} is now in your library`),
       () => this.snackBar.openError(`Can't add ${currentGame.name}`),
     );
   }
@@ -183,12 +186,31 @@ export class GameListComponent implements OnInit {
     const currentGame = this.findCurrentGame(gameId);
 
     this.storeService.removeGameFromLibrary(gameId,
-      () => {
-        this.snackBar.openSuccess(`Game ${currentGame.name} is not anymore in your library`);
-        this.needUpdate();
-      },
+      () => this.success(`Game ${currentGame.name} is not anymore in your library`),
       () => this.snackBar.openError(`Can't delete ${currentGame.name}`),
     );
+  }
+
+  editGame(gameId: string) {
+    const currentGame = this.findCurrentGame(gameId);
+
+    const dialogRef = this.dialog.open(CreateGameDialogComponent, {
+      height: '300px',
+      width: '250px',
+      data: {
+        gameName: currentGame.name,
+        gameDescription: currentGame.description,
+        isEdit: true,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) =>
+      this.gamesService.updateGame(
+        {'name': result.gameName, 'description': result.gameDescription },
+        gameId,
+        () => this.success(`${currentGame.name} successfully updated`),
+        () => this.snackBar.openError(`Can't update ${currentGame.name}`),
+      ));
   }
 
   handleEvent(event: any) {
