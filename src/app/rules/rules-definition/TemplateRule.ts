@@ -20,6 +20,10 @@ import {
   ModelViewer,
 } from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
 /**
  * the name of the class is used as ID, it's the one you will found in the
  * database
@@ -69,8 +73,8 @@ import {
  *
  */
 export class TemplateRule extends BaseRules {
-  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'TemplateRule';
     this._name = 'Template rule';

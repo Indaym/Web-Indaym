@@ -12,9 +12,13 @@ import {
   ModelViewer,
 }                 from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
 export class TestRuleTrue extends BaseRules {
-  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'TestRuleTrue';
     this._name = 'Test Rule True';

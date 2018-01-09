@@ -31,6 +31,9 @@ export class DicePawn extends BaseRules {
   }
 
   public run(args?: any): boolean {
+    const config = {
+      data: {},
+    };
     this.snackBar.open(
       `LOL`,
       SnackBarType.SUCCESS,

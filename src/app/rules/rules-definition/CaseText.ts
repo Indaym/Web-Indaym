@@ -12,9 +12,14 @@ import {
   ModelViewer,
 }                 from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
+
 export class CaseText extends BaseRules {
-  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'CaseText';
     this._name = 'Case Text';
