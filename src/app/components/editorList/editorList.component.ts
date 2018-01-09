@@ -74,13 +74,15 @@ export class EditorListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === undefined)
+      if (result === undefined || result.gameName !== undefined || result.gameName.length === 0)
         return;
 
+      if (result.sceneName !== undefined || result.sceneName.length === 0)
+        result.sceneName = 'Default';
       this.games.postGame(result.gameName, (gameId) => {
         localStorage.setItem('gameID', gameId.uuid);
 
-        this.games.postDescription(result.gameDescription, gameId.uuid);
+        this.games.postDescription(result.gameDescription || '', gameId.uuid);
         this.scene.setGameId(gameId.uuid);
         this.scene.postScene(result.sceneName, (sceneId) => {
           localStorage.setItem('sceneID', sceneId.uuid);

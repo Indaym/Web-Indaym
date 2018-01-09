@@ -92,7 +92,7 @@ export class GameService extends DefaultService {
   }
 
   public postDescription(description, id, success?, error?) {
-    this.http.put(this.gamesUrl + id, {'description': JSON.stringify(description)})
+    this.http.put(this.gamesUrl + id, {'description': description})
       .subscribe(success, error);
   }
 }
