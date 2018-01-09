@@ -16,6 +16,8 @@ import {
   SnackBarService,
 }                           from '../../services';
 
+import { SnackBarType }   from '../../components/snackBar';
+
 export class TriggerCaseText extends BaseRules {
   constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
     super(scene, model, conf, snackBar);
@@ -27,7 +29,15 @@ export class TriggerCaseText extends BaseRules {
   }
 
   public run(args?: any): boolean {
-    console.log("Case say : ", this._refScene._hovered.conf.rules[0].conf.caseText);
+    const config = {
+      duration: 10000,
+      data: {},
+    };
+    this.snackBar.open(
+      '<strong class="text-info">Case say : </strong>' + this._refScene._hovered.conf.rules[0].conf.caseText,
+      config,
+      SnackBarType.NONE,
+    );
     return true;
   }
 }

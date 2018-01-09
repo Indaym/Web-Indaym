@@ -32,13 +32,14 @@ export class DicePawn extends BaseRules {
 
   public run(args?: any): boolean {
     const config = {
+      duration: 10000,
       data: {},
     };
     this.snackBar.open(
-      `LOL`,
-      SnackBarType.SUCCESS,
+      '<strong class="text-info">Dice (1-' + this._configuration.dice + ') Result : </strong>' + (Math.floor(Math.random() * this._configuration.dice) + 1),
+      config,
+      SnackBarType.NONE,
     );
-    console.log(Math.floor(Math.random() * this._configuration.dice) + 1  );
     return true;
   }
 }
