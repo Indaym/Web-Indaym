@@ -6,9 +6,11 @@ import { BoardModelViewer } from './board.model.viewer';
 import { PawnModelViewer }  from './pawn.model.viewer';
 import { CaseModelViewer }  from './case.model.viewer';
 import { GridModelViewer }  from './grid.model.viewer';
+import { SnackBarType }   from '../components/snackBar';
 
 import {
   TextureService,
+  SnackBarService,
 }                           from '../services';
 
 import { RulesServices }    from '../services/rules.service';
@@ -22,7 +24,9 @@ export class ModelsLoader {
   };
   private rulesService: RulesServices;
 
-  constructor(private scene, private textureService: TextureService, private editorMode = false) {
+  constructor(private scene, private textureService: TextureService,
+    private snackBarService: SnackBarService,
+    private editorMode = false) {
     this.rulesService = new RulesServices();
   }
 
@@ -82,8 +86,7 @@ export class ModelsLoader {
         model.object.rules.forEach(
           (rule) => {
             const ruleDef = this.rulesService.getRules(rule.id);
-            const ruleInstance = new ruleDef(this.scene, model, rule.conf);
-
+            const ruleInstance = new ruleDef(this.scene, model, rule.conf, this.snackBarService);
             model.rules[ruleInstance.id] = ruleInstance;
           });
       }

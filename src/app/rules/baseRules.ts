@@ -30,7 +30,7 @@ export abstract class BaseRules {
    *
    */
 
-  constructor(scene: any, obj: any, conf: any = {}) {
+  constructor(scene: any, obj: any, conf: any = {}, snackBar: any) {
     this._refScene = scene;
     this._refObj = obj;
     this._configuration = conf;

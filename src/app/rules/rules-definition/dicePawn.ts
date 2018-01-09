@@ -12,9 +12,16 @@ import {
   ModelViewer,
 }                 from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
+import { SnackBarType }   from '../../components/snackBar';
+
 export class DicePawn extends BaseRules {
-  constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(
+    scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'DicePawn';
     this._name = 'Dice Pawn';
@@ -24,6 +31,10 @@ export class DicePawn extends BaseRules {
   }
 
   public run(args?: any): boolean {
+    this.snackBar.open(
+      `LOL`,
+      SnackBarType.SUCCESS,
+    );
     console.log(Math.floor(Math.random() * this._configuration.dice) + 1  );
     return true;
   }
