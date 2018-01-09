@@ -29,6 +29,8 @@ export class TriggerCaseText extends BaseRules {
   }
 
   public run(args?: any): boolean {
+    if (!this._refScene._hovered.conf.rules[0])
+      return true;
     const config = {
       duration: 6000,
       data: {},
