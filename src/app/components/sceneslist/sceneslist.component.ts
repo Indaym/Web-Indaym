@@ -6,11 +6,21 @@ import {
   ActivatedRoute,
   Router,
 }                       from '@angular/router';
+import {
+  MatDialog,
+}                       from '@angular/material';
+
 import { Subscription } from 'rxjs/Rx';
 
 import { comeFrom }     from '../../components/play';
+import {
+  CreateSceneDialogComponent,
+}                       from '../widgets/createSceneDialog/createSceneDialog.component';
 
-import { SceneService } from '../../services';
+import {
+  SceneService,
+  SnackBarService,
+} from '../../services';
 
 @Component({
   selector  : 'ia-sceneslist',
@@ -27,34 +37,41 @@ export class ScenesListComponent implements OnDestroy {
   public gameId;
   public isNew;
   public subscription: Subscription;
+  public sceneName: string;
   private redirect;
 
-  constructor(private scenes: SceneService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private scenes: SceneService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: SnackBarService,
+    private dialog: MatDialog,
+  ) {
     route.data.subscribe((val) => this.redirect = val.redirect);
     this.subscription = route.queryParams.subscribe(
-      (queryParam: any) => this.getScenesList(queryParam),
+      // (queryParam: any) => this.getScenesList(queryParam),
+      (queryParam: any) => this.getScenesList(),
     );
   }
 
-/*
-  public ngOnInit() {
-    if (comeFrom == "Play")
-      document.getElementById("toHideIfPlay").innerHTML = "";
+  private success = (msg: string) => {
+    this.snackBar.openSuccess(msg);
+    this.needUpdate();
   }
-  */
 
   public ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  public getScenesList(queryParam) {
+  // public getScenesList(queryParam) {
+  public getScenesList() {
     this.gameId = localStorage.getItem('gameID');
-    this.isNew = parseInt(queryParam.new, 10);
+    // this.isNew = parseInt(queryParam.new, 10);
 
     this.scenes.setGameId(this.gameId);
     this.scenes.getScenes((datas) => this.lsScenes = datas);
-    if (this.isNew === 1)
-      this.scenes.postScene('Default', (datas) => this.goToScenePage(datas.uuid));
+    // if (this.isNew === 1)
+    //   this.scenes.postScene('Default', (datas) => this.goToScenePage(datas.uuid));
   }
 
   public goToScenePage(id) {
@@ -63,8 +80,55 @@ export class ScenesListComponent implements OnDestroy {
   }
 
   public addScene() {
-    const myText = prompt('Scene Name: ');
-    if (myText)
-      this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
+    const dialogRef = this.dialog.open(CreateSceneDialogComponent, {
+      data: {
+        sceneName: this.sceneName,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === undefined)
+        return;
+
+      this.scenes.postScene(result.sceneName, (datas) => this.goToScenePage(datas.uuid));
+      });
+    // const myText = prompt('Scene Name: ');
+    // if (myText)
+    //   this.scenes.postScene(myText, (datas) => this.goToScenePage(datas.uuid));
+  }
+
+  public editScene(scene: any) {
+    const dialogRef = this.dialog.open(CreateSceneDialogComponent, {
+      data: {
+        sceneName: scene.name,
+        isEdit: true,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === undefined)
+        return;
+
+      this.scenes.updateScene(
+        {'name': result.sceneName},
+        scene.uuid,
+        () => this.success(`${scene.name} successfully renamed in ${result.sceneName}`),
+        () => this.snackBar.openError(`Can't update ${scene.name}`));
+      });
+  }
+
+  public deleteScene(scene: any) {
+    this.scenes.deleteScene(
+      scene.uuid,
+      () => this.success(`${scene.name} successfully deleted`),
+      () => this.snackBar.openError(`Can't delete ${scene.name}`));
+  }
+
+  public canDisplay(): boolean {
+    return this.router.url === '/sceneslist';
+  }
+
+  needUpdate() {
+    this.getScenesList();
   }
 }

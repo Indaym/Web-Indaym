@@ -77,7 +77,6 @@ export class EditorListComponent implements OnInit {
       if (result === undefined)
         return;
 
-      console.log(result);
       this.games.postGame(result.gameName, (gameId) => {
         localStorage.setItem('gameID', gameId.uuid);
 

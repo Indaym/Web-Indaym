@@ -40,7 +40,12 @@ import {
   APP_COMPONENTS,
   WIDGETS,
 }                                   from './components';
-import { CreateGameDialogComponent } from './components/widgets/createGameDialog/createGameDialog.component';
+import {
+  CreateGameDialogComponent,
+}                                   from './components/widgets/createGameDialog/createGameDialog.component';
+import {
+  CreateSceneDialogComponent,
+}                                   from './components/widgets/createSceneDialog/createSceneDialog.component';
 import { PIPES }                    from './pipes';
 
 import { AuthGuard }                from './guards';
@@ -63,6 +68,7 @@ import {
   entryComponents: [
     SnackBarComponent,
     CreateGameDialogComponent,
+    CreateSceneDialogComponent,
   ],
   providers : [
     AuthGuard,
