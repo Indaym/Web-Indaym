@@ -53,6 +53,7 @@ export class GameListComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
 
+  private offset = 0;
   nbGames: number;
   /**
    * list of games to display
@@ -111,7 +112,7 @@ export class GameListComponent implements OnInit {
   public getGames(opt = {}): void {
     this[`${this.provider}Service`].getGames(
       {
-        ...{'limit': '10', 'offset': '0'},
+        ...{'limit': '10', 'offset': this.offset.toString()},
         ...opt,
       },
       (data) => this.games = data,
@@ -216,6 +217,7 @@ export class GameListComponent implements OnInit {
   }
 
   handleEvent(event: any) {
+    this.offset = event.pageIndex;
     this.getGames({ 'offset': `${event.pageIndex}`});
     this.countGames();
     this.changePage.emit(event);

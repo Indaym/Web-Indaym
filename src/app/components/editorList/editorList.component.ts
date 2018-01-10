@@ -80,6 +80,7 @@ export class EditorListComponent implements OnInit {
       if (result.sceneName === undefined || result.sceneName.length === 0)
         result.sceneName = 'Default';
       this.games.postGame(result.gameName, (gameId) => {
+        console.log(gameId);
         localStorage.setItem('gameID', gameId.uuid);
 
         this.games.postDescription(result.gameDescription || '', gameId.uuid);
