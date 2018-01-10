@@ -8,9 +8,13 @@ import {
   ModelViewer,
 }               from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
 export class MoveForward extends BaseRules {
-  constructor(scene: any, model: any, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: any, model: any, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'MoveForward';
     this._name = 'Move Forward';

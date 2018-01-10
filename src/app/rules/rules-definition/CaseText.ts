@@ -16,18 +16,20 @@ import {
   SnackBarService,
 }                           from '../../services';
 
-export class TestRuleTrue extends BaseRules {
+
+export class CaseText extends BaseRules {
   constructor(scene: SceneViewer, model: ModelViewer, conf: any = {}, private snackBar: SnackBarService) {
     super(scene, model, conf, snackBar);
 
-    this._id = 'TestRuleTrue';
-    this._name = 'Test Rule True';
-    this._description = `This is a test True rule with ${this.id} id`;
+    this._id = 'CaseText';
+    this._name = 'Case Text';
+    this._description = `Add a text to a Case`;
     this._ruleType = RULE_TYPE.default;
   }
 
   public run(args?: any): boolean {
-    console.log('True');
+    console.log(this._refScene);
+    console.log('Case');
     return true;
   }
 }

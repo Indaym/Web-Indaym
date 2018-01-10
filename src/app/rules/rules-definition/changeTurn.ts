@@ -8,9 +8,14 @@ import {
   ModelViewer,
 }               from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
+
 export class ChangeTurn extends BaseRules {
-  constructor(scene: any, model: any, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: any, model: any, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'ChangeTurn';
     this._name = 'Change Turn rules';
