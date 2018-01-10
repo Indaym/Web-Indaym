@@ -1,0 +1,27 @@
+<ul class="flex-container" >
+  <li class="flex-item" *ngFor="let game of games" >
+      <ia-game-card
+        [game]="game"
+        [edit]="ownerCanEdit(game)"
+        [delete]="ownerCanDelete(game)"
+        [remove]="remove"
+        [add]="add"
+        [like]="like"
+        [publish]="ownerCanTogglePublish(game)"
+
+        (deleteGame)="deleteGame($event)"
+        (togglePublishGame)="togglePublishGame($event)"
+        (shouldRedirect)="redirectTo($event)"
+        (addGame)="addGame($event)"
+        (removeGame)="removeGame($event)"
+        (editGame)="editGame($event)"
+      ></ia-game-card>
+  </li>
+</ul>
+
+<mat-paginator
+  [pageSize]="10"
+  [length]="nbGames"
+  (page)="handleEvent($event)"
+  >
+</mat-paginator>

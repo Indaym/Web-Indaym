@@ -1,0 +1,11 @@
+<mat-sidenav-container class="no-background">
+  <div class="content">
+    <ia-viewer [eventDispatcher]="dispatcher" ></ia-viewer>
+  </div>
+  <mat-sidenav #start mode="over" class="left-sidenav">
+    <ia-left-sidebar [start]="start" [eventDispatcher]="dispatcher"></ia-left-sidebar>
+  </mat-sidenav>
+  <mat-sidenav #end mode="over" align="end" class="right-sidenav">
+    <ia-right-sidebar [end]="end" [eventDispatcher]="dispatcher"></ia-right-sidebar>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -1,0 +1,119 @@
+@import 'src/assets/css/colors';
+
+button {
+  background-color: $light-cyan;
+  border-radius: 4px;
+  color: $white;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 5px;
+}
+
+input {
+  color:$black;
+}
+
+select, option, option:hover,
+option:focus,
+option:active,
+option:checked  {
+  color: $black;
+}
+
+.center {
+  text-align: center;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {opacity: 1;}
+  90% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  90% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.temp {
+  -webkit-animation-duration: 5s;animation-duration: 5s;
+  -webkit-animation-fill-mode: both;animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+p.warn {
+  color: $warn-red;
+}
+
+p.up {
+  color: $up-green
+}
+
+#sel {
+  width: 150px;
+}
+
+h4 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.radio-margin {
+  margin-left: 10px;
+}
+
+.close-button {
+  float:left;
+  left: -40px;
+  border-radius: 5px  0 0 5px;
+}
+
+.but {
+  background: $gray;
+  padding: 4px;
+  line-height: normal;
+  float: right;
+  &:hover{
+    .glyphicon-ok {
+      color: $up-green;
+    }
+    .glyphicon-remove:hover {
+      color: $warn-red;
+    }
+  }
+}
+
+
+#noBorder {
+  border-width: 0 0 1px 0;
+  span:first-child {
+    flex: auto;
+    padding: 2px;
+  }
+}
+
+.sizedel {
+  border: 1px $gray solid;
+  font-size: 0;
+  height: 27px;
+  display: flex;
+
+  & > input {
+    height: 25px;
+    flex:auto;
+    line-height: 0;
+  }
+
+  & > * {
+    font-size: 14px;
+  }
+}
+
+:host {
+  height: 100%;
+}

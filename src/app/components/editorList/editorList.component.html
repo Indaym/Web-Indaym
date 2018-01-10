@@ -1,0 +1,22 @@
+<ul>
+  <li>
+    <div class="create">
+      <button mat-fab color="primary" (click)="gameFunction()" >
+        <mat-icon><i class="material-icons">add</i></mat-icon>
+      </button>
+      <span>Create a New Game</span>
+    </div>
+  </li>
+</ul>
+
+<ia-game-list
+  [edit]="true"
+  [delete]="true"
+  [add]="false"
+  [like]="false"
+  [publish]="true"
+  [redirectPath]="'/sceneslist'"
+  [provider]="'games'"
+></ia-game-list>
+
+<router-outlet></router-outlet>

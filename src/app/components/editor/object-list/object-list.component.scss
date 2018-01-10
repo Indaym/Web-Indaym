@@ -1,0 +1,52 @@
+@import 'src/assets/css/colors';
+
+.none-style {
+  list-style: none;
+}
+
+#itemsList li {
+  margin: 5px 0 5px 15px;
+}
+
+#itemsList > p {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#itemsList li.selected > .glyphicon {
+  display: inline;
+}
+
+#itemsList li:hover .glyphicon {
+  display:inline;
+}
+
+#itemsList li .glyphicon {
+  display:none;
+}
+
+#itemsList li:hover {
+  cursor: pointer;
+  color: $white;
+}
+
+#itemsList {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input, button {
+  color: $black;
+}
+
+#filter {
+  width: 100%;
+}
+
+#filter > input {
+  width: calc(100% - 35px);
+}

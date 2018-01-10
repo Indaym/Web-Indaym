@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Create a new Grid</h1>
+<hr>
+<div mat-dialog-content>
+
+  <form [formGroup]="groupForm">
+    <h5>Number of cells:</h5>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput formControlName="horizontal" type="number" step="1" min="1" max="40" placeholder="Horizontal" required/>
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput formControlName="vertical" type="number" step="1" min="1" max="40" placeholder="Vertical" required/>
+    </mat-form-field>
+
+    <h5>Cells dimensions:</h5>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput formControlName="width" type="number" min="1" max="20" placeholder="Width" required/>
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput formControlName="height" type="number" min="1" max="20" placeholder="Height" required/>
+    </mat-form-field>
+
+    <div class="form-group">
+      <label for="color">Color of highlight for selection:</label>
+      <input formControlName="color" type="color" />
+    </div>
+
+    <mat-checkbox formControlName="alternate">Alternate texture</mat-checkbox>
+
+    <br/>
+    <mat-form-field floatPlaceholder="always">
+      <mat-select formControlName="textureEven" [placeholder]="groupForm.value.alternate ? 'Even case' : 'Case'" required>
+        <mat-option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatPlaceholder="always" *ngIf="groupForm.value.alternate">
+      <mat-select formControlName="textureOdd" placeholder="Odd case" required>
+        <mat-option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <div>
+    <h5>Preview:</h5>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="previewE">Even cell texture:</label>
+        <img id="previewE" *ngIf="previewEven.length > 0" [src]="previewEven" class="form-control form-custom" />
+      </div>
+      <div class="col-xs-6 form-group" *ngIf="groupForm.value.alternate">
+        <label for="previewO">Odd cell texture:</label>
+        <img id="previewO" *ngIf="previewOdd.length > 0" [src]="previewOdd" class="form-control form-custom" />
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="groupForm.value" [disabled]="!groupForm.valid">Create</button>
+</mat-dialog-actions>

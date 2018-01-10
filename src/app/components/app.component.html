@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+	<span class="icons-indaym">
+			<img src="/favicon.ico"/>
+			<span>Indaym</span>
+	</span>
+	<ul class='nav navbar-nav'>
+	  <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+	  <li><a routerLink="/gameslist" routerLinkActive="active">Editor</a></li>
+	  <li><a routerLink="/play" routerLinkActive="active">Play</a></li>
+	  <li><a routerLink="/store" routerLinkActive="active">Store</a></li>
+  </ul>
+  <ul>
+    <ia-auth-button class="right" ></ia-auth-button>
+  </ul>
+</nav>
+
+<!-- <div class="background-image" [ngStyle]="{'background-image' : 'url(../assets/img/bg/indaymlogo.png)'}"></div> -->
+
+<router-outlet> </router-outlet>
+
+<!--<nav class="footer">
+  <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  <a routerLink="/legalMentions" routerLinkActive="active">Legal Mentions</a>
+</nav>-->

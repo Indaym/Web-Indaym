@@ -1,0 +1,12 @@
+<span [ngSwitch]="data.snackType">
+  <strong *ngSwitchCase="SnackBarType.SUCCESS" class="text-success">Success: </strong>
+  <strong *ngSwitchCase="SnackBarType.ERROR" class="text-danger">Error: </strong>
+  <strong *ngSwitchCase="SnackBarType.INFO" class="text-info">Info: </strong>
+  <strong *ngSwitchCase="SnackBarType.WARNING" class="text-warning">Warning: </strong>
+</span>
+
+<span [innerHTML]="data.message"></span>
+
+<button type="button" class="close" aria-label="Close" (click)="close()">
+  <span aria-hidden="true">&times;</span>
+</button>

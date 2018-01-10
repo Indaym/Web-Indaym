@@ -1,0 +1,51 @@
+@import 'src/assets/css/colors';
+
+button {
+  background-color: $light-cyan;
+  border-radius: 4px;
+  color: $white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.close-button {
+  float:right;
+  right: -40px;
+  border-radius: 0 5px 5px 0;
+}
+
+.objects > img {
+  width: 100px;
+  height: 100px;
+}
+
+.objects {
+  text-align: center;
+}
+
+.objects > label {
+  padding: 10px 0;
+}
+
+.parent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
+:host {
+  height: 100%;
+}
+
+.contain {
+  direction: rtl;
+}
+
+mat-accordion {
+  direction: ltr;
+}

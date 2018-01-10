@@ -1,0 +1,33 @@
+<ul>
+  <li>
+    <div class="create">
+      <button mat-fab color="primary" (click)="addScene()" >
+        <mat-icon><i class="material-icons">add</i></mat-icon>
+      </button>
+      <span>Create a New Scene</span>
+    </div>
+  </li>
+</ul>
+
+<ul class="flex-container" >
+  <li class="flex-item" *ngFor="let scene of lsScenes" >
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{scene.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-fab color="primary" *ngIf="canDisplay()" (click)="editScene(scene)" >
+          <mat-icon><i class="material-icons">edit</i></mat-icon>
+        </button>
+        <button mat-fab color="primary" (click)="goToScenePage(scene.uuid)">
+          <mat-icon><i class="material-icons">arrow_forward</i></mat-icon>
+        </button>
+        <button mat-fab color="warn" *ngIf="canDisplay()" (click)="deleteScene(scene)" >
+          <mat-icon><i class="material-icons">delete</i></mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,8 @@
+.form-custom {
+  height:auto;
+  padding: 0;
+}
+
+:host ::ng-deep .mat-input-placeholder {
+  font-size: 18px;
+}

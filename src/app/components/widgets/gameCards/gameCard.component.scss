@@ -1,0 +1,30 @@
+mat-card {
+  width: 400px;
+  height: 550px;
+}
+
+mat-card-actions {
+  height: 50px;
+}
+
+.mat-card-image {
+  @media (max-width: 600px)  {
+    margin:0 -24px 16px -24px;
+  }
+}
+
+p {
+  height: 80px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow: auto;
+}
+
+.push-right {
+  float: right;
+}
+
+.push-left {
+  float: left;
+}

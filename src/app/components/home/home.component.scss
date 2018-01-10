@@ -1,0 +1,36 @@
+@import 'src/assets/css/colors';
+
+h2 {
+    text-align: center;
+}
+
+.news {
+    column-count: 3;
+    column-gap: 0px;
+}
+
+.group-pic {
+    text-align: center;
+}
+
+.home-pic {
+    width: 100%;
+    margin-top: 5%;
+}
+
+.w3-content {
+    max-width: 700px;
+}
+
+.main-title {
+    font-family: 'Ruluko', sans-serif;
+    line-height: 120px;
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 900!important;
+}
+
+.link {
+    margin: 30px;
+    color: $dark-cyan;
+}

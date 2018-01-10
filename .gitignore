@@ -1,5 +1,9 @@
+### Mac OsX
+.DS_Store
+
 ### IDE
 .idea/
+.vscode
 
 ### Project
 
@@ -15,6 +19,7 @@ node_modules/
 typings
 
 ## file
+testNotes.ts
 
 src/**/*.js*
 !*.json

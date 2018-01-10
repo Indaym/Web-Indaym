@@ -1,0 +1,65 @@
+<br/><br/>
+<div id="toCenter2">
+    <p id="myGames">{{evaluatedGame?.name}}</p>
+</div>
+
+<div id="doMargin">
+          <img id="logos" src="assets/images/jeu1.png"/>
+          <div id="note">Average grade: {{evaluatedGame?.rate}}</div>
+          <div id="descTitle">
+          Game Description: <br/>
+          <div id="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec leo urna. Donec elit orci, porttitor nec maximus eget, dignissim sed ligula. Nulla laoreet mauris felis, eu bibendum elit tincidunt ac. Sed viverra, ipsum tempus mattis vehicula, nunc massa consequat dolor, tempus commodo augue velit in dolor. Curabitur feugiat volutpat risus id ultrices. Sed sapien turpis, sollicitudin ut blandit non, facilisis in eros. Nulla facilisi. Morbi ornare pretium tortor eu pretium. Donec nisl sapien, imperdiet in ex a, sodales porttitor est.<br/><br/></div>
+          </div>
+</div>
+
+
+<div class="container">
+     <legend>Give your opinion on this game:</legend>
+      <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
+
+          <div class="form-group">
+            <label for="message">Comment</label>
+            <input type="text" placeholder="Your message..." class="form-control" id="message"
+                    [(ngModel)]="newComment.message" name="message"
+                    #message="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input type="number" value="0" min="0" max="5" class="form-control" id="rating"
+                    [(ngModel)]="newComment.rating" name="rating">
+          </div>
+
+
+          <button type="button" class="btn btn-default" (click)="postComments(); ">New Comment</button>
+
+
+<div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="page-header">
+                    <h1><small class="pull-right">{{ratings}} comments</small>Comments </h1>
+                  </div>
+
+            <div *ngFor="let comment of parsedComments">
+
+                    <div class="comments-list">
+                      <div class="media">
+                           <p class="pull-right"><small>Now</small></p>
+                            <a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/1/">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading user_name">Anonymous</h4>
+                              {{comment}}
+
+                              <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+        </div>
+
+
+<router-outlet></router-outlet>

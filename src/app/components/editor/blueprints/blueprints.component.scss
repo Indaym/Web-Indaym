@@ -1,0 +1,88 @@
+@import 'src/assets/css/colors';
+
+.row {
+  margin: 0;
+  padding: 10px;
+}
+/*
+.col-xs-3 {
+  border: 1px solid black;
+  min-height: 50px;
+}
+*/
+
+.badge {
+  float: right;
+}
+
+.badge:hover {
+  cursor: pointer;
+  filter: brightness(120%);
+}
+
+.badge:hover > .glyphicon-minus {
+  color: $warn-red;
+}
+
+.badge:hover > .glyphicon-plus {
+  color: $up-green;
+}
+
+#available-rules, #applied-rules {
+  min-height: 500px;
+}
+
+#available-rules {
+  border-left: 3px solid $light-cyan;
+  padding-left: 25px;
+}
+
+#applied-rules {
+  border-right: 3px solid $light-cyan;
+  padding-right: 25px;
+}
+
+#available-rules-title, #applied-rules-title {
+  font-size: 150%;
+}
+
+#properties-title {
+  font-size: 140%;
+}
+
+.blueprint-title {
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+:host ::ng-deep li:hover {
+  color: $black !important;
+}
+
+
+/*
+ * Reset dragula css / bootstrap are something else must force with !important the css
+ */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}

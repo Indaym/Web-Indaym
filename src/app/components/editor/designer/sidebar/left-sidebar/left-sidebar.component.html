@@ -1,0 +1,45 @@
+<div class="close-button" mat-button (click)="start.toggle()">
+    <span class="glyphicon" [ngClass]="{'glyphicon-menu-left': start.opened, 'glyphicon-menu-right': !start.opened}"></span>
+</div>
+
+<div class="contain">
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header #modelsHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, modelsHead)">
+        <mat-panel-title>
+          Models
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <br/>
+      <div>
+        To place an object in editor:<br/>
+        • Click on the picture to place it at 0 0<br/>
+        • Drag and drop it to wanted position<br/>
+      </div>
+
+      <ng-template ngFor let-category [ngForOf]="items | keys">
+        <h3 style="text-transform:capitalize">{{ category }}</h3>
+        <mat-divider></mat-divider>
+        <div *ngIf="(items[category] | keys).length > 0; else notImplemented" class="parent">
+          <div *ngFor="let item of items[category] | keys" class="objects">
+            <img src="assets/img/objects/{{item}}.png" alt="{{items[category][item]}}" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)"/><br/>
+            <label>{{items[category][item]}}</label>
+          </div>
+        </div>
+        <ng-template #notImplemented>
+          <div>Not implemented yet</div><br/>
+        </ng-template>
+      </ng-template>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header #objectsHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, objectsHead)">
+        <mat-panel-title>
+          Scene Objects
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <br/>
+      <ia-object-list [eventDispatcher]="eventDispatcher" multiSelect></ia-object-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

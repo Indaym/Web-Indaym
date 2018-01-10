@@ -1,0 +1,12 @@
+@import 'src/assets/css/colors';
+
+button {
+  margin-top: -3%;
+  margin-left: 10px;
+  color: $white;
+}
+
+button:active, button:focus {
+  outline: 0;
+  border: none;
+}
