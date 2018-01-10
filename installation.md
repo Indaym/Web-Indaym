@@ -1,8 +1,8 @@
 # What do you need
 
- * [node.js] [1]
- * [npm] [2] ([video tutorial (fr)] [4])
- * [typings] [3]
+ * [node.js][1]
+ * [npm][2] ([video tutorial (fr)][4])
+ * [typings][3]
  * [Yarn][5]
 
 
