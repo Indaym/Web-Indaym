@@ -59,7 +59,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Backspace' && this.scene.selected)
+    if (event.key === 'Backspace' && event.ctrlKey === true && this.scene.selected)
       this.deleteObject();
   }
 
