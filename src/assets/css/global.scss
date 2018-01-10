@@ -5,3 +5,9 @@
 body {
   background-color: #eee !important;
 }
+
+@media (min-width: 330px) {
+  .navbar-nav > li {
+    float: left;
+  }
+}

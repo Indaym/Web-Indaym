@@ -48,7 +48,8 @@ export class ObjectService extends DefaultService {
   public updateObject(obj, id, success = (datas) => {}, error = (err) => {}) {
     if (!this.isSetted(true))
       return;
-    obj.object = JSON.stringify(obj.object);
+    if (obj.object)
+      obj.object = JSON.stringify(obj.object);
     this.http.put(this.objectsUrl + id, obj)
       .subscribe(success, error);
   }

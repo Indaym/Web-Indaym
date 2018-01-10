@@ -1,21 +1,8 @@
-@import 'src/assets/css/colors';
-
-input[type=checkbox]
-{
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(1.2); /* IE */
-  -moz-transform: scale(1.2); /* FF */
-  -webkit-transform: scale(1.2); /* Safari and Chrome */
-  -o-transform: scale(1.2); /* Opera */
-  transform: scale(1.2);
-  padding: 10px;
-}
-
 .form-custom {
   height:auto;
   padding: 0;
 }
 
-p.warn {
-  color: $warn-red;
+:host ::ng-deep .mat-input-placeholder {
+  font-size: 18px;
 }

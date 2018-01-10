@@ -67,9 +67,53 @@ h4 {
   margin-left: 10px;
 }
 
-#closeButton {
-  position: absolute;
-  left: 5px;
-  top: 5px;
+.close-button {
   float:left;
+  left: -40px;
+  border-radius: 5px  0 0 5px;
+}
+
+.but {
+  background: $gray;
+  padding: 4px;
+  line-height: normal;
+  float: right;
+  &:hover{
+    .glyphicon-ok {
+      color: $up-green;
+    }
+    .glyphicon-remove:hover {
+      color: $warn-red;
+    }
+  }
+}
+
+
+#noBorder {
+  border-width: 0 0 1px 0;
+  span:first-child {
+    flex: auto;
+    padding: 2px;
+  }
+}
+
+.sizedel {
+  border: 1px $gray solid;
+  font-size: 0;
+  height: 27px;
+  display: flex;
+
+  & > input {
+    height: 25px;
+    flex:auto;
+    line-height: 0;
+  }
+
+  & > * {
+    font-size: 14px;
+  }
+}
+
+:host {
+  height: 100%;
 }

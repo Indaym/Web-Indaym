@@ -21,6 +21,7 @@ import { SnackBarComponent }      from './snackBar';
 
 export { AppComponent }           from './app.component';
 export { SnackBarComponent }      from './snackBar';
+export { GridPopupComponent }     from './editor';
 
 export const APP_COMPONENTS = [
   EDITOR_COMPONENTS,

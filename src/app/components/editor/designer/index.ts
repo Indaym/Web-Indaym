@@ -8,6 +8,7 @@ import { ViewerComponent }    from './viewer';
 import { GridPopupComponent } from './grid-popup';
 
 export { DesignerComponent }  from './designer.component';
+export { GridPopupComponent } from './grid-popup';
 
 export const DESIGNER_COMPONENTS = [
   DesignerComponent,

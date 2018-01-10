@@ -12,6 +12,7 @@ import {
   Group,
   Box3,
   Matrix4,
+  SceneUtils,
 } from 'three';
 
 import { SceneViewer } from './scene.viewer';
@@ -124,10 +125,14 @@ export class EditorViewer extends SceneViewer {
       this._controller.attach(obj);
       this._scene.add(this._controller);
       this._eventDispatcher.dispatchEvent({
-        type : 'updateObjectInputs',
-        position : this._selected.position,
-        dimension : this._selected.scale,
-        rotation : this._selected.rotation,
+        type: 'updateObjectInputs',
+        position: this._selected.position,
+        dimension: this._selected.scale,
+        rotation: this._selected.rotation,
+      });
+      this._eventDispatcher.dispatchEvent({
+        type: 'selectViewObject',
+        object: this._selected,
       });
       this._eventDispatcher.dispatchEvent({
         type : 'setMinimumScale',
@@ -137,7 +142,7 @@ export class EditorViewer extends SceneViewer {
   }
 
   public selectObjects(objs) {
-    if (objs) {
+    if (objs && objs.length > 0) {
       this.unselectObject(undefined);
 
       const grp = new Group();
@@ -168,17 +173,23 @@ export class EditorViewer extends SceneViewer {
     this._controller.detach(objSel);
     this._scene.remove(this._controller);
 
+    const ret = [];
     if (this._selected instanceof Group) {
+      ret.push(...this._selected.children);
       while (this._selected.children.length > 0) {
         // Remove child from group, set correct position and add to scene
-        const element = this._selected.children[0];
-        this._selected.remove(element);
-        element.position.add(this._selected.position);
-        this._scene.add(element);
+        SceneUtils.detach(this._selected.children[0], this._selected, this._scene);
       }
       this._scene.remove(this._selected);
+    } else if (this._selected) {
+      ret.push(this._selected);
     }
     this._selected = undefined;
+    this._eventDispatcher.dispatchEvent({
+      type: 'selectViewObject',
+      object: this._selected,
+    });
+    return ret;
   }
 
   /**
