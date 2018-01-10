@@ -6,36 +6,39 @@ import {
   Component,
   Input,
   OnInit,
-}                         from '@angular/core';
+}                               from '@angular/core';
 
 import {
   GameControllerService,
   GridCreationService,
-}                         from '../../../../../services';
-import { buttonsDefault } from '../../../../../models';
+}                               from '../../../../../services';
+import { buttonsDefault }       from '../../../../../models';
+import { OverridePanelClosing } from '../overridePanelClosing';
 
 @Component({
   selector  : 'ia-left-sidebar',
   providers : [],
   templateUrl   : './left-sidebar.component.html',
   styleUrls    : [
-    './left-sidebar.component.scss',
     '../sidebars.scss',
+    './left-sidebar.component.scss',
   ],
 })
-export class LeftSidebarComponent implements OnInit {
+export class LeftSidebarComponent extends OverridePanelClosing implements OnInit {
   @Input() public start;
   @Input() public eventDispatcher;
   public items = {
     boards: {
-      'board': 'Add Board',
+      'board': 'Board',
       'case': 'Case',
       'grid': 'Grid',
     },
     pawns: {
-      'pawnWhite': 'Add White Pawn',
-      'pawnBlack': 'Add Black Pawn',
+      'pawnWhite': 'White Pawn',
+      'pawnBlack': 'Black Pawn',
     },
+    cards: {},
+    dices: {},
   };
 
   private gameController;
@@ -44,6 +47,7 @@ export class LeftSidebarComponent implements OnInit {
     private gameControllerService: GameControllerService,
     private gridCreationService: GridCreationService,
   ) {
+    super();
     this.gameController = this.gameControllerService.gameController;
   }
 

@@ -12,6 +12,7 @@ import { EventDispatcher }  from 'three';
 import {
   GameControllerService,
   TextureService,
+  SnackBarService,
 }                           from '../../../services';
 import { RulesInterface }   from './rulesInterface';
 import {
@@ -33,7 +34,8 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private modelsLoader: ModelsLoader;
   private rulesInterface: RulesInterface;
 
-  constructor(private gameControllerService: GameControllerService, private textureService: TextureService) {
+  constructor(private gameControllerService: GameControllerService, private textureService: TextureService,
+  private snackBarService: SnackBarService) {
     this.gameController = gameControllerService.gameController;
     this.rulesInterface = new RulesInterface();
   }
@@ -51,7 +53,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this.scene.domElement.addEventListener('mouseup',   (event) => this.scene.onMouseUp(event), false);
 
     this.scene.eventDispatcher = new EventDispatcher();
-    this.modelsLoader = new ModelsLoader(this.scene, this.textureService);
+    this.modelsLoader = new ModelsLoader(this.scene, this.textureService, this.snackBarService);
     this.modelsLoader.loadModels(this.gameController.getObjects());
     this.modelsLoader.initEvents(this.gameController);
   }

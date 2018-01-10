@@ -57,22 +57,22 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.gameController = gameControllerService.gameController;
   }
 
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Delete')
+    if (event.key === 'Backspace' && this.scene.selected)
       this.deleteObject();
   }
 
   public ngOnInit(): void {
     this.scene = new EditorViewer({
       width: () => window.innerWidth,
-      height: () => window.innerHeight - this.container.nativeElement.offsetTop - 5,
+      height: () => window.innerHeight - this.container.nativeElement.offsetTop - 100,
     });
     this.scene.defaultLoad(this.container.nativeElement);
     this.scene.domElement.addEventListener('mousedown', (event) => this.scene.onMouseDown(event), false);
     this.scene.domElement.addEventListener('mousemove', (event) => this.scene.onMouseMove(event), false);
     this.scene.eventDispatcher = this.eventDispatcher;
-    this.modelsLoader = new ModelsLoader(this.scene, this.textureService, true);
+    this.modelsLoader = new ModelsLoader(this.scene, this.textureService, this.snackBarService, true);
     this.modelsLoader.loadModels(this.gameController.getObjects());
     this.modelsLoader.initEvents(this.gameController);
 
@@ -96,9 +96,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
     });
 
     this.eventDispatcher.addEventListener('selectObject', (e: any) => {
-      if (e.objects.length > 0)
-        this.scene.selectObjects(e.objects.map((element) => element.threeDModel.mesh));
-      else
+      if (e.objects.length > 0) {
+        if (e.objects.length === 1)
+          this.scene.selectObject(e.objects[0].threeDModel.mesh);
+        else
+          this.scene.selectObjects(e.objects.map((element) => element.threeDModel.mesh));
+      } else
         this.scene.unselectObject(undefined);
     });
     this.eventDispatcher.addEventListener('deleteSelected', (e: any) => this.deleteObject());
@@ -123,6 +126,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   public savePositions() {
     const objs = this.gameController.getObjects();
 
+    const selObjs = this.scene.unselectObject(undefined);
     objs.forEach((elem) => {
       if (['position', 'rotation', 'dimension'].every((v, i) => {
         if (elem.object[v] === undefined)
@@ -138,6 +142,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
       elem.threeDModel.rotation.toArray(elem.object.rotation);
       this.objectService.updateObject({ object: elem.object }, elem.uuid);
     });
+    this.scene.selectObjects(selObjs);
   }
 
   public deleteObject() {
@@ -179,7 +184,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
       const name = args.dragData;
 
       if (name !== undefined && buttonsDefault[name] !== undefined) {
-        const model = Object.assign({}, buttonsDefault[name]);
+        const model = { ...buttonsDefault[name] };
+        model.object = { ...model.object };
         const cb = (datas) => {
           model.object.position = coord.toArray();
           if (name === 'grid')

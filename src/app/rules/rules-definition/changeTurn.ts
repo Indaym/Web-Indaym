@@ -8,9 +8,14 @@ import {
   ModelViewer,
 }               from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
+
 export class ChangeTurn extends BaseRules {
-  constructor(scene: any, model: any, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: any, model: any, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'ChangeTurn';
     this._name = 'Change Turn rules';
@@ -22,15 +27,9 @@ export class ChangeTurn extends BaseRules {
   public run(args?: any): boolean {
     if (this._refObj.threeDModel.oldPosition[0] === -1 && this._refObj.threeDModel.oldPosition[1] === -1)
       return true;
-    if ((this._refScene.player === 0 || this._refScene.player === 1) && this._refObj.name === 'whitepawn')
-      this._refScene.player += 1;
-    else if ((this._refScene.player === 2 || this._refScene.player === 3) && this._refObj.name === 'blackpawn') {
-      this._refScene.player += 1;
-      if (this._refScene.player === 4)
-        this._refScene.player = 0;
-    } else {
+    if (([0, 2].includes(this._refScene.player) && this._refObj.object.team !== 0) ||
+    ([1].includes(this._refScene.player) && this._refObj.object.team !== 1))
       return false;
-    }
     return true;
   }
 }

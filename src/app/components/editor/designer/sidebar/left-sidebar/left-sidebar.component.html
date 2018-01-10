@@ -1,75 +1,45 @@
-<div id="closeButton" class="close-button">
-    <span mat-button (click)="start.close()" class="glyphicon glyphicon-remove"></span>
+<div class="close-button" mat-button (click)="start.toggle()">
+    <span class="glyphicon" [ngClass]="{'glyphicon-menu-left': start.opened, 'glyphicon-menu-right': !start.opened}"></span>
 </div>
 
-<!-- <button mat-button (click)="toggleMode()">Toggle</button>
+<div class="contain">
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header #modelsHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, modelsHead)">
+        <mat-panel-title>
+          Models
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <br/>
+      <div>
+        To place an object in editor:<br/>
+        • Click on the picture to place it at 0 0<br/>
+        • Drag and drop it to wanted position<br/>
+      </div>
 
-<span>Mode: {{start.mode}}</span> -->
-
-<ia-tabs>
-  <ia-tab tabTitle="Edit">
-    <form>
-      Search:
-      <input id="toBlack" type="search" name="Search a template">
-    </form>
-    <br/>
-    To place an object in editor:<br/>
-    • Click button to place it at 0 0<br/>
-    • Drag and drop it to wanted position<br/>
-    <br/>
-    <h3>Objects</h3><br/>
-    <ia-tabs>
-      <!-- Boards (don't change the ids) -->
-      <ia-tab tabTitle="Boards">
-        <h3>Board Templates</h3><br/>
-        <form id="customBoard">Custom board:<br/>
-          <input id="toBlack" type="text" name="later">
-          <button>Add</button>
-        </form><br/>
-        <div>
-          <button *ngFor="let item of items.boards | keys" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.boards[item]}}</button><br/>
+      <ng-template ngFor let-category [ngForOf]="items | keys">
+        <h3 style="text-transform:capitalize">{{ category }}</h3>
+        <mat-divider></mat-divider>
+        <div *ngIf="(items[category] | keys).length > 0; else notImplemented" class="parent">
+          <div *ngFor="let item of items[category] | keys" class="objects">
+            <img src="assets/img/objects/{{item}}.png" alt="{{items[category][item]}}" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)"/><br/>
+            <label>{{items[category][item]}}</label>
+          </div>
         </div>
-      </ia-tab>
-
-      <!-- Pawns (don't change the ids) -->
-      <ia-tab tabTitle="Pawns">
-        <h3>Pawn Templates</h3><br/>
-        <form id="customPawn">Custom pawn:<br/>
-          <input id="toBlack" type="text" name="later">
-          <button>Add</button>
-        </form><br/>
-        <div>
-          <button *ngFor="let item of items.pawns | keys" dnd-draggable [dropZones]="['editor']" [dragEnabled]="true" dragData="{{item}}" (click)="addObject(item)">{{items.pawns[item]}}</button><br/>
-        </div>
-      </ia-tab>
-
-      <!-- Cards (don't change the ids) -->
-      <ia-tab tabTitle="Cards">
-        <h3>Card Templates</h3><br/>
-        <form id="customCards">Custom card:<br/>
-          <input id="toBlack" type="text" name="later">
-          <button>Add</button>
-        </form><br/>
-        <div>
+        <ng-template #notImplemented>
           <div>Not implemented yet</div><br/>
-        </div>
-      </ia-tab>
+        </ng-template>
+      </ng-template>
 
-      <!-- Dices (don't change the ids) -->
-      <ia-tab tabTitle="Dices">
-        <h3>Dice Templates</h3><br/>
-        <form id="customDices">Custom dice:<br/>
-          <input id="toBlack" type="text" name="later">
-          <button>Add</button>
-        </form><br/>
-        <div>
-          <div>Not implemented yet</div><br/>
-        </div>
-      </ia-tab>
-    </ia-tabs>
-  </ia-tab>
-
-  <ia-tab tabTitle="Objects List">
-    <ia-object-list [eventDispatcher]="eventDispatcher" multiSelect></ia-object-list>
-  </ia-tab>
-</ia-tabs>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header #objectsHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, objectsHead)">
+        <mat-panel-title>
+          Scene Objects
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <br/>
+      <ia-object-list [eventDispatcher]="eventDispatcher" multiSelect></ia-object-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -44,5 +44,9 @@ input, button {
 }
 
 #filter {
-  text-align: center;
+  width: 100%;
+}
+
+#filter > input {
+  width: calc(100% - 35px);
 }

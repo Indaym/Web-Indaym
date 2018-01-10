@@ -15,6 +15,10 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatExpansionModule,
+  MatListModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatOptionModule,
 }                   from '@angular/material';
 
 const MODULE_LIST = [
@@ -30,8 +34,12 @@ const MODULE_LIST = [
   MatGridListModule,
   MatIconModule,
   MatPaginatorModule,
-  MatDialogModule,
   MatExpansionModule,
+  MatListModule,
+  MatDialogModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatOptionModule,
 ];
 
 @NgModule({

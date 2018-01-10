@@ -12,13 +12,40 @@ button {
   margin: 5px;
 }
 
-#toBlack {
-  color: $black;
+.close-button {
+  float:right;
+  right: -40px;
+  border-radius: 0 5px 5px 0;
 }
 
-#closeButton {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  float:right;
+.objects > img {
+  width: 100px;
+  height: 100px;
+}
+
+.objects {
+  text-align: center;
+}
+
+.objects > label {
+  padding: 10px 0;
+}
+
+.parent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
+:host {
+  height: 100%;
+}
+
+.contain {
+  direction: rtl;
+}
+
+mat-accordion {
+  direction: ltr;
 }

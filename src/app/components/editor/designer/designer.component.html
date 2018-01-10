@@ -1,13 +1,5 @@
-<nav class="navbar">
-  <ul class="nav navbar-nav">
-   <li class="left"><a mat-button (click)="start.toggle()" >Toggle Left Panel</a></li>
-   <li class="right"><a mat-button (click)="end.toggle()" >Toggle Right Panel</a></li>
-  </ul>
-</nav><br/>
-
 <mat-sidenav-container class="no-background">
   <div class="content">
-    <ia-grid-popup></ia-grid-popup>      
     <ia-viewer [eventDispatcher]="dispatcher" ></ia-viewer>
   </div>
   <mat-sidenav #start mode="over" class="left-sidenav">

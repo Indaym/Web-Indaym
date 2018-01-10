@@ -1,10 +1,11 @@
-<div id="closeButton" class="close-button">
-    <span mat-button (click)="end.close()" class="glyphicon glyphicon-remove"></span>
+<div class="close-button" mat-button (click)="end.toggle()">
+    <span class="glyphicon" [ngClass]="{'glyphicon-menu-left': !end.opened, 'glyphicon-menu-right': end.opened}"></span>
 </div>
 
+<div class="contain">
   <mat-accordion>
     <mat-expansion-panel expanded="true">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header #objectHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, objectHead)">
         <mat-panel-title>
           Object Configuration
         </mat-panel-title>
@@ -18,26 +19,73 @@
       </mat-radio-group>
   
       <button mat-button (click)="deleteSelected()">Delete Selected Object</button>
-      <button mat-button (click)="savePositions()">Save Positions</button>
-  
-  
+      <button mat-button (click)="savePositions()">Save Positions</button>  
+
+
       <hr/>
       <h4>Object Configuration</h4>
       <form>
         <h5>Position:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
-          (ngModelChange)="updateValues('position')" /><br/>
+        <ia-expand-input type="position">
+          <ng-template let-v>
+            <label for="position{{v}}">{{v}}</label>
+            <input type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
+            (ngModelChange)="updateValues('position')" /><br/>
+          </ng-template>
+        </ia-expand-input>
+
         <h5>Rotation:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="rotation{{v}}" step="0.5" [(ngModel)]="objectSelected.rotation[v]"
-          (ngModelChange)="updateValues('rotation')" /><br/>
+        <mat-radio-group [(ngModel)]="convert" name="converter">
+          <mat-radio-button value="deg">Degree</mat-radio-button>
+          <mat-radio-button value="rad">Radian</mat-radio-button>
+        </mat-radio-group>
+        <ia-expand-input type="rotation">
+          <ng-template let-v>
+            <label for="rotation{{v}}">{{v}}</label>
+            <input type="number" id="rotation{{v}}" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
+            (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
+          </ng-template>
+        </ia-expand-input>
+
         <h5>Dimension:</h5>
-        <input *ngFor="let v of ['x', 'y', 'z']" type="number" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
-          (ngModelChange)="updateValues('dimension')" /><br/>
+        <ia-expand-input type="dimension">
+          <ng-template let-v>
+            <label for="dimension{{v}}">{{v}}</label>
+            <input type="number" id="dimension{{v}}" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
+            (ngModelChange)="updateValues('dimension')" />
+          </ng-template>
+        </ia-expand-input>
+        <br/>
+
+        <div *ngIf="selected">
+          <label>Name :</label>
+          <div *ngIf="editMode == false; else editSelectedName" class="sizedel" id="noBorder">
+            <span>{{ selected.name }}</span>
+            <span class="but" title="Edit Name" (click)="editName()"><span class="glyphicon glyphicon-edit"></span></span>
+          </div>
+          <ng-template #editSelectedName>
+            <div class="sizedel">
+              <input type="string" name="edit_selected" [(ngModel)]="selected.name"/>
+              <span class="but" title="Save Name" (click)="saveName()"><span class="glyphicon glyphicon-ok"></span></span>
+              <span class="but" title="Undo Saving Name" (click)="undoSaveName()"><span class="glyphicon glyphicon-remove"></span></span>
+            </div>
+          </ng-template>
+        </div>
+        <div *ngIf="selected">
+          <label>Rules applied</label>
+          <ul *ngIf="(selected.rules | keys).length  > 0; else noRules">
+            <li *ngFor="let rule of selected.rules | keys">{{selected.rules[rule]._name}}</li>
+          </ul>
+          <ng-template #noRules>
+            <p>No rule applied on this object</p>
+          </ng-template>
+        </div>
       </form>
+
     </mat-expansion-panel>
 
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header #textureHead [collapsedHeight]="'48px'" [expandedHeight]="'48px'" (click)="onClick($event, textureHead)">
         <mat-panel-title>
           Texture Configuration
         </mat-panel-title>
@@ -58,11 +106,11 @@
       </p>
   
       <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" name="single" accept="image/*" />
-      <button type="button" class="btn btn-success btn-xs center" (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
+      <br/>
+      <button mat-button (click)="upload()" [disabled]="!uploader.getNotUploadedItems()">
         <span class="glyphicon glyphicon-upload"></span> Upload
       </button>
-      <br/>
-      <button type="button" class="btn btn-success btn-xs center" (click)="applyTexture()">
+      <button mat-button (click)="applyTexture()">
         <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
       </button>
   
@@ -73,3 +121,4 @@
     </mat-expansion-panel>
 
   </mat-accordion>
+</div>

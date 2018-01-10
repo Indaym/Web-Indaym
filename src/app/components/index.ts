@@ -24,6 +24,7 @@ import { SnackBarComponent }      from './snackBar';
 
 export { AppComponent }           from './app.component';
 export { SnackBarComponent }      from './snackBar';
+export { GridPopupComponent }     from './editor';
 
 export { WIDGETS }                from './widgets';
 

@@ -8,9 +8,13 @@ import {
   ModelViewer,
 }               from '../../threed-viewer';
 
+import {
+  SnackBarService,
+}                           from '../../services';
+
 export class MoveForward extends BaseRules {
-  constructor(scene: any, model: any, conf: any = {}) {
-    super(scene, model, conf);
+  constructor(scene: any, model: any, conf: any = {}, private snackBar: SnackBarService) {
+    super(scene, model, conf, snackBar);
 
     this._id = 'MoveForward';
     this._name = 'Move Forward';
@@ -32,6 +36,15 @@ export class MoveForward extends BaseRules {
     }
     return true;
   }
+
+  public ChangeTurn() {
+      if (this._refScene.player === 2)
+        this._refScene.player = 1;
+      else {
+        this._refScene.player += 1;
+      }
+  }
+
 
   public run(args?: any): boolean {
     if (args === undefined || args.LinkModel.object.coord === undefined) {
@@ -59,6 +72,7 @@ export class MoveForward extends BaseRules {
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
       this._refScene.grid[xOld][yOld] = null;
+      this.ChangeTurn();
       return true;
     }
     if ((mouvement)
@@ -92,6 +106,7 @@ export class MoveForward extends BaseRules {
       this._refObj.threeDModel._oldPosition[1] = yNew;
       this._refScene.grid[xNew][yNew] = this._refScene._selected.object;
       this._refScene.grid[xOld][yOld] = null;
+      this.ChangeTurn();
       return true;
     }
     return false;

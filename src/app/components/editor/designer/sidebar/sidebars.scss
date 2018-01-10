@@ -1,27 +1,25 @@
 @import 'src/assets/css/colors';
 
 .close-button {
-  width: 30px;
-  height: 30px;
-  border: 1px solid $white;
-  border-radius: 5px;
+  background: $dark-grey-alpha;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  visibility: visible;
   z-index: 1;
+  cursor: pointer;
 }
 .close-button span {
   font-family: 'Glyphicons Halflings';
   font-size: 20px;
-  text-align: center;
+
   color:$white;
-  top:0;
-  padding: 4px;  
-}
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-.close-button span:hover {
-  color: $dark-red;
-}
-
-.close-button:hover {
-  border-color: $dark-red;
 }
 
 mat-expansion-panel {
@@ -42,3 +40,27 @@ mat-panel-title {
   margin :0;
 }
 
+.contain {
+  height:100%;
+  overflow: auto;
+}
+
+.contain::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: $dark-grey-alpha;
+}
+
+.contain::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: $dark-grey-alpha;
+}
+
+.contain::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: $dark-cyan;
+}

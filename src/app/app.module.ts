@@ -37,6 +37,7 @@ import { routing }                  from './app.route';
 import {
   AppComponent,
   SnackBarComponent,
+  GridPopupComponent,
   APP_COMPONENTS,
   WIDGETS,
 }                                   from './components';
@@ -69,6 +70,7 @@ import {
     SnackBarComponent,
     CreateGameDialogComponent,
     CreateSceneDialogComponent,
+    GridPopupComponent,
   ],
   providers : [
     AuthGuard,

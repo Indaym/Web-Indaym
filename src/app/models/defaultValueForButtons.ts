@@ -23,6 +23,7 @@ export const buttonsDefault = {
       dimension: [3.5, 1.5, 3.5],
       textureName: 'white.png',
       rules: [],
+      team: 0,
     },
   },
   'pawnBlack': {
@@ -34,6 +35,7 @@ export const buttonsDefault = {
       dimension: [3.5, 1.5, 3.5],
       textureName: 'black.png',
       rules: [],
+      team: 1,
     },
   },
   'case': {

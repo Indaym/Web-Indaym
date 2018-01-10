@@ -2,20 +2,35 @@
  * Created by nicolas on 14/04/17.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable }         from '@angular/core';
+import { MatDialog}           from '@angular/material';
+
+import { GridPopupComponent } from '../components/editor/designer/grid-popup/grid-popup.component';
 
 @Injectable()
 export class GridCreationService {
-  private _gridPopup;
 
-  constructor() {}
-
-  set gridPopup(cbopen) {
-    this._gridPopup = cbopen;
-  }
+  constructor(private dialog: MatDialog) {}
 
   public open(cb) {
-    this._gridPopup(cb);
+    const dialogRef = this.dialog.open(GridPopupComponent, {
+      width: '600px',
+      data: {
+        color: '#373737',
+        width: 8.2,
+        height: 8.2,
+        horizontal: 1,
+        vertical: 1,
+        textureEven: '',
+        textureOdd: '',
+        alternate: false,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res !== undefined)
+        cb(res);
+    });
   }
 
   public assignToGridModel(model, datas) {

@@ -85,6 +85,10 @@ nav {
   margin-bottom: 0;
 }
 
+.navbar-default .navbar-nav>li>a:focus:not(:hover) {
+  color: #fff;
+}
+
 .icons-indaym {
   float: left;
   padding: 8px;

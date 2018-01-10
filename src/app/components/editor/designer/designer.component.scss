@@ -1,19 +1,5 @@
 @import 'src/assets/css/colors';
 
-:host {
-  position: relative;
-  top: -50px;
-  background: none;
-  pointer-events: none;
-  display: block;
-}
-
-nav {
-  max-height: 0px;
-  overflow: visible;
-  background: none;
-}
-
 h1 {
   text-align: center;
   font: italic bold 21px Georgia, serif;
@@ -23,74 +9,24 @@ h2 {
   text-align: center;
 }
 
-/* navbar style */
-
-ul {
-  width: 100%;
-  list-style-type: none;
-  margin: auto;
-  padding: 0;
-  overflow: hidden;
-}
-
-li a {
-  display: block;
-  color: $white;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li {
-  background-color: $dark-grey;
-  pointer-events: all;
-  cursor: pointer;
-  border-color: $light-grey
-}
-
-li a:hover:not(.active), .active {
-  color: $black;
-  background-color: $dark-grey-light
-}
-
-.left, .left:hover, .left:active {
-  border-radius: 0 0 5px 0;
-}
-
-.right, .right:hover, .right:active {
-  border-radius: 0 0 0 5px;
-  float: right;
-}
-
 mat-sidenav-container {
-  pointer-events: all;
-  /*position: absolute;*/
-  margin-top:-20px;
-  top: 0;
-  left: 0;
-  min-height:500px;
   height:100%;
   width: 100%;
 }
 
 mat-sidenav {
   background: $dark-grey-alpha;
-  padding: 10px;
+  padding: 0px;
   width: 300px;
   color: $white;
+  overflow: visible;
 }
 mat-sidenav.right-sidenav {
-  padding: 40px 0 0 0;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 0 0 5px;
 }
 
 mat-sidenav.left-sidenav {
-  border-radius: 0 5px 5px 0;  
-}
-
-.navbar {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  border-bottom: 0px;
+  border-radius: 0 0 5px 0;  
 }
 
 ::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
