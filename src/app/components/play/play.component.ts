@@ -1,7 +1,7 @@
 import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
-import { GameService }  from '../../services/game.service';
+import { PlayService }  from '../../services';
 
 export let comeFrom = '';
 
@@ -11,18 +11,12 @@ export let comeFrom = '';
   styleUrls    : [
     './play.component.scss',
   ],
-  providers : [ GameService, GameService ],
+  providers : [ PlayService ],
 })
 export class PlayComponent {
   public lsGames = [];
 
-  constructor(private games: GameService, private router: Router) {
-    this.getGamesList();
-  }
-
-  public getGamesList() {
-    this.games.getGames((datas) => this.lsGames = datas);
-  }
+  constructor(private games: PlayService, private router: Router) {}
 
   public goToScenesPage(id) {
 

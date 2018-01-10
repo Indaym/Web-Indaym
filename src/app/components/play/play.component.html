@@ -1,12 +1,10 @@
-<br/><br/>
-<div id="toCenter2">
-    <p id="myGames">Play</p>
-    <br/>
-    <div id="toCenter3">
-        <div *ngFor="let item of lsGames">
-            <button (click)="goToScenesPage(item.uuid)">{{item.name}}</button>
-        </div>
-    </div>
-</div>
+<h1>Play</h1>
+
+<ia-game-list
+  [edit]="false"
+  [remove]="true"
+  [redirectPath]="'/playsceneslist'"
+  [provider]="'play'"
+></ia-game-list>
 
 <router-outlet></router-outlet>

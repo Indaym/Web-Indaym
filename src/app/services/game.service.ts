@@ -22,8 +22,23 @@ export class GameService extends DefaultService {
     this.settedErrorMessage = 'URL for *Games* not setted';
   }
 
-  public getGames(success?, error?) {
-    this.http.get(this.gamesUrl)
+  public getGames(opt = {}, success?, error?) {
+    this.http.get(this.gamesUrl, {
+      params: {
+        ...{ 'orderBy': 'name', 'limit': '10', 'offset': '1' },
+        ...opt,
+      },
+    })
+      .subscribe(success, error);
+  }
+
+  public getPublicGames(opt = {}, success?, error?) {
+    this.http.get(`${this.gamesUrl}play`, {
+      params: {
+        ...{ 'orderBy': 'name', 'limit': '10', 'offset': '1' },
+        ...opt,
+      },
+    })
       .subscribe(success, error);
   }
 
@@ -32,9 +47,24 @@ export class GameService extends DefaultService {
       .subscribe(success, error);
   }
 
+  public getNbGames(opt = {}, success?, error?) {
+    this.http.get(this.gamesUrl + 'count', opt)
+      .subscribe(success, error);
+  }
+
   public postGame(name, success?, error?) {
     this.http.post(this.gamesUrl, {'name': name})
       .subscribe(success, error);
+  }
+
+  public addGameToLibrary(gameId: string, success?, error?) {
+    this.http.post(this.gamesUrl + 'store', { 'gameId': gameId })
+      .subscribe(success, error);
+  }
+
+  public DeleteGameFromLibrary(gameId: string, success?, error?) {
+    // this.http.delete(this.gamesUrl + 'store', { 'gameId': gameId })
+    //   .subscribe(success, error);
   }
 
   public updateGame(obj, id, success?, error?) {
@@ -62,7 +92,7 @@ export class GameService extends DefaultService {
   }
 
   public postDescription(description, id, success?, error?) {
-    this.http.put(this.gamesUrl + id, {'description': JSON.stringify(description)})
+    this.http.put(this.gamesUrl + id, {'description': description})
       .subscribe(success, error);
   }
 }

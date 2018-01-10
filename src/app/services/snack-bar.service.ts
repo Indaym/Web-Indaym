@@ -18,4 +18,12 @@ export class SnackBarService {
     config = { duration: 3000, ...config, data: { snackType: SnackBarType.NONE, ...config.data, message } };
     this.mdSnackBar.openFromComponent(SnackBarComponent, config);
   }
+
+  public openSuccess(message) {
+    this.open(message, {}, SnackBarType.SUCCESS);
+  }
+
+  public openError(message) {
+    this.open(message, {}, SnackBarType.ERROR);
+  }
 }

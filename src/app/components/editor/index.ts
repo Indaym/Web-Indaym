@@ -2,7 +2,7 @@
  * Created by nicolas on 19/10/16.
  */
 
-import { GamesListComponent }   from '../gameslist/gameslist.component';
+import { EditorListComponent }   from '../editorList/editorList.component';
 import { ScenesListComponent }  from '../sceneslist/sceneslist.component';
 
 import { EditorComponent }      from './editor.component';
@@ -15,7 +15,7 @@ import { ObjectListComponent }  from './object-list';
 export { BlueprintsComponent }  from './blueprints';
 export { PreviewComponent }     from './preview';
 export { EditorComponent }      from './editor.component';
-export { GamesListComponent }   from '../gameslist/gameslist.component';
+export { EditorListComponent }   from '../editorList/editorList.component';
 export { ScenesListComponent }  from '../sceneslist/sceneslist.component';
 export {
   DesignerComponent,
@@ -23,7 +23,7 @@ export {
 }                               from './designer';
 
 export const EDITOR_COMPONENTS = [
-  GamesListComponent,
+  EditorListComponent,
   ScenesListComponent,
   EditorComponent,
   BlueprintsComponent,

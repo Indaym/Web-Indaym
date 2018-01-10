@@ -13,3 +13,5 @@ export { RulesServices }          from './rules.service';
 export { SnackBarService }        from './snack-bar.service';
 export { UserService }            from './user.service';
 export { TokenService }           from './tokenStore.service';
+export { StoreService }           from './store.service';
+export { PlayService }            from './play.service';

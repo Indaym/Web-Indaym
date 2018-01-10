@@ -1,0 +1,10 @@
+<h1 mat-dialog-title >Create a new Scene</h1>
+<div mat-dialog-content >
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.sceneName" placeholder="Scene name" >
+  </mat-form-field>
+</div>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()" >Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" >{{buttonMsg()}}</button>
+</mat-dialog-actions>
