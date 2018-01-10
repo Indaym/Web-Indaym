@@ -21,3 +21,14 @@
 
   text-align: center;
 }
+
+.search-bar {
+  height: 0;
+  position: relative;
+  top: -60px;
+  left: 10px;
+  button {
+    padding: 0;
+    min-width: 44px;  
+  }
+}

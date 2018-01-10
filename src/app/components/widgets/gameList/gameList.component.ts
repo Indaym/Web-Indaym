@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnInit,
+  ViewChild,
 }              from '@angular/core';
 import {
   Router,
@@ -20,6 +21,11 @@ import {
   StoreService,
   PlayService,
 }              from '../../../services';
+
+import {
+  OrderType,
+  glyphs,
+}                                 from '../../../pipes/order-by/order-type.enum';
 
 import {
   SnackBarType,
@@ -97,6 +103,10 @@ export class GameListComponent implements OnInit {
   @Output() shouldUpdate = new EventEmitter();
   @Output() changePage = new EventEmitter();
 
+  private filter = '';
+  private order = OrderType.DEFAULT;
+  @ViewChild('glyph') private glyph;
+
   private findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
 
   private success = (msg: string) => {
@@ -112,7 +122,7 @@ export class GameListComponent implements OnInit {
   public getGames(opt = {}): void {
     this[`${this.provider}Service`].getGames(
       {
-        ...{'limit': '10', 'offset': this.offset.toString()},
+        ...{'limit': '1000', 'offset': this.offset.toString()},
         ...opt,
       },
       (data) => this.games = data,
@@ -218,8 +228,13 @@ export class GameListComponent implements OnInit {
 
   handleEvent(event: any) {
     this.offset = event.pageIndex;
-    this.getGames({ 'offset': `${event.pageIndex}`});
-    this.countGames();
+    // this.getGames({ 'offset': `${event.pageIndex}`});
+    // this.countGames();
     this.changePage.emit(event);
+  }
+
+  private switchOrder() {
+    this.order = (this.order === OrderType.DESC) ? OrderType.DEFAULT : this.order + 1;
+    this.glyph.nativeElement.className = glyphs[this.order];
   }
 }

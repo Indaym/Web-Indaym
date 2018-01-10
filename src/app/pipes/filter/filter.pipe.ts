@@ -21,6 +21,8 @@ export class FilterPipe implements PipeTransform {
   transform(items: any, filter: any, fullMatch = []): any {
     if (!filter)
       return items;
+    if (items === undefined)
+      return [];
     const keys = Object.keys(filter);
 
     return items.filter((item) => {

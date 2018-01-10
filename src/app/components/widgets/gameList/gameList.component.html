@@ -1,5 +1,14 @@
+<div class="search-bar">
+  <button mat-button (click)="switchOrder()">
+    <span #glyph class="glyphicon glyphicon-sort"></span>
+  </button>
+  <mat-form-field>
+    <input matInput [(ngModel)]="filter">
+  </mat-form-field>
+  <span class="glyphicon glyphicon-search"></span>
+</div>
 <ul class="flex-container" >
-  <li class="flex-item" *ngFor="let game of games" >
+  <li class="flex-item" *ngFor="let game of games | filter:{name: filter}:[] | orderBy:'name':order | slice:offset:10" >
       <ia-game-card
         [game]="game"
         [edit]="ownerCanEdit(game)"
@@ -21,7 +30,7 @@
 
 <mat-paginator
   [pageSize]="10"
-  [length]="nbGames"
+  [length]="(games | filter:{name: filter}:[]).length"
   (page)="handleEvent($event)"
   >
 </mat-paginator>

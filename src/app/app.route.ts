@@ -40,8 +40,8 @@ export const routes: Routes = [
   { path: 'register',       component: RegisterComponent },
   { path: 'login',          component: LoginComponent },
   { path: 'gameslist',      component: EditorListComponent , canActivate: [ AuthGuard ]  },
-  { path: 'sceneslist',     component: ScenesListComponent , canActivate: [ AuthGuard ], data: { redirect: '/editor/designer' } },
-  { path: 'playsceneslist', component: ScenesListComponent , canActivate: [ AuthGuard ], data: { redirect: '/player' } },
+  { path: 'sceneslist',     component: ScenesListComponent , canActivate: [ AuthGuard ], data: { redirect: '/editor/designer', create: true } },
+  { path: 'playsceneslist', component: ScenesListComponent , canActivate: [ AuthGuard ], data: { redirect: '/player', create: false } },
   { path: 'editor',         component: EditorComponent , canActivate: [ AuthGuard ] ,
     children: [
       { path: '',           redirectTo: 'designer',           pathMatch: 'full' },

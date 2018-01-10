@@ -38,6 +38,7 @@ export class ScenesListComponent implements OnDestroy {
   public isNew;
   public subscription: Subscription;
   private redirect;
+  private canCreate = false;
   private sceneName: string;
 
   constructor(
@@ -47,7 +48,10 @@ export class ScenesListComponent implements OnDestroy {
     private snackBar: SnackBarService,
     private dialog: MatDialog,
   ) {
-    route.data.subscribe((val) => this.redirect = val.redirect);
+    route.data.subscribe((val) => {
+      this.redirect = val.redirect;
+      this.canCreate = val.create;
+    });
     this.subscription = route.queryParams.subscribe(
       // (queryParam: any) => this.getScenesList(queryParam),
       (queryParam: any) => this.getScenesList(),

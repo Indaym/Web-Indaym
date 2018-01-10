@@ -4,6 +4,7 @@ import { JoinArrayKeyPipe } from './join-array-key/join-array-key.pipe';
 import { FilterPipe }       from './filter/filter.pipe';
 import { OrderByPipe }      from './order-by/order-by.pipe';
 import { AnglesPipe }       from './angles/angles.pipe';
+import { SlicePipe }        from './slice/slice.pipe';
 
 export const PIPES = [
   KeysPipe,
@@ -12,4 +13,5 @@ export const PIPES = [
   FilterPipe,
   OrderByPipe,
   AnglesPipe,
+  SlicePipe,
 ];

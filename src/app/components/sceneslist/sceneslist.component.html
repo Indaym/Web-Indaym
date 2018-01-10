@@ -1,6 +1,6 @@
 <ul>
   <li>
-    <div class="create">
+    <div class="create" *ngIf="canCreate">
       <button mat-fab color="primary" (click)="addScene()" >
         <mat-icon><i class="material-icons">add</i></mat-icon>
       </button>
