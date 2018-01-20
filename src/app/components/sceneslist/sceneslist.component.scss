@@ -62,3 +62,11 @@ mat-card-action {
 .create {
   display: flex;
 }
+
+.gameName {
+  position: absolute;
+  right: 0;
+  h3 {
+    font-weight: bold;
+  }
+}

@@ -18,6 +18,7 @@ import {
 }                       from '../widgets/createSceneDialog/createSceneDialog.component';
 
 import {
+  GameService,
   SceneService,
   SnackBarService,
 } from '../../services';
@@ -30,11 +31,13 @@ import {
   ],
   providers : [
     SceneService,
+    GameService,
   ],
 })
 export class ScenesListComponent implements OnDestroy {
   public lsScenes = [];
   public gameId;
+  public game;
   public isNew;
   public subscription: Subscription;
   private redirect;
@@ -43,6 +46,7 @@ export class ScenesListComponent implements OnDestroy {
 
   constructor(
     private scenes: SceneService,
+    private games: GameService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: SnackBarService,
@@ -70,6 +74,7 @@ export class ScenesListComponent implements OnDestroy {
   // public getScenesList(queryParam) {
   public getScenesList() {
     this.gameId = localStorage.getItem('gameID');
+    this.games.getOneGame(this.gameId, (datas) => this.game = datas);
     // this.isNew = parseInt(queryParam.new, 10);
 
     this.scenes.setGameId(this.gameId);

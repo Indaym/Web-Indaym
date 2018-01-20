@@ -60,7 +60,7 @@ export class AuthService extends DefaultService {
   }
 
   login(password: string, email: string, success?, error?) {
-    this.user.user = { password, email };
+    // this.user.user = { password, email };
 
     const body = { 'data': { 'password': password, 'email': email } };
     return this.http.post(this.authUrl('login'), body)
@@ -80,7 +80,7 @@ export class AuthService extends DefaultService {
   }
 
   register(username: string, password: string, email: string, success?, error?) {
-    this.user.user = { username, password, email };
+    // this.user.user = { username, password, email };
     const body = {'data': { 'username': username, 'password': password, 'email': email }};
 
     return this.http.post(this.authUrl('register'), body)
