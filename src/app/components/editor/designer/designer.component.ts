@@ -13,7 +13,7 @@ import { GridCreationService }  from '../../../services';
   providers : [ providers, GridCreationService ],
 })
 export class DesignerComponent {
-  private dispatcher: EventDispatcher;
+  public dispatcher: EventDispatcher;
 
   // TODO : try without private declaration
   constructor(private gridCreationService: GridCreationService) {

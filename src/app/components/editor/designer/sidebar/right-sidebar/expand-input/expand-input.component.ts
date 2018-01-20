@@ -15,7 +15,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandInputComponent {
-  private checked = false;
+  public checked = false;
   @Input() type;
   @ContentChild(TemplateRef) template: TemplateRef<any>;
 

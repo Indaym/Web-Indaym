@@ -42,28 +42,29 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
     authToken: '',
   });
 
+  public warnMessage = '';
+  public uploaded = false;
+  public textures = [];
+  public imgSelected;
+  public imgPreview = '';
+  public convert = 'deg';
+  public selected = undefined;
+  public modeController = 'translate';
+  public controllerTypes = [
+    'translate',
+    'scale',
+    'rotate',
+  ];
+
   private urlImg;
-  private warnMessage = '';
-  private uploaded = false;
-  private textures = [];
-  private imgSelected;
-  private imgPreview = '';
   private minimumScale = new Vector3();
   private objectSelected = {
     position: new Vector3(),
     dimension: new Vector3(),
     rotation: new Euler(),
   };
-  private controllerTypes = [
-    'translate',
-    'scale',
-    'rotate',
-  ];
-  private convert = 'deg';
-  private selected = undefined;
   private oldNameSelected = undefined;
   private editMode = false;
-  private modeController = 'translate';
   @ViewChild('selectedFile') private selectedFile;
 
   constructor(private textureService: TextureService, private tokenService: TokenService, private objectService: ObjectService) {

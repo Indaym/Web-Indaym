@@ -20,14 +20,14 @@ import { RULES_DEF }        from '../../../rules/';
   ],
 })
 export class BlueprintsComponent implements OnInit, OnDestroy {
-  private dispatcher: EventDispatcher;
-  private gameController;
+  public selectedObjects;      // les objets sélectionnés
+  public selectedRule;         // règle sélectionné pour la configuration
+  public dispatcher: EventDispatcher;
 
-  private selectedObjects;      // les objets sélectionnés
+  private gameController;
   private availableRules = [];  // les règles disponible qui ne sont pas déjà appliqué
   private staticRules = [];     // liste de toutes les règles existantes
   private appliedRules = [];    // règles appliqués à l'objet
-  private selectedRule;         // règle sélectionné pour la configuration
 
   constructor(
     private dragulaService: DragulaService,

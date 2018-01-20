@@ -20,21 +20,21 @@ import {
 export class ObjectListComponent implements OnInit {
   @Input() public eventDispatcher;
   @Input() public set multiSelect(value) { this._multiSelect = true; }
+  public categories = [];
+  public filter = '';
+  public order = OrderType.DEFAULT;
+  public updateSwitch = true;
+
   private _multiSelect = false;
   private gameController;
   private objects;
   private itemsIcons = [];
-  private categories = [];
   private readonly icons = ['board3x3', 'board1x9', 'blackpawn', 'whitepawn'];
-  private filter = '';
-  private order = OrderType.DEFAULT;
-
   private selectedElements = [];
   @ViewChildren('itemsList') private itemslist;
   @ViewChild('glyph') private glyph;
 
-  private updateSwitch = true;
-  private trackSwitch = (index, value) => {
+  public trackSwitch = (index, value) => {
     return this.updateSwitch;
   }
 
@@ -116,7 +116,7 @@ export class ObjectListComponent implements OnInit {
     return this.itemsIcons;
   }
 
-  private switchOrder() {
+  public switchOrder() {
     this.order = (this.order === OrderType.DESC) ? OrderType.DEFAULT : this.order + 1;
     this.glyph.nativeElement.className = glyphs[this.order];
   }

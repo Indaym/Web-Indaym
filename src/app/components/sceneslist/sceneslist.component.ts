@@ -37,8 +37,8 @@ export class ScenesListComponent implements OnDestroy {
   public gameId;
   public isNew;
   public subscription: Subscription;
+  public canCreate = false;
   private redirect;
-  private canCreate = false;
   private sceneName: string;
 
   constructor(

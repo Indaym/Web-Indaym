@@ -59,8 +59,8 @@ export class GameListComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
 
-  private offset = 0;
-  nbGames: number;
+  public offset = 0;
+  public nbGames: number;
   /**
    * list of games to display
    */
@@ -103,8 +103,8 @@ export class GameListComponent implements OnInit {
   @Output() shouldUpdate = new EventEmitter();
   @Output() changePage = new EventEmitter();
 
-  private filter = '';
-  private order = OrderType.DEFAULT;
+  public filter = '';
+  public order = OrderType.DEFAULT;
   @ViewChild('glyph') private glyph;
 
   private findCurrentGame = (gameId: string): any => this.games.find((item) => item.uuid === gameId);
@@ -233,7 +233,7 @@ export class GameListComponent implements OnInit {
     this.changePage.emit(event);
   }
 
-  private switchOrder() {
+  switchOrder() {
     this.order = (this.order === OrderType.DESC) ? OrderType.DEFAULT : this.order + 1;
     this.glyph.nativeElement.className = glyphs[this.order];
   }

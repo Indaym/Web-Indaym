@@ -25,10 +25,11 @@ import {
   providers: [TextureService],
 })
 export class GridPopupComponent {
-  private textures = [];
-  private previewEven = '';
-  private previewOdd = '';
-  private groupForm: FormGroup;
+  public groupForm: FormGroup;
+  public textures = [];
+
+  public previewEven = '';
+  public previewOdd = '';
 
   constructor(
     private textureService: TextureService,

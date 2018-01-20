@@ -3689,10 +3689,6 @@ ng2-file-upload@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ng2-file-upload/-/ng2-file-upload-1.2.1.tgz#5563c5dfd6f43fbfbe815c206e343464a0a6a197"
 
-ng2-modal@^0.0.25:
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/ng2-modal/-/ng2-modal-0.0.25.tgz#61755f6da76017b1b0e42f38eeca3e92bd484206"
-
 ng2-translate@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/ng2-translate/-/ng2-translate-5.0.0.tgz#0adbb510eb5007a2d6ded5f5d26888c14760aca5"

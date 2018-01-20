@@ -26,7 +26,7 @@ export class RateGameComponent {
         );
     }
 
-    public initComments(queryParam) {
+    public initComments() {
         console.log('initComments');
     }
 
@@ -53,10 +53,10 @@ export class RateGameComponent {
             }
         });
         console.log('initgame');
-        this.initComments(queryParam);
+        this.initComments();
     }
 
-  public postComments(queryParam) {
+  public postComments() {
       console.log('postComments');
       // sends Comment ( message + ratings ) to db
       this.newComment = new Comment(this.newComment.message, this.newComment.rating);
@@ -69,17 +69,17 @@ export class RateGameComponent {
           }, (data) => {
               console.log('error postComment');
           });
-      this.updateGame(queryParam);
+      this.updateGame();
   }
 
-    public updateGame(queryParam) {
+    public updateGame() {
         console.log('updateGame');
-        this.updateRatings(queryParam);
+        this.updateRatings();
         // location.reload();
         // calls update rating and refresh page
     }
 
-    public updateRatings(queryParam) {
+    public updateRatings() {
         console.log('updateRatings');
         console.log(this.ratings + this.newComment.rating);
         this.games.updateRating((this.ratings + this.newComment.rating) / (this.parsedComments.length + 1) , this.evaluatedGame.uuid,

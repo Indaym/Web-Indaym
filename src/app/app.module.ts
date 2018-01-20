@@ -23,7 +23,6 @@ import {
 }                                   from '@angular/common/http';
 
 import { FileUploadModule }         from 'ng2-file-upload';
-import { ModalModule }              from 'ng2-modal';
 import {
   DragulaModule,
   DragulaService,
@@ -92,7 +91,6 @@ import {
     ReactiveFormsModule,
     DndModule.forRoot(),
     FileUploadModule,
-    ModalModule,
     DragulaModule,
   ],
 })
