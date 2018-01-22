@@ -8,6 +8,7 @@
     "dev": "ng serve --port 4000",
     "start:aot": "ng serve --port 4001 --aot",
     "build": "ng build",
+    "build:prod": "ng build --prod --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
