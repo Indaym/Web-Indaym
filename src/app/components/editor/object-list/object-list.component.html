@@ -5,10 +5,16 @@
   <input type="text" [(ngModel)]="filter">
 </div>
 <ul #itemsList id="itemsList" *ngFor="let typ of categories; trackBy: trackSwitch">
-  <p (click)="selectTypeObjects(typ, $event)">{{typ | titlecase}}</p>
-  <li class="none-style" [ngClass]="{'selected': isSelected(item)}" *ngFor="let item of itemsIcons | filter:{type: typ, name: filter}:['type'] | orderBy:'name':order" (click)="selectObject(item.uuid, $event)">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <img *ngIf="item.icon" src="{{item.icon}}">
-    <span>{{item.name}}</span>
-  </li>      
+  <ia-expander [type]="typ" [checked]="true">
+    <ng-template let-checked>
+      <p (click)="selectTypeObjects(typ, $event)">{{typ | titlecase}}</p>
+      <span *ngIf="checked">
+        <li class="none-style" [ngClass]="{'selected': isSelected(item)}" *ngFor="let item of itemsIcons | filter:{type: typ, name: filter}:['type'] | orderBy:'name':order" (click)="selectObject(item.uuid, $event)">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <img *ngIf="item.icon" src="{{item.icon}}">
+          <span>{{item.name}}</span>
+        </li>
+      </span>
+    </ng-template>
+  </ia-expander>
 </ul>

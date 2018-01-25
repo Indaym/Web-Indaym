@@ -26,35 +26,47 @@
       <h4>Object Configuration</h4>
       <form>
         <h5>Position:</h5>
-        <ia-expand-input type="position">
-          <ng-template let-v>
-            <label for="position{{v}}">{{v}}</label>
-            <input type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
-            (ngModelChange)="updateValues('position')" /><br/>
+        <ia-expander type="position">
+          <ng-template let-checked>
+            <div class="inpu" [ngClass]="{'horiflex': checked == false, 'vertiflex': checked == true}">
+              <div *ngFor="let v of ['x', 'y', 'z']">
+                <label for="position{{v}}">{{v}}</label>
+                <input type="number" name="position{{v}}" step="0.5" [(ngModel)]="objectSelected.position[v]"
+                (ngModelChange)="updateValues('position')" /><br/>
+              </div>
+            </div>
           </ng-template>
-        </ia-expand-input>
+        </ia-expander>
 
         <h5>Rotation:</h5>
         <mat-radio-group [(ngModel)]="convert" name="converter">
           <mat-radio-button value="deg">Degree</mat-radio-button>
           <mat-radio-button value="rad">Radian</mat-radio-button>
         </mat-radio-group>
-        <ia-expand-input type="rotation">
-          <ng-template let-v>
-            <label for="rotation{{v}}">{{v}}</label>
-            <input type="number" id="rotation{{v}}" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
-            (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
+        <ia-expander type="rotation">
+          <ng-template let-checked>
+            <div class="inpu" [ngClass]="{'horiflex': checked == false, 'vertiflex': checked == true}">
+              <div *ngFor="let v of ['x', 'y', 'z']">
+                <label for="rotation{{v}}">{{v}}</label>
+                <input type="number" id="rotation{{v}}" name="rotation{{v}}" step="1" [ngModel]="objectSelected.rotation[v] | angles:convert"
+                (ngModelChange)="objectSelected.rotation[v]=conv($event)" (ngModelChange)="updateValues('rotation')"/><br/>
+              </div>
+            </div>
           </ng-template>
-        </ia-expand-input>
+        </ia-expander>
 
         <h5>Dimension:</h5>
-        <ia-expand-input type="dimension">
-          <ng-template let-v>
-            <label for="dimension{{v}}">{{v}}</label>
-            <input type="number" id="dimension{{v}}" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
-            (ngModelChange)="updateValues('dimension')" />
+        <ia-expander type="dimension">
+          <ng-template let-checked>
+            <div class="inpu" [ngClass]="{'horiflex': checked == false, 'vertiflex': checked == true}">
+              <div *ngFor="let v of ['x', 'y', 'z']">
+                <label for="dimension{{v}}">{{v}}</label>
+                <input type="number" id="dimension{{v}}" name="dimension{{v}}" step="0.5" [min]="minimumScale[v]" [(ngModel)]="objectSelected.dimension[v]"
+                (ngModelChange)="updateValues('dimension')" />      
+              </div>
+            </div>
           </ng-template>
-        </ia-expand-input>
+        </ia-expander>
         <br/>
 
         <div *ngIf="selected">

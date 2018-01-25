@@ -7,16 +7,16 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector  : 'ia-expand-input',
-  templateUrl   : './expand-input.component.html',
+  selector  : 'ia-expander',
+  templateUrl   : './expander.component.html',
   styleUrls    : [
-    './expand-input.component.scss',
+    './expander.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandInputComponent {
-  public checked = false;
+export class ExpanderComponent {
   @Input() type;
+  @Input() checked = false;
   @ContentChild(TemplateRef) template: TemplateRef<any>;
 
   constructor() {

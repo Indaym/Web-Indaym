@@ -3,4 +3,3 @@
  */
 
 export { RightSidebarComponent }  from './right-sidebar.component';
-export { ExpandInputComponent }   from './expand-input';

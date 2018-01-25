@@ -117,3 +117,39 @@ h4 {
 :host {
   height: 100%;
 }
+
+
+.vertiflex {
+  flex-direction: column;
+  & > div {
+    flex-direction: row;
+  }
+}
+
+.horiflex {
+  flex-direction: row;
+  & > div {
+    flex-direction: column;
+  }
+
+  label {
+    text-align: center;
+  }
+}
+
+.inpu {
+  display: flex;
+  & > div {
+    display: flex;
+    flex: auto;
+  }
+
+  * {
+    overflow: hidden;
+  }
+
+  label {
+    margin-right:5px;
+  }
+}
+

@@ -8,12 +8,12 @@
   margin: 5px 0 5px 15px;
 }
 
-#itemsList > p {
+#itemsList p {
   font-weight: bold;
   text-decoration: underline;
 }
 
-#itemsList li.selected > .glyphicon {
+#itemsList li.selected .glyphicon {
   display: inline;
 }
 
