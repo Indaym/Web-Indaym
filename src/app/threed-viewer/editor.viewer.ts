@@ -138,6 +138,10 @@ export class EditorViewer extends SceneViewer {
         type : 'setMinimumScale',
         minimumScale : this._controller.minScale,
       });
+      this._eventDispatcher.dispatchEvent({
+        type: 'refresh_object_list_selected',
+        object: this._selected,
+      });
     }
   }
 

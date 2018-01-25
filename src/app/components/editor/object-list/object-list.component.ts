@@ -5,6 +5,10 @@ import {
   ViewChildren,
   ViewChild,
 }                                 from '@angular/core';
+import {
+  Mesh,
+  Group,
+}                                 from 'three';
 
 import { GameControllerService }  from '../../../services';
 import {
@@ -50,6 +54,12 @@ export class ObjectListComponent implements OnInit {
     this.gameController.subscribes(['deleteObject', 'deleteObjectToService'], () => this.setIcons());
     this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
     this.eventDispatcher.addEventListener('refresh_object_list', () => this.setIcons());
+    this.eventDispatcher.addEventListener('refresh_object_list_selected', (objs) => {
+      if (objs.object instanceof Mesh)
+        this.selectedElements = [objs.object.LinkModel];
+      if (objs.object instanceof Group)
+        this.selectedElements = objs.object.children.map((obj) => obj.LinkModel);
+    });
   }
 
   private cleanViewSelected() {
@@ -94,7 +104,6 @@ export class ObjectListComponent implements OnInit {
       type: 'selectObject',
       objects: [ ...this.selectedElements ],
     });
-
   }
 
   private setIcons() {
