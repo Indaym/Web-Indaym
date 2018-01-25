@@ -4,9 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 8080",
+    "start": "./node_modules/.bin/http-serve ./build -a 0.0.0.0 -p 8080",
+    "dev": "ng serve --port 4000",
     "start:aot": "ng serve --port 4001 --aot",
     "build": "ng build",
+    "build:prod": "ng build --prod --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -30,6 +32,7 @@
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.1",
     "crypto-js": "^3.1.9-1",
+    "http-serve": "^1.0.1",
     "moment": "^2.14.1",
     "ng2-bootstrap": "^1.1.11",
     "ng2-dnd": "^4.2.0",
