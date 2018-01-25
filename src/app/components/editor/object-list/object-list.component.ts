@@ -49,6 +49,7 @@ export class ObjectListComponent implements OnInit {
     this.gameController.subscribe('addGroupObjects', () => this.setIcons());
     this.gameController.subscribes(['deleteObject', 'deleteObjectToService'], () => this.setIcons());
     this.gameController.subscribe('deleteGroupObjects', () => this.setIcons());
+    this.eventDispatcher.addEventListener('refresh_object_list', () => this.setIcons());
   }
 
   private cleanViewSelected() {

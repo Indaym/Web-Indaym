@@ -206,7 +206,9 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
 
   private saveName() {
     if (this.selected) {
-      this.objectService.updateObject({name: this.selected.name}, this.selected.uuid);
+      this.objectService.updateObject({name: this.selected.name}, this.selected.uuid, () =>  {
+        this.eventDispatcher.dispatchEvent({type: 'refresh_object_list'});
+      });
       this.editMode = false;
       this.oldNameSelected = undefined;
     }
