@@ -126,6 +126,7 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
       } else {
         this.selected = undefined;
       }
+      this.editMode = false;
     });
 
     this.end.onClose.subscribe(() => this.undoSaveName());
