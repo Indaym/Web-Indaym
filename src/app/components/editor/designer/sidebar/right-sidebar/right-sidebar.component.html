@@ -105,7 +105,12 @@
 
       <h4>Select an existing texture:</h4>
       <select id="sel" [(ngModel)]="imgSelected" (ngModelChange)="previewTexture()">
-        <option *ngFor="let texture of textures" [value]="texture.uuid">{{texture.name}}</option>
+        <optgroup label="Public">
+          <option *ngFor="let texture of textures | filter:{published: true}:['published']" [value]="texture.uuid">{{texture.name}}</option>
+        </optgroup>
+        <optgroup label="Not public">
+            <option *ngFor="let texture of textures | filter:{published: false}:['published']" [value]="texture.uuid">{{texture.name}}</option>
+        </optgroup>
       </select>
   
       <h4><span class="glyphicon glyphicon-minus"></span> OR <span class="glyphicon glyphicon-minus"></span></h4>
@@ -124,6 +129,9 @@
       </button>
       <button mat-button (click)="applyTexture()">
         <span class="glyphicon glyphicon-floppy-saved"></span> Apply Texture
+      </button>
+      <button *ngIf="imgSelected && isOwner(imgSelected)" mat-button (click)="publishTexture()">
+        {{ (published) ? 'Unpublish' : 'Publish' }}
       </button>
   
       <hr>

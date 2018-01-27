@@ -21,6 +21,7 @@ import {
   TextureService,
   TokenService,
   ObjectService,
+  UserService,
 }                               from '../../../../../services';
 import { serverConfig }         from '../../../../../../../config/server.conf';
 import { OverridePanelClosing } from '../overridePanelClosing';
@@ -46,6 +47,7 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
   public uploaded = false;
   public textures = [];
   public imgSelected;
+  private published = false;
   public imgPreview = '';
   public convert = 'deg';
   public selected = undefined;
@@ -67,7 +69,12 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
   private editMode = false;
   @ViewChild('selectedFile') private selectedFile;
 
-  constructor(private textureService: TextureService, private tokenService: TokenService, private objectService: ObjectService) {
+  constructor(
+    private textureService: TextureService,
+    private tokenService: TokenService,
+    private objectService: ObjectService,
+    private userService: UserService,
+  ) {
     super();
     this.textureService.getTextures((results) => {
       this.textures = results;
@@ -167,6 +174,8 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
    * When selected item change, automatic set preview item
    */
   public previewTexture() {
+    if (this.imgSelected)
+      this.published = this.textures.find((obj) => obj.uuid === this.imgSelected).published;
     this.textureService.getLocalTexture(this.imgSelected, (texture) => {
       if (texture !== undefined)
         this.imgPreview = texture;
@@ -225,5 +234,19 @@ export class RightSidebarComponent extends OverridePanelClosing implements OnIni
 
   private toggleMode() {
     this.end.mode = (this.end.mode === 'side') ? 'over' : 'side';
+  }
+
+  public publishTexture() {
+    this.textureService.updateTexture(this.imgSelected, {published: !this.published}, (data) => {
+      this.published = !this.published;
+      if (this.imgSelected) {
+        this.textures.find((obj) => obj.uuid === this.imgSelected).published = this.published;
+        this.textures = [...this.textures];
+      }
+    });
+  }
+
+  public isOwner(id) {
+    return this.textures.find((obj) => obj.uuid === id).owner === this.userService.user.uuid;
   }
 }

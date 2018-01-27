@@ -83,6 +83,11 @@ export class TextureService extends DefaultService {
     }
   }
 
+  public updateTexture(id, obj, success = (datas) => {}, error = (err) => {}) {
+    this.http.put(this.textureUrl + id, obj)
+      .subscribe(success, error);
+  }
+
   /**
    * Transform buffer into a blob
    */
