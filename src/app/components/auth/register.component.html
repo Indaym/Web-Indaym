@@ -42,7 +42,8 @@
         <mat-error *ngFor="let error of errors" >{{error}}</mat-error>
       </div>
       <mat-error *ngIf="error" >{{error}}</mat-error>
-  </div>
+      <br/>
+    </div>
     <button mat-raised-button type="submit"
       [disabled]="registerForm.invalid"
     >Submit</button>

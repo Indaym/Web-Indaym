@@ -189,7 +189,10 @@ export class GameListComponent implements OnInit {
 
     this.storeService.addGameToLibrary(gameId,
       () => this.success(`Game ${currentGame.name} is now in your library`),
-      () => this.snackBar.openError(`Can't add ${currentGame.name}`),
+      () => {
+        this.snackBar.openError(`Can't add ${currentGame.name}`);
+        this.needUpdate();
+      },
     );
   }
 
@@ -198,7 +201,10 @@ export class GameListComponent implements OnInit {
 
     this.storeService.removeGameFromLibrary(gameId,
       () => this.success(`Game ${currentGame.name} is not anymore in your library`),
-      () => this.snackBar.openError(`Can't delete ${currentGame.name}`),
+      () => {
+        this.snackBar.openError(`Can't delete ${currentGame.name}`);
+        this.needUpdate();
+      },
     );
   }
 

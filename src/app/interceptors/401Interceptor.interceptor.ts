@@ -72,7 +72,7 @@ export class Http401Interceptor implements HttpInterceptor {
             (error) => this.handleError(error),
           );
         }
-        return Observable.of(res);
+        return Observable.throw(res);
       });
   }
 }
